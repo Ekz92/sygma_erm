@@ -2,7 +2,7 @@ object frmFicheSortie: TfrmFicheSortie
   Left = 0
   Top = 0
   Caption = 'Fiche de sortie '
-  ClientHeight = 522
+  ClientHeight = 514
   ClientWidth = 503
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,7 +25,6 @@ object frmFicheSortie: TfrmFicheSortie
     Align = alTop
     Caption = 'En-t'#234'te'
     TabOrder = 0
-    ExplicitWidth = 504
     object Label1: TLabel
       Left = 16
       Top = 16
@@ -65,11 +64,10 @@ object frmFicheSortie: TfrmFicheSortie
     Left = 0
     Top = 64
     Width = 503
-    Height = 89
+    Height = 106
     Align = alTop
     Caption = 'Client'
     TabOrder = 1
-    ExplicitWidth = 504
     object Label3: TLabel
       Left = 16
       Top = 18
@@ -90,6 +88,13 @@ object frmFicheSortie: TfrmFicheSortie
       Width = 46
       Height = 13
       Caption = 'Vehicule :'
+    end
+    object Label6: TLabel
+      Left = 16
+      Top = 85
+      Width = 46
+      Height = 13
+      Caption = 'Magasin :'
     end
     object edCodeclt: TEdit
       Left = 72
@@ -117,28 +122,38 @@ object frmFicheSortie: TfrmFicheSortie
       Height = 21
       ParentColor = True
       TabOrder = 2
+      OnChange = cbMatVehChange
       OnKeyPress = cbMatVehKeyPress
     end
     object edNomVeh: TEdit
       Left = 194
       Top = 59
-      Width = 230
+      Width = 231
       Height = 21
       ParentColor = True
       ReadOnly = True
       TabOrder = 3
     end
+    object cbMagasin: TComboBox
+      Left = 72
+      Top = 81
+      Width = 273
+      Height = 21
+      Style = csDropDownList
+      ParentColor = True
+      TabOrder = 4
+      OnCloseUp = cbMagasinCloseUp
+      OnKeyPress = cbMatVehKeyPress
+    end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 494
+    Top = 486
     Width = 503
     Height = 28
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 463
-    ExplicitWidth = 504
     object btvalider: TButton
       Left = 350
       Top = 2
@@ -155,13 +170,14 @@ object frmFicheSortie: TfrmFicheSortie
       Height = 25
       Caption = 'Annuler'
       TabOrder = 1
+      OnClick = Button2Click
     end
   end
   object st_ficheSortie: TStringGrid
     Left = 0
-    Top = 153
+    Top = 170
     Width = 503
-    Height = 341
+    Height = 316
     Align = alClient
     ColCount = 6
     DefaultRowHeight = 15
@@ -175,8 +191,6 @@ object frmFicheSortie: TfrmFicheSortie
     OnDrawCell = st_ficheSortieDrawCell
     OnKeyPress = st_ficheSortieKeyPress
     OnSelectCell = st_ficheSortieSelectCell
-    ExplicitWidth = 504
-    ExplicitHeight = 310
     ColWidths = (
       2
       74

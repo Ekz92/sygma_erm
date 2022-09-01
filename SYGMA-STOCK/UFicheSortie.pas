@@ -41,6 +41,7 @@ type
     procedure btvaliderClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure cbMagasinCloseUp(Sender: TObject);
+    procedure cbMatVehChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -325,6 +326,25 @@ begin
           end;
     end;
     if st_ficheSortie.RowCount>1 then st_ficheSortie.FixedRows:=1;
+
+end;
+
+procedure TfrmFicheSortie.cbMatVehChange(Sender: TObject);
+var
+  Psql,vNomVeh : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+
+  Psql := ' where num_immat_veh like '+QuotedStr(cbMatVeh.Text+'%');
+
+  vehs:=dm.SelectVehicule(Psql);
+
+  for I := Low(vehs) to High(vehs) do
+      begin
+        vNomVeh := vehs[i].SMarque;
+      end;
+      edNomVeh.Text := vNomVeh;
 
 end;
 

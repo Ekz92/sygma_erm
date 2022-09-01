@@ -41,6 +41,7 @@ type
     procedure btvaliderClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure cbMagasinCloseUp(Sender: TObject);
+    procedure cbMatVehChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -60,7 +61,7 @@ uses URechClt, UDM, records, UConnexion;
 procedure TfrmFicheSortie.btvaliderClick(Sender: TObject);
 var
   fiche_es : TFiche_es;
-  I,j,vVide,vFuite,vPleine: Integer;
+  I,j,vVide,vFuite,vPleine,vTotal: Integer;
   stockArt : TStock;
   codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
   article : TArticle;
@@ -247,6 +248,9 @@ begin
             vFuite :=StrToInt(Cells[4,i]);
             vPleine:=StrToInt(Cells[5,i]);
 
+            vTotal := vVide+vFuite+vPleine;
+
+//        Mise à jour du récap de fiche de sortie
 
             if Cells[3,i]='0' then Cells[3,i]:='';
             if Cells[4,i]='0' then Cells[4,i]:='';
@@ -259,11 +263,17 @@ begin
                           +' where num_fes = '+edNum.Text;
             dm.UpdateTable(sqlUpFiche);
 
-//Mise à jours dans la table total fiche d'entree
+//Mise à jours dans la table total fiche d'sortie
 
-            SqlUpTFiche:='Update tb_ficheEs_Total set '
-                          +article.Salias_art+'_S = '+QuotedStr(IntToStr(vVide+vFuite+vPleine))
-                          +' where num_ft = '+edNum.Text;
+            if vTotal<>0 then
+              SqlUpTFiche:='Update tb_ficheEs_Total set '
+                            +article.Salias_art+'_S = '+QuotedStr(IntToStr(vTotal))
+                            +' where num_ft = '+edNum.Text
+            else
+              SqlUpTFiche:='Update tb_ficheEs_Total set '
+                            +article.Salias_art+'_S = '+QuotedStr('')
+                            +' where num_ft = '+edNum.Text  ;
+
             dm.UpdateTable(SqlUpTFiche);
 
 
@@ -316,6 +326,25 @@ begin
           end;
     end;
     if st_ficheSortie.RowCount>1 then st_ficheSortie.FixedRows:=1;
+
+end;
+
+procedure TfrmFicheSortie.cbMatVehChange(Sender: TObject);
+var
+  Psql,vNomVeh : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+//
+//  Psql := ' where num_immat_veh like '+QuotedStr(cbMatVeh.Text+'%');
+//
+//  vehs:=dm.SelectVehicule(Psql);
+//
+//  for I := Low(vehs) to High(vehs) do
+//      begin
+//        vNomVeh := vehs[i].SMarque;
+//      end;
+//      edNomVeh.Text := vNomVeh;
 
 end;
 

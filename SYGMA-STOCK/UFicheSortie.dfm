@@ -122,6 +122,7 @@ object frmFicheSortie: TfrmFicheSortie
       Height = 21
       ParentColor = True
       TabOrder = 2
+      OnChange = cbMatVehChange
       OnKeyPress = cbMatVehKeyPress
     end
     object edNomVeh: TEdit
