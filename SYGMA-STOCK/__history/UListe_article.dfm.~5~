@@ -1,0 +1,132 @@
+object frmListe_article: TfrmListe_article
+  Left = 0
+  Top = 0
+  Caption = 'Liste d'#39'article'
+  ClientHeight = 353
+  ClientWidth = 436
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 436
+    Height = 58
+    Align = alTop
+    Caption = 'Recherche'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    StyleElements = [seBorder]
+    ExplicitWidth = 368
+    object Label1: TLabel
+      Left = 32
+      Top = 17
+      Width = 32
+      Height = 13
+      Caption = 'Code :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = [seBorder]
+    end
+    object Label4: TLabel
+      Left = 32
+      Top = 36
+      Width = 63
+      Height = 13
+      Caption = 'D'#233'signation :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = [seBorder]
+    end
+    object Edit1: TEdit
+      Left = 112
+      Top = 11
+      Width = 96
+      Height = 19
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
+      StyleElements = [seBorder]
+    end
+    object Edit2: TEdit
+      Left = 112
+      Top = 31
+      Width = 199
+      Height = 19
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 1
+      StyleElements = [seBorder]
+    end
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 58
+    Width = 436
+    Height = 295
+    Align = alClient
+    Anchors = [akRight, akBottom]
+    Color = clBtnFace
+    ColCount = 4
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    PopupMenu = PopupMenu1
+    ScrollBars = ssHorizontal
+    TabOrder = 1
+    StyleElements = [seBorder]
+    ExplicitTop = 71
+    ExplicitWidth = 368
+    ExplicitHeight = 213
+    ColWidths = (
+      84
+      198
+      82
+      64)
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 128
+    Top = 128
+    object Dfiniruncotdachat1: TMenuItem
+      Caption = 'D'#233'finir un co'#251't d'#39'achat'
+    end
+    object Voirlafichedestock1: TMenuItem
+      Caption = 'Voir la fiche de stock'
+    end
+  end
+end

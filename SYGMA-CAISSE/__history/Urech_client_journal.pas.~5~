@@ -1,0 +1,58 @@
+unit Urech_client_journal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRehCltJournal = class(TForm)
+    StRechClient: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edrech_nom: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure edrech_nomChange(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRehCltJournal: TfrmRehCltJournal;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRehCltJournal.edrech_nomChange(Sender: TObject);
+var
+  Psql : string;
+  Clients : TClientArray;
+  i:integer;
+begin
+  Psql := ' where nom_clt like '+QuotedStr(edrech_nom.Text+'%');
+  Clients := DM.selectClients(Psql);
+  StRechClient.RowCount:=Length(clients)+1;
+  for I := Low(clients) to High(clients) do
+    begin
+      StRechClient.Cells[0,i+1]:=clients[i].SCodeClt;
+      StRechClient.Cells[1,i+1]:=clients[i].SnomClt;
+    end;
+end;
+
+procedure TfrmRehCltJournal.FormCreate(Sender: TObject);
+begin
+with StRechClient do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Nom';
+  end;
+
+end;
+
+end.

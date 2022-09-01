@@ -1,0 +1,44 @@
+unit UMagasin_liste;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.ComCtrls;
+
+type
+  TfrmMagasin_liste = class(TForm)
+    Label4: TLabel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode: TRichEdit;
+    edDesign: TRichEdit;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmMagasin_liste: TfrmMagasin_liste;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmMagasin_liste.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'Code';
+    Cells[1,0] := 'Désignation';
+  end;
+end;
+
+end.

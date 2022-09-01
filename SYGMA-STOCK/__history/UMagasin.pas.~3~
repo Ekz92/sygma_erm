@@ -1,0 +1,99 @@
+unit UMagasin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmAdd_magasin = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    ednom_mag: TEdit;
+    StringGrid1: TStringGrid;
+    edcode_mag: TEdit;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+    Listerlesarticles1: TMenuItem;
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAdd_magasin: TfrmAdd_magasin;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+
+procedure TfrmAdd_magasin.FormShow(Sender: TObject);
+var
+  Magasins : TMagasinArray;
+  Psql : string;
+  I: Integer;
+begin
+  Psql := '';
+  Magasins :=dm.selectMagasins(Psql);
+
+  for I := Low(Magasins) to High(Magasins) do
+    begin
+      with StringGrid1 do
+        begin
+          Cells[0,i+1]:=Magasins[i].SCode_mag;
+          Cells[1,i+1]:=Magasins[i].Sdesignation_mag;
+        end;
+    end;
+
+
+end;
+
+procedure TfrmAdd_magasin.SpeedButton1Click(Sender: TObject);
+var
+  QInsert_mag,
+  QSelect_mag :TSQLQuery;
+  I : integer;
+begin
+if (ednom_mag.Text='') or (edcode_mag.Text='') then
+  begin
+    MessageDlg('Erreur, '+chr(10)+'Veillez saisir le code et la désignation du magasin',mtError,[mbok],0);
+    exit
+  end;
+
+//----------------Insertion ------------------
+  QInsert_mag:=TSQLQuery.Create(self);
+  QInsert_mag.SQLConnection:=dm.SQLConnection1;
+
+  with QInsert_mag, SQL do
+    begin
+      Add('insert into tb_magasin values(null,'
+        +QuotedStr(trim(edcode_mag.Text))+','
+        +QuotedStr(Trim(ednom_mag.Text))+')'
+      );
+    end;
+
+    try
+      QInsert_mag.ExecSQL();
+    finally
+      QInsert_mag.Free;
+    end;
+
+//--------------Affichage -----------------------
+FormShow(sender);
+end;
+
+end.

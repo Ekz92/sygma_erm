@@ -1,0 +1,51 @@
+unit UListeChargCamion;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmListeChargCamion = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    cbType: TComboBox;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    Button1: TButton;
+    Button2: TButton;
+    cbVehicule: TComboBox;
+    frxReportH: TfrxReport;
+    frxDBRapport: TfrxDBDataset;
+    QRapport: TSQLQuery;
+    frxReportV: TfrxReport;
+    DBQFactCam: TfrxDBDataset;
+    QFactureCam: TSQLQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeChargCamion: TfrmListeChargCamion;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListeChargCamion.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+cbVehicule.Clear;
+end;
+
+end.

@@ -1,0 +1,79 @@
+unit ULivreur;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    edNom: TEdit;
+    edTel: TEdit;
+    edAdresse: TEdit;
+    edMail: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edcode_liv: TEdit;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Consulter1: TMenuItem;
+    Supprimer1: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'Nom';
+    Cells[1,0] := 'Tel';
+    Cells[2,0] := 'Adresse';
+    Cells[3,0] := 'Email';
+  end;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+var
+  Lvs : TLivreurArray;
+  Psql : String;
+  I: Integer;
+begin
+  Psql := '';
+  Lvs := dm.selectLivreur(Psql);
+
+  StringGrid1.RowCount := Length(Lvs)+1;
+
+  for I := Low(Lvs) to High(Lvs) do
+    begin
+      with StringGrid1 do
+        begin
+          Cells[0,i+1] := Lvs[i].Snom_liv;
+          Cells[1,i+1] := Lvs[i].Stel_liv;
+          Cells[2,i+1] := Lvs[i].Sadresse_liv;
+          Cells[3,i+1] := Lvs[i].Smail_liv;
+        end;
+    end;
+end;
+
+end.

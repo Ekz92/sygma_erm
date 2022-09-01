@@ -1,0 +1,36 @@
+unit URechChaufVteChargCeh;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids;
+
+type
+  TfrmRechChaufVteChargCeh = class(TForm)
+    st_chauf: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechChaufVteChargCeh: TfrmRechChaufVteChargCeh;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechChaufVteChargCeh.FormCreate(Sender: TObject);
+begin
+ with st_chauf do
+  begin
+    Cells[0,0]:='N° Matricule';
+    Cells[1,0]:='Nom';
+    Cells[2,0]:='Prénom';
+  end;
+end;
+
+end.

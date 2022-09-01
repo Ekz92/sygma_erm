@@ -1,0 +1,40 @@
+unit URechChargCom;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.ExtCtrls;
+
+type
+  TfrmRechChargCom = class(TForm)
+    Panel1: TPanel;
+    StRech: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechChargCom: TfrmRechChargCom;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechChargCom.FormCreate(Sender: TObject);
+begin
+with StRech do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'N°Char';
+    Cells[2,0] := 'Pièce';
+    Cells[3,0] := 'Véhicule';
+    Cells[4,0] := 'Montant';
+  end;
+
+end;
+
+end.

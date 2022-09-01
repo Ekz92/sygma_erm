@@ -1,0 +1,60 @@
+object frmRechLotRetourBout: TfrmRechLotRetourBout
+  Left = 0
+  Top = 0
+  Caption = 'Recherche de lots'
+  ClientHeight = 206
+  ClientWidth = 412
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 412
+    Height = 57
+    Align = alTop
+    Caption = 'Recherche'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 57
+    Width = 412
+    Height = 149
+    Align = alClient
+    ColCount = 4
+    DefaultRowHeight = 15
+    FixedCols = 0
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goRowSelect]
+    ParentColor = True
+    ParentFont = False
+    ScrollBars = ssNone
+    TabOrder = 1
+    StyleElements = [seBorder]
+    OnDblClick = StringGrid1DblClick
+    OnDrawCell = StringGrid1DrawCell
+    ExplicitHeight = 154
+    ColWidths = (
+      87
+      77
+      168
+      73)
+  end
+end

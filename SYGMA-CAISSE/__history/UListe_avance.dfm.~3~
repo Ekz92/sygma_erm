@@ -1,0 +1,147 @@
+object frmListeAvance: TfrmListeAvance
+  Left = 0
+  Top = 0
+  Caption = 'Avances re'#231'us'
+  ClientHeight = 342
+  ClientWidth = 520
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 520
+    Height = 62
+    Align = alTop
+    Caption = 'Recherche'
+    TabOrder = 0
+    ExplicitWidth = 519
+    object Label1: TLabel
+      Left = 4
+      Top = 17
+      Width = 34
+      Height = 13
+      Caption = 'Client :'
+    end
+    object Label2: TLabel
+      Left = 159
+      Top = 41
+      Width = 20
+      Height = 13
+      Caption = 'Au :'
+    end
+    object Label3: TLabel
+      Left = 4
+      Top = 41
+      Width = 20
+      Height = 13
+      Caption = 'Du :'
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 449
+      Top = 15
+      Width = 69
+      Height = 45
+      Align = alRight
+      Caption = 'Recherche'
+      Flat = True
+      ExplicitLeft = 376
+    end
+    object cbClient: TComboBox
+      Left = 44
+      Top = 14
+      Width = 180
+      Height = 21
+      ParentColor = True
+      TabOrder = 0
+    end
+    object edCodeClt: TEdit
+      Left = 225
+      Top = 14
+      Width = 67
+      Height = 21
+      ParentColor = True
+      TabOrder = 1
+    end
+    object d1: TDateTimePicker
+      Left = 44
+      Top = 36
+      Width = 109
+      Height = 21
+      Date = 44779.293171875000000000
+      Time = 44779.293171875000000000
+      Color = clBtnFace
+      ParentColor = True
+      TabOrder = 2
+    end
+    object d2: TDateTimePicker
+      Left = 180
+      Top = 36
+      Width = 112
+      Height = 21
+      Date = 44779.293171875000000000
+      Time = 44779.293171875000000000
+      Color = clBtnFace
+      ParentColor = True
+      TabOrder = 3
+    end
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 62
+    Width = 520
+    Height = 251
+    Align = alClient
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
+    ParentColor = True
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    StyleElements = [seBorder]
+    ExplicitWidth = 519
+    ExplicitHeight = 237
+    ColWidths = (
+      75
+      68
+      67
+      206
+      96)
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 313
+    Width = 520
+    Height = 29
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitTop = 299
+    ExplicitWidth = 519
+    object Button1: TButton
+      Left = 444
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = 'Pr'#233'visualiser'
+      TabOrder = 0
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 232
+    Top = 152
+    object Consulterlesolde1: TMenuItem
+      Caption = 'Consulter du compte'
+    end
+    object Annuleruneavance1: TMenuItem
+      Caption = 'Annuler l'#39'avance'
+    end
+  end
+end

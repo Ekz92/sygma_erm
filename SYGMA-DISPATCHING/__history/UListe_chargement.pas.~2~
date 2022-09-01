@@ -1,0 +1,38 @@
+unit UListe_chargement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListe_chargement = class(TForm)
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    SpeedButton2: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    gbRecherche: TGroupBox;
+    Label5: TLabel;
+    edNumChargement: TEdit;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListe_chargement: TfrmListe_chargement;
+
+implementation
+
+{$R *.dfm}
+
+end.

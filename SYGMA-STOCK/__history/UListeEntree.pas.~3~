@@ -1,0 +1,39 @@
+unit UListeEntree;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
+  Data.FMTBcd, Vcl.Menus, frxClass, frxDBSet, Data.DB, Data.SqlExpr, Vcl.Grids;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    Button1: TButton;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Button2: TButton;
+    StringGrid1: TStringGrid;
+    QLentree: TSQLQuery;
+    frxDBfrxLEntree: TfrxDBDataset;
+    frxLEntree: TfrxReport;
+    PopupMenu1: TPopupMenu;
+    Supprimer1: TMenuItem;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

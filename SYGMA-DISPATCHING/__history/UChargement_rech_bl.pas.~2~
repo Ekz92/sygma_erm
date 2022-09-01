@@ -1,0 +1,44 @@
+unit UChargement_rech_bl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TForm2 = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    ednum_bl: TEdit;
+    St_bl: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+with St_bl do
+  begin
+    Cells[0,0] := 'N°BL';
+    Cells[1,0] := 'N° His';
+    Cells[2,0] := 'Client';
+    Cells[3,0] := 'Tot bout.';
+    Cells[4,0] := 'Tot Kgs';
+    Cells[5,0] := 'Prix liv.';
+    Cells[6,0] := 'Date BL';
+  end;
+
+end;
+
+end.

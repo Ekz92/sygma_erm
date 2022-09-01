@@ -1,0 +1,39 @@
+unit URechLotElivraison;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmRechLotElivraison = class(TForm)
+    GroupBox1: TGroupBox;
+    StringGrid1: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechLotElivraison: TfrmRechLotElivraison;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechLotElivraison.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='N° Lot';
+    Cells[1,0]:='Camion';
+    Cells[2,0]:='Chauffeur';
+    Cells[3,0]:='Date';
+  end;
+
+end;
+
+end.

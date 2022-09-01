@@ -1,0 +1,28 @@
+unit UListeLotLivraison;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListeLotLivraison = class(TForm)
+    GroupBox1: TGroupBox;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeLotLivraison: TfrmListeLotLivraison;
+
+implementation
+
+{$R *.dfm}
+
+end.

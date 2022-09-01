@@ -1,0 +1,78 @@
+unit UListe_article;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmListe_article = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Dfiniruncotdachat1: TMenuItem;
+    Voirlafichedestock1: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListe_article: TfrmListe_article;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListe_article.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'Code';
+    Cells[1,0] := 'Désignation';
+    Cells[2,0] := 'Type';
+    Cells[3,0] := 'Coût d''achat'
+  end;
+end;
+
+procedure TfrmListe_article.FormShow(Sender: TObject);
+var
+  Qliste :   TSQLQuery;
+  i :integer;
+begin
+
+  Qliste:=TSQLQuery.Create(self);
+  Qliste.SQLConnection :=dm.SQLConnection1;
+
+  with Qliste,SQL do
+    begin
+      Add('select * from tb_article a, tb_stock s'
+          +' where a.code_art = s.code_art');
+    end;
+
+    try
+      Qliste.Open;
+      StringGrid1.RowCount:=Qliste.RowsAffected+1;
+      for I := 1 to Qliste.RowsAffected+1 do
+        with StringGrid1, Qliste do
+          begin
+            Cells[0,i] := FieldByName('code_art').AsString;
+            Cells[1,i] := FieldByName('designation_art').AsString;
+            Cells[2,i] := FieldByName('type_art').AsString;
+            Cells[3,i] := FieldByName('cout_achat').AsString;
+            Qliste.Next;
+          end;
+    finally
+      Qliste.Free;
+    end;
+end;
+
+end.

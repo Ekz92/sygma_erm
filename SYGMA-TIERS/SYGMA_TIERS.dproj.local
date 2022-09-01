@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/08/31 09:52:56.000.714,=C:\Users\Sam Toplik\Documents\RAD Studio\Projets\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 09:54:07.000.027,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UIntegrateur.dfm=C:\Users\Sam Toplik\Documents\RAD Studio\Projets\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 09:54:07.000.027,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UIntegrateur.pas=C:\Users\Sam Toplik\Documents\RAD Studio\Projets\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 09:54:21.000.886,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\SYGMA_TIERS.dproj=C:\Users\Sam Toplik\Documents\RAD Studio\Projets\Project1.dproj</Transaction>
+    <Transaction>2022/08/31 09:56:53.000.705,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 09:58:43.000.762,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UConnexion.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 09:58:43.000.762,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UConnexion.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:01:18.000.178,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:01:33.000.559,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:01:45.000.083,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UDM.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 10:01:45.000.083,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UDM.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:07:09.000.304,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:08:14.000.799,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\ULivreur.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:08:14.000.799,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\ULivreur.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 10:10:35.000.840,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:10:51.000.789,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\records.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:18:54.000.226,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:19:48.000.490,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UAdd_client.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:19:48.000.490,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UAdd_client.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 10:46:02.000.979,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:46:49.000.045,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UPoint_vente.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 10:46:49.000.045,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UPoint_vente.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 10:59:18.000.699,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:00:23.000.113,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UListe_client.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:00:23.000.113,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UListe_client.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 11:07:24.000.886,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:08:14.000.480,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UListePointVente.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:08:14.000.480,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UListePointVente.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 11:13:42.000.115,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:14:26.000.550,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UNew_zone.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:14:26.000.550,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UNew_zone.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 11:37:31.000.844,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:38:31.000.673,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UConsultCompteClient.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:38:31.000.673,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UConsultCompteClient.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 11:47:22.000.736,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 11:49:05.000.310,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UReleveClient.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 11:49:05.000.310,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UReleveClient.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:04:30.000.195,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:05:01.000.369,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UVehicule.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 12:05:01.000.369,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UVehicule.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:27:17.000.184,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:27:57.000.140,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UType_vehicule.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:27:57.000.140,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UType_vehicule.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 12:45:33.000.618,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 12:46:40.000.142,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UChauffeur.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 12:46:40.000.142,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UChauffeur.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 14:13:09.000.586,=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 14:13:50.000.676,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UClotureDay.dfm=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 14:13:50.000.676,G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\UClotureDay.pas=G:\Projets\SODIGAZ\SYGMA ERM\SYGMA-TIERS\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

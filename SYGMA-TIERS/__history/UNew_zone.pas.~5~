@@ -1,0 +1,114 @@
+unit UNew_zone;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TfrmNew_zone = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label4: TLabel;
+    ednom: TEdit;
+    edprix: TEdit;
+    Memo1: TMemo;
+    TabSheet2: TTabSheet;
+    St_Liste_zone: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmNew_zone: TfrmNew_zone;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmNew_zone.FormActivate(Sender: TObject);
+begin
+Memo1.Clear;
+TabSheet1.Show;
+
+end;
+
+procedure TfrmNew_zone.FormCreate(Sender: TObject);
+begin
+  with St_Liste_zone do
+    begin
+      Cells[0,0] := 'Dénomination';
+      Cells[1,0] := 'Prix Liv.';
+      Cells[2,0] := 'Commentaire';
+    end;
+
+end;
+
+procedure TfrmNew_zone.SpeedButton1Click(Sender: TObject);
+var
+QAdd_zone : TSQLQuery;
+
+begin
+QAdd_zone:=TSQLQuery.Create(self);
+QAdd_zone.SQLConnection:=dm.SQLConnection1;
+
+if (ednom.Text='') then
+begin
+  MessageDlg('Entrez un nom de la zone!',mtError,[mbok],0);
+  exit
+end;
+
+if (edprix.Text='')then
+begin
+  MessageDlg('Entrez le prix de la zone!',mtError,[mbok],0);
+  exit
+end;
+
+if (Memo1.Text='') then
+begin
+  MessageDlg('Entrez une description de la zone!',mtError,[mbok],0);
+  exit
+end;
+
+
+with QAdd_zone,sql do
+  begin
+    Add('Insert into tb_zone values(null,'
+       +QuotedStr(edNom.Text)+','
+       +FloatToStrF(StrToFloat(edprix.Text),TFloatFormat(ffFixed),10,2)+','
+       +QuotedStr(Memo1.Text)+');'
+    );
+  end;
+
+
+  if MessageDlg('Confirmez-vous l''ajout de la zone?',mtConfirmation,[mbyes,mbno],0)=mryes then
+    begin
+      try
+        QAdd_zone.ExecSQL();
+        MessageDlg('Nouvelle zone enregistée avec succès!',mtInformation,[mbok],0);
+        SpeedButton2.Click;
+      finally
+        QAdd_zone.Free;
+      end;
+    end;
+
+end;
+
+end.

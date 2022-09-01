@@ -1,0 +1,44 @@
+unit UListeFcheSortie;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmListeFcheSortie = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbClient: TComboBox;
+    edcodeClt: TEdit;
+    cbVeh: TComboBox;
+    edMarque: TEdit;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxLFicheEntree: TfrxReport;
+    frxDBFicheEntree: TfrxDBDataset;
+    QFicheEntree: TSQLQuery;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeFcheSortie: TfrmListeFcheSortie;
+
+implementation
+
+{$R *.dfm}
+
+end.

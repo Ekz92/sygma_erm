@@ -1,0 +1,85 @@
+unit UPoint_vente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    ednomPoint: TEdit;
+    cbZone: TComboBox;
+    mComment: TMemo;
+    cbClient: TComboBox;
+    edCodeClient: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure cbClientCloseUp(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TForm1.cbClientCloseUp(Sender: TObject);
+var
+  client : TClient;
+  nomClt : String;
+begin
+  nomClt := cbClient.Text;
+  client := DM.selectCodeclt(nomClt);
+  edCodeClient.Text := client.SCodeClt;
+end;
+
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+cbZone.Clear;
+cbClient.Clear;
+
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+  var
+    Psql : string;
+    clients : TClientArray;
+    i,j : integer;
+
+    zones : TZoneArray ;
+
+begin
+  Psql := '';
+  clients := dm.selectClients(Psql);
+
+  for I := Low(clients) to High(clients) do
+    begin
+       cbClient.Items.Add(clients[i].SnomClt);
+    end;
+
+  zones := dm.selectZones(Psql);
+
+  for I := Low(zones) to High(zones) do
+    begin
+       cbZone.Items.Add(zones[i].Snom_zone);
+    end;
+end;
+
+end.

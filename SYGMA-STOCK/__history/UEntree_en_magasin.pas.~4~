@@ -1,0 +1,60 @@
+unit UEntree_en_magasin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Imaging.pngimage, Vcl.Buttons;
+
+type
+  TfrmEntree_magasin = class(TForm)
+    Bevel1: TBevel;
+    Label6: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lbUsager: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label4: TLabel;
+    Label5: TLabel;
+    Image1: TImage;
+    Label7: TLabel;
+    edQte: TEdit;
+    edcode_art: TEdit;
+    edcode_mag: TEdit;
+    edDesignation_art: TEdit;
+    edDesignation_mag: TEdit;
+    DateTimePicker1: TDateTimePicker;
+    edPiece: TEdit;
+    RgType: TRadioGroup;
+    procedure edcode_artDblClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmEntree_magasin: TfrmEntree_magasin;
+  vTypeEntree : integer;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmEntree_magasin.edcode_artDblClick(Sender: TObject);
+begin
+  if RgType.ItemIndex = 0 then vTypeEntree := 0
+  else
+  if RgType.ItemIndex = 1 then vTypeEntree := 1
+  else
+  if RgType.ItemIndex = 2 then vTypeEntree := 2;
+
+  FrmSource_e_s:='Entree';
+  frmrech_article_entree.ShowModal;
+
+end;
+
+end.

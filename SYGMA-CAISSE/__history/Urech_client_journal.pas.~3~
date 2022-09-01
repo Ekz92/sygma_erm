@@ -1,0 +1,39 @@
+unit Urech_client_journal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRehCltJournal = class(TForm)
+    StRechClient: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edrech_nom: TEdit;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRehCltJournal: TfrmRehCltJournal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRehCltJournal.FormCreate(Sender: TObject);
+begin
+with StRechClient do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Nom';
+  end;
+
+end;
+
+end.

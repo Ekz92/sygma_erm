@@ -1,0 +1,345 @@
+object frmchauffeur: Tfrmchauffeur
+  Left = 0
+  Top = 0
+  Caption = 'Gestion de chauffeurs'
+  ClientHeight = 421
+  ClientWidth = 468
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label8: TLabel
+    Left = 438
+    Top = 345
+    Width = 30
+    Height = 13
+    Align = alCustom
+    Caption = '          '
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 468
+    Height = 175
+    Align = alTop
+    Caption = 'Nouveau chauffeur'
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentBackground = False
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+    StyleElements = [seBorder]
+    object Label1: TLabel
+      Left = 16
+      Top = 17
+      Width = 65
+      Height = 13
+      Caption = 'N'#176' Matricule :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 39
+      Width = 28
+      Height = 13
+      Caption = 'Nom :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 16
+      Top = 61
+      Width = 48
+      Height = 13
+      Caption = 'Pr'#233'noms :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 16
+      Top = 83
+      Width = 21
+      Height = 13
+      Caption = 'T'#232'l :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 16
+      Top = 105
+      Width = 35
+      Height = 13
+      Caption = 'E-mail :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 16
+      Top = 127
+      Width = 46
+      Height = 13
+      Caption = 'Adresse :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SB_Ajouter: TSpeedButton
+      Left = 211
+      Top = 145
+      Width = 74
+      Height = 24
+      Caption = 'Ajouter'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SB_Modif: TSpeedButton
+      Left = 284
+      Top = 145
+      Width = 74
+      Height = 24
+      Caption = 'Modifier'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SB_annuler: TSpeedButton
+      Left = 357
+      Top = 145
+      Width = 74
+      Height = 24
+      Caption = 'Annuler'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 231
+      Top = 17
+      Width = 8
+      Height = 18
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = []
+    end
+    object Label10: TLabel
+      Left = 435
+      Top = 40
+      Width = 8
+      Height = 18
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = []
+    end
+    object Label11: TLabel
+      Left = 435
+      Top = 66
+      Width = 8
+      Height = 18
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = []
+    end
+    object Label12: TLabel
+      Left = 435
+      Top = 89
+      Width = 8
+      Height = 18
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      StyleElements = []
+    end
+    object ednum_mat_chauf: TEdit
+      Left = 152
+      Top = 14
+      Width = 73
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      MaxLength = 4
+      NumbersOnly = True
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 0
+    end
+    object ednom_chauf: TEdit
+      Left = 152
+      Top = 36
+      Width = 280
+      Height = 21
+      CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 1
+    end
+    object edprenom_chauf: TEdit
+      Left = 152
+      Top = 58
+      Width = 280
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 2
+    end
+    object edtel_chauf: TEdit
+      Left = 152
+      Top = 80
+      Width = 280
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edmail_chauf: TEdit
+      Left = 152
+      Top = 102
+      Width = 280
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 4
+    end
+    object edadresse_chaf: TEdit
+      Left = 152
+      Top = 124
+      Width = 280
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = True
+      ParentFont = False
+      TabOrder = 5
+    end
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 175
+    Width = 468
+    Height = 246
+    Align = alClient
+    ColCount = 6
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    GradientStartColor = 11206655
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    ParentColor = True
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    StyleElements = [seBorder]
+    OnDrawCell = StringGrid1DrawCell
+    ColWidths = (
+      64
+      102
+      123
+      135
+      122
+      95)
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 284
+    Top = 312
+    object Modifier1: TMenuItem
+      Caption = 'Modifier'
+    end
+    object Supprimer1: TMenuItem
+      Caption = 'Supprimer'
+    end
+  end
+end

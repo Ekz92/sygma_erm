@@ -1,0 +1,28 @@
+unit URechCltAvance;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRechCltAvance = class(TForm)
+    StringGrid: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edrech_nom: TEdit;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechCltAvance: TfrmRechCltAvance;
+
+implementation
+
+{$R *.dfm}
+
+end.

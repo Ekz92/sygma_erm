@@ -1,0 +1,31 @@
+unit URech_Article_entree;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  Tfrmrech_article_entree = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode_art: TEdit;
+    Edit2: TEdit;
+    StringGrid1: TStringGrid;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmrech_article_entree: Tfrmrech_article_entree;
+  FrmSource_e_s : string;
+
+implementation
+
+{$R *.dfm}
+
+end.

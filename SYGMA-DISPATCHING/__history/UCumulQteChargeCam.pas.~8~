@@ -1,0 +1,22 @@
+unit UCumulQteChargeCam;
+
+interface
+
+
+type
+  TfrmCumulQteChargeCam = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumulQteChargeCam: TfrmCumulQteChargeCam;
+
+implementation
+
+{$R *.dfm}
+
+
+end.

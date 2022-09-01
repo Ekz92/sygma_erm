@@ -1,0 +1,65 @@
+unit UAdd_Type_article;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TfrmAdd_Type_article = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label2: TLabel;
+    Label3: TLabel;
+    StringGrid1: TStringGrid;
+    edType_art: TEdit;
+    procedure FormActivate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAdd_Type_article: TfrmAdd_Type_article;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmAdd_Type_article.FormActivate(Sender: TObject);
+var
+  QSelect_Tart: TSQLQuery;
+  i : integer;
+begin
+//--------------Affichage -----------------------
+
+  QSelect_Tart:=TSQLQuery.Create(self);
+  QSelect_Tart.SQLConnection:=dm.SQLConnection1;
+
+  with QSelect_Tart, SQL do
+    begin
+      Add('select * from tb_type_article order by id_type_art desc');
+    end;
+
+    try
+      QSelect_Tart.open;
+
+      for I := 1 to QSelect_Tart.RecordCount do
+        with StringGrid1 do
+          begin
+            RowCount :=  QSelect_Tart.RecordCount +1;
+            Cells[0,i]:=IntToStr(i);
+            Cells[1,i]:=QSelect_Tart.FieldByName('designation_type_art').AsString;
+            QSelect_Tart.Next;
+          end;
+    finally
+      QSelect_Tart.Free;
+    end;
+end;
+
+end.

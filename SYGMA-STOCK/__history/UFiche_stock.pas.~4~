@@ -1,0 +1,120 @@
+unit UFiche_stock;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxExportHTML,
+  frxExportBaseDialog, frxExportText, frxDBSet, Data.DB, Data.SqlExpr,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label4: TLabel;
+    cb_magasin: TComboBox;
+    edcode_mag: TEdit;
+    CheckBox1: TCheckBox;
+    Button2: TButton;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    QFiche_stock: TSQLQuery;
+    frxFiche_stock: TfrxDBDataset;
+    frxMAgasin: TfrxDBDataset;
+    QMagasin: TSQLQuery;
+    frxE_Fiche_stock: TfrxReport;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  QSelect_mag : TSQLQuery;
+  i:integer;
+begin
+
+  QSelect_mag:=TSQLQuery.Create(self);
+  QSelect_mag.SQLConnection := dm.SQLConnection1;
+
+  with QSelect_mag,SQL do
+    begin
+      Add('select * from tb_magasin');
+    end;
+
+    try
+      QSelect_mag.Open;
+      for i:=0 to QSelect_mag.RowsAffected -1 do
+        begin
+          cb_magasin.Items.Add(QSelect_mag.FieldByName('designation_mag').AsString);
+          QSelect_mag.Next;
+        end;
+    finally
+      QSelect_mag.Free;
+    end;
+
+with StringGrid1 do
+  begin
+    Cells[0,0]:='Code art';
+    Cells[1,0]:='Désignation';
+    Cells[2,0]:='Code mag';
+    Cells[3,0]:='Qte vide';
+    Cells[4,0]:='Qte Chargé';
+    Cells[5,0]:='Qte totale';
+  end;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+  StringGrid1.RowCount := 2;
+  StringGrid1.Rows[1].Clear;
+
+  edcode_mag.Enabled:=false;
+  cb_magasin.Enabled:=false;
+
+end;
+
+procedure TForm1.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+  Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

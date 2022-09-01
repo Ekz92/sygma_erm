@@ -1,0 +1,124 @@
+unit records;
+
+interface
+type
+
+TFacturation = record
+  NId_fact: integer;
+  Sdate_fact ,
+  SNum_fact,
+  Scode_clt,
+  Snom_clt : string;
+  NQte_total : integer;
+  Rmnt_t,
+  Rmnt_p,
+  Rmnt_r : real;
+  Sstatut,
+  Stype_fact ,
+  Snum_comc ,
+  Svehicule : string;
+  NStatut_canc : integer;
+  SUsager : String;
+end;
+TFacturationArray = Array of TFacturation;
+
+TCaisse = record
+  Nid_caisse :integer;
+  Scompte,
+  Snom_caisse :string;
+  RSolde : Real;
+end;
+TCaisseArray = array of TCaisse;
+
+TTypeEncaissement = record
+  Nid_tenc :integer;
+  Scode_tenc,
+  Slibelle_tenc : string;
+end;
+TTypeEncaissementArray = array of TTypeEncaissement;
+
+TBank = record
+  NId_bk : integer;
+  Scode_bk,
+  SNom_bk  ,
+  SCompte_bk: string;
+  RSolde : real;
+end;
+TBankArray = Array of TBank;
+
+TUser = record
+  Nid_user : integer;
+  Snom_user,
+  Sprenom_user,
+  Susager,
+  Spassword,
+  Sprofil,
+  Snum_caisse : string;
+  NStatut : integer;
+end;
+TUserArray = Array of TUser;
+
+TMaxOpeCaisse = record
+  NMaxOpe : integer;
+end;
+
+TCompteClient = record
+  Nid_cc :integer;
+  Scode_clt ,
+  SNom_clt,
+  SNum_cc : String;
+  RSolde : Real;
+end;
+TCompteClientArray = array of TCompteClient;
+
+
+TPayement_caisse=record
+    NidPaye : integer ;
+    Sdate_paye ,
+    Snum_fact ,
+    Scode_clt ,
+    Snom_clt ,
+    Scode_ope,
+    Snom_caisse ,
+    Scompte_caisse : string;
+    Rmontant_paye:Real ;
+    NStatut_canc : integer;
+end;
+TPayement_caisseArray = array of TPayement_caisse;
+
+THistoriqueCaisse = record
+    Nid_hisc : integer;
+    Ddate_hisc ,
+    Snum_piece ,
+    Scode_cli ,
+    Snom_cli ,
+    STypEnc,
+    SCaisse ,
+    Sope ,
+    Ssens :String;
+    Rmontant :real;
+    Susager : string;
+    Nstatut_canc : integer;
+end;
+THistoriqueCaisseArray = array of THistoriqueCaisse;
+
+TReleve_client = record
+  NId_rc : integer;
+  SCode_client,
+  Snom_client,
+  SDate_rs,
+  SOperation,
+  SCaisse,
+  SPiece :string;
+  SAvance_credit,
+  SAvance_debit,
+  SFactRet_debit,
+  SFactRet_credit,
+  SLibelle : string;
+end;
+TReleve_clientArray = array of TReleve_client;
+
+
+implementation
+
+end.

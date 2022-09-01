@@ -1,0 +1,74 @@
+unit UMouvStockByArticle;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmMouvStockByArticle = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbarticle: TComboBox;
+    edcode_art: TRichEdit;
+    Button1: TButton;
+    cbMagasin: TComboBox;
+    edcode_mag: TRichEdit;
+    ckTout: TCheckBox;
+    frxMouv_stockArticle: TfrxReport;
+    SQLQuery1: TSQLQuery;
+    frxDBDataset1: TfrxDBDataset;
+    QHeader: TSQLQuery;
+    frxDBDataset2: TfrxDBDataset;
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmMouvStockByArticle: TfrmMouvStockByArticle;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmMouvStockByArticle.FormShow(Sender: TObject);
+var
+  articles : TarticleArray;
+  magasins : TMagasinArray;
+  I,j: Integer;
+  Psql,sql_art : string;
+begin
+  sql_art := '';
+
+  articles := dm.selectArticles(sql_art);
+
+  for I := Low(articles) to High(articles) do
+  begin
+    cbarticle.Items.Add(articles[i].Sdesignation_art);
+  end;
+
+  Psql := '';
+  magasins := dm.selectMagasins(Psql);
+  for j := Low(magasins) to High(magasins) do
+  begin
+    cbMagasin.Items.Add(magasins[j].Sdesignation_mag);
+  end;
+//******************************
+
+cbarticle.Enabled:=False;
+cbMagasin.Enabled:=False;
+edcode_art.Enabled:=False;
+edcode_mag.Enabled:=False;
+end;
+
+end.

@@ -1,0 +1,48 @@
+unit UListe_client;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmListeClient = class(TForm)
+    StringGrid: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edRech: TEdit;
+    edCode: TEdit;
+    Panel1: TPanel;
+    Label3: TLabel;
+    lbEff: TLabel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeClient: TfrmListeClient;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListeClient.FormCreate(Sender: TObject);
+begin
+with StringGrid do
+  begin
+    cells[0,0] := 'Code';
+    cells[1,0] := 'Nom';
+    cells[2,0] := 'Adresse';
+    Cells[3,0] := 'Tel'   ;
+    Cells[4,0] := 'Email';
+    Cells[5,0] := 'Tarif';
+  end;
+
+end;
+
+end.

@@ -1,0 +1,66 @@
+unit UAddCaisse;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmAddCaisse = class(TForm)
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcompte: TEdit;
+    ednom: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAddCaisse: TfrmAddCaisse;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmAddCaisse.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='Compte';
+    Cells[1,0]:='Libellé';
+    Cells[2,0]:='Solde';
+  end;
+end;
+
+procedure TfrmAddCaisse.FormShow(Sender: TObject);
+var
+  Psql : string;
+  Caisses :TCaisseArray;
+  I: Integer;
+begin
+  Psql := ' Order by id_caisse desc ' ;
+  Caisses:=DM.SelectCaisses(Psql);
+
+  StringGrid1.RowCount := Length(Caisses)+1;
+
+  for I := Low(Caisses) to High(Caisses) do
+    begin
+      StringGrid1.Cells[0,i+1]:=caisses[i].Scompte;
+      StringGrid1.Cells[1,i+1]:=caisses[i].Snom_caisse;
+      StringGrid1.Cells[2,i+1]:=FloatToStr(caisses[i].RSolde);
+    end;
+end;
+
+end.

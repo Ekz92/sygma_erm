@@ -1,0 +1,36 @@
+unit UType_vehicule;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.Buttons;
+
+type
+  Tfrmtype_vehicule = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    SB_Add: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SB_Modifier: TSpeedButton;
+    Label8: TLabel;
+    eddesign: TEdit;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmtype_vehicule: Tfrmtype_vehicule;
+
+implementation
+
+{$R *.dfm}
+
+end.

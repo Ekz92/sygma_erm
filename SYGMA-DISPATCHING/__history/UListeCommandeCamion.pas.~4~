@@ -1,0 +1,83 @@
+unit UListeCommandeCamion;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.Menus, Vcl.StdCtrls, Vcl.Grids, Vcl.ComCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmListeCommandeCamion = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    SpeedButton1: TSpeedButton;
+    Label4: TLabel;
+    cbVehicule: TComboBox;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbStatut: TComboBox;
+    StringGrid1: TStringGrid;
+    Panel2: TPanel;
+    Button1: TButton;
+    PopupMenu1: TPopupMenu;
+    Consulter1: TMenuItem;
+    Annuler1: TMenuItem;
+    frxCommande: TfrxReport;
+    frxDBCommande: TfrxDBDataset;
+    QCommande: TSQLQuery;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeCommandeCamion: TfrmListeCommandeCamion;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListeCommandeCamion.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='Date';
+    Cells[1,0]:='N°Cmd';
+    Cells[2,0]:='N°Charg';
+    Cells[3,0]:='Véhicule';
+    Cells[4,0]:='Montant';
+    Cells[5,0]:='Payé';
+    Cells[6,0]:='Reste';
+    Cells[7,0]:='Statut';
+  end;
+
+end;
+
+procedure TfrmListeCommandeCamion.FormShow(Sender: TObject);
+var
+  Psql : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+  Psql := ' ';
+  d2.Date := Now;
+
+  StringGrid1.RowCount:=2;
+  StringGrid1.Rows[1].Clear;
+
+  vehs:=dm.SelectVehicule(Psql);
+
+  for I := Low(vehs) to High(vehs) do
+    begin
+      cbVehicule.Items.Add(vehs[i].SNum_mat) ;
+    end;
+end;
+
+end.

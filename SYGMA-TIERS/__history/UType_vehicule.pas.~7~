@@ -1,0 +1,142 @@
+unit UType_vehicule;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.Buttons, Data.FMTBcd, Data.DB, Data.SqlExpr;
+
+type
+  Tfrmtype_vehicule = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    SB_Add: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SB_Modifier: TSpeedButton;
+    Label8: TLabel;
+    eddesign: TEdit;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+    procedure SB_AddClick(Sender: TObject);
+    procedure SB_ModifierClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmtype_vehicule: Tfrmtype_vehicule;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure Tfrmtype_vehicule.FormActivate(Sender: TObject);
+var
+  QListe_Type_veh :TSQLQuery;
+  i:integer;
+begin
+  eddesign.Clear;
+  SB_Modifier.Enabled:=false;// desactivation du bouton mofifier
+
+  QListe_Type_veh:=TSQLQuery.Create(self);
+  QListe_Type_veh.SQLConnection:=DM.SQLConnection1;
+
+  with QListe_Type_veh,SQL do
+    begin
+      Add('select * from tb_type_vehicule order by id_type_veh desc') ;
+    end;
+
+    try
+      QListe_Type_veh.Open;
+      StringGrid1.RowCount:=QListe_Type_veh.RecordCount+1;
+      for i:=1 to QListe_Type_veh.RecordCount do
+        with StringGrid1 do
+          begin
+            Cells[0,i]:=QListe_Type_veh.FieldByName('id_type_veh').AsString;
+            Cells[1,i]:=QListe_Type_veh.FieldByName('designation').AsString;
+
+            QListe_Type_veh.Next;
+          end;
+    finally
+       QListe_Type_veh.Free;
+       dm.SQLConnection1.Close;
+    end;
+end;
+
+procedure Tfrmtype_vehicule.SB_AddClick(Sender: TObject);
+var
+  QAdd_Type_Veh : TSQLQuery;
+begin
+  QAdd_Type_Veh:=TSQLQuery.Create(self);
+  QAdd_Type_Veh.SQLConnection:=dm.SQLConnection1;
+
+  with QAdd_Type_Veh,SQL do
+    begin
+      Add('Insert into tb_type_vehicule values(null,'
+            +QuotedStr(eddesign.Text)+')');
+    end;
+
+    try
+      if eddesign.Text<>'' then
+        begin
+          QAdd_Type_Veh.ExecSQL();
+          MessageDlg('Type de véhicule bien enregistré',mtInformation,[mbok],0);
+          eddesign.Clear;
+          FormActivate(self);
+        end else
+        begin
+          MessageDlg('Erreur !!! Veillez entrer la désignation',mtError,[mbOK],0);
+        end;
+    finally
+      QAdd_Type_Veh.Free;
+      dm.SQLConnection1.Close;
+    end;
+end;
+
+procedure Tfrmtype_vehicule.SB_ModifierClick(Sender: TObject);
+Var
+  Qupdate : TSQLQuery;
+begin
+  Qupdate:=TSQLQuery.Create(self);
+  Qupdate.SQLConnection := dm.SQLConnection1;
+
+  with Qupdate,SQL do
+    begin
+     Add('Update tb_type_vehicule set designation = '+QuotedStr(eddesign.Text)
+          +'where id_type_veh = '+IntToStr(id_typeveh));
+    end;
+
+    if eddesign.Text<>'' then
+      begin
+        beep;
+        if MessageDlg('Voulez-vous enregistrer ces modification ?',mtConfirmation,[mbyes,mbno],0)=mrYes then
+          begin
+            TRY
+              Qupdate.ExecSQL();
+              MessageDlg('Modification bien enregistrée',mtInformation,[mbok],0);
+            FINALLY
+              Qupdate.Free;
+            END;
+          end;
+         end else
+         begin
+          beep;
+          MessageDlg('Erreur !!! Veillez entrer la désignation SVP',mtError,[mbok],0);
+         end;
+//---------------
+
+FormActivate(self);
+SB_Add.Enabled:=true;
+SB_Modifier.Enabled:=false;
+
+end;
+
+end.

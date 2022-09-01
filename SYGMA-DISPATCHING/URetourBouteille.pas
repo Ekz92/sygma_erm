@@ -1,0 +1,310 @@
+unit URetourBouteille;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmRetourBouteille = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    edlot: TEdit;
+    edCamion: TEdit;
+    edChauf: TEdit;
+    edDate: TEdit;
+    st_retBout: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxEtatRetourB: TfrxReport;
+    QEtatRetourB: TSQLQuery;
+    frxDBEtatRetourB: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    procedure edlotDblClick(Sender: TObject);
+    procedure edlotExit(Sender: TObject);
+    procedure st_retBoutDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Button1Click(Sender: TObject);
+    procedure st_retBoutKeyPress(Sender: TObject; var Key: Char);
+    procedure st_retBoutSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRetourBouteille: TfrmRetourBouteille;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM, URechLotRetourBout, records, UConnexion;
+
+procedure TfrmRetourBouteille.Button1Click(Sender: TObject);
+var
+  RetourB : TRetourBouteille;
+  i:integer;
+  sqlUp, sqlUpRb,sqlPrint,
+  codeArt,
+  lot : string;
+  stock : TStock;
+
+  rb :TRetourBouteille;
+begin
+  if MessageDlg('Confirmer cet enregistrement ?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+    begin
+      lot := QuotedStr(edlot.Text);
+      rb:=dm.selectRetourBouteilleByLot(lot);
+
+      if rb.Slot.IsEmpty then //  Insertion dans la table retour bouteille si aucun retour n'a encoore été enregisté
+        begin
+          for I := 1 to st_retBout.RowCount-1 do
+            begin
+            // Mise à jour des quantité de bouteille dans le stock
+             codeArt := st_retBout.Cells[1,i];
+             stock := dm.selectStockByArticle(codeArt);
+
+             sqlUp := 'Update tb_stock set '
+                       +'qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(st_retBout.Cells[4,i]))+','
+                       +' qte_totale = '+IntToStr(stock.Nqte_total + StrToInt(st_retBout.Cells[4,i]))
+                       +' where code_art = '+QuotedStr(st_retBout.Cells[1,i]);
+             dm.UpdateTable(sqlUp);
+
+              with RetourB do
+                begin
+                  Slot:=QuotedStr(edlot.Text);
+                  Scamion:=QuotedStr(edCamion.Text);
+                  Schauf:=QuotedStr(edChauf.Text);
+                  Sdate_charg:=QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(edDate.Text)));
+                  Sdate_ret := QuotedStr(FormatDateTime('yyyy-mm-dd',Now));
+                  ScodeArt :=QuotedStr(st_retBout.Cells[1,i]);
+                  SdesignationArt := QuotedStr(st_retBout.Cells[2,i]);
+                  Nqte_ch := StrToInt(st_retBout.Cells[3,i]);
+                  Nqte_ret := StrToInt(st_retBout.Cells[4,i]);
+                  Nqte_eq := StrToInt(st_retBout.Cells[5,i]);
+                  Susager := QuotedStr(vUsager);
+                end;
+                DM.InsertRetourBout(RetourB);
+            end;
+        end else
+          begin    //mise à jour des quntité dans la table retour bouteille si
+            for I := 1 to st_retBout.RowCount-1 do
+              begin
+                // Mise à jour des quantité de bouteille dans le stock
+                 codeArt := st_retBout.Cells[1,i];
+                 stock := dm.selectStockByArticle(codeArt);
+
+                 sqlUp := 'Update tb_stock set '
+                           +'qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(st_retBout.Cells[4,i]))+','
+                           +' qte_totale = '+IntToStr(stock.Nqte_total + StrToInt(st_retBout.Cells[4,i]))
+                           +' where code_art = '+QuotedStr(st_retBout.Cells[1,i]);
+                 dm.UpdateTable(sqlUp);
+
+                 //Selection de l'article dans le retour bouteille et maj des qte
+
+                 codeArt := QuotedStr(st_retBout.Cells[1,i]);
+                 RetourB := dm.selectRetourBouteilleByLotArt(lot,codeArt);
+
+                 sqlUpRb := ' update tb_retour_bout set '
+                          +' qte_ret = '+IntToStr(RetourB.Nqte_ret + StrToInt(st_retBout.Cells[4,i]))+','
+                          +' qte_eq = '+IntToStr(RetourB.Nqte_eq - StrToInt(st_retBout.Cells[4,i]))
+                          +' where lot = '+QuotedStr(edlot.Text)
+                          +' and codeArt = '+QuotedStr(st_retBout.Cells[1,i]);
+                 dm.UpdateTable(sqlUpRb);
+              end;
+          end;
+
+        //Impression de l'état
+
+        sqlPrint := ' select * from tb_retour_bout '
+                 +' where lot = '+QuotedStr(edlot.Text);
+
+        QEtatRetourB.SQL.Clear;
+        QEtatRetourB.SQL.Add(sqlPrint);
+        QEtatRetourB.Open;
+
+        frxEtatRetourB.ShowReport();
+
+        Button2.Click;
+    end;
+end;
+
+procedure TfrmRetourBouteille.Button2Click(Sender: TObject);
+var
+  I: Integer;
+begin
+edlot.Clear;
+edCamion.Clear;
+edChauf.Clear;
+edDate.Clear;
+
+for I := 1 to st_retBout.RowCount -1 do
+  st_retBout.Rows[i].Clear;
+
+st_retBout.RowCount :=2 ;
+st_retBout.Rows[1].Clear;
+end;
+
+procedure TfrmRetourBouteille.edlotDblClick(Sender: TObject);
+begin
+frmRechLotRetourBout.ShowModal;
+end;
+
+procedure TfrmRetourBouteille.edlotExit(Sender: TObject);
+var
+  query : TSQLQuery;
+  sql,lot : string;
+  I: Integer;
+
+  rb :TRetourBouteille;
+begin
+  lot := QuotedStr(edlot.Text);
+
+  rb:=dm.selectRetourBouteilleByLot(lot);
+
+  if rb.Slot.IsEmpty then
+  sql := 'select tvcd.codeArt ,tvcd.designationArt ,sum(qte) as qte_ch from tb_vte_chargveh tvc '
+          +' inner join tb_vte_chargvehd tvcd on tvcd.numCharg = tvc.numCharg '
+          +' inner join tb_article ta on tvcd.codeArt = ta.code_art '
+//          +' inner join tb_retour_bout trb on trb.codeArt = tvcd.codeArt '
+          +' where tvc.lettrage = '+QuotedStr(edlot.Text)
+          +' and ta.type_art = '+QuotedStr('Charge gaz butane')
+//          +' and trb.qte_eq <> 0 '
+          +' group by tvcd.codeArt ;'
+
+  else
+{  sql := ' select tvcd.codeArt ,tvcd.designationArt ,(sum(qte) - trb.qte_ret) as qte_ch , tvc.lettrage '
+          +' from tb_vte_chargveh tvc '
+          +' inner join tb_vte_chargvehd tvcd on tvcd.numCharg = tvc.numCharg '
+          +' inner join tb_article ta on tvcd.codeArt = ta.code_art    '
+          +' inner join tb_retour_bout trb on trb.codeArt = tvcd.codeArt '
+          +' where tvc.lettrage = '+QuotedStr(edlot.Text)
+          +' and ta.type_art = '+QuotedStr('Charge gaz butane')
+          +' and trb.qte_eq > 0 '
+          +' group by tvcd.codeArt ;'     ;
+ }
+  sql := 'Select codeArt,designationArt,qte_ch,qte_ret,qte_eq from tb_retour_bout '
+          +' where lot = '+QuotedStr(edlot.Text);
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := dm.SQLConnection1;
+
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('g:\group.txt');
+    query.Open;
+
+    st_retBout.RowCount := query.RowsAffected +1 ;
+
+    for I := 1 to query.RowsAffected do
+      with st_retBout do
+        begin
+          Cells[0,i]:= IntToStr(i);
+          Cells[1,i]:=query.FieldByName('codeArt').AsString;
+          Cells[2,i]:=query.FieldByName('designationArt').AsString;
+          Cells[3,i]:=query.FieldByName('qte_ch').AsString;
+          if rb.Slot.IsEmpty then Cells[5,i]:=Cells[3,i] else Cells[5,i]:=query.FieldByName('qte_eq').AsString;
+          query.Next;
+        end;
+  finally
+    query.Free;
+  end;
+  if st_retBout.RowCount > 1 then st_retBout.FixedRows := 1;
+
+end;
+
+procedure TfrmRetourBouteille.FormCreate(Sender: TObject);
+begin
+with st_retBout do
+  begin
+    Cells[0,0]:='N°';
+    Cells[1,0]:='Code';
+    Cells[2,0]:='Désignation';
+    Cells[3,0]:='Qté ch';
+    Cells[4,0]:='Qté ret';
+    Cells[5,0]:='Equart';
+  end;
+
+end;
+
+procedure TfrmRetourBouteille.FormShow(Sender: TObject);
+begin
+Button1.Enabled:=false;
+end;
+
+procedure TfrmRetourBouteille.st_retBoutDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+procedure TfrmRetourBouteille.st_retBoutKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  I: Integer;
+begin
+
+ if NOT (key IN ['0'..'9', #13,#8]) then key := #0;
+
+if key = #13 then
+  begin
+    for I := 1 to st_retBout.RowCount -1 do
+      begin
+
+        if trim(st_retBout.Cells[4,i]) = '' then st_retBout.Cells[4,i] := '0' ;
+
+        with st_retBout do
+          begin
+            Cells[5,i]:= IntToStr(StrToInt(Cells[3,i]) - StrToInt(Cells[4,i]));
+          end;
+      end;
+      Button1.Enabled := True;
+  end;
+
+end;
+
+procedure TfrmRetourBouteille.st_retBoutSelectCell(Sender: TObject; ACol,
+  ARow: Integer; var CanSelect: Boolean);
+begin
+    if (Acol=0) or (Acol=1) or (Acol=2) or (Acol=3) or (Acol=5) then
+        CanSelect:=false
+      else
+        canselect:=true;
+end;
+
+end.

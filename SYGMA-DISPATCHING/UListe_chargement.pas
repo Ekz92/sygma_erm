@@ -1,0 +1,169 @@
+unit UListe_chargement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListe_chargement = class(TForm)
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    SpeedButton2: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    gbRecherche: TGroupBox;
+    Label5: TLabel;
+    edNumChargement: TEdit;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure edNumChargementKeyPress(Sender: TObject; var Key: Char);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListe_chargement: TfrmListe_chargement;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmListe_chargement.edNumChargementKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  i:integer;
+  Psql : string;
+  chargements : TChargementArray;
+begin
+    Psql:=' where date_chargement between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',D1.Date)+'00:00:00')
+     + ' and '+QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm:ss',D2.DateTime))
+     + ' and num_chargement like '+QuotedStr(edNumChargement.Text+'%')
+     +' order by date_chargement desc ';
+
+     chargements := DM.selectchargements(Psql);
+
+      if Length(chargements) < 1 then
+        begin
+          StringGrid1.RowCount :=2;
+          StringGrid1.Rows[1].Clear;
+        end
+      else
+      StringGrid1.RowCount:=Length(chargements)+1;
+
+      for I := Low(chargements) to High(chargements)  do
+        with StringGrid1 do
+          begin
+            Cells[0,i+1] := chargements[i].Snum_chargement;
+            Cells[1,i+1] := chargements[i].Snum_immat_veh ;
+            Cells[2,i+1] := IntToStr(chargements[i].NTotal_bouteille);
+            Cells[3,i+1] := FloatToStr(chargements[i].Ntotal_kilo);
+            Cells[4,i+1] := FloatToStrF(chargements[i].Rprix_livraison,ffNumber,15,0)+' F';
+            Cells[5,i+1] := chargements[i].Ddate_chargement;
+            Cells[6,i+1] := chargements[i].SUsager;
+          end;
+
+end;
+
+procedure TfrmListe_chargement.FormActivate(Sender: TObject);
+begin
+d1.Date := StrToDate(DateToStr(Now)) ;
+d2.Date := StrToDate(DateToStr(Now)) ;
+
+d1.MaxDate := Now;
+d2.MaxDate := Now;
+
+end;
+
+procedure TfrmListe_chargement.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'N° Charg';
+    Cells[1,0] := 'N° veh';
+    Cells[2,0] := 'Tot. bout.';
+    Cells[3,0] := 'Tot. kgs';
+    Cells[4,0] := 'Prix liv.';
+    Cells[5,0] := 'Date';
+    Cells[6,0] := 'Usager';
+  end;
+end;
+
+procedure TfrmListe_chargement.SpeedButton2Click(Sender: TObject);
+var
+  i:integer;
+  Psql : string;
+  chargements : TChargementArray;
+begin
+    Psql:= ' where date_chargement between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',D1.Date)+'00:00:00')
+           + ' and '+QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm:ss',D2.DateTime))
+           + ' and num_chargement like '+QuotedStr('%'+edNumChargement.Text+'%')
+           +' order by date_chargement desc ';
+
+     chargements := DM.selectchargements(Psql);
+
+      if Length(chargements) < 1 then
+        begin
+          StringGrid1.RowCount :=2;
+          StringGrid1.Rows[1].Clear;
+        end
+      else
+      StringGrid1.RowCount:=Length(chargements)+1;
+
+      for I := Low(chargements) to High(chargements)  do
+        with StringGrid1 do
+          begin
+            Cells[0,i+1] := chargements[i].Snum_chargement;
+            Cells[1,i+1] := chargements[i].Snum_immat_veh ;
+            Cells[2,i+1] := IntToStr(chargements[i].NTotal_bouteille);
+            Cells[3,i+1] := FloatToStr(chargements[i].Ntotal_kilo);
+            Cells[4,i+1] := FloatToStrF(chargements[i].Rprix_livraison,ffNumber,15,0)+'F';
+            Cells[5,i+1] := chargements[i].Ddate_chargement;
+            Cells[6,i+1] := chargements[i].SUsager;
+          end;
+end;
+
+procedure TfrmListe_chargement.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

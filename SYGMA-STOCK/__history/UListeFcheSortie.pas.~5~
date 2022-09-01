@@ -1,0 +1,74 @@
+unit UListeFcheSortie;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmListeFcheSortie = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbClient: TComboBox;
+    edcodeClt: TEdit;
+    cbVeh: TComboBox;
+    edMarque: TEdit;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxLFicheSortie: TfrxReport;
+    frxDBFicheSortie: TfrxDBDataset;
+    QFicheSortie: TSQLQuery;
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeFcheSortie: TfrmListeFcheSortie;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmListeFcheSortie.FormShow(Sender: TObject);
+var
+  Psql,Psql_veh : string;
+  Clts : TClientArray;
+  I: Integer;
+  vehs : TVehiculeArray;
+begin
+  d2.Date := Now;
+  Psql := '';
+
+  Clts := DM.selectClients(Psql);
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      cbClient.Items.Add(Clts[i].SnomClt);
+    end;
+
+//selection du véhicule
+  Psql_veh := '';
+
+  vehs:=dm.SelectVehicule(Psql_veh);
+  for I := Low(vehs) to High(vehs) do
+    begin
+      cbVeh.Items.Add(vehs[i].SNum_mat);
+    end;
+end;
+
+end.

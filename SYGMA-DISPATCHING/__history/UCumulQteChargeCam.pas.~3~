@@ -1,0 +1,39 @@
+unit UCumulQteChargeCam;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.FMTBcd,
+  frxClass, frxDBSet, Data.DB, Data.SqlExpr, frxChart;
+
+type
+  TfrmCumulQteChargeCam = class(TForm)
+    frxChartObject1: TfrxChartObject;
+    frxTableau: TfrxReport;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    ComboBox1: TComboBox;
+    btVisualiser: TButton;
+    QCumuleQte: TSQLQuery;
+    QCumuleQtecodeArt: TStringField;
+    QCumuleQtedesignationart: TStringField;
+    QCumuleQteqte: TFMTBCDField;
+    frxDBCumuleQte: TfrxDBDataset;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumulQteChargeCam: TfrmCumulQteChargeCam;
+
+implementation
+
+{$R *.dfm}
+
+end.

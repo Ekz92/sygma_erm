@@ -1,0 +1,40 @@
+unit UListeLotLivraison;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListeLotLivraison = class(TForm)
+    GroupBox1: TGroupBox;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeLotLivraison: TfrmListeLotLivraison;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListeLotLivraison.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='N° Lot';
+    Cells[1,0]:='Camion';
+    Cells[2,0]:='Chauffeur';
+    Cells[3,0]:='Date';
+  end;
+end;
+
+end.

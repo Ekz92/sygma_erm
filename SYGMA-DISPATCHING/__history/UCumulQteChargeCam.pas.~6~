@@ -1,0 +1,78 @@
+unit UCumulQteChargeCam;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.FMTBcd,
+  frxClass, frxDBSet, Data.DB, Data.SqlExpr, frxChart;
+
+type
+  TfrmCumulQteChargeCam = class(TForm)
+    procedure btVisualiserClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumulQteChargeCam: TfrmCumulQteChargeCam;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCumulQteChargeCam.btVisualiserClick(Sender: TObject);
+var
+  sql : string;
+  Component: TfrxComponent;
+  MD1,MD2,Memo26 :TfrxMemoView;
+begin
+  sql := 'select tbd.codeArt,tbd.designationart ,sum(qte) as qte from tb_vte_chargveh tbc '
+	      +' inner join tb_vte_chargvehd tbd on tbc.numCharg = tbd.numCharg '
+        +' where tbc.dateCharg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+        +' group by tbd.codeArt'
+        +' order by qte desc '  ;
+
+  QCumuleQte.SQL.Clear;
+  QCumuleQte.SQL.Add(sql);
+  QCumuleQte.Open;
+
+//****************************** Affichage date1 DIAGRAMME ***********************
+Component := frxCumuleQte.FindObject('d1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxCumuleQte.FindObject('d2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+//****************************** Affichage date1 Tableau ***********************
+Component := frxTableau.FindObject('d1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxTableau.FindObject('d2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+  if ComboBox1.ItemIndex = 0 then
+    frxCumuleQte.ShowReport()
+  else
+    frxTableau.ShowReport();
+end;
+
+end.

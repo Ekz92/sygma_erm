@@ -1,0 +1,123 @@
+unit URapprochementFicheEs;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmRapprochementFicheEs = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbClient: TComboBox;
+    edcodeClt: TEdit;
+    cbVeh: TComboBox;
+    edMarque: TEdit;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxLFicheRap: TfrxReport;
+    frxDBFicheRap: TfrxDBDataset;
+    QFicheRap: TSQLQuery;
+    frxDBsum: TfrxDBDataset;
+    QSUM: TSQLQuery;
+    procedure FormShow(Sender: TObject);
+    procedure cbClientKeyPress(Sender: TObject; var Key: Char);
+    procedure cbVehKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRapprochementFicheEs: TfrmRapprochementFicheEs;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRapprochementFicheEs.cbClientKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  Psql : string;
+  Clts : TClientArray;
+  I: Integer;
+begin
+
+if key = #13 then
+  begin
+    Psql := ' where nom_clt = '+QuotedStr(cbClient.Text);
+
+    Clts := DM.selectClients(Psql);
+
+    for I := Low(Clts) to High(Clts) do
+      begin
+        edcodeClt.Text:=Clts[i].SCodeClt;
+      end;
+
+      edMarque.Clear;
+  end;
+end;
+
+procedure TfrmRapprochementFicheEs.cbVehKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  vehs : TVehiculeArray;
+  Psql_veh : string;
+  i: integer;
+begin
+if key = #13 then
+  begin
+//selection du véhicule
+    Psql_veh := ' where Num_Immat_veh = '+QuotedStr(cbVeh.Text) ;
+
+    vehs:=dm.SelectVehicule(Psql_veh);
+    for I := Low(vehs) to High(vehs) do
+      begin
+        edMarque.Text := vehs[i].SMarque;
+      end;
+
+      edcodeClt.Clear;
+  end;
+end;
+
+procedure TfrmRapprochementFicheEs.FormShow(Sender: TObject);
+var
+  Psql,Psql_veh : string;
+  Clts : TClientArray;
+  I: Integer;
+  vehs : TVehiculeArray;
+begin
+  d2.Date := Now;
+  Psql := '';
+
+  Clts := DM.selectClients(Psql);
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      cbClient.Items.Add(Clts[i].SnomClt);
+    end;
+
+//selection du véhicule
+  Psql_veh := '';
+
+  vehs:=dm.SelectVehicule(Psql_veh);
+  for I := Low(vehs) to High(vehs) do
+    begin
+      cbVeh.Items.Add(vehs[i].SNum_mat);
+    end;
+end;
+
+end.

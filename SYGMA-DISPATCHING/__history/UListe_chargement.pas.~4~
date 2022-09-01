@@ -1,0 +1,64 @@
+unit UListe_chargement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListe_chargement = class(TForm)
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    SpeedButton2: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    gbRecherche: TGroupBox;
+    Label5: TLabel;
+    edNumChargement: TEdit;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListe_chargement: TfrmListe_chargement;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListe_chargement.FormActivate(Sender: TObject);
+begin
+d1.Date := StrToDate(DateToStr(Now)) ;
+d2.Date := StrToDate(DateToStr(Now)) ;
+
+d1.MaxDate := Now;
+d2.MaxDate := Now;
+
+end;
+
+procedure TfrmListe_chargement.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'N° Charg';
+    Cells[1,0] := 'N° veh';
+    Cells[2,0] := 'Tot. bout.';
+    Cells[3,0] := 'Tot. kgs';
+    Cells[4,0] := 'Prix liv.';
+    Cells[5,0] := 'Date';
+    Cells[6,0] := 'Usager';
+  end;
+end;
+
+end.

@@ -1,0 +1,55 @@
+unit UConsultCompteClient;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmComnsultCompteClient = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edCode: TEdit;
+    edrech_nom: TEdit;
+    StringGrid: TStringGrid;
+    procedure edCodeChange(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmComnsultCompteClient: TfrmComnsultCompteClient;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmComnsultCompteClient.edCodeChange(Sender: TObject);
+var
+  Ccs : TCompteClientArray;
+  Sql_cc :string;
+  I: Integer;
+begin
+  Sql_cc := ' where code_clt like '+QuotedStr(edCode.Text+'%');
+  Ccs := DM.SelectCompteClient(Sql_cc);
+  StringGrid.RowCount := Length(Ccs)+1;
+
+  for I := Low(Ccs) to High(Ccs) do
+    begin
+      with StringGrid do
+        begin
+          Cells[0,i+1]:= Ccs[i].Scode_clt;
+          Cells[1,i+1]:= Ccs[i].SNom_clt;
+          Cells[2,i+1]:= FloatToStrF(Ccs[i].RSolde,ffNumber,15,2);
+        end;
+    end;
+    if StringGrid.RowCount>1 then StringGrid.FixedRows := 1;
+end;
+
+end.

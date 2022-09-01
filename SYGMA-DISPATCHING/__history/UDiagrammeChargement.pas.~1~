@@ -1,0 +1,38 @@
+unit UDiagrammeChargement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxChart, frxClass,
+  frxDBSet, Data.DB, Data.SqlExpr, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmDiagrammeChargement = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    Button1: TButton;
+    Button2: TButton;
+    edtop: TEdit;
+    Diagramme: TfrxReport;
+    SQLDiag: TSQLQuery;
+    frxDiag: TfrxDBDataset;
+    frxChartObject1: TfrxChartObject;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmDiagrammeChargement: TfrmDiagrammeChargement;
+
+implementation
+
+{$R *.dfm}
+
+end.

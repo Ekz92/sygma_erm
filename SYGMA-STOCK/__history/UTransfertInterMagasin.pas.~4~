@@ -1,0 +1,83 @@
+unit UTransfertInterMagasin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+
+type
+  TfrmTransfetInterMagasin = class(TForm)
+    Bevel1: TBevel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Image1: TImage;
+    Bevel2: TBevel;
+    Label5: TLabel;
+    Label13: TLabel;
+    edqte: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DateTimePicker1: TDateTimePicker;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label8: TLabel;
+    Label12: TLabel;
+    cbmagasin: TComboBox;
+    cbarticle: TComboBox;
+    edDesignArticleDepart: TEdit;
+    edDesignMagasinDepart: TEdit;
+    GroupBox2: TGroupBox;
+    Label3: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    cbmagasin_dest: TComboBox;
+    cbArticleDes: TComboBox;
+    edDesignArticleDest: TEdit;
+    edDesignMagasinDest: TEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Déclarations privées }
+    procedure videChamp();
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmTransfetInterMagasin: TfrmTransfetInterMagasin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmTransfetInterMagasin.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  cbmagasin.clear;
+  cbarticle.Clear;
+  cbArticleDes.Clear;
+  cbmagasin_dest.Clear;
+
+  videChamp();
+
+end;
+
+procedure TfrmTransfetInterMagasin.videChamp();
+begin
+  //cbmagasin.clear;
+  //cbarticle.Clear;
+  //cbArticleDes.Clear;
+  edqte.Clear;
+  //cbmagasin_dest.Clear;
+  edDesignArticleDepart.Clear;
+  edDesignArticleDest.Clear;
+  edDesignMagasinDest.Clear;
+  edDesignMagasinDepart.Clear;
+end;
+
+
+end.

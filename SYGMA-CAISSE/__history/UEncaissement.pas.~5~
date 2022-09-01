@@ -1,0 +1,61 @@
+unit UEncaissement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmEncaissement = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label4: TLabel;
+    DateEnc: TDateTimePicker;
+    edPiece: TEdit;
+    cbCaisse: TComboBox;
+    edMontant: TEdit;
+    mLibelle: TMemo;
+    Button1: TButton;
+    Button2: TButton;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmEncaissement: TfrmEncaissement;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM, UConnexion;
+
+procedure TfrmEncaissement.FormActivate(Sender: TObject);
+  var
+  PsqlCaisse : string;
+  user : TUser;
+begin
+//**********************Selection de la caisse de l'utilisateur*********
+
+  PsqlCaisse := ' where usager = '+QuotedStr(vUsager);
+  user := dm.selectUser(PsqlCaisse);
+  cbCaisse.Text := user.Snum_caisse;
+
+  DateEnc.Date:=Now;
+end;
+
+procedure TfrmEncaissement.FormCreate(Sender: TObject);
+begin
+  mLibelle.Clear;
+
+end;
+
+end.

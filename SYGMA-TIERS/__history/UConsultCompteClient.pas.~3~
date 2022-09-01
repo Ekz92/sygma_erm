@@ -1,0 +1,32 @@
+unit UConsultCompteClient;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmComnsultCompteClient = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edCode: TEdit;
+    edrech_nom: TEdit;
+    StringGrid: TStringGrid;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmComnsultCompteClient: TfrmComnsultCompteClient;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+end.

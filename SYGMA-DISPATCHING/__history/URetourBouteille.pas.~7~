@@ -1,0 +1,114 @@
+unit URetourBouteille;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmRetourBouteille = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    edlot: TEdit;
+    edCamion: TEdit;
+    edChauf: TEdit;
+    edDate: TEdit;
+    st_retBout: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxEtatRetourB: TfrxReport;
+    QEtatRetourB: TSQLQuery;
+    frxDBEtatRetourB: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    procedure edlotDblClick(Sender: TObject);
+    procedure edlotExit(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRetourBouteille: TfrmRetourBouteille;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM, URechLotRetourBout, records;
+
+procedure TfrmRetourBouteille.edlotDblClick(Sender: TObject);
+begin
+frmRechLotRetourBout.ShowModal;
+end;
+
+procedure TfrmRetourBouteille.edlotExit(Sender: TObject);
+var
+  query : TSQLQuery;
+  sql,lot : string;
+  I: Integer;
+
+  rb :TRetourBouteille;
+begin
+  lot := QuotedStr(edlot.Text);
+
+  rb:=dm.selectRetourBouteilleByLot(lot);
+
+  if rb.Slot.IsEmpty then
+  sql := 'select tvcd.codeArt ,tvcd.designationArt ,sum(qte) as qte_ch from tb_vte_chargveh tvc '
+          +' inner join tb_vte_chargvehd tvcd on tvcd.numCharg = tvc.numCharg '
+          +' inner join tb_article ta on tvcd.codeArt = ta.code_art '
+//          +' inner join tb_retour_bout trb on trb.codeArt = tvcd.codeArt '
+          +' where tvc.lettrage = '+QuotedStr(edlot.Text)
+          +' and ta.type_art = '+QuotedStr('Charge gaz butane')
+//          +' and trb.qte_eq <> 0 '
+          +' group by tvcd.codeArt ;'
+
+  else
+{  sql := ' select tvcd.codeArt ,tvcd.designationArt ,(sum(qte) - trb.qte_ret) as qte_ch , tvc.lettrage '
+          +' from tb_vte_chargveh tvc '
+          +' inner join tb_vte_chargvehd tvcd on tvcd.numCharg = tvc.numCharg '
+          +' inner join tb_article ta on tvcd.codeArt = ta.code_art    '
+          +' inner join tb_retour_bout trb on trb.codeArt = tvcd.codeArt '
+          +' where tvc.lettrage = '+QuotedStr(edlot.Text)
+          +' and ta.type_art = '+QuotedStr('Charge gaz butane')
+          +' and trb.qte_eq > 0 '
+          +' group by tvcd.codeArt ;'     ;
+ }
+  sql := 'Select codeArt,designationArt,qte_ch,qte_ret,qte_eq from tb_retour_bout '
+          +' where lot = '+QuotedStr(edlot.Text);
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := dm.SQLConnection1;
+
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('g:\group.txt');
+    query.Open;
+
+    st_retBout.RowCount := query.RowsAffected +1 ;
+
+    for I := 1 to query.RowsAffected do
+      with st_retBout do
+        begin
+          Cells[0,i]:= IntToStr(i);
+          Cells[1,i]:=query.FieldByName('codeArt').AsString;
+          Cells[2,i]:=query.FieldByName('designationArt').AsString;
+          Cells[3,i]:=query.FieldByName('qte_ch').AsString;
+          if rb.Slot.IsEmpty then Cells[5,i]:=Cells[3,i] else Cells[5,i]:=query.FieldByName('qte_eq').AsString;
+          query.Next;
+        end;
+  finally
+    query.Free;
+  end;
+  if st_retBout.RowCount > 1 then st_retBout.FixedRows := 1;
+
+end;
+
+end.

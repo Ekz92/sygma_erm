@@ -1,0 +1,40 @@
+unit UListe_avance;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Grids, Vcl.ComCtrls, Vcl.Buttons;
+
+type
+  TfrmListeAvance = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    SpeedButton1: TSpeedButton;
+    cbClient: TComboBox;
+    edCodeClt: TEdit;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    PopupMenu1: TPopupMenu;
+    Consulterlesolde1: TMenuItem;
+    Annuleruneavance1: TMenuItem;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeAvance: TfrmListeAvance;
+
+implementation
+
+{$R *.dfm}
+
+end.

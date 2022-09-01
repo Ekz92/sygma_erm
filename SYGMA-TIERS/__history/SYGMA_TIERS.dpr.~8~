@@ -1,0 +1,25 @@
+program SYGMA_TIERS;
+
+uses
+  Vcl.Forms,
+  UIntegrateur in 'UIntegrateur.pas' {frmIntegrateur},
+  UConnexion in 'UConnexion.pas' {frmconnexion},
+  UDM in 'UDM.pas' {DM: TDataModule},
+  ULivreur in 'ULivreur.pas' {frmLivreur},
+  records in 'records.pas',
+  UAdd_client in 'UAdd_client.pas' {frmAdd_client},
+  UPoint_vente in 'UPoint_vente.pas' {frmPointDeVente};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmIntegrateur, frmIntegrateur);
+  Application.CreateForm(Tfrmconnexion, frmconnexion);
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TfrmLivreur, frmLivreur);
+  Application.CreateForm(TfrmAdd_client, frmAdd_client);
+  Application.CreateForm(TfrmPointDeVente, frmPointDeVente);
+  Application.Run;
+end.

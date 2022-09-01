@@ -1,0 +1,47 @@
+unit USortieDivers;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Imaging.pngimage, Vcl.Buttons;
+
+type
+  TfrmSortieDivers = class(TForm)
+    Bevel1: TBevel;
+    Label6: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lbUsager: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label4: TLabel;
+    Label5: TLabel;
+    Image1: TImage;
+    Label7: TLabel;
+    edQte: TEdit;
+    edcode_art: TEdit;
+    edcode_mag: TEdit;
+    edDesignation_art: TEdit;
+    edDesignation_mag: TEdit;
+    DateTimePicker1: TDateTimePicker;
+    edPiece: TEdit;
+    RgType: TRadioGroup;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmSortieDivers: TfrmSortieDivers;
+    vTypeSortie : integer;
+  FrmSource : string;
+
+implementation
+
+{$R *.dfm}
+
+end.
