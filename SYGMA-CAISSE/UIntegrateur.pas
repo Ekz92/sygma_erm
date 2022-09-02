@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Buttons,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids;
 
 type
   TfrmIntegrateur = class(TForm)
@@ -18,12 +18,6 @@ type
     Label4: TLabel;
     lbdate: TLabel;
     Panel2: TPanel;
-    Panel3: TPanel;
-    SpeedButton6: TSpeedButton;
-    SpeedButton7: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    SpeedButton10: TSpeedButton;
     MainMenu1: TMainMenu;
     Fichier1: TMenuItem;
     Nouveau1: TMenuItem;
@@ -66,7 +60,6 @@ type
     Listefacture1: TMenuItem;
     Nouvelcaisse1: TMenuItem;
     Historiquedecaisse1: TMenuItem;
-    Forage1: TMenuItem;
     Avancefacture1: TMenuItem;
     S1: TMenuItem;
     Listedesavancesreus1: TMenuItem;
@@ -77,9 +70,6 @@ type
     Saisie3: TMenuItem;
     Liste3: TMenuItem;
     Solde1: TMenuItem;
-    Versementparcommande1: TMenuItem;
-    Versement1: TMenuItem;
-    Listedeversement1: TMenuItem;
     BondeComBC1: TMenuItem;
     CrerunBC1: TMenuItem;
     ListedeBC1: TMenuItem;
@@ -88,6 +78,26 @@ type
     Liste2: TMenuItem;
     Admin1: TMenuItem;
     Sauvegarde1: TMenuItem;
+    st_SideMenu: TStringGrid;
+    Panel3: TPanel;
+    PnArticle: TPanel;
+    Image8: TImage;
+    Label5: TLabel;
+    PnMagasin: TPanel;
+    Label6: TLabel;
+    Image2: TImage;
+    PnEntree: TPanel;
+    Label7: TLabel;
+    Image3: TImage;
+    PnTransfert: TPanel;
+    Label8: TLabel;
+    Image4: TImage;
+    PnListe: TPanel;
+    Label9: TLabel;
+    Image7: TImage;
+    Panel4: TPanel;
+    Label10: TLabel;
+    ImgEntree: TImage;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);
