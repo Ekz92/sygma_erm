@@ -1,0 +1,76 @@
+unit UEtatJournal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Data.FMTBcd,
+  frxClass, frxDBSet, Data.DB, Data.SqlExpr;
+
+type
+  TfrmEtatJournal = class(TForm)
+    d1: TDateTimePicker;
+    Label1: TLabel;
+    d2: TDateTimePicker;
+    Label2: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    QJournal: TSQLQuery;
+    frxJournal: TfrxReport;
+    frxDBJournal: TfrxDBDataset;
+    frxDBDSumD: TfrxDBDataset;
+    QSumD: TSQLQuery;
+    QSumC: TSQLQuery;
+    frxDBDSumC: TfrxDBDataset;
+    Label3: TLabel;
+    cbUser: TComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmEtatJournal: TfrmEtatJournal;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM, records, UConnexion;
+
+procedure TfrmEtatJournal.Button1Click(Sender: TObject);
+var
+  sqlJrnl : string;
+begin
+
+if Trim(cbUser.Text)<>'' then
+  begin
+    sqlJrnl := 'select * from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and usager = '+QuotedStr(cbUser.Text);
+  end else
+  begin
+    sqlJrnl := 'select * from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+//                +' and usager = '+QuotedStr(cbUser.Text);
+
+  end;
+
+
+QJournal.SQL.Add()
+frxJournal.ShowReport();
+end;
+
+procedure TfrmEtatJournal.FormShow(Sender: TObject);
+begin
+d2.Date := Now;
+
+cbUser.Text := vUsager;
+end;
+
+end.

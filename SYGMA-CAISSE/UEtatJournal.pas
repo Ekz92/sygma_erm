@@ -22,6 +22,8 @@ type
     QSumD: TSQLQuery;
     QSumC: TSQLQuery;
     frxDBDSumC: TfrxDBDataset;
+    Label3: TLabel;
+    cbUser: TComboBox;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
@@ -37,16 +39,85 @@ implementation
 
 {$R *.dfm}
 
-uses UDM;
+uses UDM, records, UConnexion;
 
 procedure TfrmEtatJournal.Button1Click(Sender: TObject);
+var
+  sqlJrnl,sqlSumD,sqlSumC : string;
+
+  Component: TfrxComponent;
+  MD1,MD2,Memo26 :TfrxMemoView;
 begin
-frxJournal.ShowReport();
+
+if Trim(cbUser.Text)<>'' then
+  begin
+    sqlJrnl := 'select * from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and usager = '+QuotedStr(cbUser.Text);
+
+    sqlSumD:='select sum(debit) as TDebit from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and usager = '+QuotedStr(cbUser.Text);
+
+    sqlSumC:='select sum(credit) as TCredit from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and usager = '+QuotedStr(cbUser.Text);
+
+  end else
+  begin
+    sqlJrnl := 'select * from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+
+    sqlSumD:='select sum(debit) as TDebit from tb_etat_journal '
+            +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+
+    sqlSumC:='select sum(credit) as TCredit from tb_etat_journal '
+                +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+
+  end;
+
+//****************************** Affichage date1 DIAGRAMME ***********************
+Component := frxJournal.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxJournal.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+
+  QJournal.SQL.Clear;
+  QJournal.SQL.Add(sqlJrnl);
+  QJournal.Open;
+
+  QSumD.SQL.Clear;
+  QSumD.SQL.Add(sqlSumD);
+  QSumD.Open;
+
+  QSumC.SQL.Clear;
+  QSumC.SQL.Add(sqlSumC);
+  QSumC.Open;
+
+  frxJournal.ShowReport();
 end;
 
 procedure TfrmEtatJournal.FormShow(Sender: TObject);
 begin
 d2.Date := Now;
+
+cbUser.Text := vUsager;
 end;
 
 end.

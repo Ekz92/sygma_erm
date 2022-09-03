@@ -68,6 +68,7 @@ implementation
 
 {$R *.dfm}
 
+
 function TDM.InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
   var
   sql : string;

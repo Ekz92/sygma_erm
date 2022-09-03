@@ -17,21 +17,28 @@ object frmEtatJournal: TfrmEtatJournal
   TextHeight = 13
   object Label1: TLabel
     Left = 24
-    Top = 27
+    Top = 19
     Width = 20
     Height = 13
     Caption = 'Du :'
   end
   object Label2: TLabel
     Left = 24
-    Top = 51
+    Top = 43
     Width = 20
     Height = 13
     Caption = 'Au :'
   end
+  object Label3: TLabel
+    Left = 24
+    Top = 66
+    Width = 44
+    Height = 13
+    Caption = 'Caissier :'
+  end
   object d1: TDateTimePicker
     Left = 104
-    Top = 24
+    Top = 16
     Width = 105
     Height = 21
     Date = 44807.333493738430000000
@@ -40,7 +47,7 @@ object frmEtatJournal: TfrmEtatJournal
   end
   object d2: TDateTimePicker
     Left = 104
-    Top = 48
+    Top = 40
     Width = 105
     Height = 21
     Date = 44807.333493738430000000
@@ -64,6 +71,14 @@ object frmEtatJournal: TfrmEtatJournal
     Caption = 'Annuler'
     TabOrder = 3
   end
+  object cbUser: TComboBox
+    Left = 104
+    Top = 63
+    Width = 105
+    Height = 21
+    ParentColor = True
+    TabOrder = 4
+  end
   object QJournal: TSQLQuery
     Active = True
     MaxBlobSize = -1
@@ -83,7 +98,7 @@ object frmEtatJournal: TfrmEtatJournal
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44807.402128530100000000
-    ReportOptions.LastChange = 44807.402128530100000000
+    ReportOptions.LastChange = 44807.910722037000000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -227,7 +242,7 @@ object frmEtatJournal: TfrmEtatJournal
         object Memo25: TfrxMemoView
           AllowVectorExport = True
           Left = 3.779530000000000000
-          Width = 298.582870000000000000
+          Width = 170.078850000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -237,6 +252,66 @@ object frmEtatJournal: TfrmEtatJournal
           Frame.Typ = []
           Memo.UTF8W = (
             'Journal de caisse')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 26.456710000000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Du :')
+          ParentFont = False
+        end
+        object md1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 38.354360000000000000
+          Top = 26.456710000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          AllowVectorExport = True
+          Left = 135.842610000000000000
+          Top = 26.456710000000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Au :')
+          ParentFont = False
+        end
+        object md2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 170.417440000000000000
+          Top = 26.456710000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
           ParentFont = False
         end
       end
@@ -702,8 +777,8 @@ object frmEtatJournal: TfrmEtatJournal
     SQL.Strings = (
       'select sum(debit) as TDebit from tb_etat_journal')
     SQLConnection = DM.SQLConnection1
-    Left = 24
-    Top = 48
+    Left = 8
+    Top = 72
   end
   object QSumC: TSQLQuery
     Active = True
