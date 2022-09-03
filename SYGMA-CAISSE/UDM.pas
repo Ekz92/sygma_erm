@@ -32,6 +32,11 @@ type
     function SelectAvance(Psql : string):TAvanceDetailArray;
     function selectDepense(Psql : string):TDepenseArray;
     function selectEncaissement(Psql : string):TEncaissementArray;
+    function selectCatDate():TDateSys;
+    function SelectCaisse(Psql :string):TCaisse;
+    function selectStock(Psql : String) :TStockArray;
+    function selectCatalogueStock(Psql:string) : TCatalogueStock;
+
 
 
     function InsertReleveClient(rc : TReleve_client):Boolean;
@@ -42,6 +47,9 @@ type
     function InsertPayementCanc(payement : TPayementCanc):Boolean;
     function InsertDepense(dep : TDepense):Boolean;
     function InsertEncaissement(Enc : TEncaissement):Boolean;
+    function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
+    function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
+    function InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
 
 
     procedure UpdateTable(var Psql :string);
@@ -59,6 +67,206 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+function TDM.InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with EtatJournal do
+    begin
+      sql := 'Insert into tb_etat_journal values(null,'
+                +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDateTime(Sdate_ej)))+','
+                +QuotedStr(Snum_ope)+','
+                +QuotedStr(Snum_piece)+','
+                +QuotedStr(Slibelle) + ','
+                +QuotedStr(Sdebit)+','
+                +QuotedStr(Scredit) +','
+                +QuotedStr(Ssens)+','
+                +QuotedStr(Susager)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+
+
+function TDM.InsertCatalogueStock(cstock : TCatalogueStock):boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with cstock do
+    begin
+      sql := 'Insert into tb_catalogue_stock values(null,'
+                +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_cs)))+','
+                +QuotedStr(SCode_art)+','
+                +IntToStr(NQte_vide)+','
+                +IntToStr(NQte_mag) + ','
+                +IntToStr(Nqte_totale)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+
+function TDM.selectCatalogueStock(Psql:string) : TCatalogueStock;
+var
+  sql : string;
+  query : TSQLQuery;
+  cata_stock : TCatalogueStock;
+begin
+  sql := 'Select * from tb_catalogue_stock '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+    query.Open;
+    with query, cata_stock do
+      begin
+        Nid_cs := FieldByName('id_cs').AsInteger;
+        Sdate_cs :=FieldByName('date_cs').AsString;
+        Scode_art := FieldByName('code_art').AsString;
+        NQte_vide := FieldByName('qte_vide').AsInteger;
+        NQte_mag := FieldByName('qte_mag').AsInteger;
+        Nqte_totale := FieldByName('qte_totale').AsInteger;
+      end;
+      Result := cata_stock;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectStock(Psql : String) :TStockArray;
+var
+  sql : string;
+  query : TSQLQuery;
+  stock : TStock;
+  stocks : TStockArray;
+  i:integer;
+begin
+  sql := 'Select * from tb_stock '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(stocks,i+1);
+            with stock do
+              begin
+                Nid_stock := FieldByName('id_stock').AsInteger;
+                Scode_art := FieldByName('code_art').AsString;
+                Scode_mag := FieldByName('code_mag').AsString;
+                NQte_vide := FieldByName('qte_vide').AsInteger;
+                NQte_mag := FieldByName('qte_mag').AsInteger;
+                Nqte_total := FieldByName('qte_totale').AsInteger;
+                Rcoutachat :=FieldByName('cout_achat').AsFloat;
+              end;
+            stocks[i]:=stock;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := stocks;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
+
+function TDM.InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with Cat do
+    begin
+      sql := 'Insert into tb_catalogue_caisse values(null,'
+          +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_cat)))+','
+          +Scompte+','
+          +FloatToStr(RSolde)+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.selectCatDate():TDateSys;
+var
+  query : TSQLQuery;
+  sql : string;
+  Ds : TDateSys;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_catalogue_date ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        Ds.Sdate_cd:=FieldByName('date_cd').AsString;
+      end;
+
+    Result := Ds;
+  finally
+    query.Free;
+    dm.SQLConnection1.Close;
+  end;
+end;
+
+
 function TDM.selectEncaissement(Psql : string):TEncaissementArray;
 var
   query : TSQLQuery;
@@ -305,6 +513,34 @@ begin
     finally
       query.Free;
     end;
+end;
+
+function TDM.SelectCaisse(Psql :string):TCaisse;
+var
+  sql : string;
+  query : TSQLQuery;
+  Caisse : TCaisse;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select * from tb_caisse '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with Caisse do
+      begin
+        Scompte:= query.FieldByName('num_compte').AsString;
+        Snom_caisse := query.FieldByName('nom_caisse').AsString;
+        RSolde := query.FieldByName('solde').AsFloat;
+      end;
+    Result :=Caisse;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
 end;
 
 

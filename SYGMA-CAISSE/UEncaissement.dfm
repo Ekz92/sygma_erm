@@ -94,6 +94,7 @@ object frmEncaissement: TfrmEncaissement
     Alignment = taRightJustify
     ParentColor = True
     TabOrder = 3
+    OnKeyPress = edMontantKeyPress
   end
   object mLibelle: TMemo
     Left = 78
@@ -121,5 +122,6 @@ object frmEncaissement: TfrmEncaissement
     Height = 25
     Caption = 'Annuler'
     TabOrder = 6
+    OnClick = Button2Click
   end
 end

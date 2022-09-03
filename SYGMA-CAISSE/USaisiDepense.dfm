@@ -77,7 +77,7 @@ object frmSaisiDepense: TfrmSaisiDepense
     Height = 21
     CharCase = ecUpperCase
     ParentColor = True
-    TabOrder = 1
+    TabOrder = 2
   end
   object cbCaisse: TComboBox
     Left = 78
@@ -85,7 +85,7 @@ object frmSaisiDepense: TfrmSaisiDepense
     Width = 145
     Height = 21
     ParentColor = True
-    TabOrder = 2
+    TabOrder = 1
   end
   object edMontant: TEdit
     Left = 78
@@ -94,7 +94,8 @@ object frmSaisiDepense: TfrmSaisiDepense
     Height = 21
     Alignment = taRightJustify
     ParentColor = True
-    TabOrder = 3
+    TabOrder = 4
+    OnKeyPress = edMontantKeyPress
   end
   object mLibelle: TMemo
     Left = 78
@@ -104,7 +105,7 @@ object frmSaisiDepense: TfrmSaisiDepense
     Lines.Strings = (
       'Memo1')
     ParentColor = True
-    TabOrder = 4
+    TabOrder = 3
   end
   object Button1: TButton
     Left = 259
@@ -122,5 +123,6 @@ object frmSaisiDepense: TfrmSaisiDepense
     Height = 25
     Caption = 'Annuler'
     TabOrder = 6
+    OnClick = Button2Click
   end
 end

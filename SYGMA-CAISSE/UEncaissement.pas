@@ -24,6 +24,8 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure edMontantKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
   public
@@ -42,6 +44,7 @@ uses records, UDM, UConnexion;
 procedure TfrmEncaissement.Button1Click(Sender: TObject);
 var
   Enc : TEncaissement;
+  EtatJrn : TEtatJournal;
   caisses : TCaisseArray;
   sqlCaisse,sqlUpd :string;
   vSolde : real;
@@ -78,9 +81,25 @@ begin
           SUsager := QuotedStr(vUsager);
           Nstatut_canc:=0;
         end;
+
+//      Etat journal
+
+        with EtatJrn do
+          begin
+            Sdate_ej:= DateToStr(DateEnc.Date);
+            Snum_ope := IntToStr(Maxope);
+            Snum_piece := edPiece.Text;
+            Slibelle := mLibelle.Text;
+            Sdebit := '-';
+            Scredit := edMontant.Text;
+            Ssens := 'C';
+            Susager := vUsager;
+          end;
+
         if MessageDlg('Voulez-vous enregistré cette dépense ?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
           begin
             dm.InsertEncaissement(Enc);      {Insertion dans t_depense}
+            dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
 
             sqlUpd := 'Update tb_caisse ' {Requete Mise à jour du solde}
                     +' set solde = '+FloatToStr(vSolde + StrToFloat(edMontant.Text))
@@ -107,6 +126,18 @@ begin
             Button2.Click;
           end;
     end;
+end;
+
+procedure TfrmEncaissement.Button2Click(Sender: TObject);
+begin
+edPiece.Clear;
+edMontant.Clear;
+mLibelle.Clear;
+end;
+
+procedure TfrmEncaissement.edMontantKeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then Button1.Click;
 end;
 
 procedure TfrmEncaissement.FormActivate(Sender: TObject);

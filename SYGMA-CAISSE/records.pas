@@ -2,6 +2,53 @@ unit records;
 
 interface
 type
+TEtatJournal = record
+	Nid_ej : integer ;
+  Sdate_ej,
+	Snum_ope ,
+	Snum_piece ,
+	Slibelle ,
+	Sdebit ,
+	Scredit ,
+  Ssens,
+  Susager: string;
+end;
+TEtatJournalArray = array of TEtatJournal;
+
+TDateSys = record
+  Nid_cd : integer;
+  Sdate_cd : string;
+end;
+
+TCatalogueCaisse = record
+  Nid_cat : integer;
+  Sdate_cat,
+  Scompte : string;
+  RSolde : Real;
+end;
+TTCatalogueCaisseArray = array of TCatalogueCaisse;
+
+TStock = record
+  Nid_stock :integer;
+  Scode_art,
+  Scode_mag : String ;
+  NQte_vide,
+  NQte_mag ,
+  Nqte_total : Integer;
+  Rcoutachat : real;
+end;
+TStockArray = Array of TStock;
+
+TCatalogueStock = record
+  Nid_cs : integer;
+	Sdate_cs : String;
+	Scode_art :string;
+	Nqte_vide ,
+	Nqte_mag ,
+	Nqte_totale : integer;
+end;
+TCatalogueStockArray = array of TCatalogueStock;
+
 
 TFacturation = record
   NId_fact: integer;

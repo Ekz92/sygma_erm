@@ -30,6 +30,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure edcodeCltDblClick(Sender: TObject);
+    procedure edMontantKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
   public
@@ -56,6 +57,7 @@ var
   vOpe : integer;
 
   rc : TReleve_client;
+  EtatJrn : TEtatJournal;
 begin
 
 maxIdAvance := dm.SelectMaxIdAvance;
@@ -77,6 +79,21 @@ begin
         Nstatut_canc := 0;
       end;
       dm.InsertAvanceDetail(avd);
+
+//      Etat journal
+    with EtatJrn do
+      begin
+        Sdate_ej:= DateToStr(DateTimePicker1.Date);
+        Snum_ope := IntToStr(vOpe);
+        Snum_piece := '';
+        Slibelle := edLibelle.Text;
+        Sdebit := '-';
+        Scredit := edMontant.Text;
+        Ssens:='C';
+        Susager := vUsager;
+      end;
+    dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
      {Mise à jour du solde dU COMPTE CLIENT}
       Sql_cc := ' Where num_cc = '+QuotedStr(edCompteClt.Text);
       cc := dm.SelectCompteClient(Sql_cc);
@@ -130,6 +147,11 @@ end;
 procedure TfrmAddAvance.edcodeCltDblClick(Sender: TObject);
 begin
 frmRechCltAvance.ShowModal;
+end;
+
+procedure TfrmAddAvance.edMontantKeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then Button1.Click;
 end;
 
 procedure TfrmAddAvance.FormClose(Sender: TObject; var Action: TCloseAction);

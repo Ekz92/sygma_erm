@@ -25,6 +25,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure edMontantKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
   public
@@ -47,6 +49,7 @@ var
   sqlCaisse,sqlUpd :string;
   vSolde : real;
   I,Maxope: Integer;
+  EtatJrn : TEtatJournal;
 
   hisCaisse : THistoriqueCaisse;
 begin
@@ -57,6 +60,20 @@ begin
     begin
       vSolde := caisses[i].RSolde;
     end;
+
+//      Etat journal
+
+    with EtatJrn do
+      begin
+        Sdate_ej:= DateToStr(DateDep.Date);
+        Snum_ope := IntToStr(Maxope);
+        Snum_piece := edPiece.Text;
+        Slibelle := mLibelle.Text;
+        Sdebit := edMontant.Text;
+        Scredit := '-';
+        Ssens := 'D';
+        Susager := vUsager;
+      end;
 
   {Noméro d'opération}
 
@@ -82,6 +99,8 @@ begin
         if MessageDlg('Voulez-vous enregistré cette dépense ?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
           begin
             dm.InsertDepense(dep);      {Insertion dans t_depense}
+            dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
 
             sqlUpd := 'Update tb_caisse ' {Requete Mise à jour du solde}
                     +' set solde = '+FloatToStr(vSolde - StrToFloat(edMontant.Text))
@@ -108,6 +127,18 @@ begin
             Button2.Click;
           end;
     end;
+end;
+
+procedure TfrmSaisiDepense.Button2Click(Sender: TObject);
+begin
+edPiece.Clear;
+edMontant.Clear;
+mLibelle.Clear;
+end;
+
+procedure TfrmSaisiDepense.edMontantKeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then Button1.Click;
 end;
 
 procedure TfrmSaisiDepense.FormActivate(Sender: TObject);

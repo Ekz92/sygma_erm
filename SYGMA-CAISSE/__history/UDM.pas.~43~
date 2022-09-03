@@ -1,0 +1,1226 @@
+unit UDM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DBXMySQL, Data.FMTBcd, Data.DB,
+  Data.SqlExpr, frxClass, frxDBSet, records;
+
+type
+  TDM = class(TDataModule)
+    SQLConnection1: TSQLConnection;
+    frxDBParam: TfrxDBDataset;
+    TParam: TSQLTable;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+
+    function SelectBank(Psql:string):TBankArray;
+    function SelectTypeEncaissement(Psql:string):TTypeEncaissementArray;
+    function selectUser(Psql : string):TUser;
+    function SelectMaxOpe():TMaxOpeCaisse;
+    function SelectFactures(Psql:string):TFacturationArray;
+    function SelectCaisses(Psql : string):TCaisseArray;
+    function SelectCompteClient(Psql:string):TCompteClientArray;
+    function SelectMaxIdAvance():TMaxIdAvance;
+    function selectClients(Psql : string) : TClientArray;
+    function SelectSoldeHistorique(Psql:string):TSoldeHistorique;
+    function SelectHistorique(Psql : string):THistoriqueCaisseArray;
+    function selectPayement(Psql : string):TPayement_caisse;
+    function selectCodeclt(var vNomClt : string) : TClient;
+    function SelectAvance(Psql : string):TAvanceDetailArray;
+    function selectDepense(Psql : string):TDepenseArray;
+    function selectEncaissement(Psql : string):TEncaissementArray;
+    function selectCatDate():TDateSys;
+    function SelectCaisse(Psql :string):TCaisse;
+    function selectStock(Psql : String) :TStockArray;
+    function selectCatalogueStock(Psql:string) : TCatalogueStock;
+
+
+
+    function InsertReleveClient(rc : TReleve_client):Boolean;
+    function InsertPayementCaisse(PayeCaisse : TPayement_caisse):Boolean;
+    function InsertHisCaisse(his : THistoriqueCaisse):Boolean;
+    function InsertAvanceDetail(avd : TAvanceDetail):Boolean;
+    function InsertCaisse(Caisse: TCaisse) : Boolean;
+    function InsertPayementCanc(payement : TPayementCanc):Boolean;
+    function InsertDepense(dep : TDepense):Boolean;
+    function InsertEncaissement(Enc : TEncaissement):Boolean;
+    function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
+    function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
+    function InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
+
+
+    procedure UpdateTable(var Psql :string);
+
+    procedure DeleteFromTable(Psql : string);
+
+
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+function TDM.InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with EtatJournal do
+    begin
+      sql := 'Insert into tb_catalogue_stock values(null,'
+                +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_cs)))+','
+                +QuotedStr(SCode_art)+','
+                +IntToStr(NQte_vide)+','
+                +IntToStr(NQte_mag) + ','
+                +IntToStr(Nqte_totale)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+
+
+
+function TDM.InsertCatalogueStock(cstock : TCatalogueStock):boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with cstock do
+    begin
+      sql := 'Insert into tb_catalogue_stock values(null,'
+                +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_cs)))+','
+                +QuotedStr(SCode_art)+','
+                +IntToStr(NQte_vide)+','
+                +IntToStr(NQte_mag) + ','
+                +IntToStr(Nqte_totale)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+
+function TDM.selectCatalogueStock(Psql:string) : TCatalogueStock;
+var
+  sql : string;
+  query : TSQLQuery;
+  cata_stock : TCatalogueStock;
+begin
+  sql := 'Select * from tb_catalogue_stock '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+    query.Open;
+    with query, cata_stock do
+      begin
+        Nid_cs := FieldByName('id_cs').AsInteger;
+        Sdate_cs :=FieldByName('date_cs').AsString;
+        Scode_art := FieldByName('code_art').AsString;
+        NQte_vide := FieldByName('qte_vide').AsInteger;
+        NQte_mag := FieldByName('qte_mag').AsInteger;
+        Nqte_totale := FieldByName('qte_totale').AsInteger;
+      end;
+      Result := cata_stock;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectStock(Psql : String) :TStockArray;
+var
+  sql : string;
+  query : TSQLQuery;
+  stock : TStock;
+  stocks : TStockArray;
+  i:integer;
+begin
+  sql := 'Select * from tb_stock '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(stocks,i+1);
+            with stock do
+              begin
+                Nid_stock := FieldByName('id_stock').AsInteger;
+                Scode_art := FieldByName('code_art').AsString;
+                Scode_mag := FieldByName('code_mag').AsString;
+                NQte_vide := FieldByName('qte_vide').AsInteger;
+                NQte_mag := FieldByName('qte_mag').AsInteger;
+                Nqte_total := FieldByName('qte_totale').AsInteger;
+                Rcoutachat :=FieldByName('cout_achat').AsFloat;
+              end;
+            stocks[i]:=stock;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := stocks;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
+
+function TDM.InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with Cat do
+    begin
+      sql := 'Insert into tb_catalogue_caisse values(null,'
+          +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_cat)))+','
+          +Scompte+','
+          +FloatToStr(RSolde)+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.selectCatDate():TDateSys;
+var
+  query : TSQLQuery;
+  sql : string;
+  Ds : TDateSys;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_catalogue_date ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        Ds.Sdate_cd:=FieldByName('date_cd').AsString;
+      end;
+
+    Result := Ds;
+  finally
+    query.Free;
+    dm.SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectEncaissement(Psql : string):TEncaissementArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  Enc : TEncaissement;
+  Encs :TEncaissementArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_encaissement '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(Encs,i+1);
+            with Enc do
+              begin
+                Sope:=FieldByName('ope').AsString;
+                SdateEnc:=FieldByName('date_enc').AsString;
+                SNumCaisse:=FieldByName('num_caisse').AsString;
+                SPiece:=FieldByName('num_piece').AsString;
+                SLibelle:=FieldByName('libelle_enc').AsString;
+                RMontant:=FieldByName('montant_enc').AsFloat;
+                SUsager:=FieldByName('usager').AsString;
+                Nstatut_canc:=FieldByName('statut_canc').AsInteger;
+              end;
+              Encs[i]:=Enc;
+              Inc(i);
+              query.Next;
+          end;
+          Result := Encs;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+function TDM.InsertEncaissement(Enc : TEncaissement):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with Enc do
+    begin
+      sql := 'Insert into tb_encaissement values (null,'
+              +Sope+','
+              +SdateEnc+','
+              +SNumCaisse+','
+              +SPiece+','
+              +SLibelle+','
+              +FloatToStr(RMontant)+','
+              +SUsager+','
+              +IntToStr(Nstatut_canc)
+              +')';
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+
+function TDM.selectDepense(Psql : string):TDepenseArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  Dep : TDepense;
+  Deps :TDepenseArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_depense '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(Deps,i+1);
+            with Dep do
+              begin
+                Sope:=FieldByName('ope').AsString;
+                SdateDep:=FieldByName('dateDep').AsString;
+                SNumCaisse:=FieldByName('num_caisse').AsString;
+                SPiece:=FieldByName('num_piece').AsString;
+                SLibelle:=FieldByName('libelle_dep').AsString;
+                RMontant:=FieldByName('montant_dep').AsFloat;
+                SUsager:=FieldByName('usager').AsString;
+                Nstatut_canc:=FieldByName('statut_canc').AsInteger;
+              end;
+              Deps[i]:=Dep;
+              Inc(i);
+              query.Next;
+          end;
+          Result := Deps;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+function TDM.InsertDepense(dep : TDepense):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with dep do
+    begin
+      sql := 'Insert into tb_depense values (null,'
+              +Sope+','
+              +SdateDep+','
+              +SNumCaisse+','
+              +SPiece+','
+              +SLibelle+','
+              +FloatToStr(RMontant)+','
+              +SUsager+','
+              +IntToStr(Nstatut_canc)
+              +')';
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+function TDM.SelectAvance(Psql : string):TAvanceDetailArray;
+var
+  sql : string;
+  query : TSQLQuery;
+  avs : TAvanceDetailArray;
+  av : TAvanceDetail;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_compte_client_detail '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\comte.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(avs,i+1);
+            with av do
+              begin
+                Nid_ccd:=FieldByName('id_ccd').AsInteger;
+                Sdate_ccd:=FieldByName('date_ccd').AsString;
+                Nope := FieldByName('num_ope').AsInteger;
+                Scode_clt:=FieldByName('code_clt').AsString;
+                Snom_clt:=FieldByName('nom_clt').AsString;
+                Scompte_clt:=FieldByName('compte_clt').AsString;
+                Rmontant:=FieldByName('montant').AsFloat;
+              end;
+              avs[i]:=av;
+              Inc(i);
+              query.Next;
+          end;
+          Result := avs;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+function TDM.selectCodeclt(var vNomClt : string) : TClient;
+var
+  sql : string;
+  query : TSQLQuery;
+  client : TClient;
+begin
+  sql := 'Select * from tb_client where nom_clt = '+QuotedStr(vNomClt);
+
+      query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('G:\code.txt');
+    query.Open;
+    with query, client do
+      begin
+        NidClt := FieldByName('id_clt').AsInteger;
+        SCodeClt := FieldByName('code_clt').AsString;
+        SnomClt := FieldByName('nom_clt').AsString;
+        SadresseClt := FieldByName('adresse_clt').AsString;
+        StelClt := FieldByName('tel_clt').AsString;
+        Smail:= FieldByName('email_clt').AsString;
+        ScommentClt:= FieldByName('comment_clt').AsString;
+      end;
+      Result := client;
+  finally
+     query.Free;
+  end;
+end;
+
+procedure TDM.DeleteFromTable(Psql : string);
+  var
+    sql : string;
+    query : TSQLQuery;
+begin
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+
+    //sql := 'Delete from tb_article '+Psql;
+
+    try
+      query.SQL.Add(Psql);
+      query.ExecSQL;
+    finally
+      query.Free;
+    end;
+end;
+
+function TDM.SelectCaisse(Psql :string):TCaisse;
+var
+  sql : string;
+  query : TSQLQuery;
+  Caisse : TCaisse;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select * from tb_caisse '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with Caisse do
+      begin
+        Scompte:= query.FieldByName('num_compte').AsString;
+        Snom_caisse := query.FieldByName('nom_caisse').AsString;
+        RSolde := query.FieldByName('solde').AsFloat;
+      end;
+    Result :=Caisse;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.SelectCaisses(Psql : string):TCaisseArray;
+var
+  query : TSQLQuery;
+  sql:string;
+  caisse : TCaisse;
+  Caisses : TCaisseArray;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_caisse '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Clear;
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(Caisses,i+1);
+            with caisse do
+              begin
+                Scompte:=FieldByName('Num_compte').AsString;
+                Snom_caisse:=FieldByName('nom_caisse').AsString;
+                RSolde :=FieldByName('solde').AsFloat;
+              end;
+              Caisses[i]:=caisse;
+              Inc(i);
+              query.Next;
+          end;
+          Result := Caisses;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.InsertPayementCanc(payement : TPayementCanc):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with payement do
+    begin
+      sql := 'Insert into tb_payement_canc values (null,'
+              +Spiece+','
+              +Sope+','
+              +ScodeClt+','
+              +FloatToStr(Rmontant)+','
+              +Smotif+','
+              +Sdate_canc+','
+              +Suser_canc
+              +');'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+//      query.SQL.SaveToFile('g:\tb_facture_canc.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+
+function TDM.SelectHistorique(Psql : string):THistoriqueCaisseArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  hiscaisse :THistoriqueCaisse;
+  hiscaisses :THistoriqueCaisseArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_historique_caisse '+Psql
+         +' order by id_hisc desc ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\His.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(hiscaisses,i+1);
+            with hiscaisse do
+              begin
+                Nid_hisc:=FieldByName('id_hisc').AsInteger;
+                Ddate_hisc:=FieldByName('date_hisc').AsString;
+                Snum_piece:=FieldByName('num_piece').AsString;
+                Scode_cli:=FieldByName('code_cli').AsString;
+                Snom_cli:=FieldByName('nom_cli').AsString;
+                STypEnc:=FieldByName('type_encais').AsString;
+                SCaisse:=FieldByName('Caisse').AsString;
+                Sope:=FieldByName('ope').AsString;
+                Ssens:=FieldByName('Sens').AsString;
+                Rmontant:=FieldByName('montant').AsInteger;
+                Susager:=FieldByName('usager').AsString;
+              end;
+              hiscaisses[i]:=hiscaisse;
+              Inc(i);
+              query.Next;
+          end;
+          Result := hiscaisses;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+
+function TDM.SelectSoldeHistorique(Psql:string):TSoldeHistorique;
+var
+  query : TSQLQuery;
+  sql : string;
+  Solde : TSoldeHistorique;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select sum(montant) as total from tb_historique_caisse '+Psql;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\flot.txt');
+    query.Open;
+
+    with query ,Solde do
+      begin
+        Rsolde := FieldByName('total').AsFloat;
+      end;
+      Result := Solde;
+  finally
+    query.Free;
+  end;
+end;
+
+function TDM.selectClients(Psql : string) : TClientArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  client : TClient;
+  clients : TClientArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_client '+Psql;
+  i:=0;
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\clt.txt');
+    query.Open;
+
+    with query do
+      begin
+          while not eof do
+            begin
+            SetLength(clients,i+1);
+              with client do
+                begin
+                  NidClt := FieldByName('id_clt').AsInteger;
+                  SCodeClt := FieldByName('code_clt').AsString;
+                  SnomClt := FieldByName('nom_clt').AsString  ;
+                  SadresseClt := FieldByName('adresse_clt').AsString;
+                  StelClt :=FieldByName('tel_clt').AsString;
+                  Smail :=FieldByName('email_clt').AsString;
+                  ScommentClt := FieldByName('comment_clt').AsString;
+                  STarif := FieldByName('tarif').AsString;
+                end;
+              clients[i]:=client;
+              Inc(i);
+              query.Next;
+            end;
+      end;
+       Result := clients;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+
+end;
+
+
+function TDM.InsertCaisse(Caisse: TCaisse) : Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with Caisse do
+    begin
+      sql := 'Insert into tb_caisse values(null,'
+          +Scompte+','
+          +Snom_caisse+','
+          +'0'+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+
+end;
+
+
+function TDM.InsertAvanceDetail(avd : TAvanceDetail):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with avd do
+    begin
+      sql := 'Insert into tb_compte_client_detail value(null,'
+              +Sdate_ccd+','
+              +IntToStr(Nope)+','
+              +Scode_clt+','
+              +Snom_clt+','
+              +Scompte_clt+','
+              +FloatToStr(Rmontant)+','
+              +Scode_user+','
+              +IntToStr(Nstatut_canc)
+              +')'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+
+end;
+
+
+function TDM.SelectMaxIdAvance():TMaxIdAvance;
+var
+  sql : string;
+  query : TSQLQuery;
+  MaxIdAvance : TMaxIdAvance;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select max(id_ccd) as max_id from tb_compte_client_detail';
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with MaxIdAvance do
+      begin
+        NMaxId:=query.FieldByName('max_id').AsInteger;
+      end;
+
+    Result :=MaxIdAvance;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.InsertHisCaisse(his : THistoriqueCaisse):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with his do
+    begin
+      sql := 'Insert into tb_historique_caisse values(null,'
+          +QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm', StrToDateTime(Ddate_hisc)))+','
+          +QuotedStr(Snum_piece)+ ','
+          +QuotedStr(Scode_cli)+','
+          +QuotedStr(Snom_cli)+','
+          +QuotedStr(StypEnc)+','
+          +QuotedStr(SCaisse)+','
+          +QuotedStr(Sope)+','
+          +QuotedStr(Ssens)+','
+          +FloatToStr(Rmontant)+','
+          +QuotedStr(Susager)+','
+          +IntToStr(Nstatut_canc)+ ');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+
+function TDM.InsertPayementCaisse(PayeCaisse : TPayement_caisse):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with PayeCaisse do
+    begin
+      sql := 'Insert into tb_payement_caisse values(null,'
+          +QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm', StrToDateTime(Sdate_paye)))+','
+          +QuotedStr(Snum_fact)+ ','
+          +QuotedStr(Scode_clt)+','
+          +QuotedStr(Snom_clt)+','
+          +QuotedStr(Scode_ope)+','
+          +QuotedStr(Snom_caisse)+','
+          +QuotedStr(Scompte_caisse)+','
+          +FloatToStr(Rmontant_paye)+','
+          +'0'+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+
+function TDM.InsertReleveClient(rc : TReleve_client):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with rc do
+    begin
+      sql := 'Insert into tb_releve_client values(null,'
+          +SCode_client+','
+          +Snom_client+','
+          +SDate_rs +','
+          +SOperation+ ','
+          +SCaisse+','
+          +SPiece+','
+          +SAvance_debit+','
+          +SAvance_credit+','
+          +SFactRet_debit+','
+          +SFactRet_credit+','
+          +SLibelle+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+
+end;
+
+
+function TDM.SelectCompteClient(Psql:string):TCompteClientArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  TCC : TCompteClient;
+  TCCs :TCompteClientArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_compte_client '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\compte.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(TCCs,i+1);
+            with TCC do
+              begin
+                Scode_clt:=FieldByName('code_clt').AsString;
+                SNom_clt:=FieldByName('nom_clt').AsString;
+                SNum_cc:=FieldByName('num_cc').AsString;
+                RSolde:= FieldByName('solde').AsFloat;
+              end;
+              TCCs[i]:=TCC;
+              Inc(i);
+              query.Next;
+          end;
+          Result := TCCs;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+
+procedure TDM.UpdateTable(var Psql :string);
+var
+  Query:TSQLQuery;
+  sql : String;
+
+begin
+    Query:=TSQLQuery.Create(self);
+    Query.SQLConnection:=SQLConnection1;
+
+    try
+      Query.SQL.Add(Psql);
+//      Query.SQL.SaveToFile('g:\SqlUpChCam.txt');
+      Query.ExecSQL();
+    finally
+      Query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.selectPayement(Psql : string):TPayement_caisse;
+var
+  query : TSQLQuery;
+  sql : string;
+  pay : TPayement_caisse;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_payement_caisse '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query , pay do
+      begin
+        NidPaye :=FieldByName('idPaye').AsInteger;
+        Sdate_paye:=FieldByName('date_paye').AsString;
+        Snum_fact:=FieldByName('num_fact').AsString;
+        Scode_clt:=FieldByName('code_clt').AsString;
+        Snom_clt:=FieldByName('nom_clt').AsString;
+        Scode_ope:=FieldByName('code_ope').AsString;
+        Snom_caisse:=FieldByName('nom_caisse').AsString;
+        Scompte_caisse:=FieldByName('compte_caisse').AsString;
+        Rmontant_paye:=FieldByName('montant_paye').AsFloat;
+        Nstatut_canc:=FieldByName('statut_canc').AsInteger;
+      end;
+      Result := pay;
+  finally
+    query.Free;
+  end;
+end;
+
+
+function TDM.SelectFactures(Psql:string):TFacturationArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  facture :TFacturation;
+  factures :TFacturationArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_facturation '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(factures,i+1);
+            with facture do
+              begin
+                Sdate_fact:=FieldByName('date_fact').AsString;
+                SNum_fact:=FieldByName('num_fact').AsString;
+                Scode_clt:=FieldByName('code_clt').AsString;
+                Snom_clt:=FieldByName('nom_clt').AsString;
+                NQte_total:=FieldByName('qte_total').AsInteger;
+                Rmnt_t:=FieldByName('mnt_t').AsFloat;
+                Rmnt_p:=FieldByName('mnt_p').AsFloat;
+                Rmnt_r:=FieldByName('mnt_r').AsFloat;
+                Sstatut:=FieldByName('statut').AsString;
+                Stype_fact:=FieldByName('type_fact').AsString;
+                Snum_comc :=FieldByName('num_comc').AsString;
+                Svehicule:=FieldByName('vehicule').AsString;
+                NStatut_canc:=FieldByName('statut_canc').AsInteger;
+                SUsager:=FieldByName('Usager').AsString;
+              end;
+              factures[i]:=facture;
+              Inc(i);
+              query.Next;
+          end;
+          Result := factures;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.SelectMaxOpe():TMaxOpeCaisse;
+var
+  sql : string;
+  query : TSQLQuery;
+  MaxIdOpe : TMaxOpeCaisse;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select max(id_hisc) as max_id from tb_historique_caisse';
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with MaxIdOpe do
+      begin
+        NMaxOpe:=query.FieldByName('max_id').AsInteger;
+      end;
+
+    Result :=MaxIdOpe;
+  finally
+    query.free;
+  end;
+end;
+
+function TDM.selectUser(Psql : string):TUser;
+var
+  query : TSQLQuery;
+  sql : string;
+  User : TUser;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_user '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query , User do
+      begin
+        Nid_user :=FieldByName('id_user').AsInteger;
+        Snom_user:=FieldByName('nom_user').AsString;
+        Sprenom_user:=FieldByName('prenom_user').AsString;
+        Susager:=FieldByName('usager').AsString;
+        Spassword:=FieldByName('password').AsString;
+        Sprofil:=FieldByName('profil').AsString;
+        Snum_caisse:=FieldByName('num_caisse').AsString;
+        NStatut:=FieldByName('statut').AsInteger;
+      end;
+      Result := User;
+  finally
+    query.Free;
+  end;
+end;
+
+function TDM.SelectTypeEncaissement(Psql:string):TTypeEncaissementArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  TEnc :TTypeEncaissement;
+  TEncs :TTypeEncaissementArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_Type_encais '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(TEncs,i+1);
+            with TEnc do
+              begin
+                Scode_tenc:=FieldByName('code_tenc').AsString;
+                Slibelle_tenc:=FieldByName('libelle_tenc').AsString;
+              end;
+              TEncs[i]:=TEnc;
+              Inc(i);
+              query.Next;
+          end;
+          Result := TEncs;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+
+function TDM.SelectBank(Psql:string):TBankArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  TBK : TBank;
+  TBKs :TBankArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_bank '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(TBKs,i+1);
+            with TBK do
+              begin
+                Scode_bk:=FieldByName('code_bk').AsString;
+                SNom_bk:=FieldByName('nom_bk').AsString;
+                SCompte_bk:=FieldByName('compte_bk').AsString;
+                RSolde:= FieldByName('solde_bk').AsFloat;
+              end;
+              TBKs[i]:=TBK;
+              Inc(i);
+              query.Next;
+          end;
+          Result := TBKs;
+      end;
+  finally
+    query.Free;
+  end;
+end;
+
+
+end.

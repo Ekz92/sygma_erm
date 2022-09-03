@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Buttons,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids;
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.Imaging.jpeg;
 
 type
   TfrmIntegrateur = class(TForm)
@@ -98,6 +98,10 @@ type
     Panel4: TPanel;
     Label10: TLabel;
     ImgEntree: TImage;
+    Panel5: TPanel;
+    Image1: TImage;
+    Label11: TLabel;
+    Image9: TImage;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);
@@ -107,6 +111,18 @@ type
     procedure Listededpense1Click(Sender: TObject);
     procedure Saisie3Click(Sender: TObject);
     procedure Liste3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Image7Click(Sender: TObject);
+    procedure st_SideMenuDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Cltureouverture1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure ImgEntreeClick(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure st_SideMenuDblClick(Sender: TObject);
+    procedure Image8Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -115,17 +131,112 @@ type
 
 var
   frmIntegrateur: TfrmIntegrateur;
+  vBtn : integer;
 
 implementation
 
 {$R *.dfm}
 
 uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
-  USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement;
+  USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement, records, UDM,
+  UClotureDay, UEtatJournal;
+
+procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
+begin
+if MessageDlg('Voulez-vous clôturer la journée ?', mtConfirmation,[mbYes,mbNo],0)=mryes then
+   frmClotureDay.ShowModal;
+
+end;
+
+procedure TfrmIntegrateur.FormShow(Sender: TObject);
+var
+  dd : TDateSys ;
+begin
+st_SideMenu.Cells[0,0]:='Sous-menu';
+st_SideMenu.RowCount:=2;
+st_SideMenu.Rows[1].Clear;
+vBtn :=0;
+
+  dd := dm.selectCatDate;
+  lbdate.Caption := dd.Sdate_cd;
+
+ if lbdate.Caption <> DateToStr(now) then
+    begin
+      MessageDlg('Erreur, Merci de vérifier si vous aviez clôturer la journée d''hier',mtError,[mbOK],0);
+      with frmIntegrateur do
+        begin
+          Fichier1.Enabled:=false;
+          Image7.Enabled:=False;
+          Image4.Enabled:=False;
+          Image3.Enabled:=False;
+          Image2.Enabled:=False;
+          Image8.Enabled:=False;
+          Image1.Enabled:=False;
+        end;
+    end else
+    begin
+          Fichier1.Enabled:=True;
+          Image7.Enabled:=True;
+          Image4.Enabled:=True;
+          Image3.Enabled:=True;
+          Image2.Enabled:=True;
+          Image8.Enabled:=True;
+          Image1.Enabled:=True;
+    end;
+
+
+end;
 
 procedure TfrmIntegrateur.Historiquedecaisse1Click(Sender: TObject);
 begin
 frmJournalCaisse.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Image1Click(Sender: TObject);
+begin
+frmPayementFacture.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Image2Click(Sender: TObject);
+begin
+frmAddCaisse.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Image3Click(Sender: TObject);
+begin
+frmEncaissement.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Image4Click(Sender: TObject);
+begin
+frmSaisiDepense.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Image7Click(Sender: TObject);
+begin
+vBtn := 8;
+
+with st_SideMenu do
+  begin
+    Cells[0,1]:='Liste de caisse';
+    Cells[0,2]:='Liste des avances reçus';
+    Cells[0,3]:='Liste d''encaissement';
+    Cells[0,4]:='Liste de décaissement';
+    Cells[0,5]:='Historique de caisse';
+    Cells[0,6]:='Journal de caisse';
+
+    RowCount := 8;
+  end;
+end;
+
+procedure TfrmIntegrateur.Image8Click(Sender: TObject);
+begin
+frmEtatJournal.ShowModal;
+end;
+
+procedure TfrmIntegrateur.ImgEntreeClick(Sender: TObject);
+begin
+frmAddAvance.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Liste3Click(Sender: TObject);
@@ -166,6 +277,56 @@ end;
 procedure TfrmIntegrateur.Saisie3Click(Sender: TObject);
 begin
 frmEncaissement.ShowModal;
+end;
+
+procedure TfrmIntegrateur.st_SideMenuDblClick(Sender: TObject);
+begin
+  if (vBtn = 8 ) and (st_SideMenu.Row = 1) then
+    frmAddCaisse.ShowModal;
+
+  if (vBtn = 8 ) and (st_SideMenu.Row = 2) then
+    frmListeAvance.ShowModal;
+
+  if (vBtn = 8 ) and (st_SideMenu.Row = 3) then
+    frmListeEncaissement.ShowModal;
+
+  if (vBtn = 8 ) and (st_SideMenu.Row = 4) then
+    frmListeDepense.ShowModal;
+
+  if (vBtn = 8 ) and (st_SideMenu.Row = 5) then
+    frmJournalCaisse.ShowModal;
+
+  if (vBtn = 8 ) and (st_SideMenu.Row = 6) then
+    frmEtatJournal.ShowModal;
+end;
+
+procedure TfrmIntegrateur.st_SideMenuDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$00D1D1D1//$FFE0FF clgreen
+          else
+            Brush.Color:=$00F4F4F4;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
 end;
 
 end.

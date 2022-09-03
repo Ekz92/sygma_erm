@@ -17,7 +17,9 @@ uses
   USaisiDepense in 'USaisiDepense.pas' {frmSaisiDepense},
   UListeDepense in 'UListeDepense.pas' {frmListeDepense},
   UEncaissement in 'UEncaissement.pas' {frmEncaissement},
-  UListeEncaissement in 'UListeEncaissement.pas' {frmListeEncaissement};
+  UListeEncaissement in 'UListeEncaissement.pas' {frmListeEncaissement},
+  UClotureDay in 'UClotureDay.pas' {frmClotureDay},
+  UEtatJournal in 'UEtatJournal.pas' {frmEtatJournal};
 
 {$R *.res}
 
@@ -39,5 +41,7 @@ begin
   Application.CreateForm(TfrmListeDepense, frmListeDepense);
   Application.CreateForm(TfrmEncaissement, frmEncaissement);
   Application.CreateForm(TfrmListeEncaissement, frmListeEncaissement);
+  Application.CreateForm(TfrmClotureDay, frmClotureDay);
+  Application.CreateForm(TfrmEtatJournal, frmEtatJournal);
   Application.Run;
 end.

@@ -114,6 +114,7 @@ object frmAddAvance: TfrmAddAvance
     NumbersOnly = True
     ParentColor = True
     TabOrder = 3
+    OnKeyPress = edMontantKeyPress
   end
   object cbTypEncais: TComboBox
     Left = 98

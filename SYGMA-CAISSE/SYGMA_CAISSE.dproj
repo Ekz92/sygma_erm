@@ -144,6 +144,14 @@
             <Form>frmListeEncaissement</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="UClotureDay.pas">
+            <Form>frmClotureDay</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UEtatJournal.pas">
+            <Form>frmEtatJournal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
