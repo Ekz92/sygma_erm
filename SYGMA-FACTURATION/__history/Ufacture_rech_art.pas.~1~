@@ -1,0 +1,24 @@
+unit Ufacture_rech_art;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  Tfrmfacture_rech_art = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmfacture_rech_art: Tfrmfacture_rech_art;
+
+implementation
+
+{$R *.dfm}
+
+end.

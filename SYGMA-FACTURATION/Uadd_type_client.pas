@@ -1,0 +1,119 @@
+unit Uadd_type_client;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TfrmAddTarif = class(TForm)
+    Label2: TLabel;
+    Bevel1: TBevel;
+    edcode: TEdit;
+    edDesignation: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAddTarif: TfrmAddTarif;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmAddTarif.Button1Click(Sender: TObject);
+var
+  Tarif :TTarif;
+  Tarifs : TTarifArray;
+  I: Integer;
+  Psql:string;
+begin
+if (edcode.Text<>'') and (edDesignation.Text<>'') then
+begin
+  with Tarif do
+    begin
+      SCode_tarif:=trim(edcode.Text);
+      SDesignation_tarif:=Trim(eddesignation.Text);
+    end;
+    DM.InsertTarif(Tarif);
+    Button2.Click;
+end else
+    begin
+      MessageDlg('Veuillez renseigner tous les champs',mtError,[mbRetry],0);
+      edcode.SetFocus;
+    end;
+
+  FormShow(sender);
+end;
+
+procedure TfrmAddTarif.Button2Click(Sender: TObject);
+begin
+edcode.Clear;
+edDesignation.Clear;
+FormShow(sender);
+end;
+
+procedure TfrmAddTarif.FormShow(Sender: TObject);
+var
+  Tarifs : TTarifArray;
+  i:integer;
+  psql:string;
+begin
+    psql:='';
+    Tarifs := DM.SelectTarif(psql);
+    StringGrid1.RowCount:=Length(Tarifs)+1;
+    for I := Low(Tarifs) to High(Tarifs) do
+      begin
+        StringGrid1.Cells[0,i+1]:=Tarifs[i].SCode_tarif    ;
+        StringGrid1.Cells[1,i+1]:=Tarifs[i].SDesignation_tarif;
+      end;
+end;
+
+procedure TfrmAddTarif.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+  Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

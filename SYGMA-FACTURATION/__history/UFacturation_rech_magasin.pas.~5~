@@ -1,0 +1,63 @@
+unit UFacturation_rech_magasin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmFacturationRech_mag = class(TForm)
+    St_rech_mag: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edrech_mag: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure edrech_magDblClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmFacturationRech_mag: TfrmFacturationRech_mag;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmFacturationRech_mag.edrech_magDblClick(Sender: TObject);
+var
+  Mags : TMagasinArray;
+  i : integer;
+  Psql : string;
+begin
+  Psql := ' Where code_mag like '+QuotedStr(edrech_mag.Text + '%');
+  Mags := DM.selectMagasins(Psql);
+  St_rech_mag.RowCount := Length(Mags)+1;
+  for I := Low(Mags) to High(Mags) do
+    begin
+      St_rech_mag.Cells[0,i+1]:=MAgs[i].SCode_mag;
+      St_rech_mag.Cells[1,i+1]:=MAgs[i].Sdesignation_mag;
+    end;
+end;
+
+procedure TfrmFacturationRech_mag.FormCreate(Sender: TObject);
+begin
+with St_rech_mag do
+  begin
+    cells[0,0] := 'Code';
+    cells[1,0] := 'Désignation';
+  end;
+
+end;
+
+procedure TfrmFacturationRech_mag.FormShow(Sender: TObject);
+begin
+edrech_mag.SetFocus;
+
+end;
+
+end.

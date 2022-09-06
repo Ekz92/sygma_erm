@@ -20,8 +20,8 @@ type
     Label5: TLabel;
     edCodeclt: TEdit;
     edNomClt: TEdit;
-    cbMatVeh: TComboBox;
-    edNomVeh: TEdit;
+    edNomVeh: TComboBox;
+    cbMatVeh: TEdit;
     Panel1: TPanel;
     st_ficheEntree: TStringGrid;
     btvalider: TButton;
@@ -31,13 +31,13 @@ type
     procedure edCodecltDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure cbMatVehKeyPress(Sender: TObject; var Key: Char);
     procedure st_ficheEntreeSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure btvaliderClick(Sender: TObject);
     procedure st_ficheEntreeKeyPress(Sender: TObject; var Key: Char);
     procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edNomVehCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -288,21 +288,21 @@ begin
   cbMatVeh.Clear;
 end;
 
-procedure TfrmFicheEntree.cbMatVehKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmFicheEntree.edNomVehCloseUp(Sender: TObject);
 var
   Psql,vNomVeh : string;
   vehs : TVehiculeArray;
   i:integer;
 begin
-  Psql := ' where num_immat_veh like '+QuotedStr(cbMatVeh.Text+'%');
+  Psql := ' where marque_veh = '+QuotedStr(edNomVeh.Text);
 
   vehs:=dm.SelectVehicule(Psql);
 
   for I := Low(vehs) to High(vehs) do
       begin
-        vNomVeh := vehs[i].SMarque;
+        vNomVeh := vehs[i].SNum_mat;
       end;
-      edNomVeh.Text := vNomVeh;
+      cbMatVeh.Text := vNomVeh;
 end;
 
 procedure TfrmFicheEntree.edCodecltDblClick(Sender: TObject);
@@ -313,7 +313,7 @@ end;
 
 procedure TfrmFicheEntree.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-cbMatVeh.Items.Clear;
+edNomVeh.Items.Clear;
 end;
 
 procedure TfrmFicheEntree.FormCreate(Sender: TObject);
@@ -351,7 +351,7 @@ begin
   vehs:=dm.SelectVehicule(Psql);
   for I := Low(vehs) to High(vehs) do
     begin
-      cbMatVeh.Items.Add(vehs[i].SNum_mat);
+      edNomVeh.Items.Add(vehs[i].SMarque);
     end;
 //Selection d'article
 

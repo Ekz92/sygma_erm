@@ -1,0 +1,127 @@
+unit Ufacture_rech_art;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls, Data.FMTBcd,
+  Data.DB, Data.SqlExpr;
+
+type
+  Tfrmfacture_rech_art = class(TForm)
+    Label3: TLabel;
+    Label4: TLabel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode_art: TEdit;
+    edDesign: TEdit;
+    St_Art: TStringGrid;
+    procedure edcode_artExit(Sender: TObject);
+    procedure edDesignChange(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmfacture_rech_art: Tfrmfacture_rech_art;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM, USaisieFacture;
+
+procedure Tfrmfacture_rech_art.edcode_artExit(Sender: TObject);
+var
+  Qrech_code :TSQLQuery;
+  i : integer;
+begin
+  Qrech_code:=TSQLQuery.Create(self);
+  Qrech_code.SQLConnection:=dm.SQLConnection1;
+
+    with Qrech_code.SQL do
+      begin
+        Add('select A.*, S.* from tb_article A, tb_stock S'
+          +' where A.code_art like  '+QuotedStr('%'+edcode_art.Text+'%')
+          +' and A.code_art = S.code_art '
+          +' and S.code_mag = '+QuotedStr(vCode_mag)
+          );
+      end;
+
+      try
+       Qrech_code.Open;
+       if Qrech_code.IsEmpty then
+          begin
+            MessageDlg('Resultat de la recherche : 0 ligne trouvée',mtInformation,[mbok],0);
+            St_Art.RowCount :=2;
+            St_Art.Rows[1].Clear;
+          end
+        else
+        Begin
+          for I := 1 to Qrech_code.RowsAffected do
+            with St_Art, Qrech_code do
+              begin
+                Rows[i].Clear;
+                RowCount:=RowsAffected+1;
+                Cells[0,i] := FieldByName('code_art').AsString;
+                Cells[1,i] := FieldByName('designation_art').AsString;
+                Cells[2,i] := FieldByName('kilo').AsString;
+                Cells[3,i] := FieldByName('type_art').AsString;
+                Cells[4,i] := FieldByName('Qte_mag').AsString;
+                Qrech_code.Next ;
+              end;
+        End;
+        finally
+          Qrech_code.Free;
+        end;
+end;
+
+procedure Tfrmfacture_rech_art.edDesignChange(Sender: TObject);
+var
+  Qrech_code :TSQLQuery;
+  i : integer;
+begin
+  Qrech_code:=TSQLQuery.Create(self);
+  Qrech_code.SQLConnection:=dm.SQLConnection1;
+
+    with Qrech_code.SQL do
+      begin
+        Add('select A.*, S.* from tb_article A, tb_stock S'
+          +' where A.code_art like  '+QuotedStr('%'+edDesign.Text+'%')
+          +' and A.code_art = S.code_art '
+          +' and S.code_mag = '+QuotedStr(vCode_mag)
+          );
+      end;
+
+      try
+       Qrech_code.Open;
+       if Qrech_code.IsEmpty then
+          begin
+            MessageDlg('Resultat de la recherche : 0 ligne trouvée',mtInformation,[mbok],0);
+            St_Art.RowCount :=2;
+            St_Art.Rows[1].Clear;
+          end
+        else
+        Begin
+          for I := 1 to Qrech_code.RowsAffected do
+            with St_Art, Qrech_code do
+              begin
+                Rows[i].Clear;
+                RowCount:=RowsAffected+1;
+                Cells[0,i] := FieldByName('code_art').AsString;
+                Cells[1,i] := FieldByName('designation_art').AsString;
+                Cells[2,i] := FieldByName('kilo').AsString;
+                Cells[3,i] := FieldByName('type_art').AsString;
+                Cells[4,i] := FieldByName('Qte_mag').AsString;
+                Qrech_code.Next ;
+              end;
+        End;
+        finally
+          Qrech_code.Free;
+        end;
+end;
+
+end.

@@ -1,0 +1,37 @@
+unit UFactureCanc;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmFactureCanc = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edFActure: TEdit;
+    memo: TMemo;
+    Button1: TButton;
+    Button2: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmFactureCanc: TfrmFactureCanc;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmFactureCanc.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+frmListeFacture.SpeedButton1Click(sender);
+end;
+
+end.

@@ -1,0 +1,85 @@
+unit URechTypeClientFacturer;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRechTarif = class(TForm)
+    st_typeclient: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure st_typeclientDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure st_typeclientDblClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechTarif: TfrmRechTarif;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechTarif.FormCreate(Sender: TObject);
+begin
+with st_typeclient do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Désignation';
+  end;
+
+end;
+
+procedure TfrmRechTarif.st_typeclientDblClick(Sender: TObject);
+begin
+  with frmTarifDef do
+    begin
+      edtypeclt.Text:=st_typeclient.Cells[0,st_typeclient.Row];
+      edDesignationTypeClt.Text:=st_typeclient.Cells[1,st_typeclient.Row];
+    end;
+    CLOSE;
+
+end;
+
+procedure TfrmRechTarif.st_typeclientDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+
+    end;
+
+end;
+
+end.

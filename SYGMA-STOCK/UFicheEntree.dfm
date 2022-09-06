@@ -108,19 +108,20 @@ object frmFicheEntree: TfrmFicheEntree
       ReadOnly = True
       TabOrder = 1
     end
-    object cbMatVeh: TComboBox
+    object edNomVeh: TComboBox
       Left = 72
       Top = 59
-      Width = 121
+      Width = 246
       Height = 21
       ParentColor = True
       TabOrder = 2
-      OnKeyPress = cbMatVehKeyPress
+      OnChange = edNomVehCloseUp
+      OnCloseUp = edNomVehCloseUp
     end
-    object edNomVeh: TEdit
-      Left = 195
+    object cbMatVeh: TEdit
+      Left = 319
       Top = 59
-      Width = 230
+      Width = 106
       Height = 21
       ParentColor = True
       ReadOnly = True

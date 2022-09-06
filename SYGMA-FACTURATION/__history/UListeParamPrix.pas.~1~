@@ -1,0 +1,32 @@
+unit UListeParamPrix;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.ExtCtrls;
+
+type
+  TfrmListeTarif = class(TForm)
+    Panel1: TPanel;
+    StringGrid1: TStringGrid;
+    Panel2: TPanel;
+    Label1: TLabel;
+    cbTarif: TComboBox;
+    PopupMenu1: TPopupMenu;
+    Modifierleprix1: TMenuItem;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeTarif: TfrmListeTarif;
+
+implementation
+
+{$R *.dfm}
+
+end.

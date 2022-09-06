@@ -29,12 +29,11 @@ type
     frxDBFicheSortie: TfrxDBDataset;
     QFicheSortie: TSQLQuery;
     procedure FormShow(Sender: TObject);
-    procedure cbClientKeyPress(Sender: TObject; var Key: Char);
     procedure cbVehKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure cbClientChange(Sender: TObject);
     procedure cbVehChange(Sender: TObject);
+    procedure cbClientCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -85,20 +84,13 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
   frxLFicheSortie.ShowReport();
 end;
 
-procedure TfrmListeFcheSortie.cbClientChange(Sender: TObject);
-begin
-edcodeClt.Clear;
-end;
-
-procedure TfrmListeFcheSortie.cbClientKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmListeFcheSortie.cbClientCloseUp(Sender: TObject);
 var
   Psql : string;
   Clts : TClientArray;
   I: Integer;
 begin
 
-if key = #13 then
-  begin
     Psql := ' where nom_clt = '+QuotedStr(cbClient.Text);
 
     Clts := DM.selectClients(Psql);
@@ -109,7 +101,6 @@ if key = #13 then
       end;
 
       edMarque.Clear;
-  end;
 end;
 
 procedure TfrmListeFcheSortie.cbVehChange(Sender: TObject);

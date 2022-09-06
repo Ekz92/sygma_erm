@@ -1,0 +1,35 @@
+unit Uadd_type_client;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TfrmAddTarif = class(TForm)
+    Label2: TLabel;
+    Bevel1: TBevel;
+    edcode: TEdit;
+    edDesignation: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    Supprimer1: TMenuItem;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAddTarif: TfrmAddTarif;
+
+implementation
+
+{$R *.dfm}
+
+end.

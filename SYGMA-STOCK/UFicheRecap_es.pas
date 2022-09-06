@@ -31,11 +31,11 @@ type
     QSUM: TSQLQuery;
     frxDBSUM: TfrxDBDataset;
     procedure FormShow(Sender: TObject);
-    procedure cbClientKeyPress(Sender: TObject; var Key: Char);
     procedure cbVehKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cbVehChange(Sender: TObject);
+    procedure cbClientCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -276,15 +276,13 @@ Sql := 'Select * from tb_fichees_recap '
   frxRecap.ShowReport();
 end;
 
-procedure TfrmFicheRecap_es.cbClientKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmFicheRecap_es.cbClientCloseUp(Sender: TObject);
 var
   Psql : string;
   Clts : TClientArray;
   I: Integer;
 begin
 
-if key = #13 then
-  begin
     Psql := ' where nom_clt = '+QuotedStr(cbClient.Text);
 
     Clts := DM.selectClients(Psql);
@@ -295,7 +293,6 @@ if key = #13 then
       end;
 
       edMarque.Clear;
-  end;
 end;
 
 procedure TfrmFicheRecap_es.cbVehChange(Sender: TObject);

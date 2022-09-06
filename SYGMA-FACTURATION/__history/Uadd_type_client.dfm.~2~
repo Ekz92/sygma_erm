@@ -1,0 +1,100 @@
+object frmAddTarif: TfrmAddTarif
+  Left = 0
+  Top = 0
+  Caption = 'Nouveau Tarif'
+  ClientHeight = 235
+  ClientWidth = 353
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object TLabel
+    Left = 9
+    Top = 14
+    Width = 32
+    Height = 13
+    Caption = 'Code :'
+  end
+  object Label2: TLabel
+    Left = 9
+    Top = 37
+    Width = 63
+    Height = 13
+    Caption = 'D'#233'signation :'
+  end
+  object Bevel1: TBevel
+    Left = 3
+    Top = 3
+    Width = 345
+    Height = 82
+    Shape = bsFrame
+  end
+  object edcode: TEdit
+    Left = 89
+    Top = 11
+    Width = 121
+    Height = 21
+    CharCase = ecUpperCase
+    MaxLength = 5
+    ParentColor = True
+    TabOrder = 0
+  end
+  object edDesignation: TEdit
+    Left = 89
+    Top = 34
+    Width = 243
+    Height = 21
+    CharCase = ecUpperCase
+    ParentColor = True
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 178
+    Top = 56
+    Width = 74
+    Height = 25
+    Caption = 'Ajouter'
+    TabOrder = 2
+  end
+  object Button2: TButton
+    Left = 258
+    Top = 56
+    Width = 74
+    Height = 25
+    Caption = 'Refresh'
+    TabOrder = 3
+  end
+  object StringGrid1: TStringGrid
+    Left = 3
+    Top = 85
+    Width = 345
+    Height = 144
+    ColCount = 2
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    ParentColor = True
+    PopupMenu = PopupMenu1
+    TabOrder = 4
+    StyleElements = [seBorder]
+    ColWidths = (
+      88
+      252)
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 232
+    Top = 136
+    object Modifier1: TMenuItem
+      Caption = 'Modifier'
+    end
+    object Supprimer1: TMenuItem
+      Caption = 'Supprimer'
+    end
+  end
+end

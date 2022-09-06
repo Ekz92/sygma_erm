@@ -1,0 +1,84 @@
+object frmRechArticleFacturer: TfrmRechArticleFacturer
+  Left = 0
+  Top = 0
+  Caption = 'frmRechArticleFacturer'
+  ClientHeight = 237
+  ClientWidth = 439
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object st_article: TStringGrid
+    Left = 0
+    Top = 76
+    Width = 439
+    Height = 161
+    Align = alClient
+    ColCount = 2
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    ParentColor = True
+    TabOrder = 0
+    StyleElements = [seBorder]
+    OnDblClick = st_articleDblClick
+    OnDrawCell = st_articleDrawCell
+    ExplicitLeft = 2
+    ExplicitTop = 56
+    ExplicitWidth = 441
+    ExplicitHeight = 145
+    ColWidths = (
+      102
+      331)
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 439
+    Height = 76
+    Align = alTop
+    Caption = 'Recherche'
+    TabOrder = 1
+    ExplicitLeft = 48
+    ExplicitTop = 120
+    ExplicitWidth = 433
+    object Label1: TLabel
+      Left = 10
+      Top = 21
+      Width = 32
+      Height = 13
+      Caption = 'Code :'
+    end
+    object Label2: TLabel
+      Left = 10
+      Top = 44
+      Width = 63
+      Height = 13
+      Caption = 'D'#233'signation :'
+    end
+    object Edit1: TEdit
+      Left = 94
+      Top = 18
+      Width = 177
+      Height = 21
+      ParentColor = True
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 94
+      Top = 41
+      Width = 177
+      Height = 21
+      ParentColor = True
+      TabOrder = 1
+    end
+  end
+end

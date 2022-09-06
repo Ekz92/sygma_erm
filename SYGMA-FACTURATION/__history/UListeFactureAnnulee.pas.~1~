@@ -1,0 +1,27 @@
+unit UListeFactureAnnulee;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.ExtCtrls;
+
+type
+  TfrmListeFactureAnnulee = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    StringGrid1: TStringGrid;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeFactureAnnulee: TfrmListeFactureAnnulee;
+
+implementation
+
+{$R *.dfm}
+
+end.

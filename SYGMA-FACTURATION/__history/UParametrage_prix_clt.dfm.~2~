@@ -1,0 +1,156 @@
+object frmTarifDef: TfrmTarifDef
+  Left = 0
+  Top = 0
+  Caption = 'Definition de tarif'
+  ClientHeight = 232
+  ClientWidth = 470
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 4
+    Top = 5
+    Width = 457
+    Height = 220
+    Shape = bsFrame
+  end
+  object Label4: TLabel
+    Left = 0
+    Top = 0
+    Width = 18
+    Height = 13
+    Caption = '      '
+  end
+  object Label7: TLabel
+    Left = 432
+    Top = 216
+    Width = 33
+    Height = 13
+    Caption = '           '
+  end
+  object GroupBox2: TGroupBox
+    Left = 14
+    Top = 9
+    Width = 433
+    Height = 62
+    Caption = 'Tarif'
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 25
+      Top = 15
+      Width = 32
+      Height = 13
+      Caption = 'Code :'
+    end
+    object Label6: TLabel
+      Left = 25
+      Top = 37
+      Width = 63
+      Height = 13
+      Caption = 'D'#233'signation :'
+    end
+    object edDesignationTypeClt: TEdit
+      Left = 111
+      Top = 34
+      Width = 305
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object edtypeclt: TEdit
+      Left = 111
+      Top = 12
+      Width = 157
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object Button1: TButton
+    Left = 14
+    Top = 191
+    Width = 73
+    Height = 26
+    Caption = 'D'#233'finir'
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 94
+    Top = 191
+    Width = 75
+    Height = 25
+    Caption = 'Refresh'
+    TabOrder = 2
+  end
+  object GroupBox1: TGroupBox
+    Left = 15
+    Top = 70
+    Width = 433
+    Height = 67
+    Caption = 'Article'
+    TabOrder = 3
+    object Label1: TLabel
+      Left = 25
+      Top = 16
+      Width = 32
+      Height = 13
+      Caption = 'Code :'
+    end
+    object Label5: TLabel
+      Left = 25
+      Top = 40
+      Width = 63
+      Height = 13
+      Caption = 'D'#233'signation :'
+    end
+    object edcodeart: TEdit
+      Left = 111
+      Top = 13
+      Width = 157
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object edDesignation_art: TEdit
+      Left = 111
+      Top = 37
+      Width = 305
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 15
+    Top = 140
+    Width = 433
+    Height = 45
+    Caption = 'Prix de vente'
+    TabOrder = 4
+    object Label3: TLabel
+      Left = 23
+      Top = 19
+      Width = 25
+      Height = 13
+      Caption = 'Prix :'
+    end
+    object edprix: TEdit
+      Left = 111
+      Top = 16
+      Width = 157
+      Height = 21
+      ParentColor = True
+      TabOrder = 0
+    end
+  end
+end

@@ -20,14 +20,14 @@ type
     Label5: TLabel;
     edCodeclt: TEdit;
     edNomClt: TEdit;
-    cbMatVeh: TComboBox;
-    edNomVeh: TEdit;
     Panel1: TPanel;
     btvalider: TButton;
     Button2: TButton;
     st_ficheSortie: TStringGrid;
     Label6: TLabel;
     cbMagasin: TComboBox;
+    edNomVeh: TComboBox;
+    cbMatVeh: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edCodecltDblClick(Sender: TObject);
@@ -42,6 +42,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure cbMagasinCloseUp(Sender: TObject);
     procedure cbMatVehChange(Sender: TObject);
+    procedure edNomVehCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -371,9 +372,26 @@ vSourceRclt:='Sortie';
 frmRechClt.ShowModal;
 end;
 
+procedure TfrmFicheSortie.edNomVehCloseUp(Sender: TObject);
+var
+  Psql,vNomVeh : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+  Psql := ' where marque_veh = '+QuotedStr(edNomVeh.Text);
+
+  vehs:=dm.SelectVehicule(Psql);
+
+  for I := Low(vehs) to High(vehs) do
+      begin
+        vNomVeh := vehs[i].SNum_mat;
+      end;
+      cbMatVeh.Text := vNomVeh;
+end;
+
 procedure TfrmFicheSortie.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-cbMatVeh.Items.Clear;
+cbMatVeh.Clear;
 end;
 
 procedure TfrmFicheSortie.FormCreate(Sender: TObject);
@@ -426,7 +444,7 @@ begin
   vehs:=dm.SelectVehicule(Psql);
   for I := Low(vehs) to High(vehs) do
     begin
-      cbMatVeh.Items.Add(vehs[i].SNum_mat);
+      edNomVeh.Items.Add(vehs[i].SMarque);
     end;
 end;
 

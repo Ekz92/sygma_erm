@@ -1,0 +1,55 @@
+unit UListeParamPrix;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.ExtCtrls;
+
+type
+  TfrmListeTarif = class(TForm)
+    Panel1: TPanel;
+    StringGrid1: TStringGrid;
+    Panel2: TPanel;
+    Label1: TLabel;
+    cbTarif: TComboBox;
+    PopupMenu1: TPopupMenu;
+    Modifierleprix1: TMenuItem;
+    procedure cbTarifCloseUp(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeTarif: TfrmListeTarif;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListeTarif.cbTarifCloseUp(Sender: TObject);
+var
+  unParams : TTarif_defPrixArray;
+  i:integer;
+  Psql : string;
+begin
+  Psql := ' Where designation_tarif = '+QuotedStr(cbTarif.Text);
+
+  unParams:=DM.SelectParametragePrixclt(Psql);
+  StringGrid1.RowCount := Length(unParams)+1;
+
+  if StringGrid1.RowCount > 1 then StringGrid1.FixedRows := 1;
+
+
+  for I := Low(unParams) to High(unParams) do
+    begin
+      StringGrid1.Cells[0,i+1]:=unParams[i].Sdesignation_tarif;
+      StringGrid1.Cells[1,i+1]:=unParams[i].Sdesignation_art;
+      StringGrid1.Cells[2,i+1]:=FloatToStr(unParams[i].Rprix);
+    end;
+end;
+
+end.

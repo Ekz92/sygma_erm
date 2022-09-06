@@ -1,0 +1,294 @@
+unit USaisieFacture;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.Menus, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Grids,
+  Vcl.ExtCtrls;
+
+type
+  TfrmSaisieFacture = class(TForm)
+    Splitter1: TSplitter;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label14: TLabel;
+    lbMontant: TLabel;
+    st_saisie: TStringGrid;
+    Panel1: TPanel;
+    GbMagasin: TGroupBox;
+    Label2: TLabel;
+    Label8: TLabel;
+    edCodeMag: TEdit;
+    eddesignation_mag: TEdit;
+    GbClient: TGroupBox;
+    Label7: TLabel;
+    Label10: TLabel;
+    Label1: TLabel;
+    ednomClient: TEdit;
+    edCodeClient: TEdit;
+    edTarif: TEdit;
+    Gb_Article: TGroupBox;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    ed_article: TEdit;
+    eddesignation_art: TEdit;
+    edqte: TEdit;
+    gbEtete: TGroupBox;
+    Label11: TLabel;
+    Label3: TLabel;
+    Label9: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    cbTypeFact: TComboBox;
+    edNumFact: TEdit;
+    edveh: TEdit;
+    edCommande: TEdit;
+    eddate: TDateTimePicker;
+    pnBouton: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    PopupMenu1: TPopupMenu;
+    Supprimer1: TMenuItem;
+    QFacture: TSQLQuery;
+    frxFacturation: TfrxReport;
+    frxQFacture: TfrxDBDataset;
+    procedure st_saisieDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure edCodeMagDblClick(Sender: TObject);
+    procedure edCodeClientDblClick(Sender: TObject);
+    procedure ed_articleDblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmSaisieFacture: TfrmSaisieFacture;
+  vCode_mag : string;
+  vPrixVente,
+  vMnt_t,
+  vMnt_p,
+  vMnt_r  : real;
+  vQteTotal : integer;
+
+implementation
+
+{$R *.dfm}
+
+uses USelectClientFacturation, UFacturation_rech_magasin, Ufacture_rech_art,
+  UDM, records;
+
+procedure TfrmSaisieFacture.Button1Click(Sender: TObject);
+var
+  k,i:integer;
+  PsqlPrix:string;
+  TarifPrix : TTarif_defPrixArray;
+
+  chkArt : Boolean;
+
+  SqlSelectStockCam : string;
+  stockCam : TStockCamion;
+
+begin
+
+chkArt := False;
+
+for I := 0 to st_saisie.RowCount -1 do
+  begin
+    if st_saisie.Cells[0,i] = ed_article.Text then
+      begin
+        chkArt := True;
+      end;
+  end;
+
+if chkArt = True then
+  begin
+    MessageDlg('Cette article est déjà selectionné',mtWarning,[mbok],0);
+  end else
+if
+  (edCodeMag.Text<>'')and
+    (edTarif.Text<>'')and
+      (edCodeClient.Text<>'')and
+        (ed_article.Text<>'')and
+          (edqte.Text<>'') and (chkArt <> True)
+then
+
+begin
+{ Si c'est une vente de camion et que l'article n'est pas disponible dans le camion}
+  if cbTypeFact.Text = 'Camion' then
+    begin
+      SqlSelectStockCam := ' where code_art = '+QuotedStr(ed_article.Text)
+                          +' and vehicule = '+QuotedStr(edveh.Text) ;
+
+      stockCam := dm.selectStockCamion(SqlSelectStockCam);
+
+      if (stockCam.Scode_art.IsEmpty) or (stockCam.NQte_mag <= 0) then
+        begin
+          MessageDlg('Cet article n''existe pas, ou sa quantité est nulle dans ce camion',mtError,[mbOK],0);
+          exit
+        end else
+      if stockCam.NQte_mag < StrToInt(edqte.Text) then
+        begin
+          MessageDlg('La quantité saisie est supérieur à la quantité disponible dans le camion',mtError,[mbOK],0);
+          exit
+        end;
+    end;
+
+  {Si la quantité saisie est nulle}
+
+  if StrToInt(edqte.Text) = 0 then
+    begin
+      MessageDlg('La quantité nulle non n''autorisée',mtError,[mbOK],0);
+      exit
+    end;
+
+//selection du prix de vente selon le typeclt
+  PsqlPrix:=' where code_tarif = '+QuotedStr(edTarif.Text)
+            + ' and code_art = '+QuotedStr(ed_article.Text);
+
+  vPrixVente := 0;
+
+  TarifPrix := DM.SelectParametragePrixclt(PsqlPrix);
+
+  for I := Low(TarifPrix) to High(TarifPrix) do
+    begin
+      vPrixVente:=TarifPrix[i].Rprix;
+    end;
+  //***************
+
+  if vPrixVente <> 0 then
+    begin
+      with st_saisie do
+        begin
+          RowCount := RowCount+1;
+          k:=RowCount-1;
+          Cells[0,k]:= ed_article.Text;
+          Cells[1,k]:= eddesignation_art.Text;
+          Cells[2,k]:= edqte.Text;
+          Cells[3,k]:= FloatToStr(vPrixVente);
+          Cells[4,k]:=FloatToStr(StrToInt(Cells[2,k]) * vPrixVente);
+
+          if RowCount>1 then
+            FixedRows:=1;
+
+          edTarif.Enabled:=False;
+          edCodeMag.Enabled:=False;
+          eddesignation_mag.Enabled:=False;
+          edCodeClient.Enabled:=False;
+          ednomClient.Enabled:=False;
+          cbTypeFact.Enabled:=false;
+          edveh.Enabled:=false;
+          edCommande.Enabled:=False;
+        end;
+
+        vMnt_t := 0;
+        vQteTotal:=0;
+
+        for I := 1 to st_saisie.RowCount-1 do
+          begin
+            vMnt_t := vMnt_t + StrToFloat(st_saisie.Cells[4,i]);
+            vQteTotal := vQteTotal + StrToInt(st_saisie.Cells[2,i]);
+          end;
+      //***********
+      lbMontant.Caption:=FloatToStrF(vMnt_t,ffNumber,15,2);
+
+       refresh_art;
+      end else
+    begin
+      MessageDlg('Aucun prix n''est définit pour cet article sur ce tarif. Merci de revoir le parametrage des prix ',mtError,[mbRetry],0);
+    end;
+  end else
+    begin
+      MessageDlg('Tous les champs sont obligatoires, Merci de les renseigner',mtError,[mbOK],0);
+    end;
+
+end;
+
+procedure TfrmSaisieFacture.edCodeClientDblClick(Sender: TObject);
+begin
+if cbTypeFact.Text =''  then
+  begin
+    MessageDlg('Veuillez spécifier le type de la facture',mtWarning,[mbRetry],0);
+  end else
+  if (cbTypeFact.Text = 'Camion') and (Trim(edveh.Text)='') then
+    begin
+      MessageDlg('Veuillez spécifier le numéro matricule',mtWarning,[mbRetry],0);
+    end else
+    begin
+      vFormclt := 'SFP';
+      frmSelectClientFacturation.ShowModal;
+    end;
+
+end;
+
+procedure TfrmSaisieFacture.edCodeMagDblClick(Sender: TObject);
+begin
+  frmFacturationRech_mag.ShowModal;
+end;
+
+procedure TfrmSaisieFacture.ed_articleDblClick(Sender: TObject);
+var
+  ColCmp : integer;
+begin
+  ColCmp :=frmfacture_rech_art.St_Art.ColCount;
+
+  if cbTypeFact.Text <> 'Comptoir' then
+    begin
+      frmfacture_rech_art.St_Art.ColCount:= 4;//ColCmp-1;
+    end else
+    begin
+      frmfacture_rech_art.St_Art.ColCount:=5;//ColCmp;
+    end;
+vCode_mag:=edCodeMag.Text;
+frmfacture_rech_art.ShowModal;
+end;
+
+procedure TfrmSaisieFacture.FormShow(Sender: TObject);
+var
+  I: Integer;
+  Psql :string;
+begin
+  edDate.DateTime := now;
+
+  edveh.Enabled:=False;
+  edCommande.Enabled:=False;
+  eddate.Checked:=false;
+end;
+
+procedure TfrmSaisieFacture.st_saisieDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

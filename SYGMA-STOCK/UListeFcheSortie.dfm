@@ -96,8 +96,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       CharCase = ecUpperCase
       ParentColor = True
       TabOrder = 2
-      OnChange = cbClientChange
-      OnKeyPress = cbClientKeyPress
+      OnChange = cbClientCloseUp
+      OnCloseUp = cbClientCloseUp
     end
     object edcodeClt: TEdit
       Left = 91

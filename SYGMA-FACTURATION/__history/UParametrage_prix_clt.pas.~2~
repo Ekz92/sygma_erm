@@ -1,0 +1,42 @@
+unit UParametrage_prix_clt;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmTarifDef = class(TForm)
+    Bevel1: TBevel;
+    Label4: TLabel;
+    Label7: TLabel;
+    GroupBox2: TGroupBox;
+    Label2: TLabel;
+    Label6: TLabel;
+    edDesignationTypeClt: TEdit;
+    edtypeclt: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label5: TLabel;
+    edcodeart: TEdit;
+    edDesignation_art: TEdit;
+    GroupBox3: TGroupBox;
+    Label3: TLabel;
+    edprix: TEdit;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmTarifDef: TfrmTarifDef;
+
+implementation
+
+{$R *.dfm}
+
+end.

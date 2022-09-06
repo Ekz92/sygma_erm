@@ -361,6 +361,7 @@ begin
   try
     query.SQL.Add(sql);
     query.Open;
+//    query.SQL.SaveToFile('g:\tb_vehicule.txt');
 
     with query do
       begin
@@ -371,6 +372,7 @@ begin
               begin
                 SMarque:=FieldByName('Marque_veh').AsString;
                 SNum_mat:=FieldByName('Num_Immat_veh').AsString;
+                SMarque:=FieldByName('Marque_veh').AsString;
                 NPTAC:=FieldByName('Kilo_max').AsInteger;
               end;
               Vehs[i]:=Veh;

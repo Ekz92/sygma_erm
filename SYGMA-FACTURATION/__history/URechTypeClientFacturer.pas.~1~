@@ -1,0 +1,24 @@
+unit URechTypeClientFacturer;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmRechTarif = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechTarif: TfrmRechTarif;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,51 @@
+unit URechArticleFacturer;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRechArticleFacturer = class(TForm)
+    st_typeclient: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechArticleFacturer: TfrmRechArticleFacturer;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRechArticleFacturer.FormShow(Sender: TObject);
+var
+  Articles : TarticleArray;
+  j:integer;
+  sql_art : string;
+begin
+//******************
+  sql_art := '';
+  Articles := dm.selectArticles(sql_art);
+  st_article.RowCount := Length(Articles)+1;
+
+  for j := Low(Articles) to High(Articles) do
+    begin
+      st_article.Cells[0,j+1] := Articles[j].Scode_art;
+      st_article.Cells[1,j+1] := Articles[j].Sdesignation_art;
+    end;
+end;
+
+end.
