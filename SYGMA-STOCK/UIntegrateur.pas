@@ -105,6 +105,11 @@ type
     Panel4: TPanel;
     Label10: TLabel;
     ImgEntree: TImage;
+    BondeLivBL1: TMenuItem;
+    CrerunBL1: TMenuItem;
+    RappeldeBL1: TMenuItem;
+    ListedeBL1: TMenuItem;
+    LivrsNonlivrs1: TMenuItem;
     procedure ypedebouteil1Click(Sender: TObject);
     procedure Magasin1Click(Sender: TObject);
     procedure Entreeenmagasin1Click(Sender: TObject);
@@ -129,6 +134,10 @@ type
     procedure Image7Click(Sender: TObject);
     procedure Cltureouverture1Click(Sender: TObject);
     procedure ImgEntreeClick(Sender: TObject);
+    procedure CrerunBL1Click(Sender: TObject);
+    procedure LivrsNonlivrs1Click(Sender: TObject);
+    procedure CrerunBC1Click(Sender: TObject);
+    procedure ListedeBC1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -147,13 +156,24 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UListeEntree, UListeSortie, UFiche_stock, UMagasin_liste, UMouvStockByArticle,
   UEntreeCancListe, UListe_article, USortieDivers, UAdd_Type_article, records,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
-  UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs;
+  UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
+  UL_BL_par_date, UBon_Commande, UListeBonCommande;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
 if MessageDlg('Voulez-vous clôturer la journée ?', mtConfirmation,[mbYes,mbNo],0)=mryes then
    frmClotureDay.ShowModal;
 
+end;
+
+procedure TfrmIntegrateur.CrerunBC1Click(Sender: TObject);
+begin
+frmbonCommande.ShowModal;
+end;
+
+procedure TfrmIntegrateur.CrerunBL1Click(Sender: TObject);
+begin
+frm_nouveau_BL.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Entreeenmagasin1Click(Sender: TObject);
@@ -300,6 +320,11 @@ begin
     st_SideMenu.RowCount := 5;
 end;
 
+procedure TfrmIntegrateur.ListedeBC1Click(Sender: TObject);
+begin
+frmListeBonCommande.showmodal;
+end;
+
 procedure TfrmIntegrateur.Listedesarticles1Click(Sender: TObject);
 begin
 frmListe_article.ShowModal;
@@ -308,6 +333,11 @@ end;
 procedure TfrmIntegrateur.ListeMagasin1Click(Sender: TObject);
 begin
 frmMagasin_liste.ShowModal;
+end;
+
+procedure TfrmIntegrateur.LivrsNonlivrs1Click(Sender: TObject);
+begin
+frmL_BL_par_date.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Magasin1Click(Sender: TObject);

@@ -12,6 +12,7 @@ object DM: TDM
   end
   object TParam: TSQLTable
     MaxBlobSize = 1
+    SQLConnection = SQLConnection1
     TableName = 'tb_parametre'
     Left = 163
     Top = 88

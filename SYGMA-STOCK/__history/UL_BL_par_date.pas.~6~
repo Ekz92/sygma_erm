@@ -1,0 +1,120 @@
+unit UL_BL_par_date;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TfrmL_BL_par_date = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbStatut: TComboBox;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    StringGrid1: TStringGrid;
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmL_BL_par_date: TfrmL_BL_par_date;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmL_BL_par_date.FormActivate(Sender: TObject);
+begin
+d1.Date := StrToDate(DateToStr(Now)) ;
+d2.Date := StrToDate(DateToStr(Now)) ;
+
+d1.MaxDate := Now;
+d2.MaxDate := Now;
+end;
+
+procedure TfrmL_BL_par_date.FormCreate(Sender: TObject);
+begin
+  WITH StringGrid1 do
+    begin
+      Cells[0,0]:='N° BL';
+      Cells[1,0]:='Client';
+      Cells[2,0]:='Magasin';
+      Cells[3,0]:='Kgs';
+      Cells[4,0]:='Bouteille';
+      Cells[5,0]:='Prix liv';
+      Cells[6,0]:='Date';
+      Cells[7,0]:='Usager';
+    end;
+
+end;
+
+procedure TfrmL_BL_par_date.FormShow(Sender: TObject);
+var
+  Bls : TBLArray;
+  Psql : string;
+  I: Integer;
+begin
+  Psql :='';
+  Bls := DM.SelectBl(Psql) ;
+  StringGrid1.RowCount:=Length(bls)+1;
+
+  for I := Low(bls) to High(bls) do
+    begin
+      with StringGrid1 do
+        begin
+          Cells[0,i+1] := bls[i].Snum_bl;
+          Cells[1,i+1] := bls[i].Snom_clt;
+          Cells[2,i+1] := bls[i].Scode_mag;
+          Cells[3,i+1] := FloatToStr(bls[i].RTotKilo);
+          Cells[4,i+1] := IntToStr(bls[i].NTotBlle);
+          Cells[5,i+1] := FloatToStrF(bls[i].RPrixLiv,ffNumber,15,0)+'F';
+          Cells[6,i+1] := bls[i].Sdate_bl;
+          Cells[7,i+1] := bls[i].SUsager;
+        end;
+    end;
+end;
+
+procedure TfrmL_BL_par_date.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

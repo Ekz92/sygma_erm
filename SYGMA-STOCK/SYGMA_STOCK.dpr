@@ -28,7 +28,15 @@ uses
   UFicheRecap_es in 'UFicheRecap_es.pas' {frmFicheRecap_es},
   UListeFcheEntree in 'UListeFcheEntree.pas' {frmListeFcheEntree},
   UListeFcheSortie in 'UListeFcheSortie.pas' {frmListeFcheSortie},
-  URapprochementFicheEs in 'URapprochementFicheEs.pas' {frmRapprochementFicheEs};
+  URapprochementFicheEs in 'URapprochementFicheEs.pas' {frmRapprochementFicheEs},
+  UCreer_BL in 'UCreer_BL.pas' {frm_nouveau_BL},
+  URechFacture_BL in 'URechFacture_BL.pas' {frmRechFActureBL},
+  UQteLivre in 'UQteLivre.pas' {frmQteLivre},
+  UL_BL_par_date in 'UL_BL_par_date.pas' {frmL_BL_par_date},
+  UBon_Commande in 'UBon_Commande.pas' {frmbonCommande},
+  URechVehBc in 'URechVehBc.pas' {frmRechVehBc},
+  URechArt_bc in 'URechArt_bc.pas' {frmRechArt_bc},
+  UListeBonCommande in 'UListeBonCommande.pas' {frmListeBonCommande};
 
 {$R *.res}
 
@@ -61,5 +69,13 @@ begin
   Application.CreateForm(TfrmListeFcheEntree, frmListeFcheEntree);
   Application.CreateForm(TfrmListeFcheSortie, frmListeFcheSortie);
   Application.CreateForm(TfrmRapprochementFicheEs, frmRapprochementFicheEs);
+  Application.CreateForm(Tfrm_nouveau_BL, frm_nouveau_BL);
+  Application.CreateForm(TfrmRechFActureBL, frmRechFActureBL);
+  Application.CreateForm(TfrmQteLivre, frmQteLivre);
+  Application.CreateForm(TfrmL_BL_par_date, frmL_BL_par_date);
+  Application.CreateForm(TfrmbonCommande, frmbonCommande);
+  Application.CreateForm(TfrmRechVehBc, frmRechVehBc);
+  Application.CreateForm(TfrmRechArt_bc, frmRechArt_bc);
+  Application.CreateForm(TfrmListeBonCommande, frmListeBonCommande);
   Application.Run;
 end.

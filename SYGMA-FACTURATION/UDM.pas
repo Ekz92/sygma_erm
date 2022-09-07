@@ -68,6 +68,8 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
+uses USaisieFacture;
+
 {$R *.dfm}
 
 function TDM.InsertTypeService(TypeService : TTypeService):Boolean;

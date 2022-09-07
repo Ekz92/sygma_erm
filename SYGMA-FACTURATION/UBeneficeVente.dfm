@@ -1,4 +1,4 @@
-object Form1: TForm1
+object frmBeneficeVente: TfrmBeneficeVente
   Left = 0
   Top = 0
   Caption = 'B'#233'n'#233'fice sur vente '

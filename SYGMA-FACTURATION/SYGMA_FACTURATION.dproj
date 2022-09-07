@@ -171,7 +171,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="UBeneficeVente.pas">
-            <Form>Form1</Form>
+            <Form>frmBeneficeVente</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="UTypeService.pas">

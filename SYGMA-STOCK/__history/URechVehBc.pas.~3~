@@ -1,0 +1,53 @@
+unit URechVehBc;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmRechVehBc = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    ednum_immat: TEdit;
+    St_veh: TStringGrid;
+    procedure ednum_immatExit(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechVehBc: TfrmRechVehBc;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechVehBc.ednum_immatExit(Sender: TObject);
+var
+  Psql : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+  Psql := ' where num_immat_veh like '+QuotedStr(ednum_immat.Text+'%');
+
+  vehs:=dm.SelectVehicule(Psql);
+  St_veh.RowCount := Length(vehs) +1;
+
+  for I := Low(vehs) to High(vehs) do
+    with St_veh do
+      begin
+       // Rows[i].Clear;
+        Cells[0,i+1] := vehs[i].SNum_mat ;
+        Cells[1,i+1] := vehs[i].SMarque;
+        Cells[2,i+1] := IntToStr(vehs[i].NPTAC);
+      end;
+
+      if St_veh.RowCount>1 then St_veh.FixedRows := 1;
+
+end;
+
+end.

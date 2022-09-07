@@ -401,6 +401,7 @@ object frmSaisieFacture: TfrmSaisieFacture
     Top = 128
     object Supprimer1: TMenuItem
       Caption = 'Supprimer'
+      OnClick = Supprimer1Click
     end
   end
   object QFacture: TSQLQuery

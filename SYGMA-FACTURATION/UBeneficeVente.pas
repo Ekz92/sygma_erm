@@ -8,7 +8,7 @@ uses
   frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmBeneficeVente = class(TForm)
     Bevel1: TBevel;
     Label1: TLabel;
     Label2: TLabel;
@@ -34,13 +34,13 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmBeneficeVente: TfrmBeneficeVente;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TfrmBeneficeVente.Button1Click(Sender: TObject);
 var
   sql : string;
 
@@ -119,7 +119,7 @@ Component := RBene.FindObject('Mvehicule');
 
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TfrmBeneficeVente.FormShow(Sender: TObject);
 begin
 d2.Date:=Now;
 

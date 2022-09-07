@@ -102,6 +102,12 @@ type
     Image1: TImage;
     Label11: TLabel;
     Image9: TImage;
+    BondelivBL1: TMenuItem;
+    CrerunBL1: TMenuItem;
+    RappeldeBL1: TMenuItem;
+    ListedeBL1: TMenuItem;
+    LivrsNonlivrs1: TMenuItem;
+    ParNBL1: TMenuItem;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);
@@ -123,6 +129,7 @@ type
     procedure Image4Click(Sender: TObject);
     procedure st_SideMenuDblClick(Sender: TObject);
     procedure Image8Click(Sender: TObject);
+    procedure CrerunBL1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -139,13 +146,18 @@ implementation
 
 uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
   USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement, records, UDM,
-  UClotureDay, UEtatJournal;
+  UClotureDay, UEtatJournal, UCreer_BL;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
 if MessageDlg('Voulez-vous clôturer la journée ?', mtConfirmation,[mbYes,mbNo],0)=mryes then
    frmClotureDay.ShowModal;
 
+end;
+
+procedure TfrmIntegrateur.CrerunBL1Click(Sender: TObject);
+begin
+frm_nouveau_BL.ShowModal;
 end;
 
 procedure TfrmIntegrateur.FormShow(Sender: TObject);

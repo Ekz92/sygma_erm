@@ -1,0 +1,106 @@
+unit URechArt_bc;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmRechArt_bc = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode_art: TEdit;
+    edDesignation: TEdit;
+    St_Art: TStringGrid;
+    procedure St_ArtDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
+      State: TGridDrawState);
+    procedure edcode_artExit(Sender: TObject);
+    procedure St_ArtDblClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechArt_bc: TfrmRechArt_bc;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRechArt_bc.edcode_artExit(Sender: TObject);
+var
+  Psql: string;
+  articles : TarticleArray;
+  I: Integer;
+begin
+  if edcode_art.Text<>'' then
+    Psql := ' where code_art like '+QuotedStr('%'+edcode_art.Text+'%')
+  else if edDesignation.Text<>'' then
+    Psql := ' where designation_art like '+QuotedStr('%'+edDesignation.Text+'%');
+
+   articles := dm.selectArticles(Psql);
+   St_Art.RowCount := Length(articles)+1;
+
+   for I := Low(articles) to High(articles) do
+      begin
+        with St_Art do
+          begin
+            Cells[0,i+1]:=articles[i].Scode_art;
+            Cells[1,i+1]:=articles[i].Sdesignation_art;
+            Cells[2,i+1]:=FloatToStr(articles[i].Rkilo);
+            //Cells[3,i]:=articles[i].Stype_art;
+          end;
+      end;
+
+      if St_Art.RowCount>1 then St_Art.FixedRows := 1;
+
+end;
+
+procedure TfrmRechArt_bc.St_ArtDblClick(Sender: TObject);
+begin
+ with frmbonCommande do
+  begin
+    edarticle.Text:=St_Art.Cells[0,St_Art.Row];
+    eddesign.Text:=St_Art.Cells[1,St_Art.Row];
+    edqte.SetFocus;
+  end;
+  Close;
+
+end;
+
+procedure TfrmRechArt_bc.St_ArtDrawCell(Sender: TObject; ACol, ARow: Integer;
+  Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

@@ -1,0 +1,144 @@
+object frmL_BL_par_date: TfrmL_BL_par_date
+  Left = 0
+  Top = 0
+  Caption = 'Liste des BL par date'
+  ClientHeight = 271
+  ClientWidth = 607
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 607
+    Height = 47
+    Align = alTop
+    Caption = 'Recherche'
+    TabOrder = 0
+    ExplicitWidth = 623
+    object TLabel
+      Left = 198
+      Top = 22
+      Width = 20
+      Height = 13
+      Caption = 'Du :'
+    end
+    object TLabel
+      Left = 356
+      Top = 22
+      Width = 20
+      Height = 13
+      Caption = 'Au :'
+    end
+    object Label1: TLabel
+      Left = 8
+      Top = 22
+      Width = 37
+      Height = 13
+      Caption = 'Statut :'
+    end
+    object d1: TDateTimePicker
+      Left = 227
+      Top = 17
+      Width = 100
+      Height = 21
+      Date = 43503.711387719910000000
+      Time = 43503.711387719910000000
+      Color = 65408
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      StyleElements = [seBorder]
+    end
+    object d2: TDateTimePicker
+      Left = 387
+      Top = 17
+      Width = 100
+      Height = 21
+      CalColors.MonthBackColor = 65408
+      Date = 43503.711387719910000000
+      Time = 43503.711387719910000000
+      Color = 65408
+      TabOrder = 1
+      StyleElements = [seBorder]
+    end
+    object cbStatut: TComboBox
+      Left = 58
+      Top = 17
+      Width = 113
+      Height = 21
+      Style = csDropDownList
+      ItemIndex = 0
+      TabOrder = 2
+      Text = 'Livr'#233's'
+      Items.Strings = (
+        'Livr'#233's'
+        'Non livr'#233's')
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 244
+    Width = 607
+    Height = 27
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitTop = 243
+    ExplicitWidth = 623
+    object SpeedButton1: TSpeedButton
+      Left = 510
+      Top = 0
+      Width = 97
+      Height = 27
+      Align = alRight
+      Caption = 'Tout imprim'#233
+      ExplicitLeft = 524
+      ExplicitTop = 1
+      ExplicitHeight = 25
+    end
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 47
+    Width = 607
+    Height = 197
+    Align = alClient
+    Color = clBtnFace
+    ColCount = 8
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    TabOrder = 2
+    StyleElements = [seBorder]
+    OnDrawCell = StringGrid1DrawCell
+    ExplicitLeft = -2
+    ExplicitTop = 40
+    ExplicitWidth = 625
+    ExplicitHeight = 185
+    ColWidths = (
+      94
+      121
+      55
+      45
+      56
+      55
+      105
+      65)
+  end
+end

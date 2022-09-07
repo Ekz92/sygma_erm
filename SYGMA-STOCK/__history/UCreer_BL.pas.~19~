@@ -1,0 +1,487 @@
+unit UCreer_BL;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.Menus, Vcl.Buttons, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  Tfrm_nouveau_BL = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Panel2: TPanel;
+    Bevel1: TBevel;
+    Label11: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    lbcodeClt: TLabel;
+    Label22: TLabel;
+    lbTot_ligne: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    lbTotKg: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    lbPrixLiv: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    lbTotBlle: TLabel;
+    Label31: TLabel;
+    SG_import: TStringGrid;
+    Button1: TButton;
+    Button2: TButton;
+    cbPointVente: TComboBox;
+    edzone: TEdit;
+    edprix: TEdit;
+    edcodeClt: TEdit;
+    ednomClient: TEdit;
+    GroupBox2: TGroupBox;
+    Label19: TLabel;
+    ednumFacture: TEdit;
+    TabSheet2: TTabSheet;
+    Label1: TLabel;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    BtCreer: TSpeedButton;
+    BtAnnuler: TSpeedButton;
+    Label12: TLabel;
+    lbtkilo: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    lbTBouteille: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    lbprixlivraison: TLabel;
+    Label25: TLabel;
+    Label28: TLabel;
+    ednumBL: TEdit;
+    edClient: TEdit;
+    edcodeMag: TEdit;
+    GroupBox1: TGroupBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    BtAjouter: TSpeedButton;
+    edCode_art: TEdit;
+    edDesign_Art: TEdit;
+    edkilo: TEdit;
+    edQte: TEdit;
+    edDegn_mag: TEdit;
+    StringGrid1: TStringGrid;
+    ednom_zone: TEdit;
+    edPrix_zone: TEdit;
+    edCodeClt_man: TEdit;
+    cbPointVente_man: TComboBox;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    frxBL: TfrxReport;
+    frxDBBL: TfrxDBDataset;
+    QBL: TSQLQuery;
+    procedure ednumFactureDblClick(Sender: TObject);
+    procedure ednumFactureExit(Sender: TObject);
+    procedure ednomClientExit(Sender: TObject);
+    procedure cbPointVenteCloseUp(Sender: TObject);
+    procedure cbPointVenteChange(Sender: TObject);
+    procedure Modifier1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure SG_importDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frm_nouveau_BL: Tfrm_nouveau_BL;
+  prix_livraison : real;
+  Code_mag : string;
+  St_import_row ,
+  vNumHis : integer;
+
+  vDesignation_mag,
+  vCode_mag : string;
+
+implementation
+
+{$R *.dfm}
+
+uses URechFacture_BL, UDM, records, UQteLivre, UConnexion;
+
+procedure Tfrm_nouveau_BL.Button1Click(Sender: TObject);
+var
+  bl : TBL;
+  magasin : TMagasin;
+  stock,
+  stock_up : TStock;
+  article : TArticle;
+  Import : TImportArray;
+  Bls : TBLDetail;
+  blhis : Tb_bl_his;
+
+  i,k,j,l,Qte_Stock,Qte_new:integer;
+  Old_BL,
+  code_mag,
+  code_art,
+  designation_mag,designation_art : string;
+
+  kilo : real;
+  nom_clt,date_op : string;
+  num_import,
+  livpart_bl,
+  livpart_bld :integer;
+  SelectBL :TBLArray;
+  SQLSelectBL,SelNumFact :string;
+
+begin
+  SQLSelectBL := ' where num_bl = '+QuotedStr(ednumFacture.Text);
+  SelectBL := DM.SelectBl(SQLSelectBL);
+
+    for I := Low(SelectBL) to High(SelectBL) do
+      begin
+        SelNumFact :=SelectBL[i].Snum_bl;
+      end;
+
+if SelNumFact.IsEmpty then
+begin
+  if ((edcodeClt.Text='' )or (edprix.Text ='' )or (SG_import.Cells[1,1]='' )or (lbPrixLiv.Caption = '0') )then
+    begin
+      MessageDlg('Erreur, veillez completer la saisie',mtError,[mbok],0);
+    end else
+    begin
+      {Statut livraison partielle}
+      livpart_bl:=0;
+      for l := 1 to SG_import.RowCount -1  do
+        begin
+          if StrToInt(SG_import.Cells[4,l]) > StrToInt(SG_import.Cells[5,l]) then
+            livpart_bl := 1 ;
+        end;
+   //      ShowMessage(IntToStr(livpart));
+
+        { Insertion dans la table BL }
+        with bl,SG_import  do
+          begin
+            Snum_bl := ednumFacture.Text;      //
+            Nnum_bl_his := vNumHis;
+            SCode_clt := edcodeClt.Text;
+            Snom_clt := ednomClient.Text;
+            SpointVente := cbPointVente.Text;
+            Scode_mag := vCode_mag; //code_mag;  Create
+            SDesignation_mag := vDesignation_mag;             //
+            RTotKilo := StrTofloat(lbTotKg.Caption);
+            Sdate_bl :=  DateTimeToStr(now); //Cells[0,1];
+            NTotBlle :=StrToInt(lbTotBlle.Caption);
+            RPrixLiv :=StrToFloat(lbPrixLiv.Caption) ;
+            SUsager:=vUsager;
+            Nstatut_bl:=0;
+            NLivPart := livpart_bl;
+          end;
+          dm.InsertBL(bl);
+
+       for I := 1 to SG_import.RowCount -1 do
+         begin
+            code_art := SG_import.Cells[2,i];
+
+            designation_art :=  SG_import.Cells[3,i];
+            stock := dm.selectStockByArticle(code_art);
+
+            code_mag := stock.Scode_mag;      //OK code_mag
+            Qte_Stock := stock.NQte_mag;
+            date_op := SG_import.Cells[0,i];
+
+            magasin := DM.selectMagasinByCode(code_mag);
+            designation_mag := magasin.Sdesignation_mag; //OK designation_mag
+
+            {Contrôle de la livraison partielle d'article}
+
+            if StrToInt(SG_import.Cells[4,i]) >  StrToInt(SG_import.Cells[5,i]) then
+              begin
+                livpart_bld := 1
+              end else
+              begin
+                livpart_bld := 0
+              end;
+
+        { Insertion dans la table BL_DETAILS}
+
+          article  := DM.selectArticleByCode(code_art) ;
+          kilo := (Article.Rkilo)*(StrToInt(SG_import.Cells[5,i]));
+          with bls do
+            begin
+              Snum_bl :=  SG_import.Cells[1,i];
+              SCode_clt := edcodeClt.Text;
+              Snom_clt :=  ednomClient.Text;
+              Scode_mag := code_mag;
+              SDesignation_mag := designation_mag;
+              Scode_art := code_art;
+              SDesignation_art := article.Sdesignation_art;
+              RKilo := article.Rkilo;
+              NQte_art := StrToInt(SG_import.Cells[4,i]);
+              NQte_liv := StrToInt(SG_import.Cells[5,i]);
+              RKiloTotal := RKilo*StrToInt(SG_import.Cells[5,i]);
+              NControle := 0;
+              NLivPart := livpart_bld;
+            end;
+            dm.InsertBLs(Bls);
+
+            { Insertion dans bl historique }
+
+            with blhis do
+              begin
+                Nnum_blhis :=vNumHis;
+                Snum_bl := ednumFacture.Text;
+                Sdate_blhis := DateTimeToStr(Now);
+                Scode_art := SG_import.Cells[2,i];
+                Sdesignation_art :=SG_import.Cells[3,i];
+                Nqte_his := StrToInt(SG_import.Cells[5,i])  ;
+              end;
+              dm.InsertblHis(blhis);
+
+           end;
+            MessageDlg('Validation de BL à été bien éffectuée', mtInformation,[mbok],0);
+            with QBL do
+              begin
+                SQL.Clear;
+                SQL.Add('Select * from tb_bl_detail d, tb_bl b, tb_article a '
+                        +' where d.num_bl = '+QuotedStr(ednumFacture.Text)
+                        +' and a.code_art = d.code_art '
+                        +' and b.numbl_his = ' + IntToStr(vNumHis)
+                        +' and b.num_bl = d.num_bl '
+                        );
+                Open;
+              end;
+            frxBL.ShowReport();
+         {Vider composant}
+          Button2.Click;
+      end;
+  end else
+    begin
+      MessageDlg('Ce BL a été déjà validé',mtError,[mbOK],0);
+    end;
+end;
+
+procedure Tfrm_nouveau_BL.cbPointVenteChange(Sender: TObject);
+begin
+cbPointVente.OnCloseUp(sender);
+
+end;
+
+procedure Tfrm_nouveau_BL.cbPointVenteCloseUp(Sender: TObject);
+var
+  point : TPointVente;
+  nom_point : String;
+
+  zone : TZone;
+  nom_zone :string;
+  prix :Real;
+  PrixLiv,kilo : Real;
+begin
+  nom_point := cbPointVente.Text;
+  point := dm.selectZoneByPoint(nom_point);
+  edzone.Text := point.Snom_zone;
+
+  //**
+  nom_zone:=edzone.Text;
+  zone := dm.selectZonesByNom_zone(nom_zone);
+  edprix.Text := FloatToStr(zone.Rprix_zone);
+
+  prix := StrToFloat(edprix.Text);
+  kilo := StrToFloat(lbTotKg.Caption);
+
+  PrixLiv := prix * kilo;
+  lbPrixLiv.Caption := FloatToStr(PrixLiv);
+end;
+
+procedure Tfrm_nouveau_BL.ednomClientExit(Sender: TObject);
+var
+  Factures : TFacturation_detailArray;
+  Import : TImport;
+  Article : TArticle;
+  i,rowcount,nbBlle,Pnum_import : integer;
+  Pnom_clt ,
+  code_art,
+  Psql: string;
+  kilo,Tkilo : real;
+  //*****
+  vClient,
+  code_clt,PsqlPoint : string;
+  clt : TClient;
+  //*****
+  points : TPointVenteArray;
+begin
+  nbBlle:=0;
+  cbPointVente.Items.Clear;
+  //traitement du code client
+  vClient := Trim(ednomClient.Text);
+
+  clt:=DM.selectCodeclt(vClient);
+  code_clt:= clt.SCodeClt;
+  edcodeClt.Text := clt.SCodeClt;
+
+//Afichage des point de vente
+
+  PsqlPoint := ' where code_client = '+quotedStr(code_clt);
+
+  points := dm.selectPoints(PsqlPoint);
+  for I := Low(points) to High(points) do
+    begin
+      cbPointVente.Items.Add(points[i].Snom_pint);
+    end;
+
+//affichage dans la grille de données
+  Psql := ' where num_fact = '+QuotedStr(ednumFacture.Text);
+  Factures := DM.SelectFacturesDetail(Psql);
+
+  Pnom_clt := Trim(ednomClient.text);
+
+  Tkilo:=0;
+
+  { nombre de ligne dans la grille}
+  if Length(Factures) = 0 then
+    rowcount := 2
+  else
+    rowcount := Length(Factures)+1;
+
+  lbTot_ligne.Caption := IntToStr(Length(Factures)) ;
+  SG_import.RowCount := rowcount;
+
+  for I := Low(Factures) to High(Factures) do
+    with SG_import do
+      begin
+        Cells[0,i+1]:= Factures[i].Sdate_fact;
+        Cells[1,i+1]:= Factures[i].Snum_fact;
+        Cells[2,i+1]:= Factures[i].Scode_art;
+        Cells[3,i+1]:= Factures[i].Sdesignation_art;
+        Cells[4,i+1]:= IntToStr(Factures[i].Nqte_art);
+        Cells[5,i+1]:= IntToStr(Factures[i].Nqte_art);
+
+        vCode_mag := Factures[i].Scode_mag;
+        vDesignation_mag := Factures[i].Sdesignation_mag;
+
+        //ShowMessage(vCode_mag);
+
+        nbBlle := nbBlle+StrToInt(Cells[5,i+1]) ;
+        code_art:= Cells[2,i+1];
+
+        article  := DM.selectArticleByCode(code_art) ;
+
+        kilo := (Article.Rkilo)*(StrToInt(Cells[5,i+1]));
+
+        //ShowMessage(floatToStr(kilo));
+        Tkilo := Tkilo + kilo;
+      end;
+      lbTotBlle.Caption:=IntToStr(nbBlle);
+      lbTotKg.Caption := FloatToStr(Tkilo);
+
+end;
+
+procedure Tfrm_nouveau_BL.ednumFactureDblClick(Sender: TObject);
+begin
+  edzone.Clear;
+  edPrix.Clear;
+  cbPointVente.Clear;
+
+  frmRechFActureBL.ShowModal;
+
+end;
+
+procedure Tfrm_nouveau_BL.ednumFactureExit(Sender: TObject);
+var
+  numhis : TMaxNumRappel;
+begin
+  numhis := DM.selectMaxNumrappel;
+  vNumHis := numhis.Nnumrappel + 1 ;
+end;
+
+procedure Tfrm_nouveau_BL.FormActivate(Sender: TObject);
+begin
+BtAnnuler.Click;
+
+end;
+
+procedure Tfrm_nouveau_BL.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    ednomClient.Clear;
+    cbPointVente.Items.Clear;
+    edcodeClt.Clear;
+    edzone.Clear;
+    edprix.Clear;
+
+    with SG_import do
+    begin
+      RowCount :=2;
+      Rows[1].Clear;
+    end;
+end;
+
+procedure Tfrm_nouveau_BL.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'Code';
+    Cells[1,0] := 'Designation';
+    Cells[2,0] := 'Kgs';
+    Cells[3,0] := 'Qte cmd';
+    Cells[4,0] := 'Qte Liv';
+    Cells[5,0] := '* Kgs';
+  end;
+
+  with SG_import do
+    begin
+      Cells[0,0]:='Date';
+      Cells[1,0]:='N° BL';
+      Cells[2,0]:='Code Art';
+      Cells[3,0]:='Designation';
+      Cells[4,0] := 'Qte cmd';
+      Cells[5,0] := 'Qte Liv';
+    end;
+end;
+
+procedure Tfrm_nouveau_BL.Modifier1Click(Sender: TObject);
+begin
+St_import_row := SG_import.Row;
+frmQteLivre.ShowModal;
+end;
+
+procedure Tfrm_nouveau_BL.SG_importDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

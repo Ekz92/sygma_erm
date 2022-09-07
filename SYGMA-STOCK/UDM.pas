@@ -34,6 +34,17 @@ type
     function selectClients(Psql : string) : TClientArray;
     function SelectVehicule(Psql:string):TVehiculeArray;
     function selectFicheEs_recap(Psql : string):TficheEs_recap;
+    function selectMaxNumrappel():TMaxNumRappel;
+    function selectCodeclt(var vNomClt : string) : TClient;
+    function selectPoints(Psql : string) : TPointVenteArray;
+    function SelectFacturesDetail(Psql:string):TFacturation_detailArray;
+    function selectZoneByPoint(var nom_point :string): TPointVente;
+    function selectZonesByNom_zone(var nom_zone :String) : TZone;
+    function SelectFactures(Psql:string):TFacturationArray;
+    function SelectBl(Psql : string):TBLArray;
+    function SelectCommandeCamion(Psql :string):TCommandeCamionArray;
+    function SelectMaxBc():TMaxBc;
+    function selectBonCommande(Psql : string):TBonComArray;
 
 
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
@@ -49,6 +60,12 @@ type
     function InsertFiche_es(var Fiche_es : TFiche_es):boolean;
     function InsertFicheEsRecap(FicheEsRec : TficheEs_recap):Boolean;
     function InsertFicheEsTotal(FicheEsTotal : TFicheEsTotal):Boolean;
+    function InsertBLs ( var bls : TBLDetail):Boolean;
+    function InsertBL(var bl : TBL):Boolean;
+    function InsertblHis(blhis : Tb_bl_his):Boolean;
+    function InsertBonCom(boncom : TBonCom):Boolean;
+    function InsertBonComDetail(boncomd : TBonCom_detail):Boolean;
+
 
     procedure UpdateTable(var Psql :string);
     procedure Update_moovStock(var mouv : TMouvStock);
@@ -70,6 +87,621 @@ uses UFicheRecap_es;
 
 
 {$R *.dfm}
+function TDM.selectBonCommande(Psql : string):TBonComArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  BC : TBonCom;
+  BCs :TBonComArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_boncom '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(BCs,i+1);
+            with BC do
+              begin
+                Nid_bc:=FieldByName('id_bc').AsInteger;
+                Sdate_bc:=FieldByName('date_bc').AsString;
+                Nnum_bc:=FieldByName('num_bc').AsInteger;
+                Snom_four:=FieldByName('nom_fourn').AsString;
+                SVehicule:=FieldByName('Vehicule').AsString;
+                Rmontant_bc:=FieldByName('montant_bc').AsFloat;
+              end;
+              BCs[i]:=BC;
+              Inc(i);
+              query.Next;
+          end;
+          Result := BCs;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.InsertBonComDetail(boncomd : TBonCom_detail):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with boncomd do
+    begin
+      sql := 'Insert into tb_boncom_detail values(null,'
+                +IntToStr(Nnum_bc)+','
+                +Scode_art+','
+                +Sdesignation_art+','
+                +FloatToStr(Rpu) +','
+                +IntToStr(Nqte) +','
+                +FloatToStr(Rpt)
+                +');' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.InsertBonCom(boncom : TBonCom):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with boncom do
+    begin
+      sql := 'Insert into tb_boncom values(null,'
+                +Sdate_bc+','
+                +IntToStr(Nnum_bc)+','
+                +Scode_four+','
+                +Snom_four+','
+                +FloatToStr(Rmontant_bc) +','
+                +Susager_init  +','
+                +Susager_val+','
+                +SVehicule+','
+                +SnomVehicule+','
+                +IntToStr(Nstatut_bc)
+                +');' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+   //   query.SQL.SaveToFile('g:\ff.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.SelectMaxBc():TMaxBc;
+var
+  sql : string;
+  query : TSQLQuery;
+  bc : TMaxBc;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select max(num_bc) as max_bc from tb_boncom ';
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with bc do
+      begin
+        NnumMax:=query.FieldByName('max_bc').AsInteger;
+      end;
+
+    Result :=bc;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
+end;
+function TDM.SelectCommandeCamion(Psql :string):TCommandeCamionArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  Com : TCommandeCamion;
+  Coms :TCommandeCamionArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_commande_camion '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(Coms,i+1);
+            with Com do
+              begin
+                Nid_comc :=FieldByName('id_comc').AsInteger;
+                Nnum_comc:=FieldByName('num_comc').AsInteger;
+                Sdate_com:=FieldByName('date_com').AsString;
+                Nchargement:=FieldByName('chargement').AsInteger;
+                Spiece:=FieldByName('piece').AsString;
+                Svehicule:=FieldByName('vehicule').AsString;
+                Rmontant:=FieldByName('montant').AsFloat;
+                Rmontant_p:=FieldByName('montant_p').AsFloat;
+                Rmontant_r:=FieldByName('montant_r').AsFloat;
+                Nstatut_cmd :=FieldByName('statut_cmd').AsInteger;
+              end;
+              Coms[i]:=Com;
+              Inc(i);
+              query.Next;
+          end;
+          Result := Coms;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+function TDM.InsertblHis(blhis : Tb_bl_his):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with blhis do
+    begin
+      sql := 'Insert into tb_bl_his values(null,'
+          +IntToStr(Nnum_blhis) +','
+          +QuotedStr(Snum_bl)+ ','
+          +QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm', StrToDateTime(Sdate_blhis)))+','
+          +QuotedStr(Scode_art)+','
+          +QuotedStr(Sdesignation_art)+','
+          +IntToStr(Nqte_his)+');'
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.InsertBL(var bl : TBL):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with bl do
+    begin
+      sql := 'Insert into tb_bl values(null,'
+              +QuotedStr(Snum_bl)+','
+              +IntToStr(Nnum_bl_his)+','
+              +QuotedStr(SCode_clt)+','
+              +QuotedStr(Snom_clt)+','
+              +QuotedStr(SpointVente)+','
+              +QuotedStr(Scode_mag)+','
+              +QuotedStr(SDesignation_mag)+','
+              +FloatToStr(RTotKilo)+','
+              +QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm:ss',StrToDateTime(Sdate_bl))) +','
+              +IntToStr(NTotBlle)+','
+              +FloatToStr(RPrixLiv)+','
+              +QuotedStr(SUsager)+','
+              +IntToStr(Nstatut_bl) +','
+              +IntToStr(NLivPart)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+     // query.SQL.SaveToFile('G:\bl'+inttostr(i)+'.txt');
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.InsertBLs ( var bls : TBLDetail):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with bls do
+    begin
+      sql := 'Insert into tb_bl_detail values(null,'
+              +QuotedStr(Snum_bl)+','
+              +QuotedStr(SCode_clt)+','
+              +QuotedStr(Snom_clt)+','
+              +QuotedStr(Scode_mag)+','
+              +QuotedStr(SDesignation_mag)+','
+              +QuotedStr(Scode_art)+','
+              +QuotedStr(SDesignation_art)+','
+              +FloatToStr(RKilo)+','
+              +IntToStr(NQte_art)+','
+              +IntToStr(NQte_liv)+','
+              +FloatToStr(RKiloTotal)+','
+              +inttostr(NControle) +','
+              +IntToStr(NLivPart)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+       //query.SQL.SaveToFile('G:\Bls'+inttostr(i)+'.txt');
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+
+end;
+
+function TDM.SelectBl(Psql : string):TBLArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  Bl :TBL;
+  Bls :TBLArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_bl '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(Bls,i+1);
+            with Bl do
+              begin
+                Nid_bl:=FieldByName('id_bl').AsInteger;
+                Snum_bl:=FieldByName('num_bl').AsString;
+                Nnum_bl_his:=FieldByName('numbl_his').AsInteger;
+                SCode_clt:=FieldByName('code_clt').AsString;
+                Snom_clt:=FieldByName('nom_clt').AsString;
+                SpointVente:=FieldByName('point_vente').AsString;
+                Scode_mag:=FieldByName('code_mag').AsString;
+                RTotKilo:=FieldByName('total_kilo').AsFloat;
+                Sdate_bl:=FieldByName('date_bl').AsString;
+                NTotBlle:=FieldByName('Total_bouteille').AsInteger;
+                RPrixLiv:=FieldByName('prix_livraison').AsFloat;
+                SUsager:=FieldByName('Usager').AsString;
+                Nstatut_bl:=FieldByName('statut_bl').AsInteger;
+                NLivPart := FieldByName('livpart').AsInteger;
+              end;
+              Bls[i]:=Bl;
+              Inc(i);
+              query.Next;
+          end;
+          Result := Bls;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+function TDM.SelectFactures(Psql:string):TFacturationArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  facture :TFacturation;
+  factures :TFacturationArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_facturation '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(factures,i+1);
+            with facture do
+              begin
+                Sdate_fact:=FieldByName('date_fact').AsString;
+                SNum_fact:=FieldByName('num_fact').AsString;
+                Scode_clt:=FieldByName('code_clt').AsString;
+                Snom_clt:=FieldByName('nom_clt').AsString;
+                NQte_total:=FieldByName('qte_total').AsInteger;
+                Rmnt_t:=FieldByName('mnt_t').AsFloat;
+                Rmnt_p:=FieldByName('mnt_p').AsFloat;
+                Rmnt_r:=FieldByName('mnt_r').AsFloat;
+                Sstatut:=FieldByName('statut').AsString;
+                Stype_fact:=FieldByName('type_fact').AsString;
+                Snum_comc :=FieldByName('num_comc').AsString;
+                Svehicule:=FieldByName('vehicule').AsString;
+                NStatut_canc:=FieldByName('statut_canc').AsInteger;
+                SUsager:=FieldByName('Usager').AsString;
+              end;
+              factures[i]:=facture;
+              Inc(i);
+              query.Next;
+          end;
+          Result := factures;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectZonesByNom_zone(var nom_zone :String) : TZone;
+var
+  sql:string;
+  query : TSQLQuery;
+  zone : TZone;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_zone where nom_zone ='+QuotedStr(nom_zone);
+
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('G:\toto.txt');
+    query.Open;
+
+    with query ,zone do
+        begin
+          Nid_zone := FieldByName('id_zone').AsInteger;
+          Snom_zone := FieldByName('nom_zone').AsString;
+          Rprix_zone :=  FieldByName('prix_zone').AsFloat;
+          SComment := FieldByName('comment_zone').AsString;
+        end;
+       Result := zone;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+function TDM.selectZoneByPoint(var nom_point :string): TPointVente;
+var
+  sql : string;
+  query : TSQLQuery;
+  point : TPointVente;
+begin
+  sql := 'Select * from tb_point_vente where nom_point = '+QuotedStr(nom_point);
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+
+    query.Open;
+    with query, point do
+      begin
+        Nid_pv := FieldByName('id_point').AsInteger;
+        Snom_pint := FieldByName('nom_point').AsString;
+        Snom_zone :=  FieldByName('zone').AsString;
+        Scode_clt := FieldByName('code_client').AsString;
+        Sadresse := FieldByName('adresse').AsString;
+      end;
+      Result := point;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+function TDM.SelectFacturesDetail(Psql:string):TFacturation_detailArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  facture_d :TFacturation_detail;
+  factures_d :TFacturation_detailArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_facturation_detail '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(factures_d,i+1);
+            with facture_d do
+              begin
+                Sdate_fact:=FieldByName('date_fact').AsString;
+                SNum_fact:=FieldByName('num_fact').AsString;
+                Scode_mag:=FieldByName('code_mag').AsString;
+                Sdesignation_mag:=FieldByName('designation_mag').AsString;
+                Scode_clt:=FieldByName('code_clt').AsString;
+                Scode_art:=FieldByName('code_art').AsString;
+                Sdesignation_art:=FieldByName('designation_art').AsString;
+                Snom_clt:=FieldByName('nom_clt').AsString;
+                Nqte_art:=FieldByName('qte_art').AsInteger;
+                RPrixU:=FieldByName('PrixU').AsInteger;
+                RPrixT:=FieldByName('PrixT').AsFloat;
+              end;
+              factures_d[i]:=facture_d;
+              Inc(i);
+              query.Next;
+          end;
+          Result := factures_d;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectPoints(Psql : string) : TPointVenteArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  point : TPointVente;
+  points : TPointVenteArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_point_vente '+ Psql;
+  i:=0;
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\tt.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(points,i+1);
+            with point do
+              begin
+                Nid_pv := FieldByName('id_point').AsInteger;
+                Snom_pint := FieldByName('nom_point').AsString;
+                Snom_zone :=  FieldByName('zone').AsString;
+                Scode_clt := FieldByName('code_client').AsString;
+                Sadresse := FieldByName('adresse').AsString;
+              end;
+            points[i]:=point;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := points;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+function TDM.selectCodeclt(var vNomClt : string) : TClient;
+var
+  sql : string;
+  query : TSQLQuery;
+  client : TClient;
+begin
+  sql := 'Select * from tb_client where nom_clt = '+QuotedStr(vNomClt);
+
+      query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('G:\code.txt');
+    query.Open;
+    with query, client do
+      begin
+        NidClt := FieldByName('id_clt').AsInteger;
+        SCodeClt := FieldByName('code_clt').AsString;
+        SnomClt := FieldByName('nom_clt').AsString;
+        SadresseClt := FieldByName('adresse_clt').AsString;
+        StelClt := FieldByName('tel_clt').AsString;
+        Smail:= FieldByName('email_clt').AsString;
+        ScommentClt:= FieldByName('comment_clt').AsString;
+      end;
+      Result := client;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+function TDM.selectMaxNumrappel():TMaxNumRappel;
+var
+  sql : string;
+  query : TSQLQuery;
+  MaxNumRappel : TMaxNumRappel;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select max(num_blhis) as num_blhis from tb_bl_his';
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with MaxNumRappel do
+      begin
+        Nnumrappel:=query.FieldByName('num_blhis').AsInteger;
+      end;
+
+    Result :=MaxNumRappel;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
+end;
 Function TDM. SelectFicheEs_recap(Psql : string):TficheEs_recap;
 var
   sql : string;

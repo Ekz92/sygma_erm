@@ -2,6 +2,158 @@ unit records;
 
 interface
 type
+TMaxNumRappel = record
+  Nnumrappel : integer;
+end;
+
+TFacturation_detail =record
+  NId_fact : integer;
+  Sdate_fact,
+  Snum_fact ,
+  Scode_mag,
+  Sdesignation_mag,
+  Scode_tarif,
+  Sdesignation_tarif,
+  Scode_clt,
+  Snom_clt,
+  Scode_art,
+  Sdesignation_art: string;
+  Nqte_art : integer;
+  RPrixU,
+  RPrixT :real;
+end;
+TFacturation_detailArray = Array of TFacturation_detail;
+
+TFacturation = record
+  NId_fact: integer;
+  Sdate_fact ,
+  SNum_fact,
+  Scode_clt,
+  Snom_clt : string;
+  NQte_total : integer;
+  Rmnt_t,
+  Rmnt_p,
+  Rmnt_r : real;
+  Sstatut,
+  Stype_fact ,
+  Snum_comc ,
+  Svehicule : string;
+  NStatut_canc : integer;
+  SUsager : String;
+end;
+TFacturationArray = Array of TFacturation;
+
+TCommandeCamion = record
+	Nid_comc : integer ;
+	Nnum_comc :integer;
+	Sdate_com : string;
+	Nchargement : Integer;
+	Spiece ,
+	Svehicule : string;
+	Rmontant,
+  Rmontant_p,
+  Rmontant_r : real;
+  Nstatut_cmd : integer;
+end;
+TCommandeCamionArray = array of TCommandeCamion;
+
+TMaxBc = record
+  NnumMax : integer;
+end;
+
+TArticle = record
+  Nid_art : integer;
+  Scode_art,
+  Sdesignation_art,
+  Salias_art,
+  Salias_ret,
+  Stype_art : String;
+  Rkilo : real;
+  Scode_mag : string;
+end;
+TarticleArray = array of TArticle;
+
+
+TBLDetail = record
+  Nid_bl : integer;
+  Snum_bl,
+  SCode_clt,
+  Snom_clt,
+  Scode_mag,
+  SDesignation_mag,
+  Scode_art,
+  SDesignation_art : string;
+  RKilo : Real;
+  NQte_art,
+  NQte_liv : integer;
+  RKiloTotal : real;
+  NControle,
+  NLivPart : integer;
+end;
+TBLDetailArray = Array of TBLDetail;
+
+Tb_bl_his= record
+  Nid_bhis ,
+  Nnum_blhis : integer;
+  Snum_bl ,
+  Sdate_blhis ,
+  Scode_art ,
+  Sdesignation_art : string;
+  Nqte_his : Integer;
+end;
+Tb_bl_hisArray = array of Tb_bl_his;
+
+
+TBL = record
+  Nid_bl : integer;
+  Snum_bl : string;
+  Nnum_bl_his : integer ;
+  SCode_clt,
+  Snom_clt,
+  SpointVente,
+  Scode_mag,
+  SDesignation_mag : string;
+  RTotKilo : real;
+  Sdate_bl : String;
+  NTotBlle :integer;
+  RPrixLiv : real;
+  SUsager :String;
+  Nstatut_bl,
+  NLivPart:integer;
+end;
+TBLArray = Array of TBL;
+
+
+
+TImport= record
+  Nnum_import : integer;
+  Snom_client,
+  Ddate,
+  Hheure,
+  Snum_bl,
+  Scode_art,
+  Sdesignation_art,
+  Nqte : String;
+end;
+TImportArray = array of TImport;
+
+TPointVente = record
+  Nid_pv : integer;
+  Snom_pint,
+  Snom_zone,
+  Scode_clt,
+  Sadresse : string
+end;
+TPointVenteArray =Array of TPointVente;
+
+TZone = record
+  Nid_zone :integer;
+  Snom_zone  : String;
+  Rprix_zone : Real;
+  SComment : String;
+end;
+TZoneArray = Array of TZone;
+
 
 TficheEs_recap = record
 	Nid_fes ,
@@ -202,17 +354,32 @@ TMagasin =record
 end;
 TMagasinArray = Array of TMagasin;
 
-TArticle = record
-  Nid_art : integer;
-  Scode_art,
-  Sdesignation_art,
-  Salias_art,
-  Salias_ret,
-  Stype_art : String;
-  Rkilo : real;
-  Scode_mag : string;
+TBonCom = record
+  Nid_bc :integer;
+  Sdate_bc : string;
+  Nnum_bc :Integer;
+  Scode_four,
+  Snom_four: String;
+  Rmontant_bc : real;
+  Susager_init ,
+  Susager_val,
+  SVehicule,
+  SnomVehicule: string;
+  Nstatut_bc : integer;
 end;
-TarticleArray = array of TArticle;
+TBonComArray = array of TBonCom;
+
+TBonCom_detail = record
+  Nid_bc : integer;
+  Nnum_bc :integer;
+  Scode_art ,
+  Sdesignation_art :string;
+  Rpu : real;
+  Nqte : integer;
+  Rpt : real;
+end;
+TBonCom_detailArray = array of TBonCom_detail;
+
 
 TStock = record
   Nid_stock :integer;

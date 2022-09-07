@@ -1,0 +1,30 @@
+unit URechArt_bc;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmRechArt_bc = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode_art: TEdit;
+    edDesignation: TEdit;
+    St_Art: TStringGrid;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechArt_bc: TfrmRechArt_bc;
+
+implementation
+
+{$R *.dfm}
+
+end.

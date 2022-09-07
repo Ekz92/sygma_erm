@@ -57458,9 +57458,11 @@ object frmIntegrateur: TfrmIntegrateur
       Caption = 'Bon de Com. (BC)'
       object CrerunBC1: TMenuItem
         Caption = 'Cr'#233'er un BC'
+        OnClick = CrerunBC1Click
       end
       object ListedeBC1: TMenuItem
         Caption = 'Liste de BC'
+        OnClick = ListedeBC1Click
       end
     end
     object Banque1: TMenuItem
@@ -57476,6 +57478,23 @@ object frmIntegrateur: TfrmIntegrateur
       Caption = 'Admin'
       object Sauvegarde1: TMenuItem
         Caption = 'Sauvegarde de DB'
+      end
+    end
+    object BondeLivBL1: TMenuItem
+      Caption = 'Bon de Liv(BL)'
+      object CrerunBL1: TMenuItem
+        Caption = 'Cr'#233'er un BL'
+        OnClick = CrerunBL1Click
+      end
+      object RappeldeBL1: TMenuItem
+        Caption = 'Rappel de BL'
+      end
+      object ListedeBL1: TMenuItem
+        Caption = 'Liste de BL'
+        object LivrsNonlivrs1: TMenuItem
+          Caption = 'Livr'#233's/Non livr'#233's'
+          OnClick = LivrsNonlivrs1Click
+        end
       end
     end
   end

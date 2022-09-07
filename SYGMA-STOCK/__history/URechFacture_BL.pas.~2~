@@ -1,0 +1,43 @@
+unit URechFacture_BL;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmRechFActureBL = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edRechFact: TEdit;
+    St_facture: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRechFActureBL: TfrmRechFActureBL;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRechFActureBL.FormCreate(Sender: TObject);
+begin
+with St_facture do
+  begin
+    Cells[0,0]:='N° Fact';
+    Cells[1,0]:='Client';
+    Cells[2,0]:='Nom';
+    Cells[3,0]:='Date';
+    Cells[4,0]:='Statut';
+    Cells[5,0]:='N° His';
+  end;
+
+end;
+
+end.

@@ -67,6 +67,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure edqteKeyPress(Sender: TObject; var Key: Char);
+    procedure Supprimer1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -643,6 +644,37 @@ begin
       {Design du texte}
       TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
     end;
+
+end;
+
+procedure TfrmSaisieFacture.Supprimer1Click(Sender: TObject);
+var
+  k,i:integer;
+begin
+with st_saisie do
+  begin
+    k:=Row;
+
+    for I := k to RowCount do
+      begin
+        Rows[i]:=Rows[i+1];
+      end;
+
+      //***********
+
+      RowCount:=RowCount-1;
+  end;
+
+  vMnt_t := 0;
+  vQteTotal:=0;
+
+  for I := 1 to st_saisie.RowCount-1 do
+    begin
+      vMnt_t := vMnt_t + StrToFloat(st_saisie.Cells[4,i]);
+      vQteTotal := vQteTotal + StrToInt(st_saisie.Cells[2,i]);
+    end;
+    lbMontant.Caption:=FloatToStrF(vMnt_t,ffNumber,15,2);
+
 
 end;
 
