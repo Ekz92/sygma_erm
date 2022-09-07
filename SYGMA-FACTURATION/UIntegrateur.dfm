@@ -359,9 +359,6 @@ object frmIntegrateur: TfrmIntegrateur
         object Chauffeur1: TMenuItem
           Caption = 'Chauffeur'
         end
-        object ypeservice1: TMenuItem
-          Caption = 'Type service'
-        end
       end
       object Fichedemission2: TMenuItem
         Caption = 'Fiche de mission'
@@ -531,6 +528,10 @@ object frmIntegrateur: TfrmIntegrateur
       end
       object Bnficesurvente1: TMenuItem
         Caption = 'B'#233'n'#233'fice sur vente'
+      end
+      object ypeservice1: TMenuItem
+        Caption = 'Type service'
+        OnClick = ypeservice1Click
       end
     end
     object Banque1: TMenuItem

@@ -3,6 +3,11 @@ unit records;
 interface
 
 type
+TDateSys = record
+  Nid_cd : integer;
+  Sdate_cd : string;
+end;
+
 TCommandeCamion = record
 	Nid_comc : integer ;
 	Nnum_comc :integer;

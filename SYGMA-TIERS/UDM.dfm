@@ -2,6 +2,20 @@ object DM: TDM
   OldCreateOrder = False
   Height = 172
   Width = 283
+  object frxDBParam: TfrxDBDataset
+    UserName = 'frxDBParam'
+    CloseDataSource = False
+    DataSet = TParam
+    BCDToCurrency = False
+    Left = 171
+    Top = 20
+  end
+  object TParam: TSQLTable
+    MaxBlobSize = 1
+    TableName = 'tb_parametre'
+    Left = 163
+    Top = 88
+  end
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
     LoginPrompt = False
@@ -27,34 +41,19 @@ object DM: TDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=127.0.0.1'
+      'HostName=192.168.1.117'
       'Database=gpa_db'
-      'User_Name=root'
-      'Password='
+      'User_Name=kernel'
+      'Password=kernel'
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'
       'Encrypted=False'
       'BlobSize=-1'
-      'ErrorResourceFile=')
+      'ErrorResourceFile='
+      '=')
     Connected = True
     Left = 64
     Top = 32
-  end
-  object frxDBParam: TfrxDBDataset
-    UserName = 'frxDBParam'
-    CloseDataSource = False
-    DataSet = TParam
-    BCDToCurrency = False
-    Left = 171
-    Top = 20
-  end
-  object TParam: TSQLTable
-    Active = True
-    MaxBlobSize = 1
-    SQLConnection = SQLConnection1
-    TableName = 'tb_parametre'
-    Left = 163
-    Top = 88
   end
 end

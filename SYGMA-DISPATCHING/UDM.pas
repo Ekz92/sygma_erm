@@ -8,9 +8,9 @@ uses
 
 type
   TDM = class(TDataModule)
-    SQLConnection1: TSQLConnection;
     frxDBParam: TfrxDBDataset;
     TParam: TSQLTable;
+    SQLConnection1: TSQLConnection;
   private
     { Déclarations privées }
   public
@@ -36,6 +36,7 @@ type
     function SelectMaxComCam():TMaxCommandeCam;
     function SelectCommandeCamion(Psql :string):TCommandeCamionArray;
     function SelectFactures(Psql:string):TFacturationArray;
+    function selectCatDate():TDateSys;
 
 
     function InsertVteChargVeh(vteChargVeh : TvteChargVeh):Boolean;
@@ -66,6 +67,37 @@ uses UEtatLivraison;
 
 
 {$R *.dfm}
+function TDM.selectCatDate():TDateSys;
+var
+  query : TSQLQuery;
+  sql : string;
+  Ds : TDateSys;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_catalogue_date ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        Ds.Sdate_cd:=FieldByName('date_cd').AsString;
+      end;
+
+    Result := Ds;
+  finally
+    query.Free;
+    dm.SQLConnection1.Close;
+  end;
+end;
+
 function TDM.SelectFactures(Psql:string):TFacturationArray;
 var
   query : TSQLQuery;

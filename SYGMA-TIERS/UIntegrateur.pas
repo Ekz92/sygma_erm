@@ -24,7 +24,6 @@ type
     Vhicule1: TMenuItem;
     ypevhicule1: TMenuItem;
     Chauffeur1: TMenuItem;
-    ypeservice1: TMenuItem;
     Fichedemission2: TMenuItem;
     Missionordinaire2: TMenuItem;
     Missionspciale2: TMenuItem;

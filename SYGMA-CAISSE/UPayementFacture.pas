@@ -751,8 +751,8 @@ begin
 //******************************* Affichage dans la grid
   Psql := ' where statut_canc = 0'
 //          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(dat))+' 00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(dat))+' 23:59:59')
-          +' and usager = '+QuotedStr(vUsager)
+//          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(dat))+' 23:59:59')
+//          +' and usager = '+QuotedStr(vUsager)
           +' Order by id_fact desc '   ;
   factures := DM.SelectFactures(Psql);
 

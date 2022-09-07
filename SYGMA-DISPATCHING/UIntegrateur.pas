@@ -189,6 +189,7 @@ type
     procedure Retourbouteilles1Click(Sender: TObject);
     procedure Dclarer1Click(Sender: TObject);
     procedure Liste4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -205,7 +206,7 @@ implementation
 uses UChargement_veh, UListe_chargement, UvteChargVeh, UStockcamion,
   UListeChargCamion, UListeChargementCamion, UListeLotLivraison,
   UCumulQteChargeCam, UEtatLivraison, UDiagrammeChargement, URetourBouteille,
-  UAddCommandeCamion, UListeCommandeCamion;
+  UAddCommandeCamion, UListeCommandeCamion, records, UDM;
 
 procedure TfrmIntegrateur.Consultationdechargement1Click(Sender: TObject);
 begin
@@ -235,6 +236,40 @@ end;
 procedure TfrmIntegrateur.Etat2Click(Sender: TObject);
 begin
 frmEtatLivraison.ShowModal;
+end;
+
+procedure TfrmIntegrateur.FormShow(Sender: TObject);
+var
+  dd : TDateSys ;
+begin
+//ShowMessage(IntToStr(Screen.Width));
+//ShowMessage(IntToStr(frmIntegrateur.Width));
+  dd := dm.selectCatDate;
+
+  lbdate.Caption := dd.Sdate_cd;
+ if lbdate.Caption <> DateToStr(now) then
+    begin
+      MessageDlg('Erreur, Merci de vérifier si vous aviez clôturer la journée d''hier',mtError,[mbOK],0);
+      with frmIntegrateur do
+        begin
+          Fichier1.Enabled:=false;
+          Facturation1.Enabled:=false;
+          Caisse1.Enabled:=false;
+          Magasin2.Enabled:=false;
+          BL2.Enabled:=False;
+          Saisie1.Enabled:=False;
+          Chargement2.Enabled:=False;
+        end;
+    end else
+    begin
+          Fichier1.Enabled:=True;
+          Facturation1.Enabled:=True;
+          Caisse1.Enabled:=True;
+          Magasin2.Enabled:=True;
+          BL2.Enabled:=True;
+          Saisie1.Enabled:=True;
+          Chargement2.Enabled:=True;
+    end;
 end;
 
 procedure TfrmIntegrateur.Liste4Click(Sender: TObject);

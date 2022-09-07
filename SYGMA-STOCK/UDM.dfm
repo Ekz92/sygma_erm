@@ -27,16 +27,18 @@ object DM: TDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=127.0.0.1'
+      'HostName=192.168.1.117'
       'Database=gpa_db'
-      'User_Name=root'
-      'Password='
+      'User_Name=kernel'
+      'Password=kernel'
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'
       'Encrypted=False'
       'BlobSize=-1'
-      'ErrorResourceFile=')
+      'ErrorResourceFile='
+      '=')
+    Connected = True
     Left = 64
     Top = 32
   end

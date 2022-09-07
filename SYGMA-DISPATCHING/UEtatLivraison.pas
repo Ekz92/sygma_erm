@@ -27,8 +27,11 @@ type
     frxEtatLivraison: TfrxReport;
     frxDBRapport: TfrxDBDataset;
     QRapport: TSQLQuery;
+    Qsum: TSQLQuery;
+    frxDBsum: TfrxDBDataset;
     QRapportid_cc: TIntegerField;
     QRapportdate_charg: TDateField;
+    QRapportlettrage: TStringField;
     QRapportnum_charg: TIntegerField;
     QRapportcode_livreur: TStringField;
     QRapportnom_livreur: TStringField;
@@ -61,10 +64,9 @@ type
     QRapportprix_zone: TFloatField;
     QRapportprix_liv: TFloatField;
     QRapportusager: TStringField;
-    QRapportlettrage: TStringField;
     QRapportid_veh: TIntegerField;
     QRapportMarque_veh: TStringField;
-    QRapportModele_veh: TStringField;
+    QRapportcode_clt_1: TStringField;
     QRapportNum_Immat_veh: TStringField;
     QRapportCouleur_veh: TStringField;
     QRapportCompteur_veh: TIntegerField;
@@ -72,8 +74,6 @@ type
     QRapportKilo_max: TIntegerField;
     QRapportdate_mise_sce: TDateField;
     QRapportdispo_parc: TIntegerField;
-    Qsum: TSQLQuery;
-    frxDBsum: TfrxDBDataset;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);

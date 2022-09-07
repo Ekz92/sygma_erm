@@ -24,7 +24,6 @@ object frmListeEntree: TfrmListeEntree
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 661
     object Label2: TLabel
       Left = 23
       Top = 30
@@ -70,9 +69,6 @@ object frmListeEntree: TfrmListeEntree
       Caption = 'Voir'
       TabOrder = 2
       OnClick = Button1Click
-      ExplicitLeft = 344
-      ExplicitTop = 5
-      ExplicitHeight = 21
     end
   end
   object Panel2: TPanel
@@ -83,8 +79,6 @@ object frmListeEntree: TfrmListeEntree
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 374
-    ExplicitWidth = 661
     object Button2: TButton
       Left = 615
       Top = 0
@@ -94,7 +88,6 @@ object frmListeEntree: TfrmListeEntree
       Caption = 'G'#233'n'#233'rer'
       TabOrder = 0
       OnClick = Button2Click
-      ExplicitLeft = 664
     end
   end
   object StringGrid1: TStringGrid
@@ -113,10 +106,6 @@ object frmListeEntree: TfrmListeEntree
     TabOrder = 2
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitLeft = -28
-    ExplicitTop = 36
-    ExplicitWidth = 689
-    ExplicitHeight = 288
     ColWidths = (
       55
       98

@@ -2288,7 +2288,6 @@
     Top = 8
   end
   object QRapport: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -2303,6 +2302,10 @@
     end
     object QRapportdate_charg: TDateField
       FieldName = 'date_charg'
+    end
+    object QRapportlettrage: TStringField
+      FieldName = 'lettrage'
+      Size = 12
     end
     object QRapportnum_charg: TIntegerField
       FieldName = 'num_charg'
@@ -2427,10 +2430,6 @@
       FieldName = 'usager'
       Size = 4
     end
-    object QRapportlettrage: TStringField
-      FieldName = 'lettrage'
-      Size = 12
-    end
     object QRapportid_veh: TIntegerField
       FieldName = 'id_veh'
       Required = True
@@ -2440,10 +2439,9 @@
       Required = True
       Size = 100
     end
-    object QRapportModele_veh: TStringField
-      FieldName = 'Modele_veh'
-      Required = True
-      Size = 100
+    object QRapportcode_clt_1: TStringField
+      FieldName = 'code_clt_1'
+      Size = 12
     end
     object QRapportNum_Immat_veh: TStringField
       FieldName = 'Num_Immat_veh'
@@ -2478,7 +2476,6 @@
     end
   end
   object Qsum: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

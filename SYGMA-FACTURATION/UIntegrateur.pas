@@ -72,6 +72,7 @@ type
     procedure Facturer1Click(Sender: TObject);
     procedure Prixvente1Click(Sender: TObject);
     procedure ypeClient1Click(Sender: TObject);
+    procedure ypeservice1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -87,7 +88,7 @@ implementation
 
 uses UDM, records, USaisieFacture, USaisieFactureService, UListeParamPrix,
   UListeFacture, UListeFactureAnnulee, UListeFactureCommande,
-  UParametreNumFacture, UParametrage_prix_clt, Uadd_type_client;
+  UParametreNumFacture, UParametrage_prix_clt, Uadd_type_client, UTypeService;
 
 procedure TfrmIntegrateur.Factureannule1Click(Sender: TObject);
 begin
@@ -168,6 +169,11 @@ procedure TfrmIntegrateur.ypeClient1Click(Sender: TObject);
 begin
 frmAddTarif.ShowModal;
 
+end;
+
+procedure TfrmIntegrateur.ypeservice1Click(Sender: TObject);
+begin
+frmtypeService.ShowModal;
 end;
 
 end.

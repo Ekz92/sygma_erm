@@ -8,9 +8,9 @@ uses
 
 type
   TDM = class(TDataModule)
-    SQLConnection1: TSQLConnection;
     frxDBParam: TfrxDBDataset;
     TParam: TSQLTable;
+    SQLConnection1: TSQLConnection;
   private
     { Déclarations privées }
   public
@@ -49,6 +49,7 @@ type
     function InsertParametreNumFacture(unParam : TParametreNumFacture):Boolean;
     function InsertParametragePrixClt(unParam : TTarif_defPrix):Boolean;
     function InsertTarif(var unTarif : TTarif): Boolean;
+    function InsertTypeService(TypeService : TTypeService):Boolean;
 
     Procedure UpdateStock(var stock : TStock);
     Procedure UpdateStockCamion(stockCam : TStockCamion);
@@ -69,6 +70,31 @@ implementation
 
 {$R *.dfm}
 
+function TDM.InsertTypeService(TypeService : TTypeService):Boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with TypeService do
+    begin
+      sql := 'Insert into tb_type_service values(null,'
+                +QuotedStr(Scode_ts)+','
+                +QuotedStr(Sdesign_ts)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
 
 function TDM.InsertTarif(var unTarif : TTarif): Boolean;
 var

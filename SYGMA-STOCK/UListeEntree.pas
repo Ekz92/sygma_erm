@@ -81,6 +81,7 @@ begin
 
   finally
     Query.Free;
+    dm.SQLConnection1.Close;
   end;
 end;
 

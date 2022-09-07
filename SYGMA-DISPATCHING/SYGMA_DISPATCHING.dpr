@@ -37,12 +37,12 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tfrmconnexion, frmconnexion);
   Application.CreateForm(TfrmIntegrateur, frmIntegrateur);
   Application.CreateForm(TfrmChargement_veh, frmChargement_veh);
   Application.CreateForm(Tfrmchargement_Rech_veh, frmchargement_Rech_veh);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmChargement_rech_bl, frmChargement_rech_bl);
-  Application.CreateForm(Tfrmconnexion, frmconnexion);
   Application.CreateForm(TfrmListe_chargement, frmListe_chargement);
   Application.CreateForm(TfrmvteChargVeh, frmvteChargVeh);
   Application.CreateForm(TfrmRechLivreurChargement, frmRechLivreurChargement);
