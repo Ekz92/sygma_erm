@@ -38,6 +38,7 @@ object frmRechClientFacture: TfrmRechClientFacture
       Height = 21
       ParentColor = True
       TabOrder = 0
+      OnChange = edrech_nomChange
     end
   end
   object St_Rech: TStringGrid
@@ -62,10 +63,6 @@ object frmRechClientFacture: TfrmRechClientFacture
     StyleElements = [seBorder]
     OnDblClick = St_RechDblClick
     OnDrawCell = St_RechDrawCell
-    ExplicitLeft = 3
-    ExplicitTop = 40
-    ExplicitWidth = 366
-    ExplicitHeight = 121
     ColWidths = (
       113
       246)

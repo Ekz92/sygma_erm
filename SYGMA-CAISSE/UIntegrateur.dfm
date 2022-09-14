@@ -2,7 +2,7 @@ object frmIntegrateur: TfrmIntegrateur
   Left = 0
   Top = 0
   Align = alClient
-  Caption = 'Int'#233'grateur'
+  Caption = 'SYGMA CAISSE'
   ClientHeight = 708
   ClientWidth = 1309
   Color = clBtnFace

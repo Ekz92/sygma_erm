@@ -187,7 +187,7 @@ if RgType.ItemIndex = 1 then {Traitement pour les bouteilles chargées}
 
       Qte_vide := stock.NQte_vide ; // - StrToInt(edQte.Text);
       Qte_mag := stock.NQte_mag - StrToInt(edQte.Text);
-      Qte_fin := Qte_ini+StrToInt(edQte.Text);
+//      Qte_fin := Qte_ini+StrToInt(edQte.Text);
 
     //-------------------------- Insertion dans la table des entrée----------
       with sortie do

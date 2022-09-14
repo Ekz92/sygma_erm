@@ -1,0 +1,121 @@
+unit URappelBl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.Menus, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRappelBL = class(TForm)
+    Label31: TLabel;
+    lbcodeClt: TLabel;
+    Label21: TLabel;
+    Label30: TLabel;
+    lbTotBlle: TLabel;
+    Label27: TLabel;
+    lbPrixLiv: TLabel;
+    Label24: TLabel;
+    lbTotKg: TLabel;
+    Label22: TLabel;
+    lbTot_ligne: TLabel;
+    Label1: TLabel;
+    Label20: TLabel;
+    Sg_rappel_Bl: TStringGrid;
+    ednomClient: TEdit;
+    edcodeClt: TEdit;
+    GroupBox2: TGroupBox;
+    Label19: TLabel;
+    ednumFacture: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edprix: TEdit;
+    EdPointVente: TEdit;
+    edzone: TEdit;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    frxBL: TfrxReport;
+    frxDBBL: TfrxDBDataset;
+    QBL: TSQLQuery;
+    procedure ednumFactureDblClick(Sender: TObject);
+    procedure ednumFactureExit(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Sg_rappel_BlDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRappelBL: TfrmRappelBL;
+    Sg_rappelBl_row :integer;
+  vNumHis :Integer;
+
+  vDesignation_mag,
+  vCode_mag : string;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM, URechBLRappel;
+
+procedure TfrmRappelBL.ednumFactureDblClick(Sender: TObject);
+begin
+frmRechBLRappel.ShowModal;
+end;
+
+procedure TfrmRappelBL.ednumFactureExit(Sender: TObject);
+var
+  numhis : TMaxNumRappel;
+begin
+  numhis := DM.selectMaxNumrappel;
+  vNumHis := numhis.Nnumrappel + 1 ;
+end;
+
+procedure TfrmRappelBL.FormCreate(Sender: TObject);
+begin
+  with Sg_rappel_Bl do
+    begin
+      Cells[0,0]:='Date';
+      Cells[1,0]:='N° BL';
+      Cells[2,0]:='Code Art';
+      Cells[3,0]:='Designation';
+      Cells[4,0] := 'Qte Res';
+      Cells[5,0] := 'Qte Liv';
+    end;
+
+end;
+
+procedure TfrmRappelBL.Sg_rappel_BlDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+end;
+
+end.

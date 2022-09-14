@@ -222,6 +222,18 @@
             <Form>frmListeBonCommande</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="URappelBl.pas">
+            <Form>frmRappelBL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="URechBLRappel.pas">
+            <Form>frmRechBLRappel</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UQteLivre2.pas">
+            <Form>frmQteLivre2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

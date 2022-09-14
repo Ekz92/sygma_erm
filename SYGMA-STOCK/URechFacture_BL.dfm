@@ -24,7 +24,6 @@ object frmRechFActureBL: TfrmRechFActureBL
     Align = alTop
     Caption = 'Recherche de facture'
     TabOrder = 0
-    ExplicitWidth = 445
     object Label1: TLabel
       Left = 16
       Top = 23
@@ -63,8 +62,6 @@ object frmRechFActureBL: TfrmRechFActureBL
     StyleElements = [seBorder]
     OnDblClick = St_factureDblClick
     OnDrawCell = St_factureDrawCell
-    ExplicitWidth = 445
-    ExplicitHeight = 137
     ColWidths = (
       74
       79

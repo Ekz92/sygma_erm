@@ -1,0 +1,205 @@
+unit URappelBl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.Menus, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRappelBL = class(TForm)
+    Label31: TLabel;
+    lbcodeClt: TLabel;
+    Label21: TLabel;
+    Label30: TLabel;
+    lbTotBlle: TLabel;
+    Label27: TLabel;
+    lbPrixLiv: TLabel;
+    Label24: TLabel;
+    lbTotKg: TLabel;
+    Label22: TLabel;
+    lbTot_ligne: TLabel;
+    Label1: TLabel;
+    Label20: TLabel;
+    Sg_rappel_Bl: TStringGrid;
+    ednomClient: TEdit;
+    edcodeClt: TEdit;
+    GroupBox2: TGroupBox;
+    Label19: TLabel;
+    ednumFacture: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edprix: TEdit;
+    EdPointVente: TEdit;
+    edzone: TEdit;
+    PopupMenu1: TPopupMenu;
+    Modifier1: TMenuItem;
+    frxBL: TfrxReport;
+    frxDBBL: TfrxDBDataset;
+    QBL: TSQLQuery;
+    procedure ednumFactureDblClick(Sender: TObject);
+    procedure ednumFactureExit(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Sg_rappel_BlDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Modifier1Click(Sender: TObject);
+    procedure ednomClientExit(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRappelBL: TfrmRappelBL;
+    Sg_rappelBl_row :integer;
+  vNumHis :Integer;
+
+  vDesignation_mag,
+  vCode_mag : string;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM, URechBLRappel, UQteLivre2;
+
+procedure TfrmRappelBL.ednomClientExit(Sender: TObject);
+var
+  bls : TBLDetailArray;
+  Import : TImport;
+  Article : TArticle;
+  i,rowcount,nbBlle,Pnum_import : integer;
+  Pnom_clt ,
+  code_art,
+  Psql: string;
+  kilo,Tkilo : real;
+  //*****
+  vClient,
+  code_clt : string;
+  clt : TClient;
+  //*****
+  points : TPointVenteArray;
+begin
+  nbBlle:=0;
+
+  //traitement du code client
+  vClient := Trim(ednomClient.Text);
+
+  clt:=DM.selectCodeclt(vClient);
+  code_clt:= clt.SCodeClt;
+  edcodeClt.Text := clt.SCodeClt;
+
+
+//affichage dans la grille de données
+  Psql := ' where num_bl = '+QuotedStr(ednumFacture.Text)
+          +' and livpart = 1 ' ;
+
+  bls := DM.SelectBlDetails(Psql);
+
+  Pnom_clt := Trim(ednomClient.text);
+
+  Tkilo:=0;
+
+  { nombre de ligne dans la grille}
+  if Length(bls) = 0 then
+    rowcount := 2
+  else
+    rowcount := Length(bls)+1;
+
+  lbTot_ligne.Caption := IntToStr(Length(bls)) ;
+  Sg_rappel_Bl.RowCount := rowcount;
+
+  for I := Low(bls) to High(bls) do
+    with Sg_rappel_Bl do
+      begin
+        Cells[0,i+1]:= edcodeClt.Text;
+        Cells[1,i+1]:= bls[i].Snum_bl;
+        Cells[2,i+1]:= bls[i].Scode_art;
+        Cells[3,i+1]:= bls[i].Sdesignation_art;
+        Cells[4,i+1]:= IntToStr(bls[i].Nqte_art - bls[i].NQte_liv);
+        Cells[5,i+1]:= Cells[4,i+1];//IntToStr(bls[i].NQte_liv);
+
+        vCode_mag := bls[i].Scode_mag;
+        vDesignation_mag := bls[i].Sdesignation_mag;
+
+        nbBlle := nbBlle+StrToInt(Cells[5,i+1]) ;
+        code_art:= Cells[2,i+1];
+
+        article  := DM.selectArticleByCode(code_art) ;
+
+        kilo := (Article.Rkilo)*(StrToInt(Cells[5,i+1]));
+        //ShowMessage(floatToStr(kilo));
+        Tkilo := Tkilo + kilo;
+      end;
+      lbTotBlle.Caption:=IntToStr(nbBlle);
+      lbTotKg.Caption := FloatToStr(Tkilo);
+
+end;
+
+procedure TfrmRappelBL.ednumFactureDblClick(Sender: TObject);
+begin
+frmRechBLRappel.ShowModal;
+end;
+
+procedure TfrmRappelBL.ednumFactureExit(Sender: TObject);
+var
+  numhis : TMaxNumRappel;
+begin
+  numhis := DM.selectMaxNumrappel;
+  vNumHis := numhis.Nnumrappel + 1 ;
+end;
+
+procedure TfrmRappelBL.FormCreate(Sender: TObject);
+begin
+  with Sg_rappel_Bl do
+    begin
+      Cells[0,0]:='Date';
+      Cells[1,0]:='N° BL';
+      Cells[2,0]:='Code Art';
+      Cells[3,0]:='Designation';
+      Cells[4,0] := 'Qte Res';
+      Cells[5,0] := 'Qte Liv';
+    end;
+
+end;
+
+procedure TfrmRappelBL.Modifier1Click(Sender: TObject);
+begin
+
+  Sg_rappelBl_row := Sg_rappel_Bl.Row;
+  frmQteLivre2.ShowModal;
+
+
+end;
+
+procedure TfrmRappelBL.Sg_rappel_BlDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+end;
+
+end.

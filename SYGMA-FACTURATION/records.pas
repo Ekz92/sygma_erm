@@ -8,6 +8,15 @@ TDateSys = record
   Sdate_cd : string;
 end;
 
+TCumuleVenteBL = record
+  Scode_art,
+  Sdesignation_art : string;
+  Nqte : integer;
+  Rpt : Real;
+end;
+TCumuleVenteBLArray = array of TCumuleVenteBL ;
+
+
 TClient = record
   NidClt : integer;
   SCodeClt,

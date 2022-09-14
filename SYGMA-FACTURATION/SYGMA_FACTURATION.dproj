@@ -178,6 +178,14 @@
             <Form>frmtypeService</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="URapportParClient.pas">
+            <Form>frmRapportParClient</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UCumuleVenteBl.pas">
+            <Form>frmCumuleVenteBL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

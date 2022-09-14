@@ -1,0 +1,96 @@
+unit URapportParClient;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmRapportParClient = class(TForm)
+    Label5: TLabel;
+    Label6: TLabel;
+    GroupBox1: TGroupBox;
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cbTout: TCheckBox;
+    edDesign_mag: TEdit;
+    cbcode_mag: TComboBox;
+    GroupBox2: TGroupBox;
+    Bevel2: TBevel;
+    Label3: TLabel;
+    Label4: TLabel;
+    cbnomclient: TComboBox;
+    edcode_client: TEdit;
+    Button1: TButton;
+    GroupBox3: TGroupBox;
+    Label8: TLabel;
+    Label9: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    QRapport: TSQLQuery;
+    Rapport: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    QHeader: TSQLQuery;
+    frxDBDataset2: TfrxDBDataset;
+    procedure FormShow(Sender: TObject);
+    procedure cbcode_magCloseUp(Sender: TObject);
+    procedure cbcode_magChange(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRapportParClient: TfrmRapportParClient;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRapportParClient.cbcode_magChange(Sender: TObject);
+begin
+edDesign_mag.Clear;
+
+end;
+
+procedure TfrmRapportParClient.cbcode_magCloseUp(Sender: TObject);
+  var
+    magasin : TMagasin;
+    code_mag : String;
+begin
+   code_mag := cbcode_mag.Text;
+   magasin := dm.selectMagasinByCode(code_mag);
+   edDesign_mag.Text := magasin.Sdesignation_mag;
+end;
+
+procedure TfrmRapportParClient.FormShow(Sender: TObject);
+var
+  clients : TClientArray;
+  Psql,mPsql : string;
+  magasin : TMagasinArray;
+  I,j: Integer;
+begin
+d2.Date := Now;
+  Psql := '';
+  mPsql := '';
+//************ Selection de client***********
+  clients := DM.selectClients(Psql);
+  for I := Low(clients) to High(clients) do
+    begin
+      cbnomclient.Items.Add(clients[i].SnomClt);
+    end;
+//************Selection de magasin************
+   magasin := dm.selectMagasins(mPsql);
+  for j := Low(magasin) to High(magasin) do
+    begin
+      cbcode_mag.Items.Add(magasin[j].SCode_mag);
+    end;
+end;
+
+end.

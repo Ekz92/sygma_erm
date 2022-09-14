@@ -2,7 +2,7 @@ object frmListeAvance: TfrmListeAvance
   Left = 0
   Top = 0
   Caption = 'Avances re'#231'us'
-  ClientHeight = 342
+  ClientHeight = 317
   ClientWidth = 520
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +24,6 @@ object frmListeAvance: TfrmListeAvance
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
-    ExplicitWidth = 519
     object Label1: TLabel
       Left = 4
       Top = 17
@@ -102,7 +101,7 @@ object frmListeAvance: TfrmListeAvance
     Left = 0
     Top = 62
     Width = 520
-    Height = 251
+    Height = 226
     Align = alClient
     DefaultRowHeight = 15
     FixedCols = 0
@@ -113,8 +112,7 @@ object frmListeAvance: TfrmListeAvance
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 519
-    ExplicitHeight = 237
+    ExplicitHeight = 251
     ColWidths = (
       75
       68
@@ -124,14 +122,13 @@ object frmListeAvance: TfrmListeAvance
   end
   object Panel1: TPanel
     Left = 0
-    Top = 313
+    Top = 288
     Width = 520
     Height = 29
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 299
-    ExplicitWidth = 519
+    ExplicitTop = 313
     object Button1: TButton
       Left = 444
       Top = 3
@@ -146,9 +143,11 @@ object frmListeAvance: TfrmListeAvance
     Top = 152
     object Consulterlesolde1: TMenuItem
       Caption = 'Consulter du compte'
+      OnClick = Consulterlesolde1Click
     end
     object Annuleruneavance1: TMenuItem
       Caption = 'Annuler l'#39'avance'
+      OnClick = Annuleruneavance1Click
     end
   end
 end

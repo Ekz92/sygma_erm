@@ -37,6 +37,8 @@ type
     function SelectCommandeCamion(Psql :string):TCommandeCamionArray;
     function selectArticles(Psql : string) : TarticleArray;
     function SelectUnParamPrix(code_art,codetclt : string):Boolean;
+    function selectCodeclt(var vNomClt : string) : TClient;
+    function selectCumuleVente(Psql : string):TCumuleVenteBLArray;
 
 
     function InsertFacturation(facture : TFacturation):boolean;
@@ -71,6 +73,83 @@ implementation
 uses USaisieFacture;
 
 {$R *.dfm}
+function TDM.selectCumuleVente(Psql : string):TCumuleVenteBLArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  cumule :TCumuleVenteBL;
+  cumules :TCumuleVenteBLArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select code_art, designation_art, sum(qte_art) as qte,prixu,sum(prixt) as prixt,f.code_clt,f.nom_clt '
+          +' from  tb_facturation_detail d, tb_facturation f '
+          +' WHERE f.num_fact = d.num_fact '+Psql
+          +' GROUP BY code_art,f.nom_clt ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(cumules, i+1);
+            with cumule do
+              begin
+                Scode_art:=FieldByName('code_art').AsString;
+                Sdesignation_art:=FieldByName('Designation_art').AsString;
+                Nqte := FieldByName('qte').AsInteger;
+                Rpt := FieldByName('prixt').AsFloat;
+              end;
+              cumules[i]:=cumule;
+              Inc(i);
+              query.Next;
+          end;
+          Result := cumules;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectCodeclt(var vNomClt : string) : TClient;
+var
+  sql : string;
+  query : TSQLQuery;
+  client : TClient;
+begin
+  sql := 'Select * from tb_client where nom_clt = '+QuotedStr(vNomClt);
+
+      query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('G:\code.txt');
+    query.Open;
+    with query, client do
+      begin
+        NidClt := FieldByName('id_clt').AsInteger;
+        SCodeClt := FieldByName('code_clt').AsString;
+        SnomClt := FieldByName('nom_clt').AsString;
+        SadresseClt := FieldByName('adresse_clt').AsString;
+        StelClt := FieldByName('tel_clt').AsString;
+        Smail:= FieldByName('email_clt').AsString;
+        ScommentClt:= FieldByName('comment_clt').AsString;
+      end;
+      Result := client;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
 
 function TDM.InsertTypeService(TypeService : TTypeService):Boolean;
   var

@@ -17,6 +17,7 @@ type
     procedure St_RechDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
     procedure St_RechDblClick(Sender: TObject);
+    procedure edrech_nomChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -31,6 +32,28 @@ implementation
 {$R *.dfm}
 
 uses records, UDM, UListeFacture;
+
+procedure TfrmRechClientFacture.edrech_nomChange(Sender: TObject);
+var
+  Psql : string;
+  Clts : TClientArray;
+  I: Integer;
+begin
+  Psql := ' where nom_clt like '+QuotedStr(edrech_nom.Text+'%');
+
+  Clts := DM.selectClients(Psql);
+
+  St_Rech.RowCount := Length(Clts)+1;
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      with St_Rech do
+        begin
+          Cells[0,i+1]:=Clts[i].SCodeClt;
+          Cells[1,i+1]:=Clts[i].SnomClt;
+        end;
+    end;
+end;
 
 procedure TfrmRechClientFacture.FormActivate(Sender: TObject);
 var

@@ -1108,6 +1108,7 @@ begin
     Result :=MaxIdOpe;
   finally
     query.free;
+    SQLConnection1.Close;
   end;
 end;
 

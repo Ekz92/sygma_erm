@@ -11,7 +11,6 @@ object DM: TDM
     Top = 20
   end
   object TParam: TSQLTable
-    Active = True
     MaxBlobSize = 1
     SQLConnection = SQLConnection1
     TableName = 'tb_parametre'
@@ -30,9 +29,7 @@ object DM: TDM
         'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
         'nd.Data.DbxCommonDriver,Version=19.0.0.0,Culture=neutral,PublicK' +
         'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXMySqlMetaDataCommandFactory,DbxMySQLDr' +
-        'iver190.bpl'
+      'MetaDataPackageLoader=K2'
       
         'MetaDataAssemblyLoader=Borland.Data.TDBXMySqlMetaDataCommandFact' +
         'ory,Borland.Data.DbxMySQLDriver,Version=19.0.0.0,Culture=neutral' +
@@ -43,10 +40,10 @@ object DM: TDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=192.168.1.117'
+      'HostName=127.0.0.1'
       'Database=gpa_db'
-      'User_Name=kernel'
-      'Password=kernel'
+      'User_Name=root'
+      'Password='
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'

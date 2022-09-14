@@ -1,7 +1,7 @@
 object frmconnexion: Tfrmconnexion
   Left = 0
   Top = 0
-  Caption = 'CONNEXION'
+  Caption = 'SYGMA - FACTURATION'
   ClientHeight = 301
   ClientWidth = 336
   Color = clTeal

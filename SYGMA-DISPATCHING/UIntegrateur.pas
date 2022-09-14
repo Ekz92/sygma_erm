@@ -127,12 +127,6 @@ type
     Versementparcommande1: TMenuItem;
     Versement1: TMenuItem;
     Listedeversement1: TMenuItem;
-    BL2: TMenuItem;
-    CrerunBL1: TMenuItem;
-    RappeldeBL1: TMenuItem;
-    ListedesBL1: TMenuItem;
-    Pardate1: TMenuItem;
-    ParNBL1: TMenuItem;
     Admin1: TMenuItem;
     Sauvegarde1: TMenuItem;
     frxFiche_mission_spec: TfrxReport;
@@ -216,8 +210,8 @@ begin
           Fichier1.Enabled:=false;
           Facturation1.Enabled:=false;
           Caisse1.Enabled:=false;
-          Magasin2.Enabled:=false;
-          BL2.Enabled:=False;
+//          Magasin2.Enabled:=false;
+//          BL2.Enabled:=False;
           Saisie1.Enabled:=False;
           Chargement2.Enabled:=False;
         end;
@@ -226,8 +220,8 @@ begin
           Fichier1.Enabled:=True;
           Facturation1.Enabled:=True;
           Caisse1.Enabled:=True;
-          Magasin2.Enabled:=True;
-          BL2.Enabled:=True;
+//          Magasin2.Enabled:=True;
+//          BL2.Enabled:=True;
           Saisie1.Enabled:=True;
           Chargement2.Enabled:=True;
     end;

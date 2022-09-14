@@ -1,0 +1,188 @@
+unit UListeEncaissement;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.Buttons,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+
+type
+  TfrmListeEncaissement = class(TForm)
+    stEnc: TStringGrid;
+    Panel1: TPanel;
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    SpeedButton1: TSpeedButton;
+    Label3: TLabel;
+    lbTotal: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    PopupMenu1: TPopupMenu;
+    Annulercettedpense1: TMenuItem;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure stEncDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
+      State: TGridDrawState);
+    procedure Annulercettedpense1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeEncaissement: TfrmListeEncaissement;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmListeEncaissement.Annulercettedpense1Click(Sender: TObject);
+var
+  sqlH,sqlD,
+  PsqlOpe, vOpe,
+  vNumCaisse,
+  SqlUpCaisse,SqlCaisse : string;
+
+  Enc :TDepenseArray;
+  Caisse :TCaisseArray;
+
+  vMnt_Enc,vSoldeCaisse :Real;
+  I: Integer;
+begin
+{ Préparation des requetes}
+  with stEnc do
+    begin
+      sqlH := 'Update tb_historique_caisse set '
+              +' statut_canc = 1 '
+              +' where ope = '+QuotedStr(Cells[1,Row]);
+
+      sqlD := 'Update tb_encaissement set '
+              +' statut_canc = 1 '
+              +' where ope = '+QuotedStr(Cells[1,Row]);
+
+      PsqlOpe := ' where ope = '+QuotedStr(Cells[1,Row]);
+    end;
+
+  {Selection de la dépenses}
+
+    Enc := dm.selectEncaissement(PsqlOpe);
+
+    for I := Low(Enc) to High(Enc) do
+      begin
+        vMnt_Enc :=Enc[i].RMontant;
+        vOpe := Enc[i].Sope;
+        vNumCaisse := Enc[i].SNumCaisse;
+      end;
+
+    {Selection de la caisse}
+
+      SqlCaisse := ' where num_compte = '+QuotedStr(vNumCaisse);
+
+      Caisse := dm.SelectCaisses(SqlCaisse);
+
+    for I := Low(caisse) to High(caisse) do
+      begin
+        vSoldeCaisse := caisse[i].RSolde;
+      end;
+
+    {Modification du solde de la caisse}
+
+    SqlUpCaisse := 'Update tb_caisse set'
+                    +' solde = '+FloatToStr(vSoldeCaisse + vMnt_dep)
+                    +' where num_compte = '+QuotedStr(vNumCaisse);
+
+  if MessageDlg('Voulez-vous annuler cette opération ?',mtConfirmation,[mbYes,mbNo],0)=mrYes then
+    begin
+      dm.UpdateTable(sqlH); {Changement du statut dans la table historique}
+      dm.UpdateTable(sqlD); {Changement du statut dans la table des d&penses}
+      dm.UpdateTable(SqlUpCaisse) {Modification du solde dans la table des caisse}
+    end;
+
+    SpeedButton1.Click;
+end;
+
+procedure TfrmListeEncaissement.FormCreate(Sender: TObject);
+begin
+with stEnc do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'Ope';
+    Cells[2,0] := 'Pièce';
+    Cells[3,0] := 'Libellé';
+    Cells[4,0] := 'Montant';
+  end;
+end;
+
+procedure TfrmListeEncaissement.SpeedButton1Click(Sender: TObject);
+var
+  Psql : string;
+  Encs : TEncaissementArray;
+  I: Integer;
+  vTDep : Real;
+begin
+  Psql := ' where date_enc between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+              +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+              +' and statut_canc = 0'
+              +' order by id_enc desc ';
+
+  Encs := dm.selectEncaissement(Psql) ;
+  stEnc.RowCount := Length(Encs)+1;
+
+  vTDep := 0;
+
+  for I := Low(Encs) to High(Encs) do
+    begin
+      with stEnc do
+        begin
+          Cells[0,i+1]:=Encs[i].SdateEnc;
+          Cells[1,i+1]:=Encs[i].Sope;
+          Cells[2,i+1]:=Encs[i].SPiece;
+          Cells[3,i+1]:=Encs[i].SLibelle;
+          Cells[4,i+1]:=FloatToStr(Encs[i].RMontant);
+
+          vTDep := vTDep + Encs[i].RMontant;
+        end;
+    end;
+
+    lbTotal.Caption:=FloatToStrF(vTDep,ffNumber,15,2);
+
+    if stEnc.RowCount>1 then stEnc.FixedRows:=1;
+
+end;
+
+procedure TfrmListeEncaissement.stEncDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+
+end;
+
+end.

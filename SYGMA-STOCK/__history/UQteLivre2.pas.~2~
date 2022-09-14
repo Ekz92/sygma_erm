@@ -1,0 +1,35 @@
+unit UQteLivre2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmQteLivre2 = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edQteLive: TEdit;
+    Button1: TButton;
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmQteLivre2: TfrmQteLivre2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmQteLivre2.FormShow(Sender: TObject);
+begin
+edQteLive.Clear;
+edQteLive.SetFocus;
+end;
+
+end.

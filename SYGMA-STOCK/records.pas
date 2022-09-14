@@ -6,6 +6,7 @@ TMaxNumRappel = record
   Nnumrappel : integer;
 end;
 
+
 TFacturation_detail =record
   NId_fact : integer;
   Sdate_fact,
@@ -368,6 +369,24 @@ TBonCom = record
   Nstatut_bc : integer;
 end;
 TBonComArray = array of TBonCom;
+
+TMaxLettrage = record
+  numLettrage : integer;
+end;
+
+TFicheEsH = record
+  NidFh,
+	Nnum_fh : integer;
+	Sdate_fh ,
+	Scode_clt ,
+	Snom_clt ,
+	Snum_veh ,
+	Snom_veh : string;
+  NType_fs : integer;
+  Susager : string;
+	Nstatut_canc : integer;
+end;
+TFicheEsHArray  = array of TFicheEsH;
 
 TBonCom_detail = record
   Nid_bc : integer;

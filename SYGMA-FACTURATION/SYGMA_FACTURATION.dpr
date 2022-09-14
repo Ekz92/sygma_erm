@@ -25,7 +25,9 @@ uses
   URechArticleFacturer in 'URechArticleFacturer.pas' {frmRechArticleFacturer},
   Uadd_type_client in 'Uadd_type_client.pas' {frmAddTarif},
   UBeneficeVente in 'UBeneficeVente.pas' {frmBeneficeVente},
-  UTypeService in 'UTypeService.pas' {frmtypeService};
+  UTypeService in 'UTypeService.pas' {frmtypeService},
+  URapportParClient in 'URapportParClient.pas' {frmRapportParClient},
+  UCumuleVenteBl in 'UCumuleVenteBl.pas' {frmCumuleVenteBL};
 
 {$R *.res}
 
@@ -55,5 +57,7 @@ begin
   Application.CreateForm(TfrmAddTarif, frmAddTarif);
   Application.CreateForm(TfrmBeneficeVente, frmBeneficeVente);
   Application.CreateForm(TfrmtypeService, frmtypeService);
+  Application.CreateForm(TfrmRapportParClient, frmRapportParClient);
+  Application.CreateForm(TfrmCumuleVenteBL, frmCumuleVenteBL);
   Application.Run;
 end.

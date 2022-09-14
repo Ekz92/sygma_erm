@@ -31,14 +31,8 @@ object frm_nouveau_BL: Tfrm_nouveau_BL
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 529
-    ExplicitHeight = 403
     object TabSheet1: TTabSheet
       Caption = 'Importation '
-      ExplicitWidth = 521
-      ExplicitHeight = 374
       object Panel2: TPanel
         Left = 0
         Top = 0
@@ -53,8 +47,6 @@ object frm_nouveau_BL: Tfrm_nouveau_BL
         ParentBackground = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 521
-        ExplicitHeight = 374
         object Bevel1: TBevel
           Left = 6
           Top = 8
@@ -1022,6 +1014,7 @@ object frm_nouveau_BL: Tfrm_nouveau_BL
         DataSetName = 'frxDBBL'
       end
       item
+        DataSet = DM.frxDBParam
         DataSetName = 'frxDBParam'
       end>
     Variables = <>
@@ -1108,7 +1101,7 @@ object frm_nouveau_BL: Tfrm_nouveau_BL
           AllowVectorExport = True
           Left = 22.779527560000000000
           Top = 38.118120000000000000
-          Width = 37.795300000000000000
+          Width = 56.692950000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack

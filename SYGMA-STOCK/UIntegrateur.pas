@@ -138,6 +138,7 @@ type
     procedure LivrsNonlivrs1Click(Sender: TObject);
     procedure CrerunBC1Click(Sender: TObject);
     procedure ListedeBC1Click(Sender: TObject);
+    procedure RappeldeBL1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -157,7 +158,7 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UEntreeCancListe, UListe_article, USortieDivers, UAdd_Type_article, records,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
-  UL_BL_par_date, UBon_Commande, UListeBonCommande;
+  UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -348,6 +349,11 @@ end;
 procedure TfrmIntegrateur.Pararticle1Click(Sender: TObject);
 begin
 frmMouvStockByArticle.ShowModal;
+end;
+
+procedure TfrmIntegrateur.RappeldeBL1Click(Sender: TObject);
+begin
+frmRappelBL.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Sortie1Click(Sender: TObject);

@@ -165,20 +165,6 @@ end;
 
 if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mbyes,mbno],0)=mrYes then
   begin
-//      Etat journal
-  with EtatJrn do
-    begin
-      Sdate_ej:= eddate.Text;
-      Snum_ope := edOperation.Text;
-      Snum_piece := edFacture.Text;
-      Slibelle := edLibEncais.Text;
-      Sdebit := '-';
-      Scredit := edMontant.Text;
-      Ssens := 'C';
-      Susager := vUsager;
-    end;
-  dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
-
 { Insertion dans la table du relevé client}
 
 //      Récupération du solde compte du client
@@ -408,6 +394,21 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
 
         end;
       end;
+
+//      Etat journal
+  with EtatJrn do
+    begin
+      Sdate_ej:= eddate.Text;
+      Snum_ope := edOperation.Text;
+      Snum_piece := edFacture.Text;
+      Slibelle := edLibEncais.Text;
+      Sdebit := '-';
+      Scredit := edMontant.Text;
+      Ssens := 'C';
+      Susager := vUsager;
+    end;
+  dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
 
 { Changement de statut }
       if vMnt_r <= StrToFloat(edMontant.Text) then

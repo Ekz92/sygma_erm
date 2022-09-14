@@ -1,0 +1,101 @@
+unit Urech_client_journal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmRehCltJournal = class(TForm)
+    StRechClient: TStringGrid;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edrech_nom: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure edrech_nomChange(Sender: TObject);
+    procedure StRechClientDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure StRechClientDblClick(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmRehCltJournal: TfrmRehCltJournal;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmRehCltJournal.edrech_nomChange(Sender: TObject);
+var
+  Psql : string;
+  Clients : TClientArray;
+  i:integer;
+begin
+  Psql := ' where nom_clt like '+QuotedStr(edrech_nom.Text+'%');
+  Clients := DM.selectClients(Psql);
+  StRechClient.RowCount:=Length(clients)+1;
+  for I := Low(clients) to High(clients) do
+    begin
+      StRechClient.Cells[0,i+1]:=clients[i].SCodeClt;
+      StRechClient.Cells[1,i+1]:=clients[i].SnomClt;
+    end;
+end;
+
+procedure TfrmRehCltJournal.FormCreate(Sender: TObject);
+begin
+with StRechClient do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Nom';
+  end;
+
+end;
+
+procedure TfrmRehCltJournal.StRechClientDblClick(Sender: TObject);
+begin
+with frmJournalCaisse do
+  begin
+     //edNomCli.Text:=StRechClient.Cells[1,StRechClient.Row]    ;
+     edCode.Text:=StRechClient.Cells[0,StRechClient.Row]
+  end;
+  close;
+
+end;
+
+procedure TfrmRehCltJournal.StRechClientDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

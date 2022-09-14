@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
-  Data.DB, Data.SqlExpr, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Data.DB, Data.SqlExpr, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  frxExportBaseDialog, frxExportPDF;
 
 type
   TfrmbonCommande = class(TForm)
@@ -59,6 +60,7 @@ type
     QBonComqte: TIntegerField;
     QBonCompt: TFloatField;
     frxDBBonCom: TfrxDBDataset;
+    frxPDFExport1: TfrxPDFExport;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,6 +73,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Supprimer1Click(Sender: TObject);
+    procedure edqteKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
   public
@@ -94,6 +97,12 @@ var
   stock : TStock;
   code_art : string;
 begin
+  if trim(edVehicule.Text) ='' then
+    begin
+      MessageDlg('Veuillez spécifier le véhicule',mtError,[mbok],0);
+      exit
+    end;
+
   code_art := edarticle.Text;
   stock := dm.selectStockByArticle(code_art)  ;
   lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) + (stock.Rcoutachat * StrToInt(edqte.Text)));
@@ -162,7 +171,7 @@ if (edVehicule.Text<>'') and (lbmontant.Caption<>'0') then
             Snom_four := QuotedStr(ednom_fourn.Text);
             Rmontant_bc := StrToFloat(lbmontant.Caption);
             Susager_init := QuotedStr(vUsager);
-            Susager_val := QuotedStr('1002');
+            Susager_val := QuotedStr('');
             SVehicule := QuotedStr(edVehicule.Text);
             SnomVehicule := QuotedStr(ednomveh.Text);
             Nstatut_bc := 0
@@ -205,6 +214,12 @@ begin
 frmRechArt_bc.ShowModal;
 end;
 
+procedure TfrmbonCommande.edqteKeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then btAjouter.Click;
+
+end;
+
 procedure TfrmbonCommande.edVehiculeDblClick(Sender: TObject);
 begin
 frmRechVehBc.showmodal;
@@ -236,6 +251,11 @@ begin
   MaxBc := DM.SelectMaxBc.NnumMax;
   MaxBc := MaxBc +1;
   lbNumbc.Caption := IntToStr(MaxBc);
+
+//  StringGrid1.RowCount := 2;
+//  StringGrid1.Rows[1] := 2;
+
+
 end;
 
 procedure TfrmbonCommande.StringGrid1DrawCell(Sender: TObject; ACol,
@@ -269,15 +289,22 @@ end;
 
 procedure TfrmbonCommande.Supprimer1Click(Sender: TObject);
 var
-  k,i:integer;
+  k,i,qte:integer;
+//  mnt : real;
   code_art :string;
   stock : TStock;
 begin
 with StringGrid1 do
   begin
+  qte := StrToInt(Cells[3,Row]);
   code_art := Cells[0,Row];
+//  mnt :=
+
+//  ShowMessage(IntToStr(qte));
+
   stock := dm.selectStockByArticle(code_art)  ;
-  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * StrToInt(Cells[2,Row])));
+  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * qte ));
+
 
     k:=Row;
     for I := k to RowCount do

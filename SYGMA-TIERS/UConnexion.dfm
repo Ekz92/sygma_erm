@@ -1,7 +1,7 @@
 object frmconnexion: Tfrmconnexion
   Left = 0
   Top = 0
-  Caption = 'CONNEXION'
+  Caption = 'CONNEXION TIERS'
   ClientHeight = 301
   ClientWidth = 335
   Color = clTeal

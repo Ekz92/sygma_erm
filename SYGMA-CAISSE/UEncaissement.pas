@@ -87,7 +87,7 @@ begin
         with EtatJrn do
           begin
             Sdate_ej:= DateToStr(DateEnc.Date);
-            Snum_ope := IntToStr(Maxope);
+            Snum_ope := 'ope'+IntToStr(Maxope);
             Snum_piece := edPiece.Text;
             Slibelle := mLibelle.Text;
             Sdebit := '-';

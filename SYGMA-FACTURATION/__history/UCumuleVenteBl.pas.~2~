@@ -1,0 +1,77 @@
+unit UCumuleVenteBl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.ComCtrls,
+  Vcl.Buttons;
+
+type
+  TfrmCumuleVenteBL = class(TForm)
+    GroupBox1: TGroupBox;
+    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbClient: TComboBox;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    frxReport1: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumuleVenteBL: TfrmCumuleVenteBL;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCumuleVenteBL.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+cbClient.Items.Clear;
+
+end;
+
+procedure TfrmCumuleVenteBL.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Désignation';
+    Cells[2,0]:='Qte';
+    //Cells[3,0]:='PU';
+    Cells[3,0]:='PT';
+  end;
+end;
+
+procedure TfrmCumuleVenteBL.FormShow(Sender: TObject);
+begin
+var
+  clients : TClientArray;
+  Psql : string;
+  I: Integer;
+begin
+  Psql :='';
+  clients := DM.selectClients(Psql);
+
+  for I := Low(clients) to High(clients) do
+    begin
+      cbClient.Items.Add(clients[i].SnomClt);
+    end;
+end;
+
+end.

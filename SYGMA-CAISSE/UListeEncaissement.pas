@@ -46,12 +46,12 @@ var
   sqlH,sqlD,
   PsqlOpe, vOpe,
   vNumCaisse,
-  SqlUpCaisse,SqlCaisse : string;
+  SqlUpCaisse,SqlCaisse,sqlEtatJrn : string;
 
-  dep :TDepenseArray;
+  Enc :TEncaissementArray;
   Caisse :TCaisseArray;
 
-  vMnt_dep,vSoldeCaisse :Real;
+  vMnt_Enc,vSoldeCaisse :Real;
   I: Integer;
 begin
 { Préparation des requetes}
@@ -61,22 +61,24 @@ begin
               +' statut_canc = 1 '
               +' where ope = '+QuotedStr(Cells[1,Row]);
 
-      sqlD := 'Update tb_depense set '
+      sqlD := 'Update tb_encaissement set '
               +' statut_canc = 1 '
               +' where ope = '+QuotedStr(Cells[1,Row]);
+
+      sqlEtatJrn := 'delete from tb_etat_journal where num_ope = '+QuotedStr(Cells[1,Row]);
 
       PsqlOpe := ' where ope = '+QuotedStr(Cells[1,Row]);
     end;
 
   {Selection de la dépenses}
 
-    dep := dm.selectDepense(PsqlOpe);
+    Enc := dm.selectEncaissement(PsqlOpe);
 
-    for I := Low(dep) to High(dep) do
+    for I := Low(Enc) to High(Enc) do
       begin
-        vMnt_dep :=dep[i].RMontant;
-        vOpe := dep[i].Sope;
-        vNumCaisse := dep[i].SNumCaisse;
+        vMnt_Enc :=Enc[i].RMontant;
+        vOpe := Enc[i].Sope;
+        vNumCaisse := Enc[i].SNumCaisse;
       end;
 
     {Selection de la caisse}
@@ -93,14 +95,15 @@ begin
     {Modification du solde de la caisse}
 
     SqlUpCaisse := 'Update tb_caisse set'
-                    +' solde = '+FloatToStr(vSoldeCaisse + vMnt_dep)
+                    +' solde = '+FloatToStr(vSoldeCaisse - vMnt_Enc)
                     +' where num_compte = '+QuotedStr(vNumCaisse);
 
   if MessageDlg('Voulez-vous annuler cette opération ?',mtConfirmation,[mbYes,mbNo],0)=mrYes then
     begin
       dm.UpdateTable(sqlH); {Changement du statut dans la table historique}
       dm.UpdateTable(sqlD); {Changement du statut dans la table des d&penses}
-      dm.UpdateTable(SqlUpCaisse) {Modification du solde dans la table des caisse}
+      dm.UpdateTable(SqlUpCaisse) ;{Modification du solde dans la table des caisse}
+      dm.DeleteFromTable(sqlEtatJrn);{Suppession sur la fiche etat du stock}
     end;
 
     SpeedButton1.Click;
@@ -128,7 +131,7 @@ begin
   Psql := ' where date_enc between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
               +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
               +' and statut_canc = 0'
-              +' order by id_enc desc';
+              +' order by id_enc desc ';
 
   Encs := dm.selectEncaissement(Psql) ;
   stEnc.RowCount := Length(Encs)+1;

@@ -60,13 +60,18 @@ begin
     begin
       vSolde := caisses[i].RSolde;
     end;
+  {Noméro d'opération}
+
+  Maxope := DM.SelectMaxOpe.NMaxOpe;
+  Maxope := Maxope + 1;
+
 
 //      Etat journal
 
     with EtatJrn do
       begin
         Sdate_ej:= DateToStr(DateDep.Date);
-        Snum_ope := IntToStr(Maxope);
+        Snum_ope := 'ope'+IntToStr(Maxope);
         Snum_piece := edPiece.Text;
         Slibelle := mLibelle.Text;
         Sdebit := edMontant.Text;
@@ -74,11 +79,6 @@ begin
         Ssens := 'D';
         Susager := vUsager;
       end;
-
-  {Noméro d'opération}
-
-  Maxope := DM.SelectMaxOpe.NMaxOpe;
-  Maxope := Maxope +1;
 
   if (Trim(edPiece.Text)='') and (Trim(edMontant.Text)='') and(Trim(mLibelle.Text)='') then
     begin
@@ -100,7 +100,6 @@ begin
           begin
             dm.InsertDepense(dep);      {Insertion dans t_depense}
             dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
-
 
             sqlUpd := 'Update tb_caisse ' {Requete Mise à jour du solde}
                     +' set solde = '+FloatToStr(vSolde - StrToFloat(edMontant.Text))

@@ -47,7 +47,7 @@ var
   sqlH,sqlD,
   PsqlOpe, vOpe,
   vNumCaisse,
-  SqlUpCaisse,SqlCaisse : string;
+  SqlUpCaisse,SqlCaisse,sqlEtatJrn : string;
 
   dep :TDepenseArray;
   Caisse :TCaisseArray;
@@ -65,6 +65,8 @@ begin
       sqlD := 'Update tb_depense set '
               +' statut_canc = 1 '
               +' where ope = '+QuotedStr(Cells[1,Row]);
+
+      sqlEtatJrn := 'delete from tb_etat_journal where num_ope = '+QuotedStr(Cells[1,Row]);
 
       PsqlOpe := ' where ope = '+QuotedStr(Cells[1,Row]);
     end;
@@ -101,7 +103,8 @@ begin
     begin
       dm.UpdateTable(sqlH); {Changement du statut dans la table historique}
       dm.UpdateTable(sqlD); {Changement du statut dans la table des d&penses}
-      dm.UpdateTable(SqlUpCaisse) {Modification du solde dans la table des caisse}
+      dm.UpdateTable(SqlUpCaisse); {Modification du solde dans la table des caisse}
+      dm.DeleteFromTable(sqlEtatJrn);{Suppession sur la fiche etat du stock}
     end;
 
     SpeedButton1.Click;

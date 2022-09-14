@@ -1,0 +1,24 @@
+unit UCumuleVenteBl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmCumuleVenteBL = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumuleVenteBL: TfrmCumuleVenteBL;
+
+implementation
+
+{$R *.dfm}
+
+end.

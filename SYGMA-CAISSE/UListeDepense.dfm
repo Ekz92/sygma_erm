@@ -32,8 +32,6 @@ object frmListeDepense: TfrmListeDepense
     TabOrder = 0
     StyleElements = [seBorder]
     OnDrawCell = stDepDrawCell
-    ExplicitWidth = 478
-    ExplicitHeight = 170
     ColWidths = (
       63
       41
@@ -49,7 +47,6 @@ object frmListeDepense: TfrmListeDepense
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 478
     object Bevel1: TBevel
       Left = 3
       Top = 3

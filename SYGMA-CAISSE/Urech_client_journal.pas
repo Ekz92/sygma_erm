@@ -16,6 +16,7 @@ type
     procedure edrech_nomChange(Sender: TObject);
     procedure StRechClientDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure StRechClientDblClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -29,7 +30,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM;
+uses records, UDM, UJournal_caisse;
 
 procedure TfrmRehCltJournal.edrech_nomChange(Sender: TObject);
 var
@@ -54,6 +55,17 @@ with StRechClient do
     Cells[0,0]:='Code';
     Cells[1,0]:='Nom';
   end;
+
+end;
+
+procedure TfrmRehCltJournal.StRechClientDblClick(Sender: TObject);
+begin
+with frmJournalCaisse do
+  begin
+     //edNomCli.Text:=StRechClient.Cells[1,StRechClient.Row]    ;
+     edCode.Text:=StRechClient.Cells[0,StRechClient.Row]
+  end;
+  close;
 
 end;
 

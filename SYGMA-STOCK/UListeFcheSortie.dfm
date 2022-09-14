@@ -2,8 +2,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
   Left = 0
   Top = 0
   Caption = 'Liste de sortie'
-  ClientHeight = 176
-  ClientWidth = 336
+  ClientHeight = 409
+  ClientWidth = 578
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,56 +19,56 @@ object frmListeFcheSortie: TfrmListeFcheSortie
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 336
-    Height = 144
-    Align = alClient
+    Width = 578
+    Height = 137
+    Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
     object Label1: TLabel
-      Left = 24
-      Top = 16
+      Left = 4
+      Top = 6
       Width = 20
       Height = 13
       Caption = 'Du :'
     end
     object Label2: TLabel
-      Left = 24
-      Top = 37
+      Left = 4
+      Top = 27
       Width = 20
       Height = 13
       Caption = 'Au :'
     end
     object Label3: TLabel
-      Left = 24
-      Top = 60
+      Left = 4
+      Top = 50
       Width = 34
       Height = 13
       Caption = 'Client :'
     end
     object Label4: TLabel
-      Left = 24
-      Top = 82
+      Left = 4
+      Top = 72
       Width = 32
       Height = 13
       Caption = 'Code :'
     end
     object Label5: TLabel
-      Left = 24
-      Top = 105
+      Left = 4
+      Top = 95
       Width = 46
       Height = 13
       Caption = 'Vehicule :'
     end
     object Label6: TLabel
-      Left = 24
-      Top = 126
+      Left = 4
+      Top = 116
       Width = 43
       Height = 13
       Caption = 'Marque :'
     end
     object d1: TDateTimePicker
-      Left = 91
-      Top = 13
+      Left = 71
+      Top = 3
       Width = 115
       Height = 21
       Date = 44801.587425474540000000
@@ -78,8 +78,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       TabOrder = 0
     end
     object d2: TDateTimePicker
-      Left = 91
-      Top = 35
+      Left = 71
+      Top = 25
       Width = 115
       Height = 21
       Date = 44801.587425474540000000
@@ -89,8 +89,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       TabOrder = 1
     end
     object cbClient: TComboBox
-      Left = 91
-      Top = 57
+      Left = 71
+      Top = 47
       Width = 240
       Height = 21
       CharCase = ecUpperCase
@@ -100,27 +100,27 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       OnCloseUp = cbClientCloseUp
     end
     object edcodeClt: TEdit
-      Left = 91
-      Top = 79
+      Left = 71
+      Top = 69
       Width = 115
       Height = 21
       ParentColor = True
       TabOrder = 3
     end
     object cbVeh: TComboBox
-      Left = 91
-      Top = 101
+      Left = 71
+      Top = 91
       Width = 115
       Height = 21
       CharCase = ecUpperCase
       ParentColor = True
       TabOrder = 4
       OnChange = cbVehChange
-      OnKeyPress = cbVehKeyPress
+      OnCloseUp = cbVehCloseUp
     end
     object edMarque: TEdit
-      Left = 91
-      Top = 123
+      Left = 71
+      Top = 113
       Width = 240
       Height = 21
       ParentColor = True
@@ -129,12 +129,14 @@ object frmListeFcheSortie: TfrmListeFcheSortie
   end
   object Panel2: TPanel
     Left = 0
-    Top = 144
-    Width = 336
+    Top = 137
+    Width = 578
     Height = 32
-    Align = alBottom
+    Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 144
+    ExplicitWidth = 336
     object Button1: TButton
       Left = 181
       Top = 4
@@ -153,6 +155,34 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       TabOrder = 1
     end
   end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 169
+    Width = 578
+    Height = 240
+    Align = alClient
+    ColCount = 6
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect]
+    ParentColor = True
+    PopupMenu = PopupMenu1
+    TabOrder = 2
+    StyleElements = [seBorder]
+    OnDrawCell = StringGrid1DrawCell
+    ExplicitLeft = 184
+    ExplicitTop = 320
+    ExplicitWidth = 320
+    ExplicitHeight = 120
+    ColWidths = (
+      75
+      64
+      55
+      159
+      78
+      138)
+  end
   object frxLFicheSortie: TfrxReport
     Version = '6.9.3'
     DotMatrixReport = False
@@ -169,8 +199,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       'begin'
       ''
       'end.')
-    Left = 197
-    Top = 25
+    Left = 357
+    Top = 17
     Datasets = <
       item
         DataSet = frxDBFicheSortie
@@ -808,8 +838,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
     CloseDataSource = False
     DataSet = QFicheSortie
     BCDToCurrency = False
-    Left = 232
-    Top = 88
+    Left = 440
+    Top = 48
   end
   object QFicheSortie: TSQLQuery
     Active = True
@@ -818,7 +848,18 @@ object frmListeFcheSortie: TfrmListeFcheSortie
     SQL.Strings = (
       'select * from tb_fiche_es tfe where type_fes= 0;')
     SQLConnection = DM.SQLConnection1
-    Left = 136
-    Top = 64
+    Left = 384
+    Top = 96
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 296
+    Top = 288
+    object Consulter1: TMenuItem
+      Caption = 'Consulter'
+      OnClick = Consulter1Click
+    end
+    object Supprimer1: TMenuItem
+      Caption = 'Annuler'
+    end
   end
 end

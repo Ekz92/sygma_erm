@@ -31,8 +31,6 @@ object frmListeEncaissement: TfrmListeEncaissement
     TabOrder = 0
     StyleElements = [seBorder]
     OnDrawCell = stEncDrawCell
-    ExplicitLeft = -30
-    ExplicitHeight = 157
     ColWidths = (
       63
       41
@@ -48,7 +46,6 @@ object frmListeEncaissement: TfrmListeEncaissement
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = -30
     object Bevel1: TBevel
       Left = 3
       Top = 3

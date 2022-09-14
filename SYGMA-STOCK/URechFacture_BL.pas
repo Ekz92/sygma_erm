@@ -77,9 +77,34 @@ with St_facture do
 end;
 
 procedure TfrmRechFActureBL.FormShow(Sender: TObject);
+var
+  Psql : string;
+  Factures : TFacturationArray;
+  I: Integer;
 begin
- St_facture.RowCount:=2;
- St_facture.Rows[1].Clear;
+  edRechFact.SetFocus;
+  Psql := ' where num_fact like  '+QuotedStr(edRechFact.Text+'%')
+          +' and statut = '+QuotedStr('PA') +' or statut='+ QuotedStr('FO')
+          +' and statut_canc = 0'
+          +' order by date_fact desc ';
+
+  Factures := DM.SelectFactures(Psql);
+  St_facture.RowCount := Length(Factures)+1;
+
+  for I := Low(Factures) to High(Factures) do
+    begin
+      with St_facture do
+        begin
+          Cells[0,i+1]:=Factures[i].SNum_fact;
+          Cells[1,i+1]:=Factures[i].Scode_clt;
+          Cells[2,i+1]:=Factures[i].Snom_clt;
+          Cells[3,i+1]:=Factures[i].Sdate_fact;
+          Cells[4,i+1]:=Factures[i].Sstatut;
+        end;
+    end;
+    if St_facture.RowCount > 1 then St_facture.FixedRows:=1;
+// St_facture.RowCount:=2;
+// St_facture.Rows[1].Clear;
 
 end;
 

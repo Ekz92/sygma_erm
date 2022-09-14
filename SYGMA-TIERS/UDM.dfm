@@ -11,7 +11,6 @@ object DM: TDM
     Top = 20
   end
   object TParam: TSQLTable
-    Active = True
     MaxBlobSize = 1
     SQLConnection = SQLConnection1
     TableName = 'tb_parametre'
@@ -43,10 +42,10 @@ object DM: TDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=192.168.1.117'
+      'HostName=127.0.0.1'
       'Database=gpa_db'
-      'User_Name=kernel'
-      'Password=kernel'
+      'User_Name=root'
+      'Password='
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'

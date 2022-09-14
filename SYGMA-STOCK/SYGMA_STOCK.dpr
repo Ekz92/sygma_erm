@@ -36,7 +36,10 @@ uses
   UBon_Commande in 'UBon_Commande.pas' {frmbonCommande},
   URechVehBc in 'URechVehBc.pas' {frmRechVehBc},
   URechArt_bc in 'URechArt_bc.pas' {frmRechArt_bc},
-  UListeBonCommande in 'UListeBonCommande.pas' {frmListeBonCommande};
+  UListeBonCommande in 'UListeBonCommande.pas' {frmListeBonCommande},
+  URappelBl in 'URappelBl.pas' {frmRappelBL},
+  URechBLRappel in 'URechBLRappel.pas' {frmRechBLRappel},
+  UQteLivre2 in 'UQteLivre2.pas' {frmQteLivre2};
 
 {$R *.res}
 
@@ -77,5 +80,8 @@ begin
   Application.CreateForm(TfrmRechVehBc, frmRechVehBc);
   Application.CreateForm(TfrmRechArt_bc, frmRechArt_bc);
   Application.CreateForm(TfrmListeBonCommande, frmListeBonCommande);
+  Application.CreateForm(TfrmRappelBL, frmRappelBL);
+  Application.CreateForm(TfrmRechBLRappel, frmRechBLRappel);
+  Application.CreateForm(TfrmQteLivre2, frmQteLivre2);
   Application.Run;
 end.
