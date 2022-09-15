@@ -3,7 +3,7 @@ object frmFicheSortie: TfrmFicheSortie
   Top = 0
   Caption = 'Fiche de sortie '
   ClientHeight = 453
-  ClientWidth = 556
+  ClientWidth = 548
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,19 +18,18 @@ object frmFicheSortie: TfrmFicheSortie
   PixelsPerInch = 96
   TextHeight = 13
   object Panel3: TPanel
-    Left = 505
+    Left = 503
     Top = 0
-    Width = 51
+    Width = 45
     Height = 453
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 552
-    ExplicitHeight = 486
+    ExplicitLeft = 510
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
-      Width = 51
+      Width = 45
       Height = 42
       Hint = 'Revenir au lot pr'#233'cedent'
       Align = alTop
@@ -49,7 +48,7 @@ object frmFicheSortie: TfrmFicheSortie
     object SpeedButton2: TSpeedButton
       Left = 0
       Top = 42
-      Width = 51
+      Width = 45
       Height = 42
       Hint = 'Passer au lot suivant'
       Align = alTop
@@ -68,7 +67,7 @@ object frmFicheSortie: TfrmFicheSortie
     object btSave: TButton
       Left = 0
       Top = 84
-      Width = 51
+      Width = 45
       Height = 42
       Hint = 'Enregistrer sans cloturer le lot'
       Align = alTop
@@ -84,11 +83,12 @@ object frmFicheSortie: TfrmFicheSortie
       TabOrder = 0
       WordWrap = True
       OnClick = btSaveClick
+      ExplicitWidth = 51
     end
     object btAnnuler: TButton
       Left = 0
       Top = 411
-      Width = 51
+      Width = 45
       Height = 42
       Align = alBottom
       Caption = 'Annuler'
@@ -102,13 +102,12 @@ object frmFicheSortie: TfrmFicheSortie
       ShowHint = True
       TabOrder = 1
       OnClick = btAnnulerClick
-      ExplicitTop = 126
-      ExplicitWidth = 608
+      ExplicitWidth = 51
     end
-    object Button1: TButton
+    object btClot: TButton
       Left = 0
       Top = 369
-      Width = 51
+      Width = 45
       Height = 42
       Hint = 'Enregistrer et passer au lot suivant'
       Align = alBottom
@@ -123,30 +122,28 @@ object frmFicheSortie: TfrmFicheSortie
       ShowHint = True
       TabOrder = 2
       WordWrap = True
-      OnClick = Button1Click
-      ExplicitTop = 168
-      ExplicitWidth = 608
+      OnClick = btClotClick
+      ExplicitWidth = 51
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 505
+    Width = 503
     Height = 453
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 503
-    ExplicitHeight = 480
+    ExplicitWidth = 502
     object GroupBox1: TGroupBox
-      Left = 1
-      Top = 1
+      Left = 0
+      Top = 0
       Width = 503
       Height = 64
       Align = alTop
       Caption = 'En-t'#234'te'
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
+      ExplicitWidth = 502
       object Label1: TLabel
         Left = 16
         Top = 16
@@ -184,14 +181,14 @@ object frmFicheSortie: TfrmFicheSortie
       end
     end
     object GroupBox2: TGroupBox
-      Left = 1
-      Top = 65
+      Left = 0
+      Top = 64
       Width = 503
       Height = 106
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
-      ExplicitWidth = 501
+      ExplicitWidth = 502
       object Label3: TLabel
         Left = 16
         Top = 18
@@ -271,10 +268,10 @@ object frmFicheSortie: TfrmFicheSortie
       end
     end
     object st_ficheSortie: TStringGrid
-      Left = 1
-      Top = 171
+      Left = 0
+      Top = 170
       Width = 503
-      Height = 281
+      Height = 283
       Align = alClient
       ColCount = 6
       DefaultRowHeight = 15
@@ -288,8 +285,7 @@ object frmFicheSortie: TfrmFicheSortie
       OnDrawCell = st_ficheSortieDrawCell
       OnKeyPress = st_ficheSortieKeyPress
       OnSelectCell = st_ficheSortieSelectCell
-      ExplicitWidth = 501
-      ExplicitHeight = 308
+      ExplicitWidth = 502
       ColWidths = (
         2
         74

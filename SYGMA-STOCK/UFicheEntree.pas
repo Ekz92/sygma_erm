@@ -5,10 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.Buttons;
 
 type
   TfrmFicheEntree = class(TForm)
+    Panel2: TPanel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -22,10 +23,13 @@ type
     edNomClt: TEdit;
     edNomVeh: TComboBox;
     cbMatVeh: TEdit;
-    Panel1: TPanel;
     st_ficheEntree: TStringGrid;
-    btvalider: TButton;
-    Button2: TButton;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    btSave: TButton;
+    btAnnuler: TButton;
+    btClot: TButton;
     procedure st_ficheEntreeDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodecltDblClick(Sender: TObject);
@@ -33,11 +37,12 @@ type
     procedure FormShow(Sender: TObject);
     procedure st_ficheEntreeSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure btvaliderClick(Sender: TObject);
     procedure st_ficheEntreeKeyPress(Sender: TObject; var Key: Char);
-    procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edNomVehCloseUp(Sender: TObject);
+    procedure btSaveClick(Sender: TObject);
+    procedure btClotClick(Sender: TObject);
+    procedure btAnnulerClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -46,6 +51,7 @@ type
 
 var
   frmFicheEntree: TfrmFicheEntree;
+  vNumHis : integer ;
 
 implementation
 
@@ -53,7 +59,26 @@ implementation
 
 uses URechClt, records, UDM, UConnexion;
 
-procedure TfrmFicheEntree.btvaliderClick(Sender: TObject);
+procedure TfrmFicheEntree.btAnnulerClick(Sender: TObject);
+var
+  i,j : integer;
+begin
+//  edNum.Clear;
+  edCodeclt.Clear;
+  edNomClt.Clear;
+  edNomVeh.Clear;
+  cbMatVeh.Clear;
+
+
+  //vider les cellules
+  for I := 3 to st_ficheEntree.ColCount do
+    for j := 1 to st_ficheEntree.RowCount-1 do
+      st_ficheEntree.Cells[i,j] := ' ';
+
+  st_ficheEntree.RowCount := 1;
+end;
+
+procedure TfrmFicheEntree.btSaveClick(Sender: TObject);
 var
   fiche_es : TFiche_es;
   I,j,
@@ -63,6 +88,7 @@ var
   codeArt,sqlUp,sqlUpFiche,SqlUpTFiche : string;
   ficheEs_recap : TficheEs_recap;
   ficheEsTotal : TFicheEsTotal;
+  FicheEsH : TFicheEsH;
 begin
   for I := 3 to st_ficheEntree.ColCount do
     for j := 1 to st_ficheEntree.RowCount-1 do
@@ -83,10 +109,27 @@ begin
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
   begin
+//  Insertion dans la table d'entete de fiche
+  with FicheEsH do
+    begin
+      Nnum_fh := StrToInt(edNum.Text);
+      Nnum_his := vNumHis;
+      Sdate_fh := DateToStr(cbdate.Date);
+      Scode_clt:=edCodeclt.Text;
+      Snom_clt:=edNomClt.Text;
+      Snum_veh := cbMatVeh.Text;
+      Snom_veh := edNomVeh.Text;
+      NType_fs := 0;   // 1 Pour la sortie et 0 pour l'entree
+      Susager := vUsager;
+      Nstatut_canc := 0;
+    end;
+    dm.InsertFicheEsH(FicheEsH);
+
 //  INSERTION DANS fiche recap
   with ficheEs_recap do
     begin
       Nnum_fes:=StrToInt(edNum.Text);
+      Nnum_his := vNumHis;
       Sdate_fes:=DateToStr(cbdate.Date);
       Scode_clt:=edCodeclt.Text;
       Snom_clt:=edNomClt.Text;
@@ -153,6 +196,7 @@ begin
   with ficheEsTotal , st_ficheEntree do //Insertion dans la table de total fiche
     begin
       Nnum_ft := StrToInt(edNum.Text);
+      Nnum_his := vNumHis;
       Sdate_ft := DateToStr(cbdate.Date);
       Scode_clt:=edCodeclt.Text;
       Snom_clt:=edNomClt.Text;
@@ -203,6 +247,7 @@ begin
             article:=dm.selectArticleByCode(codeArt);
 
             Nnum_fes := StrToInt(edNum.Text);
+            Nnum_his := vNumHis;
             Sdate_fes := DateToStr(cbdate.Date);
             Scode_clt := edCodeclt.Text;
             Snom_clt := edNomClt.Text;
@@ -254,7 +299,8 @@ begin
                           +article.Salias_art+'_Iv = '+QuotedStr(Cells[3,i])+','
                           +article.Salias_art+'_If = '+QuotedStr(Cells[4,i])+','
                           +article.Salias_art+'_Ip = '+QuotedStr(Cells[5,i])
-                          +' where num_fes = '+edNum.Text;
+                          +' where num_fes = '+edNum.Text
+                          +' and num_his = '+IntToStr(vNumHis);
             dm.UpdateTable(sqlUpFiche);
 
 //Mise à jours dans la table total fiche d'entree
@@ -263,29 +309,56 @@ begin
               SqlUpTFiche:='Update tb_ficheEs_Total set '
                             +article.Salias_art+'_I = '+QuotedStr(IntToStr(vTotal))
                             +' where num_ft = '+edNum.Text
+                            +' and num_his = '+IntToStr(vNumHis)
             else
               SqlUpTFiche:='Update tb_ficheEs_Total set '
                             +article.Salias_art+'_I = '+QuotedStr('')
-                            +' where num_ft = '+edNum.Text  ;
+                            +' where num_ft = '+edNum.Text
+                            +' and num_his = '+IntToStr(vNumHis);
+
 
             dm.UpdateTable(SqlUpTFiche);
 
           end;
       end;
+    //vider les cellules
+      for I := 3 to st_ficheEntree.ColCount do
+        for j := 1 to st_ficheEntree.RowCount-1 do
+          st_ficheEntree.Cells[i,j] := ' ';
 
-      Button2.Click;
-      FormShow(sender);
+      st_ficheEntree.RowCount := 1;
+
+// Incrémentation du  numéro d'historique
+  vNumHis := vNumHis +1 ;
+
+  btClot.Enabled := True;
+  btSave.Enabled := False;
+
+  edCodeclt.Enabled:=False;
+  edNomClt.Enabled := False;
+  edNomVeh.Enabled:=false;
+  cbMatVeh.Enabled:=false;
+
+  st_ficheEntree.Enabled := False;
   end;
 
 end;
 
-procedure TfrmFicheEntree.Button2Click(Sender: TObject);
+procedure TfrmFicheEntree.btClotClick(Sender: TObject);
 begin
-  edNum.Clear;
-  edCodeclt.Clear;
-  edNomClt.Clear;
-  edNomVeh.Clear;
-  cbMatVeh.Clear;
+if  MessageDlg('Etes-vous certain de vouloir clôturer ce lot ?',mtWarning,[mbYes,mbNo],0) = mrYes then
+  begin
+    btAnnuler.Click;
+    FormShow(sender);
+    vNumHis := 0;
+
+    edCodeclt.Enabled:=True;
+    edNomClt.Enabled := True;
+    edNomVeh.Enabled:=True;
+    cbMatVeh.Enabled:=True;
+
+  end;
+
 end;
 
 procedure TfrmFicheEntree.edNomVehCloseUp(Sender: TObject);
@@ -327,6 +400,11 @@ with st_ficheEntree do
     Cells[4,0]:='Fuite';
     Cells[5,0]:='Pleine';
   end;
+
+//initialisation du numéro d'historique
+
+vNumHis := 0;
+
 end;
 
 procedure TfrmFicheEntree.FormShow(Sender: TObject);
@@ -344,7 +422,10 @@ begin
       st_ficheEntree.Cells[i,j] := ' ';
 //*****
   cbdate.Date := Now;
-  btvalider.Enabled := false;
+  btSave.Enabled := false;
+  btClot.Enabled := false;
+  st_ficheEntree.Enabled := True;
+
 //selection du véhicule
   Psql := '';
 
@@ -368,6 +449,9 @@ begin
           end;
     end;
     if st_ficheEntree.RowCount>1 then st_ficheEntree.FixedRows:=1;
+
+  edNum.Text := vUsager+IntToStr(dm.SelectMaxLettrage.numLettrage+1) ;
+
 
 end;
 
@@ -416,7 +500,9 @@ if key = #13 then
             st_ficheEntree.Cells[i,j] := '0';
 //            btvalider.Enabled:=True else btvalider.Enabled := False;
           end;
-          btvalider.Enabled:=true;
+          btSave.Enabled:=true;
+          btClot.Enabled:=false;
+
   end;
 end;
 

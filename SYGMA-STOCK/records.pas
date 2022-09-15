@@ -158,7 +158,8 @@ TZoneArray = Array of TZone;
 
 TficheEs_recap = record
 	Nid_fes ,
-	Nnum_fes : integer;
+	Nnum_fes ,
+  Nnum_his : integer;
 	Sdate_fes ,
 	Scode_clt ,
 	Snom_clt ,
@@ -223,7 +224,8 @@ TficheEs_recapArray = array of TficheEs_recap;
 
 TFiche_es = record
 	Nid_fes ,
-	Nnum_fes :integer;
+	Nnum_fes ,
+  Nnum_his :integer;
 	Sdate_fes ,
 	Scode_clt ,
 	Snom_clt ,
@@ -244,7 +246,8 @@ TFiche_esArray = array of TFiche_es;
 
 TFicheEsTotal = record
 	Nid_ft ,
-	Nnum_ft : integer;
+	Nnum_ft ,
+  Nnum_his : integer;
 	Sdate_ft ,
 	Scode_clt ,
 	Snom_clt ,
@@ -376,7 +379,8 @@ end;
 
 TFicheEsH = record
   NidFh,
-	Nnum_fh : integer;
+	Nnum_fh ,
+  Nnum_his : integer;
 	Sdate_fh ,
 	Scode_clt ,
 	Snom_clt ,

@@ -14,7 +14,7 @@ type
     SpeedButton2: TSpeedButton;
     btSave: TButton;
     btAnnuler: TButton;
-    Button1: TButton;
+    btClot: TButton;
     Panel2: TPanel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
@@ -50,7 +50,7 @@ type
     procedure btAnnulerClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btClotClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -60,6 +60,7 @@ type
 var
   frmFicheSortie: TfrmFicheSortie;
   vCodeMag : string;
+  vNumHis : integer ;
 
 implementation
 
@@ -292,12 +293,18 @@ begin
 
 end;
 
-procedure TfrmFicheSortie.Button1Click(Sender: TObject);
+procedure TfrmFicheSortie.btClotClick(Sender: TObject);
 begin
 if  MessageDlg('Etes-vous certain de vouloir clôturer ce lot ?',mtWarning,[mbYes,mbNo],0) = mrYes then
   begin
     FormShow(sender);
     btAnnuler.Click;
+    vNumHis := 0;
+
+    edCodeclt.Enabled:=True;
+    edNomClt.Enabled := True;
+    edNomVeh.Enabled:=True;
+    cbMatVeh.Enabled:=True;
   end;
 end;
 
@@ -313,6 +320,7 @@ var
   FicheEsRec : TficheEs_recap;
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
+
 begin
   for I := 3 to st_ficheSortie.ColCount do
     for j := 1 to st_ficheSortie.RowCount-1 do
@@ -337,6 +345,7 @@ begin
   with FicheEsH do
     begin
       Nnum_fh := StrToInt(edNum.Text);
+      Nnum_his := vNumHis;
       Sdate_fh := DateToStr(cbdate.Date);
       Scode_clt:=edCodeclt.Text;
       Snom_clt:=edNomClt.Text;
@@ -353,6 +362,7 @@ begin
   with ficheEs_recap do
     begin
       Nnum_fes:=StrToInt(edNum.Text);
+      Nnum_his:=vNumHis;
       Sdate_fes:=DateToStr(cbdate.Date);
       Scode_clt:=edCodeclt.Text;
       Snom_clt:=edNomClt.Text;
@@ -419,6 +429,7 @@ begin
   with ficheEsTotal , st_ficheSortie do //Insertion dans la table de total fiche
     begin
       Nnum_ft := StrToInt(edNum.Text);
+      Nnum_his := vNumHis;
       Sdate_ft := DateToStr(cbdate.Date);
       Scode_clt:=edCodeclt.Text;
       Snom_clt:=edNomClt.Text;
@@ -467,8 +478,8 @@ begin
             stockArt:=dm.selectStockByArticle(codeArt);
             article:=dm.selectArticleByCode(codeArt);
 
-
             Nnum_fes := StrToInt(edNum.Text);
+            Nnum_his := vNumHis;
             Sdate_fes := DateToStr(cbdate.Date);
             Scode_clt := edCodeclt.Text;
             Snom_clt := edNomClt.Text;
@@ -483,7 +494,8 @@ begin
             RkgPleine:=article.Rkilo * StrToInt(Cells[5,i]);
             Ntype_fes:= 1 ; // 0 Pour la fiche d'entrée et 1 pour la fiche de sortie
             Susager := vusager;
-            Nstatut_canc := 0;          end;
+            Nstatut_canc := 0;
+          end;
           dm.InsertFiche_es(fiche_es);
       end;// end for
 
@@ -521,7 +533,8 @@ begin
                           +article.Salias_art+'_Ov = '+QuotedStr(Cells[3,i])+','
                           +article.Salias_art+'_Of = '+QuotedStr(Cells[4,i])+','
                           +article.Salias_art+'_Op = '+QuotedStr(Cells[5,i])
-                          +' where num_fes = '+edNum.Text;
+                          +' where num_fes = '+edNum.Text
+                          +' and num_his = '+IntToStr(vNumHis);
             dm.UpdateTable(sqlUpFiche);
 
 //Mise à jours dans la table total fiche d'sortie
@@ -530,14 +543,14 @@ begin
               SqlUpTFiche:='Update tb_ficheEs_Total set '
                             +article.Salias_art+'_S = '+QuotedStr(IntToStr(vTotal))
                             +' where num_ft = '+edNum.Text
+                            +' and num_his = '+IntToStr(vNumHis)
             else
               SqlUpTFiche:='Update tb_ficheEs_Total set '
                             +article.Salias_art+'_S = '+QuotedStr('')
-                            +' where num_ft = '+edNum.Text  ;
+                            +' where num_ft = '+edNum.Text
+                            +' and num_his = '+IntToStr(vNumHis);
 
             dm.UpdateTable(SqlUpTFiche);
-
-
           end;
       end;
 
@@ -547,6 +560,19 @@ begin
           st_ficheSortie.Cells[i,j] := ' ';
 
       st_ficheSortie.RowCount := 1;
+
+// Incrémentation du  numéro d'historique
+  vNumHis := vNumHis +1 ;
+
+  btClot.Enabled := True;
+  btSave.Enabled := False;
+
+  edCodeclt.Enabled:=False;
+  edNomClt.Enabled := False;
+  edNomVeh.Enabled:=false;
+  cbMatVeh.Enabled:=false;
+
+  st_ficheSortie.Enabled := False;
 
   end;
 end;
@@ -585,6 +611,12 @@ begin
       vCodeMag:=Magasins[i].SCode_mag;
     end;
 
+//numéro d'historisation    
+
+//  if vCodeMag = 'PFGB' then vNumHis := 0
+//  else
+//  if vCodeMag = 'PFBC' then vNumHis := 1;
+
 //Selection d'article
 
   PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag); //where code_mag = '+QuotedStr('PFGB');
@@ -600,6 +632,8 @@ begin
           end;
     end;
     if st_ficheSortie.RowCount>1 then st_ficheSortie.FixedRows:=1;
+
+    st_ficheSortie.Enabled := True;
 
 end;
 
@@ -680,6 +714,11 @@ with st_ficheSortie do
     Cells[4,0]:='Fuite';
     Cells[5,0]:='Pleine';
   end;
+
+//initialisation du numéro d'historique
+
+vNumHis := 0;
+
 end;
 
 procedure TfrmFicheSortie.FormShow(Sender: TObject);
@@ -692,7 +731,6 @@ var
 
   Magasins : TMagasinArray;
   PsqlMag : string;
-
 begin
   cbdate.Checked := False;
 //vider les cellules
@@ -703,6 +741,8 @@ begin
 //*****
   cbdate.Date := Now;
   btSave.Enabled := false;
+  btClot.Enabled := false;
+  st_ficheSortie.Enabled := True;
 
 // selection du magasin
 
@@ -788,6 +828,7 @@ if key = #13 then
             st_ficheSortie.Cells[i,j] := '0';
           end;
           btSave.Enabled:=true;
+          btClot.Enabled:=false;
   end;
 end;
 

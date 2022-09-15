@@ -31,11 +31,11 @@ type
     frxDBsum: TfrxDBDataset;
     QSUM: TSQLQuery;
     procedure FormShow(Sender: TObject);
-    procedure cbVehKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cbVehChange(Sender: TObject);
     procedure cbClientCloseUp(Sender: TObject);
+    procedure cbVehCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -137,7 +137,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
 Sql := 'Select * from tb_fichees_total '
           +' where date_ft between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and matricule_veh = '+QuotedStr(edMarque.Text)
           +' order by date_ft desc ';
 
   //
@@ -170,7 +170,7 @@ Sql := 'Select * from tb_fichees_total '
     +' from tb_fichees_total '
     +' where date_ft between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
     +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-    +' and matricule_veh = '+QuotedStr(cbVeh.Text) ;
+    +' and matricule_veh = '+QuotedStr(edMarque.Text) ;
     end;
 
   QFicheRap.SQL.Clear;
@@ -206,28 +206,25 @@ end;
 procedure TfrmRapprochementFicheEs.cbVehChange(Sender: TObject);
 begin
 edMarque.Clear;
+cbVeh.OnCloseUp(sender);
 end;
 
-procedure TfrmRapprochementFicheEs.cbVehKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TfrmRapprochementFicheEs.cbVehCloseUp(Sender: TObject);
 var
   vehs : TVehiculeArray;
   Psql_veh : string;
   i: integer;
 begin
-if key = #13 then
-  begin
 //selection du véhicule
-    Psql_veh := ' where Num_Immat_veh = '+QuotedStr(cbVeh.Text) ;
+    Psql_veh := ' where marque_veh = '+QuotedStr(cbVeh.Text) ;
 
     vehs:=dm.SelectVehicule(Psql_veh);
     for I := Low(vehs) to High(vehs) do
       begin
-        edMarque.Text := vehs[i].SMarque;
+        edMarque.Text := vehs[i].SNum_mat;
       end;
 
       edcodeClt.Clear;
-  end;
 end;
 
 procedure TfrmRapprochementFicheEs.FormCreate(Sender: TObject);
@@ -259,7 +256,7 @@ begin
   vehs:=dm.SelectVehicule(Psql_veh);
   for I := Low(vehs) to High(vehs) do
     begin
-      cbVeh.Items.Add(vehs[i].SNum_mat);
+      cbVeh.Items.Add(vehs[i].SMarque);
     end;
 end;
 

@@ -18,6 +18,7 @@ type
     procedure St_RechDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
     procedure St_RechDblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -54,6 +55,15 @@ begin
           Cells[1,i+1]:=Clts[i].SnomClt;
         end;
     end;
+end;
+
+procedure TfrmRechClt.FormCreate(Sender: TObject);
+begin
+with St_Rech do
+  begin
+    Cells[0,0]:='Client';
+    Cells[1,0]:='Nom'
+  end;
 end;
 
 procedure TfrmRechClt.St_RechDblClick(Sender: TObject);

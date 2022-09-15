@@ -12,6 +12,7 @@ object frmRechClt: TfrmRechClt
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -22,7 +23,6 @@ object frmRechClt: TfrmRechClt
     Align = alTop
     Caption = 'Client'
     TabOrder = 0
-    ExplicitWidth = 312
     object Label1: TLabel
       Left = 24
       Top = 39
@@ -83,8 +83,6 @@ object frmRechClt: TfrmRechClt
     StyleElements = [seBorder]
     OnDblClick = St_RechDblClick
     OnDrawCell = St_RechDrawCell
-    ExplicitWidth = 312
-    ExplicitHeight = 213
     ColWidths = (
       61
       246)
