@@ -289,10 +289,11 @@ with st_SideMenu do
     Cells[0,2]:='Etat des entrées';
     Cells[0,3]:='Etat des sorties';
     Cells[0,4]:='Etat des entrées annulées';
-    Cells[0,5]:='Récap de fiche d''entrées/sorties';
-    Cells[0,6]:='Rapprochement de fiche d''entrées/sorties';
+    Cells[0,5]:='Récap de fiche d''entrées';
+    Cells[0,6]:='Récap de fiche de sortie';
+    Cells[0,7]:='Rapprochement de fiche d''entrées/sorties';
   end;
-  st_SideMenu.RowCount:=7;
+  st_SideMenu.RowCount:=8;
   vBtn := 5;
 end;
 

@@ -245,116 +245,123 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
     end
     object Page1: TfrxReportPage
       Orientation = poLandscape
-      PaperWidth = 420.000000000000000000
-      PaperHeight = 297.000000000000000000
-      PaperSize = 8
-      LeftMargin = 10.000000000000000000
-      RightMargin = 10.000000000000000000
-      TopMargin = 10.000000000000000000
-      BottomMargin = 10.000000000000000000
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 2.000000000000000000
+      RightMargin = 2.000000000000000000
+      TopMargin = 2.000000000000000000
+      BottomMargin = 2.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
+        Height = 41.574830000000000000
         Top = 18.897650000000000000
-        Width = 1511.812000000000000000
+        Width = 1107.402290000000000000
+        object Memo100: TfrxMemoView
+          AllowVectorExport = True
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 332.598640000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Etat de rapprochement d'#39'entr'#233'e/sortie par fiche')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 41.574830000000000000
-        Top = 68.031540000000000000
-        Width = 1511.812000000000000000
+        Top = 83.149660000000000000
+        Width = 1107.402290000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
-          Left = 0.117810000000000000
+          Left = -167.882190000000000000
           Top = 22.000000000000000000
-          Width = 1511.811323860000000000
+          Width = 26.456692913385800000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftBottom]
           Frame.Width = 2.000000000000000000
+          HAlign = haCenter
           ParentFont = False
-          Style = 'Header line'
+          VAlign = vaCenter
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
           Top = 22.000000000000000000
-          Width = 80.503937010000000000
+          Width = 65.385817010000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'Date')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 81.046308020000000000
+          Left = 67.046308020000000000
           Top = 22.000000000000000000
-          Width = 131.669751280000000000
+          Width = 120.331161280000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'Client')
           ParentFont = False
-        end
-        object Memo5: TfrxMemoView
-          AllowVectorExport = True
-          Left = 213.786869300000000000
-          Top = 22.000000000000000000
-          Width = 83.211281790000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'N'#176' Veh')
-          ParentFont = False
+          VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 297.439091090000000000
+          Left = 189.439091090000000000
           Top = 22.000000000000000000
-          Width = 183.869539540000000000
+          Width = 123.397059540000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'Marque ')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo7: TfrxMemoView
           AllowVectorExport = True
-          Left = 482.143200630000000000
+          Left = 314.143200630000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -362,16 +369,17 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'B3A')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo8: TfrxMemoView
           AllowVectorExport = True
-          Left = 517.495255400000000000
+          Left = 345.495255400000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -379,16 +387,17 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'B3')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo9: TfrxMemoView
           AllowVectorExport = True
-          Left = 552.526127420000000000
+          Left = 376.377952760000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -396,160 +405,179 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'B6')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo10: TfrxMemoView
           AllowVectorExport = True
-          Left = 587.556999430000000000
+          Left = 407.556999430000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B6R')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo11: TfrxMemoView
           AllowVectorExport = True
-          Left = 622.722518950000000000
+          Left = 438.722518950000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B12')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo12: TfrxMemoView
           AllowVectorExport = True
-          Left = 657.447644220000000000
+          Left = 470.447644220000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B25')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo13: TfrxMemoView
           AllowVectorExport = True
-          Left = 692.172769490000000000
+          Left = 502.172769490000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B50')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo14: TfrxMemoView
           AllowVectorExport = True
-          Left = 727.897894760000000000
+          Left = 532.897894760000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B6E')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo15: TfrxMemoView
           AllowVectorExport = True
-          Left = 763.249949530000000000
+          Left = 564.249949530000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -12
+          Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B12E')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo16: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.296257550000000000
+          Left = 595.296257550000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B14')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo17: TfrxMemoView
           AllowVectorExport = True
-          Left = 834.021382820000000000
+          Left = 627.021382820000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
-            'B20_I')
+            'B20')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Left = 868.746508090000000000
+          Left = 658.746508090000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
-            'B35_I')
+            'B35')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo19: TfrxMemoView
           AllowVectorExport = True
-          Left = 908.471633350000000000
+          Left = 694.677165354331000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -557,16 +585,17 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'B3A')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo20: TfrxMemoView
           AllowVectorExport = True
-          Left = 942.891011880000000000
+          Left = 725.891011880000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -574,176 +603,197 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'B3')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo21: TfrxMemoView
           AllowVectorExport = True
-          Left = 977.989207640000000000
+          Left = 757.989207640000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B6')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo22: TfrxMemoView
           AllowVectorExport = True
-          Left = 1013.087403410000000000
+          Left = 789.087403410000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B6R')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo23: TfrxMemoView
           AllowVectorExport = True
-          Left = 1048.320246680000000000
+          Left = 820.320246680000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B12')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo24: TfrxMemoView
           AllowVectorExport = True
-          Left = 1083.112695700000000000
+          Left = 851.112695700000000000
           Top = 22.000000000000000000
-          Width = 35.792449020000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B25')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo25: TfrxMemoView
           AllowVectorExport = True
-          Left = 1119.905144720000000000
+          Left = 881.905144720000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B50')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo26: TfrxMemoView
           AllowVectorExport = True
-          Left = 1155.697593740000000000
+          Left = 913.697593740000000000
           Top = 22.000000000000000000
-          Width = 37.419378520000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B6E')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo27: TfrxMemoView
           AllowVectorExport = True
-          Left = 1194.116972270000000000
+          Left = 945.116972270000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -12
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B12E')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo28: TfrxMemoView
           AllowVectorExport = True
-          Left = 1229.230604040000000000
+          Left = 977.230604040000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B14')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo29: TfrxMemoView
           AllowVectorExport = True
-          Left = 1264.023053060000000000
+          Left = 1009.023053060000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B20')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo30: TfrxMemoView
           AllowVectorExport = True
-          Left = 1299.136684840000000000
+          Left = 1040.136684840000000000
           Top = 22.000000000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             'B35')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo223: TfrxMemoView
           AllowVectorExport = True
-          Left = 482.267716540000000000
+          Left = 314.267716540000000000
           Top = 1.677180000000000000
-          Width = 420.661417320000000000
+          Width = 375.307057320000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -752,16 +802,17 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'BOUTEILLE TOTAL ENTREE')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo224: TfrxMemoView
           AllowVectorExport = True
-          Left = 908.598425200000000000
+          Left = 694.677165350000000000
           Top = 2.000000000000000000
-          Width = 424.440944880000000000
+          Width = 375.307054880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -770,99 +821,88 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             'BOUTEILLE TOTAL SORTIE')
           ParentFont = False
+          VAlign = vaCenter
         end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 170.078850000000000000
-        Width = 1511.812000000000000000
+        Top = 185.196970000000000000
+        Width = 1107.402290000000000000
         DataSet = frxDBFicheRap
         DataSetName = 'frxDBFicheRap'
         RowCount = 0
         object Memo31: TfrxMemoView
           AllowVectorExport = True
-          Width = 80.503937010000000000
+          Width = 65.385817010000000000
           Height = 18.897650000000000000
           DataField = 'date_ft'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBFicheRap."date_ft"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo32: TfrxMemoView
           AllowVectorExport = True
-          Left = 81.046308020000000000
-          Width = 131.669751280000000000
+          Left = 67.046308020000000000
+          Width = 120.331161280000000000
           Height = 18.897650000000000000
           DataField = 'nom_clt'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBFicheRap."nom_clt"]')
           ParentFont = False
-        end
-        object Memo33: TfrxMemoView
-          AllowVectorExport = True
-          Left = 213.786869300000000000
-          Width = 83.211281790000000000
-          Height = 18.897650000000000000
-          DataField = 'matricule_veh'
-          DataSet = frxDBFicheRap
-          DataSetName = 'frxDBFicheRap'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFicheRap."matricule_veh"]')
-          ParentFont = False
+          VAlign = vaCenter
         end
         object Memo34: TfrxMemoView
           AllowVectorExport = True
-          Left = 297.439091090000000000
-          Width = 183.869539540000000000
+          Left = 189.439091090000000000
+          Width = 123.397059540000000000
           Height = 18.897650000000000000
           DataField = 'marque_veh'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBFicheRap."marque_veh"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo35: TfrxMemoView
           AllowVectorExport = True
-          Left = 482.143200630000000000
-          Width = 34.015748030000000000
+          Left = 314.143200630000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B3A_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -870,18 +910,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B3A_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo36: TfrxMemoView
           AllowVectorExport = True
-          Left = 517.495255400000000000
-          Width = 34.015748030000000000
+          Left = 345.495255400000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B3_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -889,18 +930,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B3_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo37: TfrxMemoView
           AllowVectorExport = True
-          Left = 552.526127420000000000
-          Width = 34.015748030000000000
+          Left = 376.377952760000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B6_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -908,18 +950,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo38: TfrxMemoView
           AllowVectorExport = True
-          Left = 587.556999430000000000
-          Width = 34.015748030000000000
+          Left = 407.556999430000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B6R_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -927,18 +970,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6R_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo39: TfrxMemoView
           AllowVectorExport = True
-          Left = 622.722518950000000000
-          Width = 34.015748030000000000
+          Left = 438.722518950000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B12_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -946,18 +990,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B12_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo40: TfrxMemoView
           AllowVectorExport = True
-          Left = 657.447644220000000000
-          Width = 34.015748030000000000
+          Left = 470.447644220000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B25_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -965,18 +1010,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B25_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo41: TfrxMemoView
           AllowVectorExport = True
-          Left = 692.172769490000000000
-          Width = 34.015748030000000000
+          Left = 502.172769490000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B50_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -984,18 +1030,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B50_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo42: TfrxMemoView
           AllowVectorExport = True
-          Left = 727.897894760000000000
-          Width = 34.015748030000000000
+          Left = 532.897894760000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B6E_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1003,18 +1050,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6E_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo43: TfrxMemoView
           AllowVectorExport = True
-          Left = 763.249949530000000000
-          Width = 34.015748030000000000
+          Left = 564.249949530000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B12E_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1022,18 +1070,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B12E_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo44: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.296257550000000000
-          Width = 34.015748030000000000
+          Left = 595.296257550000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B14_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1041,18 +1090,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B14_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo45: TfrxMemoView
           AllowVectorExport = True
-          Left = 834.021382820000000000
-          Width = 34.015748030000000000
+          Left = 627.021382820000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B20_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1060,18 +1110,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B20_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo46: TfrxMemoView
           AllowVectorExport = True
-          Left = 868.746508090000000000
-          Width = 34.015748030000000000
+          Left = 658.746508090000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B35_I'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1079,18 +1130,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B35_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo47: TfrxMemoView
           AllowVectorExport = True
-          Left = 908.471633350000000000
-          Width = 34.015748030000000000
+          Left = 694.677165354331000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B3A_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1098,18 +1150,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B3A_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo48: TfrxMemoView
           AllowVectorExport = True
-          Left = 942.891011880000000000
-          Width = 34.015748030000000000
+          Left = 725.891011880000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B3_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1117,18 +1170,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B3_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo49: TfrxMemoView
           AllowVectorExport = True
-          Left = 977.989207640000000000
-          Width = 34.015748030000000000
+          Left = 757.989207640000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B6_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1136,18 +1190,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo50: TfrxMemoView
           AllowVectorExport = True
-          Left = 1013.087403410000000000
-          Width = 34.015748030000000000
+          Left = 789.087403410000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B6R_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1155,18 +1210,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6R_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo51: TfrxMemoView
           AllowVectorExport = True
-          Left = 1048.320246680000000000
-          Width = 34.015748030000000000
+          Left = 820.320246680000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B12_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1174,18 +1230,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B12_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo52: TfrxMemoView
           AllowVectorExport = True
-          Left = 1083.112695700000000000
-          Width = 35.792449020000000000
+          Left = 851.112695700000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B25_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1193,18 +1250,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B25_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo53: TfrxMemoView
           AllowVectorExport = True
-          Left = 1119.905144720000000000
-          Width = 34.015748030000000000
+          Left = 881.905144720000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B50_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1212,18 +1270,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B50_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo54: TfrxMemoView
           AllowVectorExport = True
-          Left = 1155.697593740000000000
-          Width = 37.419378520000000000
+          Left = 913.697593740000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B6E_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1231,18 +1290,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B6E_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo55: TfrxMemoView
           AllowVectorExport = True
-          Left = 1194.116972270000000000
-          Width = 34.015748030000000000
+          Left = 945.116972270000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B12E_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1250,18 +1310,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B12E_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo56: TfrxMemoView
           AllowVectorExport = True
-          Left = 1229.230604040000000000
-          Width = 34.015748030000000000
+          Left = 977.230604040000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataField = 'B14_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1269,17 +1330,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B14_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo57: TfrxMemoView
           AllowVectorExport = True
-          Left = 1264.023053060000000000
-          Width = 34.015748030000000000
+          Left = 1009.023053060000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1287,18 +1349,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B20_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo58: TfrxMemoView
           AllowVectorExport = True
-          Left = 1299.136684840000000000
-          Width = 34.015748030000000000
+          Left = 1040.136684840000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataField = 'B35_S'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1306,18 +1369,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBFicheRap."B35_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 317.480520000000000000
-        Width = 1511.812000000000000000
+        Top = 332.598640000000000000
+        Width = 1107.402290000000000000
         object Memo59: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
-          Width = 1511.812000000000000000
+          Width = 1107.402290000000000000
           Frame.Typ = [ftTop]
           Frame.Width = 2.000000000000000000
         end
@@ -1333,7 +1397,7 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
         object Memo61: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 1436.221400000000000000
+          Left = 1031.811690000000000000
           Top = 1.000000000000000000
           Width = 75.590600000000000000
           Height = 22.677180000000000000
@@ -1347,18 +1411,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
         FillType = ftBrush
         Frame.Typ = []
         Height = 45.354360000000000000
-        Top = 211.653680000000000000
-        Width = 1511.812000000000000000
+        Top = 226.771800000000000000
+        Width = 1107.402290000000000000
         object Memo62: TfrxMemoView
           AllowVectorExport = True
-          Left = 482.267716540000000000
-          Width = 34.015748030000000000
+          Left = 314.267716540000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1367,17 +1431,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB3A_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo63: TfrxMemoView
           AllowVectorExport = True
-          Left = 517.417322830000000000
-          Width = 34.015748030000000000
+          Left = 345.417322830000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1386,17 +1451,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB3_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo64: TfrxMemoView
           AllowVectorExport = True
-          Left = 552.566929130000000000
-          Width = 34.015748030000000000
+          Left = 376.377952760000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1405,17 +1471,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo65: TfrxMemoView
           AllowVectorExport = True
-          Left = 587.716535430000000000
-          Width = 34.015748030000000000
+          Left = 407.716535430000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1424,17 +1491,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6R_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo66: TfrxMemoView
           AllowVectorExport = True
-          Left = 622.866141730000000000
-          Width = 34.015748030000000000
+          Left = 438.866141730000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1443,17 +1511,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB12_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo67: TfrxMemoView
           AllowVectorExport = True
-          Left = 657.259842520000000000
-          Width = 34.015748030000000000
+          Left = 470.259842520000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1462,17 +1531,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB25_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo68: TfrxMemoView
           AllowVectorExport = True
-          Left = 692.031496060000000000
-          Width = 34.015748030000000000
+          Left = 502.031496060000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1481,17 +1551,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB50_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo69: TfrxMemoView
           AllowVectorExport = True
-          Left = 727.937007870000000000
-          Width = 34.015748030000000000
+          Left = 532.937007870000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1500,17 +1571,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6E_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo70: TfrxMemoView
           AllowVectorExport = True
-          Left = 763.086614170000000000
-          Width = 34.015748030000000000
+          Left = 564.086614170000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1519,17 +1591,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB12E_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo71: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.370078740000000000
-          Width = 34.015748030000000000
+          Left = 595.370078740000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1538,17 +1611,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB14_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo72: TfrxMemoView
           AllowVectorExport = True
-          Left = 834.141732280000000000
-          Width = 34.015748030000000000
+          Left = 627.141732280000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1557,17 +1631,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB20_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo73: TfrxMemoView
           AllowVectorExport = True
-          Left = 868.913385830000000000
-          Width = 34.015748030000000000
+          Left = 658.913385830000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1576,17 +1651,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB35_I"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo74: TfrxMemoView
           AllowVectorExport = True
-          Left = 908.598425200000000000
-          Width = 34.015748030000000000
+          Left = 694.677165354331000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1595,17 +1671,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB3A_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo75: TfrxMemoView
           AllowVectorExport = True
-          Left = 942.992125980000000000
-          Width = 34.015748030000000000
+          Left = 725.992125980000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1614,17 +1691,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB3_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo76: TfrxMemoView
           AllowVectorExport = True
-          Left = 978.141732280000000000
-          Width = 34.015748030000000000
+          Left = 758.141732280000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1633,17 +1711,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo77: TfrxMemoView
           AllowVectorExport = True
-          Left = 1012.913385830000000000
-          Width = 34.015748030000000000
+          Left = 789.165354330709000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1652,17 +1731,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6R_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo78: TfrxMemoView
           AllowVectorExport = True
-          Left = 1048.440944880000000000
-          Width = 34.015748030000000000
+          Left = 820.141732283465000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1671,17 +1751,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB12_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo79: TfrxMemoView
           AllowVectorExport = True
-          Left = 1083.212598430000000000
-          Width = 35.792449020000000000
+          Left = 851.212598430000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1690,17 +1771,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB25_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo80: TfrxMemoView
           AllowVectorExport = True
-          Left = 1119.874015750000000000
-          Width = 34.015748030000000000
+          Left = 881.874015750000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1709,17 +1791,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB50_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo81: TfrxMemoView
           AllowVectorExport = True
-          Left = 1155.779527560000000000
-          Width = 37.419378520000000000
+          Left = 913.511811023622000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1728,17 +1811,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB6E_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo82: TfrxMemoView
           AllowVectorExport = True
-          Left = 1193.952755910000000000
-          Width = 34.015748030000000000
+          Left = 944.952755910000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1747,17 +1831,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB12E_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo83: TfrxMemoView
           AllowVectorExport = True
-          Left = 1229.102362200000000000
-          Width = 34.015748030000000000
+          Left = 977.102362200000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1766,17 +1851,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB14_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo84: TfrxMemoView
           AllowVectorExport = True
-          Left = 1263.874015750000000000
-          Width = 34.015748030000000000
+          Left = 1008.874015750000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1785,17 +1871,18 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB20_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo85: TfrxMemoView
           AllowVectorExport = True
-          Left = 1299.023622050000000000
-          Width = 34.015748030000000000
+          Left = 1040.023622050000000000
+          Width = 30.236220472440900000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1804,18 +1891,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[frxDBsum."TB35_S"]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo86: TfrxMemoView
           AllowVectorExport = True
-          Left = 481.779840000000000000
+          Left = 313.779840000000000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1833,6 +1921,7 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB3A_I">-<frxDBsum."TB3A_S">)]')
           ParentFont = False
+          VAlign = vaCenter
           Formats = <
             item
             end
@@ -1841,15 +1930,15 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
         end
         object Memo87: TfrxMemoView
           AllowVectorExport = True
-          Left = 516.929446290000000000
+          Left = 345.472440940000000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1867,18 +1956,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB3_I">-<frxDBsum."TB3_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo88: TfrxMemoView
           AllowVectorExport = True
-          Left = 552.079052590000000000
+          Left = 376.377952760000000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1896,18 +1986,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB6_I">-<frxDBsum."TB6_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo89: TfrxMemoView
           AllowVectorExport = True
-          Left = 587.228658890000000000
+          Left = 407.811023622047000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1925,18 +2016,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB6R_I">-<frxDBsum."TB6R_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo90: TfrxMemoView
           AllowVectorExport = True
-          Left = 622.378265190000000000
+          Left = 438.677165350000000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1954,18 +2046,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB12_I">-<frxDBsum."TB12_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo91: TfrxMemoView
           AllowVectorExport = True
-          Left = 656.771965980000000000
+          Left = 470.448818897638000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -1983,18 +2076,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB25_I">-<frxDBsum."TB25_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo92: TfrxMemoView
           AllowVectorExport = True
-          Left = 691.543619520000000000
+          Left = 501.842519685039000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2012,18 +2106,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB50_I">-<frxDBsum."TB50_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo93: TfrxMemoView
           AllowVectorExport = True
-          Left = 727.449131330000000000
+          Left = 532.913385826772000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2041,18 +2136,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB6E_I">-<frxDBsum."TB6E_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo94: TfrxMemoView
           AllowVectorExport = True
-          Left = 762.598737630000000000
+          Left = 563.897637795276000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2070,18 +2166,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB12E_I">-<frxDBsum."TB12E_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo95: TfrxMemoView
           AllowVectorExport = True
-          Left = 798.882202200000000000
+          Left = 595.181102362205000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2099,18 +2196,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB14_I">-<frxDBsum."TB14_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo96: TfrxMemoView
           AllowVectorExport = True
-          Left = 833.653855740000000000
+          Left = 626.952755905512000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2128,18 +2226,19 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB20_I">-<frxDBsum."TB20_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo97: TfrxMemoView
           AllowVectorExport = True
-          Left = 868.425509290000000000
+          Left = 658.771653543307000000
           Top = 26.456710000000000000
-          Width = 34.015748030000000000
+          Width = 30.236220470000000000
           Height = 18.897650000000000000
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
@@ -2157,37 +2256,42 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Memo.UTF8W = (
             '[(<frxDBsum."TB35_I">-<frxDBsum."TB35_S">)]')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo98: TfrxMemoView
           AllowVectorExport = True
-          Left = 302.362204724409000000
+          Left = 169.362204724409000000
           Top = 26.456710000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
+          HAlign = haCenter
           Memo.UTF8W = (
             'Equarts :')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo99: TfrxMemoView
           AllowVectorExport = True
-          Left = 302.362400000000000000
+          Left = 169.362400000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
+          HAlign = haCenter
           Memo.UTF8W = (
             'Totaux :')
           ParentFont = False
+          VAlign = vaCenter
         end
       end
     end
@@ -2255,5 +2359,35 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
     SQLConnection = DM.SQLConnection1
     Left = 80
     Top = 104
+  end
+  object frxPDFExport1: TfrxPDFExport
+    FileName = 'C:\Users\Sam Toplik\Desktop\ee.pdf'
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    CreationTime = 44820.275993009260000000
+    DataOnly = False
+    InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
+    OpenAfterExport = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    PDFStandard = psNone
+    PDFVersion = pv17
+    Left = 264
+    Top = 16
   end
 end
