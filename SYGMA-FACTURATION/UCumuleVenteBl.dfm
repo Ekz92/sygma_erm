@@ -106,7 +106,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitHeight = 198
     ColWidths = (
       82
       240
@@ -121,7 +120,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 263
     object Button1: TButton
       Left = 410
       Top = 0

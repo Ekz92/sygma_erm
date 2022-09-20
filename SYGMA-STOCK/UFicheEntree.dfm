@@ -25,7 +25,6 @@ object frmFicheEntree: TfrmFicheEntree
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 491
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
@@ -155,7 +154,6 @@ object frmFicheEntree: TfrmFicheEntree
       OnDrawCell = st_ficheEntreeDrawCell
       OnKeyPress = st_ficheEntreeKeyPress
       OnSelectCell = st_ficheEntreeSelectCell
-      ExplicitHeight = 338
       ColWidths = (
         2
         74
@@ -173,7 +171,6 @@ object frmFicheEntree: TfrmFicheEntree
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 491
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
@@ -247,7 +244,6 @@ object frmFicheEntree: TfrmFicheEntree
       ShowHint = True
       TabOrder = 1
       OnClick = btAnnulerClick
-      ExplicitTop = 449
     end
     object btClot: TButton
       Left = 0
@@ -268,7 +264,6 @@ object frmFicheEntree: TfrmFicheEntree
       TabOrder = 2
       WordWrap = True
       OnClick = btClotClick
-      ExplicitTop = 407
     end
   end
 end

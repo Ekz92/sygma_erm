@@ -36,9 +36,6 @@ object frmRechLivreurChargement: TfrmRechLivreurChargement
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 304
     object Label1: TLabel
       Left = 24
       Top = 18
@@ -73,6 +70,7 @@ object frmRechLivreurChargement: TfrmRechLivreurChargement
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 1
+      OnChange = edNomChange
     end
   end
   object St_Livreur: TStringGrid
@@ -92,8 +90,6 @@ object frmRechLivreurChargement: TfrmRechLivreurChargement
     StyleElements = [seBorder]
     OnDblClick = St_LivreurDblClick
     OnDrawCell = St_LivreurDrawCell
-    ExplicitWidth = 304
-    ExplicitHeight = 168
     ColWidths = (
       99
       198)

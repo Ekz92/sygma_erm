@@ -110,11 +110,14 @@ object frmListeBonCommande: TfrmListeBonCommande
       Width = 85
       Height = 21
       Style = csDropDownList
+      ItemIndex = 0
       ParentColor = True
       TabOrder = 5
+      Text = 'Tout'
       OnChange = cbStatutCloseUp
       OnCloseUp = cbStatutCloseUp
       Items.Strings = (
+        'Tout'
         'Valid'#233
         'Non valid'#233)
     end
@@ -182,6 +185,7 @@ object frmListeBonCommande: TfrmListeBonCommande
     end
     object Annuler1: TMenuItem
       Caption = 'Annuler'
+      OnClick = Annuler1Click
     end
   end
   object QBonCom: TSQLQuery
@@ -744,7 +748,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           Frame.Typ = [ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[SUM(<frxDBBonCom."montant_bc">,MasterData1)]')
+            '[SUM(<frxDBBonCom."pt">,MasterData1)]')
           ParentFont = False
         end
         object Memo20: TfrxMemoView

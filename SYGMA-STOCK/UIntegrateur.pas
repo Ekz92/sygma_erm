@@ -158,7 +158,8 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UEntreeCancListe, UListe_article, USortieDivers, UAdd_Type_article, records,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
-  UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl;
+  UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl, UFicheRecapi,
+  UFicheRecapo;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -440,12 +441,16 @@ begin
   if (vBtn = 5) and (st_SideMenu.Row = 4) then
     frmEntreeCancListe.ShowModal;
 
-//Si cest le bouton Etat et le sous menu etat récap entree/sortie ...
+//Si cest le bouton Etat et le sous menu etat récap entree ...
   if (vBtn = 5) and (st_SideMenu.Row = 5) then
-    frmFicheRecap_es.ShowModal;
+    frmFicheRecapi.ShowModal;
+
+//Si cest le bouton Etat et le sous menu etat récap entree ...
+  if (vBtn = 5) and (st_SideMenu.Row = 6) then
+    frmFicheRecapo.ShowModal;
 
 //Si cest le bouton Etat et le sous menu etat raprochement de fiche entree/sortie ...
-  if (vBtn = 5) and (st_SideMenu.Row = 6) then
+  if (vBtn = 5) and (st_SideMenu.Row = 7) then
     frmRapprochementFicheEs.ShowModal;
 
 //*********************************************************************

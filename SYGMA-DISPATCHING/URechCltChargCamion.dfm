@@ -13,6 +13,7 @@ object frmRechCltChargCamion: TfrmRechCltChargCamion
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -47,7 +48,6 @@ object frmRechCltChargCamion: TfrmRechCltChargCamion
       ParentCtl3D = False
       TabOrder = 0
       OnChange = edrech_nomChange
-      OnExit = edrech_nomChange
     end
     object Edit1: TEdit
       Left = 67

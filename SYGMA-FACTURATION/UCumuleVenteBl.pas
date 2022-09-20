@@ -107,7 +107,7 @@ var
   I: Integer;
 begin
   Psql := ' and f.nom_clt = '+QuotedStr(cbClient.Text)
-          +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +'00:00:00 ')
+          +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +' 00:00:00 ')
           +' and '+ QuotedStr(FormatDateTime('yyyy-mm-dd', d2.Date) +' 23:59:59')
           +' and f.statut_canc = 0';
 

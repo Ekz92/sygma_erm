@@ -52,6 +52,9 @@ type
     procedure st_factureServiceDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure Button3Click(Sender: TObject);
+    procedure Supprimercetteligne1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure edqteKeyPress(Sender: TObject; var Key: Char);
   private
     { Déclarations privées }
   public
@@ -221,6 +224,21 @@ begin
     MessageDlg('Veillez ajouter un service vendu',mtError,[mbOK],0);
 end;
 
+procedure TfrmSaisieFactureService.Button4Click(Sender: TObject);
+begin
+if MessageDlg('Voulez-vous annuler la saisie?',mtWarning,[mbYes,mbNo],0) = mrYes then
+  begin
+    ednomClt.Clear;
+    edCodeClt.Clear;
+    edDesign_sce.Clear;
+    edpu.Clear;
+    edqte.Clear;
+    edCodeTypeSce.Clear;
+    st_factureService.RowCount:=1;
+    lbMontant.Caption:='0';
+  end;
+end;
+
 procedure TfrmSaisieFactureService.cbTypeServiceCloseUp(Sender: TObject);
 var
   Ts : TTypeServiceArray;
@@ -242,6 +260,13 @@ procedure TfrmSaisieFactureService.edCodeCltDblClick(Sender: TObject);
 begin
   vFormclt := 'SFS';
   frmSelectClientFacturation.ShowModal;
+end;
+
+procedure TfrmSaisieFactureService.edqteKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+if Key = #13 then Button1.Click;
+
 end;
 
 procedure TfrmSaisieFactureService.FormClose(Sender: TObject;
@@ -306,6 +331,39 @@ begin
       {Design du texte}
       TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
     end;
+
+end;
+
+procedure TfrmSaisieFactureService.Supprimercetteligne1Click(Sender: TObject);
+var
+  k,i,
+  vQte_t: integer;
+  vMnt_t : Real;
+begin
+with st_factureService do
+  begin
+    k:=Row;
+
+    for I := k to RowCount do
+      begin
+        Rows[i]:=Rows[i+1];
+      end;
+
+      //***********
+
+      RowCount:=RowCount-1;
+  end;
+//  Calcul des totaux
+  vMnt_t := 0;
+  vQte_t := 0;
+
+  for I := 1 to st_factureService.RowCount-1 do
+    begin
+      vMnt_t := vMnt_t + StrToFloat(st_factureService.Cells[3,i]);
+      vQte_t := vQte_t + StrToInt(st_factureService.Cells[2,i]);
+    end;
+    lbMontant.Caption:=FloatToStrF(vMnt_t,ffNumber,15,2);
+
 
 end;
 

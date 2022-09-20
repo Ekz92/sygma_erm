@@ -172,6 +172,7 @@ object frmSaisieFactureService: TfrmSaisieFactureService
       NumbersOnly = True
       ParentColor = True
       TabOrder = 2
+      OnKeyPress = edqteKeyPress
     end
     object Button1: TButton
       Left = 512
@@ -242,6 +243,7 @@ object frmSaisieFactureService: TfrmSaisieFactureService
       Height = 25
       Caption = 'Annuler'
       TabOrder = 1
+      OnClick = Button4Click
     end
   end
   object st_factureService: TStringGrid
@@ -272,6 +274,7 @@ object frmSaisieFactureService: TfrmSaisieFactureService
     Top = 232
     object Supprimercetteligne1: TMenuItem
       Caption = 'Supprimer cette ligne'
+      OnClick = Supprimercetteligne1Click
     end
   end
   object frxFacturationService: TfrxReport

@@ -186,6 +186,10 @@
             <Form>frmCumuleVenteBL</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="URechCommandeFacture.pas">
+            <Form>frmRechCommandeFacture</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

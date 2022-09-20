@@ -59,7 +59,7 @@ begin
          +' and date_entree between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
          +' and statut_canc = 0'
-         +' order by date_entree desc ';
+         +' order by id_entree desc ';
 
   try
 

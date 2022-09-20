@@ -1,0 +1,63 @@
+unit URechCommandeFacture;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    StRech: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+with StRech do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'N°Cmd';
+    Cells[2,0] := 'Pièce';
+    Cells[3,0] := 'Véhicule';
+  end;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+var
+  Coms : TCommandeCamionArray;
+  Psql : string;
+  I: Integer;
+begin
+  Psql := ' Where statut_cmd = 0 order by num_comc desc '  ;
+  Coms := dm.SelectCommandeCamion(Psql);
+  StRech.RowCount := Length(Coms)+1;
+
+  for I := Low(Coms) to High(Coms) do
+    begin
+      with StRech do
+        begin
+          Cells[0,i+1]:=Coms[i].Sdate_com;
+          Cells[1,i+1]:=IntToStr(Coms[i].Nnum_comc);
+          Cells[2,i+1]:=Coms[i].Spiece;
+          Cells[3,i+1]:=Coms[i].Svehicule;
+        end;
+    end;
+if StRech.RowCount > 1 then StRech.FixedRows := 1;
+
+end;
+
+end.

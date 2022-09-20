@@ -86,7 +86,7 @@ var
   stockArt : TStock;
   article : TArticle;
   codeArt,sqlUp,sqlUpFiche,SqlUpTFiche : string;
-  ficheEs_recap : TficheEs_recap;
+  fichei_recap : Tfichei_recap;
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
 begin
@@ -126,7 +126,7 @@ begin
     dm.InsertFicheEsH(FicheEsH);
 
 //  INSERTION DANS fiche recap
-  with ficheEs_recap do
+  with fichei_recap do
     begin
       Nnum_fes:=StrToInt(edNum.Text);
       Nnum_his := vNumHis;
@@ -162,35 +162,35 @@ begin
       SB12E_Iv:='';
       SB12E_Ip:='';
       SB12E_If:='';
-      SB3A_Ov:='';
-      SB3A_Op:='';
-      SB3A_Of:='';
-      SB3_Ov:='';
-      SB3_Op:='';
-      SB3_Of :='';
-      SB6_Ov:='';
-      SB6_Op:='';
-      SB6_Of:='';
-      SB6R_Ov:='';
-      SB6R_Op:='';
-      SB6R_Of:='';
-      SB12_Ov:='';
-      SB12_Op:='';
-      SB12_Of:='';
-      SB50_Ov:='';
-      SB50_Op:='';
-      SB50_Of:='';
-      SB25_Ov:='';
-      SB25_Op:='';
-      SB25_Of:='';
-      SB6E_Ov:='';
-      SB6E_Op:='';
-      SB6E_Of:='';
-      SB12E_Ov:='';
-      SB12E_Op:='';
-      SB12E_Of :='';
+//      SB3A_Ov:='';
+//      SB3A_Op:='';
+//      SB3A_Of:='';
+//      SB3_Ov:='';
+//      SB3_Op:='';
+//      SB3_Of :='';
+//      SB6_Ov:='';
+//      SB6_Op:='';
+//      SB6_Of:='';
+//      SB6R_Ov:='';
+//      SB6R_Op:='';
+//      SB6R_Of:='';
+//      SB12_Ov:='';
+//      SB12_Op:='';
+//      SB12_Of:='';
+//      SB50_Ov:='';
+//      SB50_Op:='';
+//      SB50_Of:='';
+//      SB25_Ov:='';
+//      SB25_Op:='';
+//      SB25_Of:='';
+//      SB6E_Ov:='';
+//      SB6E_Op:='';
+//      SB6E_Of:='';
+//      SB12E_Ov:='';
+//      SB12E_Op:='';
+//      SB12E_Of :='';
     end;
-    dm.InsertFicheEsRecap(ficheEs_recap);
+    dm.InsertFicheiRecap(fichei_recap);
 
 //insertion dans la table total fiche
   with ficheEsTotal , st_ficheEntree do //Insertion dans la table de total fiche
@@ -295,7 +295,7 @@ begin
             if Trim(Cells[5,i])='0' then Cells[5,i]:='';
 
 
-            sqlUpFiche := 'update tb_fichees_recap set '
+            sqlUpFiche := 'update tb_fichei_recap set '
                           +article.Salias_art+'_Iv = '+QuotedStr(Cells[3,i])+','
                           +article.Salias_art+'_If = '+QuotedStr(Cells[4,i])+','
                           +article.Salias_art+'_Ip = '+QuotedStr(Cells[5,i])

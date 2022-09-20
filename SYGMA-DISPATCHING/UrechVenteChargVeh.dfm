@@ -13,6 +13,7 @@ object frmrechVenteChargVeh: TfrmrechVenteChargVeh
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -23,7 +24,6 @@ object frmrechVenteChargVeh: TfrmrechVenteChargVeh
     Align = alTop
     Caption = 'Crit'#232're de recherche'
     TabOrder = 0
-    ExplicitWidth = 450
     object Label1: TLabel
       Left = 24
       Top = 18
@@ -60,8 +60,7 @@ object frmrechVenteChargVeh: TfrmrechVenteChargVeh
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 1
-      OnChange = edDesignationExit
-      OnExit = edDesignationExit
+      OnChange = edDesignationChange
     end
   end
   object St_Art: TStringGrid
@@ -80,8 +79,6 @@ object frmrechVenteChargVeh: TfrmrechVenteChargVeh
     StyleElements = [seBorder]
     OnDblClick = St_ArtDblClick
     OnDrawCell = St_ArtDrawCell
-    ExplicitWidth = 450
-    ExplicitHeight = 160
     ColWidths = (
       82
       235

@@ -43,6 +43,7 @@ type
     procedure Valider1Click(Sender: TObject);
     procedure StringGrid1DblClick(Sender: TObject);
     procedure cbStatutCloseUp(Sender: TObject);
+    procedure Annuler1Click(Sender: TObject);
 //    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
 //      Rect: TRect; State: TGridDrawState);
   private
@@ -60,6 +61,105 @@ implementation
 
 uses records, UDM, UConnexion;
 
+procedure TfrmListeBonCommande.Annuler1Click(Sender: TObject);
+  var
+  SqlUpBc, SqlDelEntree ,SqlBc: string;
+  Bcs :TBonCom_detailArray;
+
+  code_art, sqlUpdStock : string;
+  i,qte_vide,qte_mag,qte_fin : integer;
+  stock : TStock;
+
+  date_op,code_mag : string;
+
+  SelectMouv,
+//  insertMouv,
+  UpdateMouv :TMouvStock;
+
+begin
+if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes then
+  begin
+//si le bc n'a pas été encore validé
+  if Trim(StringGrid1.Cells[5,StringGrid1.Row])='' then
+    begin
+    //  Changement du statut du Bon
+
+      SqlUpBc := ' Update tb_boncom set '
+                +' statut_bc = 1 ,'
+                +' user_validate = '+QuotedStr('')
+                +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
+
+      dm.UpdateTable(SqlUpBc);
+    end else
+    begin //si le BC est déjà valider
+
+    //  Changement du statut du Bon
+
+      SqlUpBc := ' Update tb_boncom set '
+                +' statut_bc = 1 ,'
+                +' user_validate = '+QuotedStr('')
+                +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
+
+      dm.UpdateTable(SqlUpBc);
+
+    //  Suppression du bon dans la table entree
+
+      SqlDelEntree := ' delete from tb_entree where num_piece = ' +StringGrid1.Cells[1,StringGrid1.Row];
+      dm.DeleteFromTable(SqlDelEntree);
+
+      SqlBc := ' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row]  ;
+
+        Bcs := dm.selectBonCommandeDetail(SqlBc);
+
+
+        for I := Low(Bcs) to High(Bcs) do
+          begin
+          //---------------------------Selection de la quantité en stock----------
+            code_art := Bcs[i].Scode_art;
+            stock := dm.selectStockByArticle(code_art);
+
+            Qte_vide := stock.NQte_vide + Bcs[i].Nqte;
+            Qte_mag := stock.NQte_mag - Bcs[i].Nqte;
+
+          //------------------------ Modification de la quantité du stock ----------------------
+              if stock.Scode_mag = 'PFGB' then
+                sqlUpdStock := 'Update tb_stock set '
+                            +' qte_vide ='+IntToStr(Qte_vide)+','
+                            +' qte_mag = '+IntToStr(Qte_mag)+','
+                            +' qte_totale = '+IntToStr(Qte_vide + Qte_mag )
+                            +' where code_art = '+QuotedStr(Bcs[i].Scode_art)
+              ELSE
+                sqlUpdStock := 'Update tb_stock set '
+    //                        +' qte_vide ='+IntToStr(Qte_vide)+','
+                            +' qte_mag = '+IntToStr(Qte_mag)+','
+                            +' qte_totale = '+IntToStr(Qte_mag )
+                            +' where code_art = '+QuotedStr(Bcs[i].Scode_art) ;
+
+                  dm.UpdateTable(sqlUpdStock);
+
+    //          Ecriture dans la table des mouvement du stock TmouvemntStock
+
+            date_op := DateToStr(Now);
+            code_mag := stock.Scode_mag;
+
+             SelectMouv := dm.selectMouvStock(code_art,date_op,code_mag);
+
+            with UpdateMouv do
+              begin
+                NidMouvStock := SelectMouv.NidMouvStock;
+                Ddate_mouv := SelectMouv.Ddate_mouv;
+                Scode_art := SelectMouv.Scode_art;
+                Scode_mag := SelectMouv.Scode_mag;
+                Nqte_entree := SelectMouv.Nqte_entree-Bcs[i].Nqte;
+                Nqte_sortie := SelectMouv.Nqte_sortie ;
+              end;
+              dm.Update_moovStock(UpdateMouv);
+          end; //end for
+    end;
+  end;
+  Button1.Click;
+end;
+
 procedure TfrmListeBonCommande.Button1Click(Sender: TObject);
 var
   Psql : string;
@@ -73,13 +173,17 @@ begin
 
 
   Psql:=' where date_bc between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
-                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and statut_bc = 0';
 
   if ednumbc.Text<>'' then Psql:= Psql+' and num_bc = '+ednumbc.Text;
   if cbVehicule.Text<>'' then Psql:= Psql+' and vehicule = '+cbVehicule.Text;
 
-  if cbStatut.ItemIndex = 0 then Psql := Psql + ' and user_validate <>'+QuotedStr('')
-  else Psql := Psql + ' and user_validate = '+QuotedStr('');
+  // Filtre sur le statut du bon
+
+  if cbStatut.ItemIndex = 1 then Psql := Psql + ' and user_validate <>'+QuotedStr('')
+  else
+  if cbStatut.ItemIndex = 2 then Psql := Psql + ' and user_validate = '+QuotedStr('');
 
   Psql := Psql+' order by num_bc desc';
 
@@ -94,6 +198,7 @@ begin
           Cells[2,i+1] := Bcs[i].Snom_four;
           Cells[3,i+1] := Bcs[i].SVehicule;
           Cells[4,i+1] := FloatToStrF(Bcs[i].Rmontant_bc,ffNumber,15,2);
+          Cells[5,i+1] := Bcs[i].Susager_val;
 
           vTot := vTot + Bcs[i].Rmontant_bc;
         end;
@@ -168,7 +273,8 @@ vTot := 0;
 //      cbVehicule.Items.Add(vehs[i].SNum_mat);
 //    end;
   //************************
-  Psql:=' order by date_bc desc';
+  Psql:= ' where statut_bc = 0'
+        + ' order by num_bc desc';
 
   BCs := dm.selectBonCommande(Psql);
   StringGrid1.RowCount := Length(BCs)+1;
@@ -181,6 +287,7 @@ vTot := 0;
           Cells[2,i+1] := Bcs[i].Snom_four;
           Cells[3,i+1] := Bcs[i].SVehicule;
           Cells[4,i+1] := FloatToStrF(Bcs[i].Rmontant_bc,ffNumber,15,2);
+          Cells[5,i+1] := Bcs[i].Susager_val;
 
           vTot := vTot + Bcs[i].Rmontant_bc;
         end;
@@ -237,6 +344,13 @@ var
   UpdateMouv :TMouvStock;
 
 begin
+//  Control si le bon a été deja validé
+  if Trim(StringGrid1.Cells[5,StringGrid1.Row]) <> '' then
+    begin
+      MessageDlg('Ce bon a été déjà validé et ne peut plus faire objet de validation',mtError,[mbOK],0);
+      Exit
+    end
+  else //sinon faire sa validation
   if MessageDlg('Confirmez-vous la validation de l''ajout en stock?',mtConfirmation,[mbyes,mbno],0)=mryes then
     begin
 
@@ -317,6 +431,7 @@ begin
                 end;
                 dm.Update_moovStock(UpdateMouv);
             end ;
+// Modification du statut du bl en statut valider
 
               SqlVal := 'Update tb_boncom set user_validate = '+QuotedStr(vUsager)
                         +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
@@ -325,6 +440,8 @@ begin
 
               dm.InsertEntree(entree);
               dm.UpdateTable(sqlUpdStock);
+
+              Button1.Click;
             end;
       end;
 end;

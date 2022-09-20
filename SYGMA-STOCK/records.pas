@@ -156,7 +156,7 @@ end;
 TZoneArray = Array of TZone;
 
 
-TficheEs_recap = record
+Tfichei_recap = record
 	Nid_fes ,
 	Nnum_fes ,
   Nnum_his : integer;
@@ -191,7 +191,19 @@ TficheEs_recap = record
 	SB6E_If ,
 	SB12E_Iv ,
 	SB12E_Ip ,
-	SB12E_If ,
+	SB12E_If  : string;
+end;
+Tfichei_recapArray = array of Tfichei_recap;
+
+Tficheo_recap = record
+	Nid_fes ,
+	Nnum_fes ,
+  Nnum_his : integer;
+	Sdate_fes ,
+	Scode_clt ,
+	Snom_clt ,
+	Smatricule_veh ,
+	Smarque_veh ,
 	SB3A_Ov ,
 	SB3A_Op ,
 	SB3A_Of ,
@@ -220,7 +232,7 @@ TficheEs_recap = record
 	SB12E_Op ,
 	SB12E_Of : string;
 end;
-TficheEs_recapArray = array of TficheEs_recap;
+Tficheo_recapArray = array of Tficheo_recap;
 
 TFiche_es = record
 	Nid_fes ,

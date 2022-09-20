@@ -21,6 +21,7 @@ type
     procedure St_LivreurDblClick(Sender: TObject);
     procedure St_LivreurDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure edNomChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -36,6 +37,30 @@ implementation
 {$R *.dfm}
 
 uses records, UDM, UvteChargVeh, UImportBl;
+
+procedure TfrmRechLivreurChargement.edNomChange(Sender: TObject);
+var
+  Lvs : TLivreurArray;
+  Psql : String;
+  I: Integer;
+begin
+  Psql := ' where nom_liv like '+QuotedStr(edNom.Text+'%');
+  Lvs := dm.selectLivreur(Psql);
+
+  St_Livreur.RowCount := Length(Lvs)+1;
+
+  for I := Low(Lvs) to High(Lvs) do
+    begin
+      with St_Livreur do
+        begin
+          Cells[0,i+1] := Lvs[i].SCode_liv;
+          Cells[1,i+1] := Lvs[i].Snom_liv;
+          Cells[2,i+1] := Lvs[i].Stel_liv;
+          Cells[3,i+1] := Lvs[i].Sadresse_liv;
+          Cells[4,i+1] := Lvs[i].Smail_liv;
+        end;
+    end;
+end;
 
 procedure TfrmRechLivreurChargement.FormCreate(Sender: TObject);
 begin

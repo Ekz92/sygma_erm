@@ -68,6 +68,8 @@ type
     procedure Button3Click(Sender: TObject);
     procedure edqteKeyPress(Sender: TObject; var Key: Char);
     procedure Supprimer1Click(Sender: TObject);
+    procedure cbTypeFactCloseUp(Sender: TObject);
+    procedure edCommandeDblClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -90,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses USelectClientFacturation, UFacturation_rech_magasin, Ufacture_rech_art,
-  UDM, records, UConnexion;
+  UDM, records, UConnexion, URechCommandeFacture;
 
 procedure TfrmSaisieFacture.Button1Click(Sender: TObject);
 var
@@ -550,6 +552,21 @@ begin
 end;
 end;
 
+procedure TfrmSaisieFacture.cbTypeFactCloseUp(Sender: TObject);
+begin
+if cbTypeFact.Text<>'Comptoir' then
+  begin
+    edveh.Enabled:=True;
+    edCommande.Enabled:=True;
+    edCommande.SetFocus;
+  end else
+  begin
+   edveh.Enabled:=False;
+   edCommande.Enabled := False;
+  end;
+
+end;
+
 procedure TfrmSaisieFacture.edCodeClientDblClick(Sender: TObject);
 begin
 if cbTypeFact.Text =''  then
@@ -570,6 +587,11 @@ end;
 procedure TfrmSaisieFacture.edCodeMagDblClick(Sender: TObject);
 begin
   frmFacturationRech_mag.ShowModal;
+end;
+
+procedure TfrmSaisieFacture.edCommandeDblClick(Sender: TObject);
+begin
+  frmRechCommandeFacture.ShowModal;
 end;
 
 procedure TfrmSaisieFacture.edqteKeyPress(Sender: TObject; var Key: Char);

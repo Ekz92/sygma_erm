@@ -25,7 +25,6 @@ object frmFicheSortie: TfrmFicheSortie
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 510
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
@@ -83,7 +82,6 @@ object frmFicheSortie: TfrmFicheSortie
       TabOrder = 0
       WordWrap = True
       OnClick = btSaveClick
-      ExplicitWidth = 51
     end
     object btAnnuler: TButton
       Left = 0
@@ -102,7 +100,6 @@ object frmFicheSortie: TfrmFicheSortie
       ShowHint = True
       TabOrder = 1
       OnClick = btAnnulerClick
-      ExplicitWidth = 51
     end
     object btClot: TButton
       Left = 0
@@ -123,7 +120,6 @@ object frmFicheSortie: TfrmFicheSortie
       TabOrder = 2
       WordWrap = True
       OnClick = btClotClick
-      ExplicitWidth = 51
     end
   end
   object Panel2: TPanel
@@ -134,7 +130,6 @@ object frmFicheSortie: TfrmFicheSortie
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 502
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
@@ -143,7 +138,6 @@ object frmFicheSortie: TfrmFicheSortie
       Align = alTop
       Caption = 'En-t'#234'te'
       TabOrder = 0
-      ExplicitWidth = 502
       object Label1: TLabel
         Left = 16
         Top = 16
@@ -188,7 +182,6 @@ object frmFicheSortie: TfrmFicheSortie
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
-      ExplicitWidth = 502
       object Label3: TLabel
         Left = 16
         Top = 18
@@ -285,7 +278,6 @@ object frmFicheSortie: TfrmFicheSortie
       OnDrawCell = st_ficheSortieDrawCell
       OnKeyPress = st_ficheSortieKeyPress
       OnSelectCell = st_ficheSortieSelectCell
-      ExplicitWidth = 502
       ColWidths = (
         2
         74

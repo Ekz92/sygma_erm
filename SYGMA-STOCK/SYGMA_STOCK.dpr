@@ -25,7 +25,6 @@ uses
   UFicheEntree in 'UFicheEntree.pas' {frmFicheEntree},
   URechClt in 'URechClt.pas' {frmRechClt},
   UFicheSortie in 'UFicheSortie.pas' {frmFicheSortie},
-  UFicheRecap_es in 'UFicheRecap_es.pas' {frmFicheRecap_es},
   UListeFcheEntree in 'UListeFcheEntree.pas' {frmListeFcheEntree},
   UListeFcheSortie in 'UListeFcheSortie.pas' {frmListeFcheSortie},
   URapprochementFicheEs in 'URapprochementFicheEs.pas' {frmRapprochementFicheEs},
@@ -39,7 +38,9 @@ uses
   UListeBonCommande in 'UListeBonCommande.pas' {frmListeBonCommande},
   URappelBl in 'URappelBl.pas' {frmRappelBL},
   URechBLRappel in 'URechBLRappel.pas' {frmRechBLRappel},
-  UQteLivre2 in 'UQteLivre2.pas' {frmQteLivre2};
+  UQteLivre2 in 'UQteLivre2.pas' {frmQteLivre2},
+  UFicheRecapi in 'UFicheRecapi.pas' {frmFicheRecapi},
+  UFicheRecapo in 'UFicheRecapo.pas' {frmFicheRecapo};
 
 {$R *.res}
 
@@ -68,7 +69,6 @@ begin
   Application.CreateForm(TfrmFicheEntree, frmFicheEntree);
   Application.CreateForm(TfrmRechClt, frmRechClt);
   Application.CreateForm(TfrmFicheSortie, frmFicheSortie);
-  Application.CreateForm(TfrmFicheRecap_es, frmFicheRecap_es);
   Application.CreateForm(TfrmListeFcheEntree, frmListeFcheEntree);
   Application.CreateForm(TfrmListeFcheSortie, frmListeFcheSortie);
   Application.CreateForm(TfrmRapprochementFicheEs, frmRapprochementFicheEs);
@@ -83,5 +83,8 @@ begin
   Application.CreateForm(TfrmRappelBL, frmRappelBL);
   Application.CreateForm(TfrmRechBLRappel, frmRechBLRappel);
   Application.CreateForm(TfrmQteLivre2, frmQteLivre2);
+  Application.CreateForm(TfrmFicheRecapi, frmFicheRecapi);
+  Application.CreateForm(TfrmFicheRecapi, frmFicheRecapi);
+  Application.CreateForm(TfrmFicheRecapo, frmFicheRecapo);
   Application.Run;
 end.

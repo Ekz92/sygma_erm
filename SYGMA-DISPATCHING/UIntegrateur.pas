@@ -91,42 +91,6 @@ type
     Commande1: TMenuItem;
     Dclarer1: TMenuItem;
     Liste4: TMenuItem;
-    Statistique1: TMenuItem;
-    Chargeparclient1: TMenuItem;
-    Graphclienttop1: TMenuItem;
-    Cumuledachat1: TMenuItem;
-    Facturation1: TMenuItem;
-    Saisiedefacture1: TMenuItem;
-    Produit1: TMenuItem;
-    Service1: TMenuItem;
-    Listedeparamprixlient1: TMenuItem;
-    Listedefacture1: TMenuItem;
-    Listedefactures1: TMenuItem;
-    Factureannule1: TMenuItem;
-    Factureparcommande1: TMenuItem;
-    Parametrage1: TMenuItem;
-    Facturer1: TMenuItem;
-    Prixvente1: TMenuItem;
-    ypeClient1: TMenuItem;
-    Bnficesurvente1: TMenuItem;
-    Caisse1: TMenuItem;
-    Listefacture1: TMenuItem;
-    Nouvelcaisse1: TMenuItem;
-    Historiquedecaisse1: TMenuItem;
-    Forage1: TMenuItem;
-    Avancefacture1: TMenuItem;
-    S1: TMenuItem;
-    Listedesavancesreus1: TMenuItem;
-    Dcaissement1: TMenuItem;
-    Saisidedpense1: TMenuItem;
-    Listededpense1: TMenuItem;
-    Encaissement1: TMenuItem;
-    Saisie3: TMenuItem;
-    Liste3: TMenuItem;
-    Solde1: TMenuItem;
-    Versementparcommande1: TMenuItem;
-    Versement1: TMenuItem;
-    Listedeversement1: TMenuItem;
     Admin1: TMenuItem;
     Sauvegarde1: TMenuItem;
     frxFiche_mission_spec: TfrxReport;
@@ -208,8 +172,8 @@ begin
       with frmIntegrateur do
         begin
           Fichier1.Enabled:=false;
-          Facturation1.Enabled:=false;
-          Caisse1.Enabled:=false;
+//          Facturation1.Enabled:=false;
+//          Caisse1.Enabled:=false;
 //          Magasin2.Enabled:=false;
 //          BL2.Enabled:=False;
           Saisie1.Enabled:=False;
@@ -218,8 +182,8 @@ begin
     end else
     begin
           Fichier1.Enabled:=True;
-          Facturation1.Enabled:=True;
-          Caisse1.Enabled:=True;
+//          Facturation1.Enabled:=True;
+//          Caisse1.Enabled:=True;
 //          Magasin2.Enabled:=True;
 //          BL2.Enabled:=True;
           Saisie1.Enabled:=True;

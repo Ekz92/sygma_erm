@@ -15,11 +15,12 @@ type
     edDesignation: TEdit;
     St_Art: TStringGrid;
     procedure edcode_artExit(Sender: TObject);
-    procedure edDesignationExit(Sender: TObject);
     procedure St_ArtDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
     procedure St_ArtDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure edDesignationChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -67,7 +68,7 @@ begin
       if St_Art.RowCount>1 then St_Art.FixedRows := 1;
 end;
 
-procedure TfrmrechVenteChargVeh.edDesignationExit(Sender: TObject);
+procedure TfrmrechVenteChargVeh.edDesignationChange(Sender: TObject);
 var
   Psql: string;
   articles : TarticleArray;
@@ -103,6 +104,32 @@ with St_Art do
     Cells[3,0] := 'Alias' ;
   end;
 
+end;
+
+procedure TfrmrechVenteChargVeh.FormShow(Sender: TObject);
+var
+  Psql: string;
+  articles : TarticleArray;
+  I: Integer;
+begin
+
+   Psql := '';
+
+   articles := dm.selectArticles(Psql);
+   St_Art.RowCount := Length(articles)+1;
+
+   for I := Low(articles) to High(articles) do
+      begin
+        with St_Art do
+          begin
+            Cells[0,i+1]:=articles[i].Scode_art;
+            Cells[1,i+1]:=articles[i].Sdesignation_art;
+            Cells[2,i+1]:=FloatToStr(articles[i].Rkilo);
+            Cells[3,i+1]:=articles[i].Salias_art;
+            Cells[4,i+1]:=articles[i].Salias_ret;
+          end;
+      end;
+      if St_Art.RowCount>1 then St_Art.FixedRows := 1;
 end;
 
 procedure TfrmrechVenteChargVeh.St_ArtDblClick(Sender: TObject);

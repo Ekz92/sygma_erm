@@ -75,8 +75,8 @@ var
   stockArt : TStock;
   codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
   article : TArticle;
-  ficheEs_recap : TficheEs_recap;
-  FicheEsRec : TficheEs_recap;
+  ficheo_recap : Tficheo_recap;
+  FicheoRec : Tficheo_recap;
   ficheEsTotal : TFicheEsTotal;
 begin
   for I := 3 to st_ficheSortie.ColCount do
@@ -99,7 +99,7 @@ begin
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
   begin
 //  INSERTION DANS fiche recap
-  with ficheEs_recap do
+  with ficheo_recap do
     begin
       Nnum_fes:=StrToInt(edNum.Text);
       Sdate_fes:=DateToStr(cbdate.Date);
@@ -107,33 +107,33 @@ begin
       Snom_clt:=edNomClt.Text;
       Smatricule_veh:= cbMatVeh.Text;
       Smarque_veh := edNomVeh.Text;
-      SB3A_Iv:='';
-      SB3A_Ip:='';
-      SB3A_If:='';
-      SB3_Iv:='';
-      SB3_Ip:='';
-      SB3_If:='';
-      SB6_Iv:='';
-      SB6_Ip:='';
-      SB6_If:='';
-      SB6R_Iv:='';
-      SB6R_Ip:='';
-      SB6R_If:='';
-      SB12_Iv:='';
-      SB12_Ip:='';
-      SB12_If:='';
-      SB50_Iv:='';
-      SB50_Ip:='';
-      SB50_If:='';
-      SB25_Iv:='';
-      SB25_Ip:='';
-      SB25_If:='';
-      SB6E_Iv:='';
-      SB6E_Ip:='';
-      SB6E_If:='';
-      SB12E_Iv:='';
-      SB12E_Ip:='';
-      SB12E_If:='';
+//      SB3A_Iv:='';
+//      SB3A_Ip:='';
+//      SB3A_If:='';
+//      SB3_Iv:='';
+//      SB3_Ip:='';
+//      SB3_If:='';
+//      SB6_Iv:='';
+//      SB6_Ip:='';
+//      SB6_If:='';
+//      SB6R_Iv:='';
+//      SB6R_Ip:='';
+//      SB6R_If:='';
+//      SB12_Iv:='';
+//      SB12_Ip:='';
+//      SB12_If:='';
+//      SB50_Iv:='';
+//      SB50_Ip:='';
+//      SB50_If:='';
+//      SB25_Iv:='';
+//      SB25_Ip:='';
+//      SB25_If:='';
+//      SB6E_Iv:='';
+//      SB6E_Ip:='';
+//      SB6E_If:='';
+//      SB12E_Iv:='';
+//      SB12E_Ip:='';
+//      SB12E_If:='';
       SB3A_Ov:='';
       SB3A_Op:='';
       SB3A_Of:='';
@@ -162,7 +162,7 @@ begin
       SB12E_Op:='';
       SB12E_Of :='';
     end;
-    dm.InsertFicheEsRecap(ficheEs_recap);
+    dm.InsertFicheoRecap(ficheo_recap);
 
 //insertion dans la table total fiche
   with ficheEsTotal , st_ficheSortie do //Insertion dans la table de total fiche
@@ -316,8 +316,8 @@ var
   stockArt : TStock;
   codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
   article : TArticle;
-  ficheEs_recap : TficheEs_recap;
-  FicheEsRec : TficheEs_recap;
+  ficheo_recap : Tficheo_recap;
+  FicheoRec : Tficheo_recap;
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
 
@@ -326,7 +326,7 @@ begin
     for j := 1 to st_ficheSortie.RowCount-1 do
       if st_ficheSortie.Cells[i,j] = '' then
         begin
-          MessageDlg('Cellule vude non autorisées',mtError,[mbRetry],0);
+          MessageDlg('Cellule vide non autorisées',mtError,[mbRetry],0);
           exit
         end;
 
@@ -359,7 +359,7 @@ begin
 
 
 //  INSERTION DANS fiche recap
-  with ficheEs_recap do
+  with ficheo_recap do
     begin
       Nnum_fes:=StrToInt(edNum.Text);
       Nnum_his:=vNumHis;
@@ -368,33 +368,33 @@ begin
       Snom_clt:=edNomClt.Text;
       Smatricule_veh:= cbMatVeh.Text;
       Smarque_veh := edNomVeh.Text;
-      SB3A_Iv:='';
-      SB3A_Ip:='';
-      SB3A_If:='';
-      SB3_Iv:='';
-      SB3_Ip:='';
-      SB3_If:='';
-      SB6_Iv:='';
-      SB6_Ip:='';
-      SB6_If:='';
-      SB6R_Iv:='';
-      SB6R_Ip:='';
-      SB6R_If:='';
-      SB12_Iv:='';
-      SB12_Ip:='';
-      SB12_If:='';
-      SB50_Iv:='';
-      SB50_Ip:='';
-      SB50_If:='';
-      SB25_Iv:='';
-      SB25_Ip:='';
-      SB25_If:='';
-      SB6E_Iv:='';
-      SB6E_Ip:='';
-      SB6E_If:='';
-      SB12E_Iv:='';
-      SB12E_Ip:='';
-      SB12E_If:='';
+//      SB3A_Iv:='';
+//      SB3A_Ip:='';
+//      SB3A_If:='';
+//      SB3_Iv:='';
+//      SB3_Ip:='';
+//      SB3_If:='';
+//      SB6_Iv:='';
+//      SB6_Ip:='';
+//      SB6_If:='';
+//      SB6R_Iv:='';
+//      SB6R_Ip:='';
+//      SB6R_If:='';
+//      SB12_Iv:='';
+//      SB12_Ip:='';
+//      SB12_If:='';
+//      SB50_Iv:='';
+//      SB50_Ip:='';
+//      SB50_If:='';
+//      SB25_Iv:='';
+//      SB25_Ip:='';
+//      SB25_If:='';
+//      SB6E_Iv:='';
+//      SB6E_Ip:='';
+//      SB6E_If:='';
+//      SB12E_Iv:='';
+//      SB12E_Ip:='';
+//      SB12E_If:='';
       SB3A_Ov:='';
       SB3A_Op:='';
       SB3A_Of:='';
@@ -423,7 +423,7 @@ begin
       SB12E_Op:='';
       SB12E_Of :='';
     end;
-    dm.InsertFicheEsRecap(ficheEs_recap);
+    dm.InsertFicheoRecap(ficheo_recap);
 
 //insertion dans la table total fiche
   with ficheEsTotal , st_ficheSortie do //Insertion dans la table de total fiche
@@ -529,7 +529,7 @@ begin
             if Cells[4,i]='0' then Cells[4,i]:='';
             if Cells[5,i]='0' then Cells[5,i]:='';
 
-            sqlUpFiche := 'update tb_fichees_recap set '
+            sqlUpFiche := 'update tb_ficheo_recap set '
                           +article.Salias_art+'_Ov = '+QuotedStr(Cells[3,i])+','
                           +article.Salias_art+'_Of = '+QuotedStr(Cells[4,i])+','
                           +article.Salias_art+'_Op = '+QuotedStr(Cells[5,i])

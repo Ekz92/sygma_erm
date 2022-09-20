@@ -33,7 +33,8 @@ type
     function selectCatalogueStock(Psql:string) : TCatalogueStock;
     function selectClients(Psql : string) : TClientArray;
     function SelectVehicule(Psql:string):TVehiculeArray;
-    function selectFicheEs_recap(Psql : string):TficheEs_recap;
+    function selectFichei_recap(Psql : string):Tfichei_recap;
+    function selectFicheo_recap(Psql : string):Tficheo_recap;
     function selectMaxNumrappel():TMaxNumRappel;
     function selectCodeclt(var vNomClt : string) : TClient;
     function selectPoints(Psql : string) : TPointVenteArray;
@@ -64,7 +65,8 @@ type
     function InsertSortie( var sortie : TSortie):boolean;
     function InsertStock(var stock : TStock):boolean;
     function InsertFiche_es(var Fiche_es : TFiche_es):boolean;
-    function InsertFicheEsRecap(FicheEsRec : TficheEs_recap):Boolean;
+    function InsertFicheiRecap(FicheiRec : Tfichei_recap):Boolean;
+    function InsertFicheoRecap(FicheoRec : Tficheo_recap):Boolean;
     function InsertFicheEsTotal(FicheEsTotal : TFicheEsTotal):Boolean;
     function InsertBLs ( var bls : TBLDetail):Boolean;
     function InsertBL(var bl : TBL):Boolean;
@@ -437,6 +439,10 @@ begin
                 Snom_four:=FieldByName('nom_fourn').AsString;
                 SVehicule:=FieldByName('Vehicule').AsString;
                 Rmontant_bc:=FieldByName('montant_bc').AsFloat;
+                Susager_init:=FieldByName('user_init').AsString;
+                Susager_val:=FieldByName('user_validate').AsString;
+                SnomVehicule:=FieldByName('nom_Vehicule').AsString;
+                Nstatut_bc:=FieldByName('statut_bc').AsInteger;
               end;
               BCs[i]:=BC;
               Inc(i);
@@ -1019,16 +1025,103 @@ begin
     SQLConnection1.Close;
   end;
 end;
-Function TDM. SelectFicheEs_recap(Psql : string):TficheEs_recap;
+
+function TDM.selectFicheo_recap(Psql : string):Tficheo_recap;
 var
   sql : string;
   query : TSQLQuery;
-  Fiche : TficheEs_recap;
+  Fiche : Tficheo_recap;
 begin
   query := TSQLQuery.Create(self);
   query.SQLConnection:=SQLConnection1;
 
-  sql:='Select * from tb_ficheEs_recap '+Psql;
+  sql:='Select * from tb_ficheo_recap '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with Fiche do
+      begin
+        Nnum_fes:= query.FieldByName('num_fes').AsInteger;
+        Sdate_fes := query.FieldByName('date_fes').AsString;
+        Scode_clt := query.FieldByName('code_clt').AsString;
+        Snom_clt := query.FieldByName('nom_clt').AsString;
+        Smatricule_veh := query.FieldByName('matricule_veh').AsString;
+        Smarque_veh := query.FieldByName('marque_veh').AsString;
+//        SB3A_Iv := query.FieldByName('B3A_Iv').AsString;
+//        SB3A_Ip := query.FieldByName('B3A_Ip').AsString;
+//        SB3A_If := query.FieldByName('B3A_If').AsString;
+//        SB3_Iv := query.FieldByName('B3A_Iv').AsString;
+//        SB3_Ip := query.FieldByName('B3A_Ip').AsString;
+//        SB3_If := query.FieldByName('B3A_If').AsString;
+//        SB6_Iv := query.FieldByName('B3A_Iv').AsString;
+//        SB6_Ip := query.FieldByName('B3A_Ip').AsString;
+//        SB6_If := query.FieldByName('B3A_If').AsString;
+//        SB6R_Iv := query.FieldByName('B6R_Iv').AsString;
+//        SB6R_Ip := query.FieldByName('B6R_Ip').AsString;
+//        SB6R_If := query.FieldByName('B6R_If').AsString;
+//        SB12_Iv := query.FieldByName('B6R_Iv').AsString;
+//        SB12_Ip := query.FieldByName('B6R_Ip').AsString;
+//        SB12_If := query.FieldByName('B6R_If').AsString;
+//        SB50_Iv := query.FieldByName('B50_Iv').AsString;
+//        SB50_Ip := query.FieldByName('B50_Ip').AsString;
+//        SB50_If := query.FieldByName('B50_If').AsString;
+//        SB25_Iv := query.FieldByName('B25_Iv').AsString;
+//        SB25_Ip := query.FieldByName('B25_Ip').AsString;
+//        SB25_If := query.FieldByName('B25_If').AsString;
+//        SB6E_Iv := query.FieldByName('B6E_Iv').AsString;
+//        SB6E_Ip := query.FieldByName('B6E_Ip').AsString;
+//        SB6E_If := query.FieldByName('B6E_If').AsString;
+//        SB12E_Iv := query.FieldByName('B12E_Iv').AsString;
+//        SB12E_Ip := query.FieldByName('B12E_Ip').AsString;
+//        SB12E_If := query.FieldByName('B12E_If').AsString;
+////
+        SB3A_Ov := query.FieldByName('B3A_Ov').AsString;
+        SB3A_Op := query.FieldByName('B3A_Op').AsString;
+        SB3A_Of := query.FieldByName('B3A_Of').AsString;
+        SB3_Ov := query.FieldByName('B3A_Ov').AsString;
+        SB3_Op := query.FieldByName('B3A_Op').AsString;
+        SB3_Of := query.FieldByName('B3A_Of').AsString;
+        SB6_Ov := query.FieldByName('B3A_Ov').AsString;
+        SB6_Op := query.FieldByName('B3A_Op').AsString;
+        SB6_Of := query.FieldByName('B3A_Of').AsString;
+        SB6R_Ov := query.FieldByName('B6R_Ov').AsString;
+        SB6R_Op := query.FieldByName('B6R_Op').AsString;
+        SB6R_Of := query.FieldByName('B6R_Of').AsString;
+        SB12_Ov := query.FieldByName('B6R_Ov').AsString;
+        SB12_Op := query.FieldByName('B6R_Op').AsString;
+        SB12_Of := query.FieldByName('B6R_Of').AsString;
+        SB50_Ov := query.FieldByName('B50_Ov').AsString;
+        SB50_Op := query.FieldByName('B50_Op').AsString;
+        SB50_Of := query.FieldByName('B50_Of').AsString;
+        SB25_Ov := query.FieldByName('B25_Ov').AsString;
+        SB25_Op := query.FieldByName('B25_Op').AsString;
+        SB25_Of := query.FieldByName('B25_Of').AsString;
+        SB6E_Ov := query.FieldByName('B6E_Ov').AsString;
+        SB6E_Op := query.FieldByName('B6E_Op').AsString;
+        SB6E_Of := query.FieldByName('B6E_Of').AsString;
+        SB12E_Ov := query.FieldByName('B12E_Ov').AsString;
+        SB12E_Op := query.FieldByName('B12E_Op').AsString;
+        SB12E_Of := query.FieldByName('B12E_Of').AsString;
+      end;
+    Result :=Fiche;
+  finally
+    query.free;
+    SQLConnection1.Close;
+  end;
+end;
+
+Function TDM. SelectFichei_recap(Psql : string):Tfichei_recap;
+var
+  sql : string;
+  query : TSQLQuery;
+  Fiche : Tfichei_recap;
+begin
+  query := TSQLQuery.Create(self);
+  query.SQLConnection:=SQLConnection1;
+
+  sql:='Select * from tb_fichei_recap '+Psql;
 
   try
     query.SQL.Add(sql);
@@ -1069,34 +1162,34 @@ begin
         SB12E_Iv := query.FieldByName('B12E_Iv').AsString;
         SB12E_Ip := query.FieldByName('B12E_Ip').AsString;
         SB12E_If := query.FieldByName('B12E_If').AsString;
-//
-        SB3A_Ov := query.FieldByName('B3A_Ov').AsString;
-        SB3A_Op := query.FieldByName('B3A_Op').AsString;
-        SB3A_Of := query.FieldByName('B3A_Of').AsString;
-        SB3_Ov := query.FieldByName('B3A_Ov').AsString;
-        SB3_Op := query.FieldByName('B3A_Op').AsString;
-        SB3_Of := query.FieldByName('B3A_Of').AsString;
-        SB6_Ov := query.FieldByName('B3A_Ov').AsString;
-        SB6_Op := query.FieldByName('B3A_Op').AsString;
-        SB6_Of := query.FieldByName('B3A_Of').AsString;
-        SB6R_Ov := query.FieldByName('B6R_Ov').AsString;
-        SB6R_Op := query.FieldByName('B6R_Op').AsString;
-        SB6R_Of := query.FieldByName('B6R_Of').AsString;
-        SB12_Ov := query.FieldByName('B6R_Ov').AsString;
-        SB12_Op := query.FieldByName('B6R_Op').AsString;
-        SB12_Of := query.FieldByName('B6R_Of').AsString;
-        SB50_Ov := query.FieldByName('B50_Ov').AsString;
-        SB50_Op := query.FieldByName('B50_Op').AsString;
-        SB50_Of := query.FieldByName('B50_Of').AsString;
-        SB25_Ov := query.FieldByName('B25_Ov').AsString;
-        SB25_Op := query.FieldByName('B25_Op').AsString;
-        SB25_Of := query.FieldByName('B25_Of').AsString;
-        SB6E_Ov := query.FieldByName('B6E_Ov').AsString;
-        SB6E_Op := query.FieldByName('B6E_Op').AsString;
-        SB6E_Of := query.FieldByName('B6E_Of').AsString;
-        SB12E_Ov := query.FieldByName('B12E_Ov').AsString;
-        SB12E_Op := query.FieldByName('B12E_Op').AsString;
-        SB12E_Of := query.FieldByName('B12E_Of').AsString;
+////
+//        SB3A_Ov := query.FieldByName('B3A_Ov').AsString;
+//        SB3A_Op := query.FieldByName('B3A_Op').AsString;
+//        SB3A_Of := query.FieldByName('B3A_Of').AsString;
+//        SB3_Ov := query.FieldByName('B3A_Ov').AsString;
+//        SB3_Op := query.FieldByName('B3A_Op').AsString;
+//        SB3_Of := query.FieldByName('B3A_Of').AsString;
+//        SB6_Ov := query.FieldByName('B3A_Ov').AsString;
+//        SB6_Op := query.FieldByName('B3A_Op').AsString;
+//        SB6_Of := query.FieldByName('B3A_Of').AsString;
+//        SB6R_Ov := query.FieldByName('B6R_Ov').AsString;
+//        SB6R_Op := query.FieldByName('B6R_Op').AsString;
+//        SB6R_Of := query.FieldByName('B6R_Of').AsString;
+//        SB12_Ov := query.FieldByName('B6R_Ov').AsString;
+//        SB12_Op := query.FieldByName('B6R_Op').AsString;
+//        SB12_Of := query.FieldByName('B6R_Of').AsString;
+//        SB50_Ov := query.FieldByName('B50_Ov').AsString;
+//        SB50_Op := query.FieldByName('B50_Op').AsString;
+//        SB50_Of := query.FieldByName('B50_Of').AsString;
+//        SB25_Ov := query.FieldByName('B25_Ov').AsString;
+//        SB25_Op := query.FieldByName('B25_Op').AsString;
+//        SB25_Of := query.FieldByName('B25_Of').AsString;
+//        SB6E_Ov := query.FieldByName('B6E_Ov').AsString;
+//        SB6E_Op := query.FieldByName('B6E_Op').AsString;
+//        SB6E_Of := query.FieldByName('B6E_Of').AsString;
+//        SB12E_Ov := query.FieldByName('B12E_Ov').AsString;
+//        SB12E_Op := query.FieldByName('B12E_Op').AsString;
+//        SB12E_Of := query.FieldByName('B12E_Of').AsString;
       end;
     Result :=Fiche;
   finally
@@ -1165,7 +1258,7 @@ begin
     end;
 end;
 
-function TDM.InsertFicheEsRecap(FicheEsRec : TficheEs_recap):Boolean;
+function TDM.InsertFicheoRecap(FicheoRec : Tficheo_recap):Boolean;
   var
   sql : string;
   query : TSQLQuery;
@@ -1174,9 +1267,9 @@ begin
   query:=TSQLQuery.Create(self);
   query.SQLConnection:= dm.SQLConnection1;
 
-  with FicheEsRec do
+  with FicheoRec do
     begin
-      sql := 'Insert into tb_ficheEs_recap values(null,'
+      sql := 'Insert into tb_ficheo_recap values(null,'
                 +IntToStr(Nnum_fes)+','
                 +IntToStr(Nnum_his)+','
                 +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_fes)))+','
@@ -1184,34 +1277,34 @@ begin
                 +QuotedStr(Snom_clt)+','
                 +QuotedStr(Smatricule_veh)+','
                 +QuotedStr(Smarque_veh)+','
-                +QuotedStr(SB3A_Iv)+','
-                +QuotedStr(SB3A_Ip)+','
-                +QuotedStr(SB3A_If) + ','
-                +QuotedStr(SB3_Iv)+','
-                +QuotedStr(SB3_Ip)+','
-                +QuotedStr(SB3_If)+','
-                +QuotedStr(SB6_Iv)+','
-                +QuotedStr(SB6_Ip)+','
-                +QuotedStr(SB6_If)+','
-                +QuotedStr(SB6R_Iv)+','
-                +QuotedStr(SB6R_Ip)+','
-                +QuotedStr(SB6R_If)+','
-                +QuotedStr(SB12_Iv)+','
-                +QuotedStr(SB12_Ip)+','
-                +QuotedStr(SB12_If)+','
-                +QuotedStr(SB50_Iv)+','
-                +QuotedStr(SB50_Ip)+','
-                +QuotedStr(SB50_If)+','
-                +QuotedStr(SB25_Iv)+','
-                +QuotedStr(SB25_Ip)+','
-                +QuotedStr(SB25_If)+','
-                +QuotedStr(SB6E_Iv)+','
-                +QuotedStr(SB6E_Ip)+','
-                +QuotedStr(SB6E_If)+','
-                +QuotedStr(SB12E_Iv)+','
-                +QuotedStr(SB12E_Ip)+','
-                +QuotedStr(SB12E_If)+','
-                //*******
+//                +QuotedStr(SB3A_Iv)+','
+//                +QuotedStr(SB3A_Ip)+','
+//                +QuotedStr(SB3A_If) + ','
+//                +QuotedStr(SB3_Iv)+','
+//                +QuotedStr(SB3_Ip)+','
+//                +QuotedStr(SB3_If)+','
+//                +QuotedStr(SB6_Iv)+','
+//                +QuotedStr(SB6_Ip)+','
+//                +QuotedStr(SB6_If)+','
+//                +QuotedStr(SB6R_Iv)+','
+//                +QuotedStr(SB6R_Ip)+','
+//                +QuotedStr(SB6R_If)+','
+//                +QuotedStr(SB12_Iv)+','
+//                +QuotedStr(SB12_Ip)+','
+//                +QuotedStr(SB12_If)+','
+//                +QuotedStr(SB50_Iv)+','
+//                +QuotedStr(SB50_Ip)+','
+//                +QuotedStr(SB50_If)+','
+//                +QuotedStr(SB25_Iv)+','
+//                +QuotedStr(SB25_Ip)+','
+//                +QuotedStr(SB25_If)+','
+//                +QuotedStr(SB6E_Iv)+','
+//                +QuotedStr(SB6E_Ip)+','
+//                +QuotedStr(SB6E_If)+','
+//                +QuotedStr(SB12E_Iv)+','
+//                +QuotedStr(SB12E_Ip)+','
+//                +QuotedStr(SB12E_If)
+//                //*******
                 +QuotedStr(SB3A_Ov)+','
                 +QuotedStr(SB3A_Op)+','
                 +QuotedStr(SB3A_Of) + ','
@@ -1245,6 +1338,94 @@ begin
     try
       query.SQL.Add(sql);
 //      query.SQL.SaveToFile('g:\');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+
+function TDM.InsertFicheiRecap(FicheiRec : Tfichei_recap):Boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with FicheiRec do
+    begin
+      sql := 'Insert into tb_fichei_recap values(null,'
+                +IntToStr(Nnum_fes)+','
+                +IntToStr(Nnum_his)+','
+                +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(Sdate_fes)))+','
+                +QuotedStr(Scode_clt)+','
+                +QuotedStr(Snom_clt)+','
+                +QuotedStr(Smatricule_veh)+','
+                +QuotedStr(Smarque_veh)+','
+                +QuotedStr(SB3A_Iv)+','
+                +QuotedStr(SB3A_Ip)+','
+                +QuotedStr(SB3A_If) + ','
+                +QuotedStr(SB3_Iv)+','
+                +QuotedStr(SB3_Ip)+','
+                +QuotedStr(SB3_If)+','
+                +QuotedStr(SB6_Iv)+','
+                +QuotedStr(SB6_Ip)+','
+                +QuotedStr(SB6_If)+','
+                +QuotedStr(SB6R_Iv)+','
+                +QuotedStr(SB6R_Ip)+','
+                +QuotedStr(SB6R_If)+','
+                +QuotedStr(SB12_Iv)+','
+                +QuotedStr(SB12_Ip)+','
+                +QuotedStr(SB12_If)+','
+                +QuotedStr(SB50_Iv)+','
+                +QuotedStr(SB50_Ip)+','
+                +QuotedStr(SB50_If)+','
+                +QuotedStr(SB25_Iv)+','
+                +QuotedStr(SB25_Ip)+','
+                +QuotedStr(SB25_If)+','
+                +QuotedStr(SB6E_Iv)+','
+                +QuotedStr(SB6E_Ip)+','
+                +QuotedStr(SB6E_If)+','
+                +QuotedStr(SB12E_Iv)+','
+                +QuotedStr(SB12E_Ip)+','
+                +QuotedStr(SB12E_If)
+//                //*******
+//                +QuotedStr(SB3A_Ov)+','
+//                +QuotedStr(SB3A_Op)+','
+//                +QuotedStr(SB3A_Of) + ','
+//                +QuotedStr(SB3_Ov)+','
+//                +QuotedStr(SB3_Op)+','
+//                +QuotedStr(SB3_Of)+','
+//                +QuotedStr(SB6_Ov)+','
+//                +QuotedStr(SB6_Op)+','
+//                +QuotedStr(SB6_Of)+','
+//                +QuotedStr(SB6R_Ov)+','
+//                +QuotedStr(SB6R_Op)+','
+//                +QuotedStr(SB6R_Of)+','
+//                +QuotedStr(SB12_Ov)+','
+//                +QuotedStr(SB12_Op)+','
+//                +QuotedStr(SB12_Of)+','
+//                +QuotedStr(SB50_Ov)+','
+//                +QuotedStr(SB50_Op)+','
+//                +QuotedStr(SB50_Of)+','
+//                +QuotedStr(SB25_Ov)+','
+//                +QuotedStr(SB25_Op)+','
+//                +QuotedStr(SB25_Of)+','
+//                +QuotedStr(SB6E_Ov)+','
+//                +QuotedStr(SB6E_Op)+','
+//                +QuotedStr(SB6E_Of)+','
+//                +QuotedStr(SB12E_Ov)+','
+//                +QuotedStr(SB12E_Op)+','
+//                +QuotedStr(SB12E_Of)
+          +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+//      query.SQL.SaveToFile('g:\query.txt');
       query.ExecSQL();
     finally
       query.Free;

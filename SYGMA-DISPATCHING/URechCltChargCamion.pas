@@ -19,6 +19,7 @@ type
       State: TGridDrawState);
     procedure St_RechDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -64,6 +65,28 @@ with St_Rech do
     cells[0,0] := 'Code';
     cells[1,0] := 'Nom';
   end;
+end;
+
+procedure TfrmRechCltChargCamion.FormShow(Sender: TObject);
+var
+  Psql : string;
+  Clts : TClientArray;
+  I: Integer;
+begin
+  Psql := ' ';
+
+  Clts := DM.selectClients(Psql);
+
+  St_Rech.RowCount := Length(Clts)+1;
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      with St_Rech do
+        begin
+          Cells[0,i+1]:=Clts[i].SCodeClt;
+          Cells[1,i+1]:=Clts[i].SnomClt;
+        end;
+    end;
 end;
 
 procedure TfrmRechCltChargCamion.St_RechDblClick(Sender: TObject);

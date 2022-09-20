@@ -174,10 +174,6 @@
             <Form>frmFicheSortie</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UFicheRecap_es.pas">
-            <Form>frmFicheRecap_es</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="UListeFcheEntree.pas">
             <Form>frmListeFcheEntree</Form>
             <FormType>dfm</FormType>
@@ -232,6 +228,14 @@
         </DCCReference>
         <DCCReference Include="UQteLivre2.pas">
             <Form>frmQteLivre2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UFicheRecapi.pas">
+            <Form>frmFicheRecapi</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UFicheRecapo.pas">
+            <Form>frmFicheRecapo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

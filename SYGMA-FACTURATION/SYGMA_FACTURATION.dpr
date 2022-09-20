@@ -27,7 +27,8 @@ uses
   UBeneficeVente in 'UBeneficeVente.pas' {frmBeneficeVente},
   UTypeService in 'UTypeService.pas' {frmtypeService},
   URapportParClient in 'URapportParClient.pas' {frmRapportParClient},
-  UCumuleVenteBl in 'UCumuleVenteBl.pas' {frmCumuleVenteBL};
+  UCumuleVenteBl in 'UCumuleVenteBl.pas' {frmCumuleVenteBL},
+  URechCommandeFacture in 'URechCommandeFacture.pas' {frmRechCommandeFacture};
 
 {$R *.res}
 
@@ -59,5 +60,6 @@ begin
   Application.CreateForm(TfrmtypeService, frmtypeService);
   Application.CreateForm(TfrmRapportParClient, frmRapportParClient);
   Application.CreateForm(TfrmCumuleVenteBL, frmCumuleVenteBL);
+  Application.CreateForm(TfrmRechCommandeFacture, frmRechCommandeFacture);
   Application.Run;
 end.

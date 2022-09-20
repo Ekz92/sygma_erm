@@ -1,0 +1,77 @@
+object frmVteChargVehRechVeh: TfrmVteChargVehRechVeh
+  Left = 0
+  Top = 0
+  Caption = 'Recherche de vehicule'
+  ClientHeight = 248
+  ClientWidth = 354
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 354
+    Height = 53
+    Align = alTop
+    Caption = 'Recherche de vehicule'
+    TabOrder = 0
+    ExplicitWidth = 355
+    object Label1: TLabel
+      Left = 24
+      Top = 24
+      Width = 52
+      Height = 13
+      Caption = 'N'#176' Immat :'
+    end
+    object ednum_immat: TEdit
+      Left = 96
+      Top = 21
+      Width = 121
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      ParentColor = True
+      ParentCtl3D = False
+      TabOrder = 0
+      OnExit = ednum_immatExit
+    end
+  end
+  object St_veh: TStringGrid
+    Left = 0
+    Top = 53
+    Width = 354
+    Height = 195
+    Align = alClient
+    Color = clBtnFace
+    ColCount = 3
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    ParentFont = False
+    ScrollBars = ssNone
+    TabOrder = 1
+    StyleElements = [seBorder]
+    OnDblClick = St_vehDblClick
+    OnDrawCell = St_vehDrawCell
+    ExplicitWidth = 355
+    ExplicitHeight = 116
+    ColWidths = (
+      74
+      218
+      56)
+  end
+end
