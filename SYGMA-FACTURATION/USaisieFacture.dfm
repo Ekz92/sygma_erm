@@ -100,7 +100,6 @@ object frmSaisieFacture: TfrmSaisieFacture
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 353
     object GbMagasin: TGroupBox
       Left = 0
       Top = 226
@@ -111,7 +110,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Caption = 'Magasin'
       ParentBiDiMode = False
       TabOrder = 2
-      ExplicitWidth = 353
       object Label2: TLabel
         Left = 10
         Top = 15
@@ -154,7 +152,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
-      ExplicitWidth = 353
       object Label7: TLabel
         Left = 10
         Top = 18
@@ -213,7 +210,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alTop
       Caption = 'Article'
       TabOrder = 3
-      ExplicitWidth = 353
       object Label4: TLabel
         Left = 10
         Top = 14
@@ -273,7 +269,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alTop
       Caption = 'En-t'#234'te'
       TabOrder = 0
-      ExplicitWidth = 353
       object Label11: TLabel
         Left = 10
         Top = 18
@@ -374,7 +369,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 4
-      ExplicitWidth = 353
       object Button1: TButton
         Left = 170
         Top = 0

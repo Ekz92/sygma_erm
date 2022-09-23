@@ -17,7 +17,8 @@ type
     procedure St_vehDblClick(Sender: TObject);
     procedure St_vehDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
-    procedure ednum_immatExit(Sender: TObject);
+    procedure ednum_immatChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -33,7 +34,7 @@ implementation
 
 uses UChargement_veh, UDM;
 
-procedure Tfrmchargement_Rech_veh.ednum_immatExit(Sender: TObject);
+procedure Tfrmchargement_Rech_veh.ednum_immatChange(Sender: TObject);
 var
   Qrech_veh :TSQLQuery;
   i : integer;
@@ -84,6 +85,39 @@ with St_veh do
      Cells[2,0] := 'Kgs max' ;
   end;
 
+end;
+
+procedure Tfrmchargement_Rech_veh.FormShow(Sender: TObject);
+var
+  Qrech_veh :TSQLQuery;
+  i : integer;
+begin
+  Qrech_veh:=TSQLQuery.Create(self);
+  Qrech_veh.SQLConnection:=dm.SQLConnection1;
+
+    with Qrech_veh.SQL do
+      begin
+          Add('select * from tb_vehicule V '
+//              +' where V.num_immat_veh like '+QuotedStr(ednum_immat.Text+'%')
+           //   +' and V.dispo_parc = 1'
+          );
+      end;
+      try
+       Qrech_veh.Open;
+          for I := 1 to Qrech_veh.RowsAffected do
+            with St_veh, Qrech_veh do
+              begin
+              Rows[i].Clear;
+                RowCount:=RowsAffected+1;
+                Cells[0,i] := FieldByName('num_immat_veh').AsString;
+                Cells[1,i] := FieldByName('marque_veh').AsString;
+                Cells[2,i] := FieldByName('kilo_max').AsString;
+
+                Qrech_veh.Next ;
+              end;
+        finally
+          Qrech_veh.Free;
+        end;
 end;
 
 procedure Tfrmchargement_Rech_veh.St_vehDblClick(Sender: TObject);

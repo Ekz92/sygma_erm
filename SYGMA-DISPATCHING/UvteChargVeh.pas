@@ -186,11 +186,11 @@ begin
       MessageDlg('Merci de selectionner un camion', mtError,[mbRetry],0);
       exit
     end else
-//  if edChauf.Text='' then
-//  begin
-//     MessageDlg('Merci de selectionner le chauffeur ', mtError,[mbRetry],0);
-//     exit
-//  end else
+  if edChauf.Text='' then
+  begin
+     MessageDlg('Merci de selectionner le chauffeur ', mtError,[mbRetry],0);
+     exit
+  end else
   if edPiece.Text='' then
   begin
     MessageDlg('Merci de spécifier le numéro de la pièce ', mtError,[mbRetry],0);

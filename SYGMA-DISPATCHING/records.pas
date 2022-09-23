@@ -3,6 +3,14 @@ unit records;
 interface
 
 type
+
+TMagasin =record
+  Nid_mag : integer;
+  SCode_mag,
+  Sdesignation_mag : string;
+end;
+TMagasinArray = Array of TMagasin;
+
 TDateSys = record
   Nid_cd : integer;
   Sdate_cd : string;

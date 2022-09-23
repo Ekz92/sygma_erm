@@ -1,0 +1,52 @@
+object frmRechCommandeLFactures: TfrmRechCommandeLFactures
+  Left = 0
+  Top = 0
+  Caption = 'Recherche commande '
+  ClientHeight = 213
+  ClientWidth = 447
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 447
+    Height = 53
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitWidth = 446
+  end
+  object StRech: TStringGrid
+    Left = 0
+    Top = 53
+    Width = 447
+    Height = 160
+    Align = alClient
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect]
+    ParentColor = True
+    ScrollBars = ssNone
+    TabOrder = 1
+    StyleElements = [seBorder]
+    OnDblClick = StRechDblClick
+    OnDrawCell = StRechDrawCell
+    ExplicitWidth = 446
+    ExplicitHeight = 148
+    ColWidths = (
+      81
+      102
+      85
+      92
+      77)
+  end
+end

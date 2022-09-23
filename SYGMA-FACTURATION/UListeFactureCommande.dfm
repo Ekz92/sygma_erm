@@ -22,7 +22,6 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
-    ExplicitWidth = 580
     object Label2: TLabel
       Left = 226
       Top = 17
@@ -198,8 +197,6 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = St_listeFactureDrawCell
-    ExplicitWidth = 580
-    ExplicitHeight = 201
     ColWidths = (
       59
       69
@@ -217,8 +214,6 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 263
-    ExplicitWidth = 580
     object Button1: TButton
       Left = 508
       Top = 0
@@ -228,7 +223,6 @@ object frmListeFactureCommande: TfrmListeFactureCommande
       Caption = 'Imprimer'
       TabOrder = 0
       OnClick = Button1Click
-      ExplicitLeft = 505
     end
     object Button2: TButton
       Left = 387
@@ -239,7 +233,6 @@ object frmListeFactureCommande: TfrmListeFactureCommande
       Caption = 'Imprimer les d'#233'tails'
       TabOrder = 1
       OnClick = Button2Click
-      ExplicitLeft = 384
     end
     object cbprint: TComboBox
       Left = 184
@@ -1565,36 +1558,37 @@ object frmListeFactureCommande: TfrmListeFactureCommande
         end
         object Memo30: TfrxMemoView
           AllowVectorExport = True
-          Left = 472.441250000000000000
+          Left = 476.220780000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -19
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'ETS BARRY GAZ & FRERES')
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
           ParentFont = False
         end
         object Memo31: TfrxMemoView
           AllowVectorExport = True
-          Left = 514.567026770000000000
-          Top = 15.897650000000000000
+          Left = 516.346556770000000000
+          Top = 19.897650000000000000
           Width = 173.858235980000000000
           Height = 15.118120000000000000
           AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'COMMERCE GENERAL')
+            '[frxDBParam."description"]')
           ParentFont = False
         end
       end
@@ -2554,38 +2548,40 @@ object frmListeFactureCommande: TfrmListeFactureCommande
             'Statut cmd :')
           ParentFont = False
         end
-        object Memo31: TfrxMemoView
+        object Memo42: TfrxMemoView
           AllowVectorExport = True
-          Left = 797.441250000000000000
+          Left = 794.126470000000000000
+          Top = 3.779530000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -19
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'ETS BARRY GAZ & FRERES')
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
           ParentFont = False
         end
-        object Memo32: TfrxMemoView
+        object Memo43: TfrxMemoView
           AllowVectorExport = True
-          Left = 839.567026770000000000
-          Top = 15.897650000000000000
+          Left = 834.252246770000000000
+          Top = 23.677180000000000000
           Width = 173.858235980000000000
           Height = 15.118120000000000000
           AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'COMMERCE GENERAL')
+            '[frxDBParam."description"]')
           ParentFont = False
         end
       end

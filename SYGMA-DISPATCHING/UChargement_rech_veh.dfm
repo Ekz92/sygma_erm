@@ -13,6 +13,7 @@ object frmchargement_Rech_veh: Tfrmchargement_Rech_veh
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -23,7 +24,6 @@ object frmchargement_Rech_veh: Tfrmchargement_Rech_veh
     Align = alTop
     Caption = 'Recherche de vehicule'
     TabOrder = 0
-    ExplicitWidth = 350
     object Label1: TLabel
       Left = 16
       Top = 23
@@ -41,8 +41,7 @@ object frmchargement_Rech_veh: Tfrmchargement_Rech_veh
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 0
-      OnChange = ednum_immatExit
-      OnExit = ednum_immatExit
+      OnChange = ednum_immatChange
     end
   end
   object St_veh: TStringGrid
@@ -68,8 +67,6 @@ object frmchargement_Rech_veh: Tfrmchargement_Rech_veh
     StyleElements = [seBorder]
     OnDblClick = St_vehDblClick
     OnDrawCell = St_vehDrawCell
-    ExplicitWidth = 350
-    ExplicitHeight = 134
     ColWidths = (
       74
       196

@@ -105,7 +105,7 @@ begin
           Sdate_canc:=QuotedStr(FormatDateTime('yyyy-mm-dd',Now));
           Suser_canc := QuotedStr(vUsager);
         end;
-      if Memo1.Text<>'' then
+      if Trim(Memo1.Text)<>'' then
         begin
           dm.InsertPayementCanc(Pc);
           dm.UpdateTable(PSql);
@@ -166,14 +166,14 @@ begin
 
               sqlDelReleve := 'delete from tb_releve_client where operation_rc = '+ QuotedStr(edOpe.Text);
               dm.DeleteFromTable(sqlDelReleve);
-              end else
-              begin
-                MessageDlg('Merci de renseigner le motif',mtError,[mbRetry],0);
-              end;
-          end;
-    Close;
 
-end;
+              close;
+            end;
+        end else
+          begin
+            MessageDlg('Merci de renseigner le motif',mtError,[mbRetry],0);
+          end;
+       end;
 end;
 
 procedure TfrmPayementCanc.FormClose(Sender: TObject; var Action: TCloseAction);

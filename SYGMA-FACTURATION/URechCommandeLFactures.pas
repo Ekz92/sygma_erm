@@ -13,6 +13,8 @@ type
     procedure StRechDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
     procedure StRechDblClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -26,7 +28,43 @@ implementation
 
 {$R *.dfm}
 
-uses UListeFactureCommande;
+uses UListeFactureCommande, records, UDM;
+
+procedure TfrmRechCommandeLFactures.FormCreate(Sender: TObject);
+begin
+with StRech do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'N°Cmd';
+    Cells[2,0] := 'Pièce';
+    Cells[3,0] := 'Véhicule';
+    Cells[4,0] := 'Statut';
+  end;
+end;
+
+procedure TfrmRechCommandeLFactures.FormShow(Sender: TObject);
+var
+  Coms : TCommandeCamionArray;
+  Psql : string;
+  I: Integer;
+begin
+  Psql := ' order by num_comc desc '  ;
+  Coms := dm.SelectCommandeCamion(Psql);
+  StRech.RowCount := Length(Coms)+1;
+
+  for I := Low(Coms) to High(Coms) do
+    begin
+      with StRech do
+        begin
+          Cells[0,i+1]:=Coms[i].Sdate_com;
+          Cells[1,i+1]:=IntToStr(Coms[i].Nnum_comc);
+          Cells[2,i+1]:=Coms[i].Spiece;
+          Cells[3,i+1]:=Coms[i].Svehicule;
+          if Coms[i].Nstatut_cmd = 0  then Cells[4,i+1]:='En cours' else Cells[4,i+1]:='Côturée'
+        end;
+    end;
+if StRech.RowCount > 1 then StRech.FixedRows := 1;
+end;
 
 procedure TfrmRechCommandeLFactures.StRechDblClick(Sender: TObject);
 begin

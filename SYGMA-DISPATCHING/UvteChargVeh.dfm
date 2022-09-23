@@ -591,7 +591,6 @@ object frmvteChargVeh: TfrmvteChargVeh
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 64
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
@@ -667,7 +666,6 @@ object frmvteChargVeh: TfrmvteChargVeh
       ShowHint = True
       TabOrder = 1
       OnClick = Button4Click
-      ExplicitWidth = 64
     end
     object Button2: TButton
       Left = 0
@@ -688,7 +686,6 @@ object frmvteChargVeh: TfrmvteChargVeh
       TabOrder = 2
       WordWrap = True
       OnClick = Button2Click
-      ExplicitWidth = 64
     end
   end
   object PopupMenu1: TPopupMenu
