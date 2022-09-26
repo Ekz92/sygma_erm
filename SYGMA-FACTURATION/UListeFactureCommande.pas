@@ -49,6 +49,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure St_listeFactureDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -269,6 +271,30 @@ procedure TfrmListeFactureCommande.edvehiculeKeyPress(Sender: TObject;
 begin
 Key :=#0;
 
+end;
+
+procedure TfrmListeFactureCommande.FormCreate(Sender: TObject);
+begin
+with St_listeFacture do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'Facture';
+    Cells[2,0] := 'Client';
+    Cells[3,0] := 'Total';
+    Cells[4,0] := 'Payée';
+    Cells[5,0] := 'Reste';
+    Cells[6,0] := 'Statut';
+  end;
+
+end;
+
+procedure TfrmListeFactureCommande.FormShow(Sender: TObject);
+begin
+d2.Date:=Now;
+St_listeFacture.RowCount:=1;
+lbtotal.Caption:='-';
+lbtotpaye.Caption:='-';
+lbtotreste.Caption:='-';
 end;
 
 procedure TfrmListeFactureCommande.SpeedButton1Click(Sender: TObject);

@@ -30884,34 +30884,6 @@ object frmIntegrateur: TfrmIntegrateur
         Caption = 'Solde de la caisse'
       end
     end
-    object BondelivBL1: TMenuItem
-      Caption = 'Bon de liv (BL)'
-      object CrerunBL1: TMenuItem
-        Caption = 'Cr'#233'er un BL'
-        OnClick = CrerunBL1Click
-      end
-      object RappeldeBL1: TMenuItem
-        Caption = 'Rappel de BL'
-      end
-      object ListedeBL1: TMenuItem
-        Caption = 'Liste de BL'
-        object LivrsNonlivrs1: TMenuItem
-          Caption = 'Livr'#233's/Non livr'#233's'
-        end
-        object ParNBL1: TMenuItem
-          Caption = 'Par N'#176' BL'
-        end
-      end
-    end
-    object BondeComBC1: TMenuItem
-      Caption = 'Bon de Com. (BC)'
-      object CrerunBC1: TMenuItem
-        Caption = 'Cr'#233'er un BC'
-      end
-      object ListedeBC1: TMenuItem
-        Caption = 'Liste de BC'
-      end
-    end
     object Banque1: TMenuItem
       Caption = 'Bank'
       object Nouveau2: TMenuItem

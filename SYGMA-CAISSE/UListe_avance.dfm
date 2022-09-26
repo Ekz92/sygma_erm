@@ -112,7 +112,6 @@ object frmListeAvance: TfrmListeAvance
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitHeight = 251
     ColWidths = (
       75
       68
@@ -128,7 +127,6 @@ object frmListeAvance: TfrmListeAvance
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 313
     object Button1: TButton
       Left = 444
       Top = 3

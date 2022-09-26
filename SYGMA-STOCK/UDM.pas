@@ -8,9 +8,9 @@ uses
 
 type
   TDM = class(TDataModule)
-    SQLConnection1: TSQLConnection;
     frxDBParam: TfrxDBDataset;
     TParam: TSQLTable;
+    SQLConnection1: TSQLConnection;
   private
     { Déclarations privées }
   public

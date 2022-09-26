@@ -18,6 +18,7 @@ type
     QStockCam: TSQLQuery;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Déclarations privées }
   public
@@ -48,6 +49,11 @@ begin
   QStockCam.Open;
 
   frxStockCam.ShowReport();
+end;
+
+procedure TfrmStockcamion.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+cbVehicule.Clear;
 end;
 
 procedure TfrmStockcamion.FormShow(Sender: TObject);

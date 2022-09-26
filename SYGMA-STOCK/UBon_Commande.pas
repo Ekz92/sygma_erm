@@ -61,6 +61,7 @@ type
     QBonCompt: TFloatField;
     frxDBBonCom: TfrxDBDataset;
     frxPDFExport1: TfrxPDFExport;
+    cbNormal: TCheckBox;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -97,6 +98,7 @@ var
   stock : TStock;
   code_art : string;
 begin
+
   if trim(edVehicule.Text) ='' then
     begin
       MessageDlg('Veuillez spécifier le véhicule',mtError,[mbok],0);
@@ -105,32 +107,25 @@ begin
 
   code_art := edarticle.Text;
   stock := dm.selectStockByArticle(code_art)  ;
-  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) + (stock.Rcoutachat * StrToInt(edqte.Text)));
+  if cbNormal.Checked = True then  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) + (stock.Rcoutachat * StrToInt(edqte.Text)));
 
   nbLigne :=StringGrid1.RowCount+1;
   with StringGrid1 do
     begin
       RowCount := nbLigne;
       Cells[0,nbLigne-1]:=edarticle.Text;
-      Cells[1,nbLigne-1]:=edDesign.Text;
-      Cells[2,nbLigne-1]:=FloatToStr(stock.Rcoutachat);
+      if cbNormal.Checked = True then Cells[1,nbLigne-1]:=edDesign.Text else Cells[1,nbLigne-1]:=edDesign.Text+' (Fuite)';
+      if cbNormal.Checked = True then Cells[2,nbLigne-1]:=FloatToStr(stock.Rcoutachat) else Cells[2,nbLigne-1]:='' ;
       Cells[3,nbLigne-1]:=edqte.Text;
-      Cells[4,nbLigne-1]:=FloatToStr(stock.Rcoutachat * StrToInt(edqte.Text));
+      if cbNormal.Checked = True then Cells[4,nbLigne-1]:=FloatToStr(stock.Rcoutachat * StrToInt(edqte.Text)) else Cells[4,nbLigne-1]:='' ;
     end;
 if StringGrid1.RowCount>1 then StringGrid1.FixedRows:=1;
   Button2.Click;
 
 vTBout := 0;
 vTkg := 0;
-{
-for I := 1 to StringGrid1.RowCount-1 do
-  begin
-    vTBout := vTBout + StrToInt(StringGrid1.Cells[3,i]) ;
-    vTkg := vTkg+ StrToFloat(StringGrid1.Cells[2,i])* StrToFloat(StringGrid1.Cells[3,i]);
-  end;
- }
-//  lbTbout.Caption := IntToStr(vTBout);
-//  lbTkilo.Caption := FloatToStr(vTkg);
+
+cbNormal.Checked := True;
 end;
 
 procedure TfrmbonCommande.Button1Click(Sender: TObject);
@@ -187,9 +182,9 @@ if (edVehicule.Text<>'') and (lbmontant.Caption<>'0') then
                 Nnum_bc := StrToInt(lbNumbc.Caption);
                 Scode_art := QuotedStr(Cells[0,i]) ;
                 Sdesignation_art := QuotedStr(Cells[1,i]) ;
-                Rpu :=StrToFloat(Cells[2,i]);
+                if Trim(Cells[4,i])<>'' then Rpu :=StrToFloat(Cells[2,i]) else Rpu := 0;
                 Nqte := StrToInt(Cells[3,i]);
-                Rpt := StrToInt(Cells[4,i]);
+                if Trim(Cells[4,i])<>'' then Rpt := StrToInt(Cells[4,i]) else Rpt := 0;
               end;
               dm.InsertBonComDetail(bcd);
           end;
@@ -200,6 +195,7 @@ if (edVehicule.Text<>'') and (lbmontant.Caption<>'0') then
 
         QBonCom.SQL.Clear;
         QBonCom.SQL.Add(SqlBon);
+//        QBonCom.SQL.SaveToFile('g:\tb_boncom.txt');
         QBonCom.Open;
 
         frxBonCom.ShowReport();
@@ -252,9 +248,7 @@ begin
   MaxBc := MaxBc +1;
   lbNumbc.Caption := IntToStr(MaxBc);
 
-//  StringGrid1.RowCount := 2;
-//  StringGrid1.Rows[1] := 2;
-
+  cbNormal.Checked := True;
 
 end;
 
@@ -298,12 +292,9 @@ with StringGrid1 do
   begin
   qte := StrToInt(Cells[3,Row]);
   code_art := Cells[0,Row];
-//  mnt :=
-
-//  ShowMessage(IntToStr(qte));
 
   stock := dm.selectStockByArticle(code_art)  ;
-  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * qte ));
+  if Trim(StringGrid1.Cells[2,StringGrid1.Row]) <> '' then lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * qte ));
 
 
     k:=Row;

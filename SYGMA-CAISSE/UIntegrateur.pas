@@ -70,9 +70,6 @@ type
     Saisie3: TMenuItem;
     Liste3: TMenuItem;
     Solde1: TMenuItem;
-    BondeComBC1: TMenuItem;
-    CrerunBC1: TMenuItem;
-    ListedeBC1: TMenuItem;
     Banque1: TMenuItem;
     Nouveau2: TMenuItem;
     Liste2: TMenuItem;
@@ -102,12 +99,6 @@ type
     Image1: TImage;
     Label11: TLabel;
     Image9: TImage;
-    BondelivBL1: TMenuItem;
-    CrerunBL1: TMenuItem;
-    RappeldeBL1: TMenuItem;
-    ListedeBL1: TMenuItem;
-    LivrsNonlivrs1: TMenuItem;
-    ParNBL1: TMenuItem;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);

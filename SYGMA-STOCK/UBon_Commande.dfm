@@ -199,12 +199,22 @@ object frmbonCommande: TfrmbonCommande
       TabOrder = 4
       OnClick = Button2Click
     end
+    object cbNormal: TCheckBox
+      Left = 296
+      Top = 58
+      Width = 97
+      Height = 17
+      Caption = 'Bon normal'
+      Checked = True
+      State = cbChecked
+      TabOrder = 5
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 343
+    Top = 347
     Width = 573
-    Height = 30
+    Height = 26
     Align = alBottom
     TabOrder = 2
     object TLabel
@@ -225,7 +235,7 @@ object frmbonCommande: TfrmbonCommande
       Left = 422
       Top = 1
       Width = 75
-      Height = 28
+      Height = 24
       Align = alRight
       Caption = 'Valider'
       TabOrder = 0
@@ -235,7 +245,7 @@ object frmbonCommande: TfrmbonCommande
       Left = 497
       Top = 1
       Width = 75
-      Height = 28
+      Height = 24
       Align = alRight
       Caption = 'Annuler'
       TabOrder = 1
@@ -246,7 +256,7 @@ object frmbonCommande: TfrmbonCommande
     Left = 0
     Top = 146
     Width = 573
-    Height = 197
+    Height = 201
     Align = alClient
     DefaultRowHeight = 15
     FixedColor = 4194304
@@ -291,8 +301,8 @@ object frmbonCommande: TfrmbonCommande
       'begin'
       ''
       'end.')
-    Left = 360
-    Top = 136
+    Left = 432
+    Top = 176
     Datasets = <
       item
         DataSet = frxDBBonCom
@@ -891,7 +901,6 @@ object frmbonCommande: TfrmbonCommande
     end
   end
   object QBonCom: TSQLQuery
-    Active = True
     MaxBlobSize = 1
     Params = <>
     SQL.Strings = (

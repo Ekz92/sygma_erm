@@ -55,7 +55,7 @@ var
   Avance : TAvanceDetailArray;
   sql_Cc,sql_UpCc,
   sqlSelAv ,
-  SqlDelReleve:string;
+  SqlDelReleve,SqlDelJrl:string;
   I: Integer;
   solde_cc,mnt_av : real;
 begin
@@ -91,11 +91,14 @@ if MessageDlg('Voulez-vous annuler cet avance ?',mtWarning,[mbYes,mbNo],0)=mryes
                   +' where num_cc = '+QuotedStr(StringGrid1.Cells[2,StringGrid1.Row]);
 
 //      suppression dans les relevés dopération du client
-
       SqlDelReleve := 'delete from tb_releve_client where operation_rc = '+StringGrid1.Cells[1,StringGrid1.Row]
                       +' and piece = '+QuotedStr(StringGrid1.Cells[1,StringGrid1.Row]);
-
       dm.DeleteFromTable(SqlDelReleve);
+
+//      Suppression dsur le journal de caisse
+      SqlDelJrl := 'Delete from tb_etat_journal '
+                  +' where num_ope = '+QuotedStr(StringGrid1.Cells[1,StringGrid1.Row]);
+      dm.DeleteFromTable(SqlDelJrl);
 
       dm.UpdateTable(sql_UpCc);
       SpeedButton1.Click;

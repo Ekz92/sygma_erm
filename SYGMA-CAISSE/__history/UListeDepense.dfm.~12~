@@ -1,0 +1,183 @@
+object frmListeDepense: TfrmListeDepense
+  Left = 0
+  Top = 0
+  Caption = 'Liste de d'#233'pense'
+  ClientHeight = 329
+  ClientWidth = 477
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object stDep: TStringGrid
+    Left = 0
+    Top = 61
+    Width = 477
+    Height = 244
+    Align = alClient
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
+    ParentColor = True
+    PopupMenu = PopupMenu1
+    ScrollBars = ssNone
+    TabOrder = 0
+    StyleElements = [seBorder]
+    OnDrawCell = stDepDrawCell
+    ExplicitHeight = 225
+    ColWidths = (
+      63
+      41
+      74
+      229
+      64)
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 477
+    Height = 61
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 1
+    object Bevel1: TBevel
+      Left = 3
+      Top = 3
+      Width = 472
+      Height = 54
+      Shape = bsFrame
+    end
+    object Label1: TLabel
+      Left = 7
+      Top = 10
+      Width = 51
+      Height = 13
+      Caption = 'Date deb :'
+    end
+    object Label2: TLabel
+      Left = 7
+      Top = 31
+      Width = 47
+      Height = 13
+      Caption = 'Date Fin :'
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 393
+      Top = 6
+      Width = 78
+      Height = 47
+      Align = alCustom
+      Caption = 'Recherche'
+      Flat = True
+      OnClick = SpeedButton1Click
+    end
+    object Label3: TLabel
+      Left = 183
+      Top = 10
+      Width = 31
+      Height = 13
+      Caption = 'Total :'
+    end
+    object lbTotal: TLabel
+      Left = 221
+      Top = 10
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object d1: TDateTimePicker
+      Left = 69
+      Top = 7
+      Width = 89
+      Height = 21
+      Date = 44663.614059745370000000
+      Time = 44663.614059745370000000
+      Color = clBtnFace
+      ParentColor = True
+      TabOrder = 0
+    end
+    object d2: TDateTimePicker
+      Left = 69
+      Top = 29
+      Width = 89
+      Height = 21
+      Date = 44663.614059745370000000
+      Time = 44663.614059745370000000
+      Color = clBtnFace
+      ParentColor = True
+      TabOrder = 1
+      StyleElements = [seBorder]
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 305
+    Width = 477
+    Height = 24
+    Align = alBottom
+    TabOrder = 2
+    ExplicitTop = 262
+    object Button1: TButton
+      Left = 401
+      Top = 1
+      Width = 75
+      Height = 22
+      Align = alRight
+      Caption = 'Imprimer'
+      TabOrder = 0
+      ExplicitLeft = 400
+      ExplicitTop = 8
+      ExplicitHeight = 25
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 232
+    Top = 120
+    object Annulercettedpense1: TMenuItem
+      Caption = 'Annuler cette d'#233'pense'
+      OnClick = Annulercettedpense1Click
+    end
+  end
+  object frxLDepense: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44828.255081215280000000
+    ReportOptions.LastChange = 44828.255081215280000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 344
+    Top = 248
+    Datasets = <>
+    Variables = <>
+    Style = <>
+  end
+  object SqlDepense: TSQLQuery
+    Params = <>
+    Left = 344
+    Top = 200
+  end
+  object frxDBDepense: TfrxDBDataset
+    UserName = 'frxDBDepense'
+    CloseDataSource = False
+    DataSet = SqlDepense
+    BCDToCurrency = False
+    Left = 344
+    Top = 152
+  end
+end

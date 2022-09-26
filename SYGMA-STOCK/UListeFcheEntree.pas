@@ -339,6 +339,8 @@ begin
     begin
       cbVeh.Items.Add(vehs[i].SMarque);
     end;
+
+    Button1.Click;
 end;
 
 procedure TfrmListeFcheEntree.StringGrid1DblClick(Sender: TObject);
@@ -389,7 +391,7 @@ var
 begin
 if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes,mbNo],0) = mrYes then
   begin
-    PDel_fes := ' delete from tb_fiche_es '
+    PDel_fes := ' delete from tb_fichei_recap '
             +' where num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
             +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
 
@@ -402,7 +404,7 @@ if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes
             +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
 
 
-    PDel_fesRec := ' delete from tb_fichees_recap '
+    PDel_fesRec := ' delete from tb_fiche_es '
             +' where num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
             +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
 

@@ -2,6 +2,21 @@ object DM: TDM
   OldCreateOrder = False
   Height = 194
   Width = 287
+  object frxDBParam: TfrxDBDataset
+    UserName = 'frxDBParam'
+    CloseDataSource = False
+    DataSet = TParam
+    BCDToCurrency = False
+    Left = 171
+    Top = 20
+  end
+  object TParam: TSQLTable
+    MaxBlobSize = 1
+    SQLConnection = SQLConnection1
+    TableName = 'tb_parametre'
+    Left = 163
+    Top = 88
+  end
   object SQLConnection1: TSQLConnection
     DriverName = 'MySQL'
     LoginPrompt = False
@@ -41,21 +56,5 @@ object DM: TDM
     Connected = True
     Left = 64
     Top = 32
-  end
-  object frxDBParam: TfrxDBDataset
-    UserName = 'frxDBParam'
-    CloseDataSource = False
-    DataSet = TParam
-    BCDToCurrency = False
-    Left = 171
-    Top = 20
-  end
-  object TParam: TSQLTable
-    Active = True
-    MaxBlobSize = 1
-    SQLConnection = SQLConnection1
-    TableName = 'tb_parametre'
-    Left = 163
-    Top = 88
   end
 end

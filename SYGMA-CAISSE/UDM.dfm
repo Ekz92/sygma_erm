@@ -53,7 +53,6 @@ object DM: TDM
       'BlobSize=-1'
       'ErrorResourceFile='
       '=')
-    Connected = True
     Left = 64
     Top = 32
   end

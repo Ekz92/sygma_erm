@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.Buttons,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr;
 
 type
   TfrmListeDepense = class(TForm)
@@ -21,12 +22,18 @@ type
     d2: TDateTimePicker;
     PopupMenu1: TPopupMenu;
     Annulercettedpense1: TMenuItem;
+    Panel2: TPanel;
+    Button1: TButton;
+    frxLDepense: TfrxReport;
+    SqlDepense: TSQLQuery;
+    frxDBDepense: TfrxDBDataset;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure stDepDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
     procedure Annulercettedpense1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -110,6 +117,47 @@ begin
     SpeedButton1.Click;
 
     end;
+
+procedure TfrmListeDepense.Button1Click(Sender: TObject);
+var
+  Psql : string;
+
+  Component: TfrxComponent;
+  MD1,MD2 :TfrxMemoView;
+
+begin
+
+  Psql := ' select * from tb_depense '
+              +' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+              +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+              +' and statut_canc = 0'
+              +' order by id_dep desc';
+
+//****************************** Affichage date1 DIAGRAMME ***********************
+  Component := frxLDepense.FindObject('md1');
+    if Component is TfrxMemoView then
+    begin
+          MD1 := Component as TfrxMemoView;
+          MD1.Text := DateToStr(d1.DateTime);
+    end;
+  //*****
+  Component := frxLDepense.FindObject('md2');
+    if Component is TfrxMemoView then
+    begin
+          MD2 := Component as TfrxMemoView;
+          MD2.Text := DateToStr(d2.DateTime);
+    end;
+
+
+  SqlDepense.SQL.Clear;
+  SqlDepense.SQL.Add(Psql);
+  SqlDepense.Open;
+
+  frxLDepense.ShowReport();
+
+
+
+end;
 
 procedure TfrmListeDepense.FormCreate(Sender: TObject);
 begin

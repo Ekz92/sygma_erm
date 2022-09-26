@@ -1167,7 +1167,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBRecap."B12_Iv"]')
+            '[frxDBRecap."B25_Iv"]')
           ParentFont = False
           VAlign = vaCenter
         end

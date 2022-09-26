@@ -66,6 +66,8 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
+uses UListeDepense;
+
 {$R *.dfm}
 
 

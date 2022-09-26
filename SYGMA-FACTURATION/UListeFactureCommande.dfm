@@ -2,7 +2,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
   Left = 0
   Top = 0
   Caption = 'Liste de facture par commande'
-  ClientHeight = 353
+  ClientHeight = 294
   ClientWidth = 583
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,6 +12,8 @@ object frmListeFactureCommande: TfrmListeFactureCommande
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -181,7 +183,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     Left = 0
     Top = 62
     Width = 583
-    Height = 264
+    Height = 205
     Align = alClient
     ColCount = 7
     DefaultRowHeight = 15
@@ -197,6 +199,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = St_listeFactureDrawCell
+    ExplicitHeight = 264
     ColWidths = (
       59
       69
@@ -208,12 +211,13 @@ object frmListeFactureCommande: TfrmListeFactureCommande
   end
   object Panel1: TPanel
     Left = 0
-    Top = 326
+    Top = 267
     Width = 583
     Height = 27
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 326
     object Button1: TButton
       Left = 508
       Top = 0
@@ -476,7 +480,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 56.692950000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 56.692950000000000000
           Height = 18.897650000000000000
           DataField = 'statut'
@@ -519,7 +523,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
         object Memo12: TfrxMemoView
           AllowVectorExport = True
           Left = 122.622140000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 49.133890000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -536,7 +540,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 174.779547090000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 70.299205280000000000
           Height = 18.897650000000000000
           DataField = 'code_clt'
@@ -550,7 +554,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 246.346630000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 192.000000000000000000
           Height = 18.897650000000000000
           DataField = 'nom_clt'
@@ -904,6 +908,10 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     Left = 432
     Top = 80
     Datasets = <
+      item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
       item
         DataSet = frxRFactureListe
         DataSetName = 'frxRFactureListe'
@@ -1773,6 +1781,10 @@ object frmListeFactureCommande: TfrmListeFactureCommande
     Top = 216
     Datasets = <
       item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
+      item
         DataSet = frxDBDataset1
         DataSetName = 'frxRFactureListed'
       end>
@@ -2082,7 +2094,7 @@ object frmListeFactureCommande: TfrmListeFactureCommande
           Highlight.FillType = ftBrush
           Highlight.Frame.Typ = []
           Memo.UTF8W = (
-            '[frxRFactureListed."date_com"]')
+            '[frxRFactureListed."datefact"]')
           ParentFont = False
         end
         object Memo13: TfrxMemoView

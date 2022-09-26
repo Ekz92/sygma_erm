@@ -86,7 +86,7 @@ begin
         Sdate_ej:= DateToStr(DateTimePicker1.Date);
         Snum_ope := IntToStr(vOpe);
         Snum_piece := '';
-        Slibelle := edLibelle.Text;
+        Slibelle := edLibelle.Text+' '+edNomClt.Text;
         Sdebit := '-';
         Scredit := edMontant.Text;
         Ssens:='C';

@@ -59,7 +59,7 @@ var
   num_compte,SqlUpCaisse,SqlUpPay,SqlUpHisCais,SqlUpBeneFact,
   sqlDelReleve,
   SqlCc,
-  SqlUpCc : string;
+  SqlUpCc,SqlDelJrl : string;
 
   Paymt : TPayement_caisse;
   CompteClt : TCompteClientArray;
@@ -163,9 +163,13 @@ begin
                 End;
 
       //        suppession de ligne sur le relevé du client
-
               sqlDelReleve := 'delete from tb_releve_client where operation_rc = '+ QuotedStr(edOpe.Text);
               dm.DeleteFromTable(sqlDelReleve);
+
+//      Suppression dsur le journal de caisse
+              SqlDelJrl := 'Delete from tb_etat_journal '
+                          +' where num_ope = '+QuotedStr(edOpe.Text);
+              dm.DeleteFromTable(SqlDelJrl);
 
               close;
             end;

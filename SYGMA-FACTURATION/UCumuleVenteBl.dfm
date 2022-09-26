@@ -1,9 +1,9 @@
 object frmCumuleVenteBL: TfrmCumuleVenteBL
   Left = 0
   Top = 0
-  Caption = 'Cumule vente Bl'
+  Caption = 'Cumule vente par client'
   ClientHeight = 291
-  ClientWidth = 485
+  ClientWidth = 484
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,13 +20,14 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 485
+    Width = 484
     Height = 65
     Align = alTop
     Caption = 'Crit'#232'res'
     TabOrder = 0
+    ExplicitWidth = 485
     object SpeedButton1: TSpeedButton
-      Left = 407
+      Left = 406
       Top = 15
       Width = 76
       Height = 48
@@ -92,42 +93,46 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
   object StringGrid1: TStringGrid
     Left = 0
     Top = 65
-    Width = 485
+    Width = 484
     Height = 201
     Align = alClient
     BevelOuter = bvRaised
-    BorderStyle = bsNone
-    ColCount = 4
     DefaultRowHeight = 15
     FixedCols = 0
     RowCount = 2
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
     ParentColor = True
+    ScrollBars = ssNone
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
+    ExplicitWidth = 525
     ColWidths = (
-      82
-      240
-      69
-      86)
+      60
+      212
+      38
+      84
+      81)
   end
   object Panel1: TPanel
     Left = 0
     Top = 266
-    Width = 485
+    Width = 484
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 485
     object Button1: TButton
-      Left = 410
+      Left = 409
       Top = 0
       Width = 75
       Height = 25
+      Align = alRight
       Caption = 'Imprimer'
       TabOrder = 0
       OnClick = Button1Click
+      ExplicitLeft = 425
     end
   end
   object frxReport1: TfrxReport
@@ -294,7 +299,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         Width = 718.110700000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
-          Width = 718.110236220472000000
+          Width = 718.110236220000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -308,7 +313,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Left = 76.000000000000000000
+          Left = 1.000000000000000000
           Width = 86.224973440000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -324,7 +329,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 162.547793440000000000
+          Left = 87.547793440000000000
           Width = 308.384179160000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -340,7 +345,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         end
         object Memo5: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.018552610000000000
+          Left = 396.018552610000000000
           Width = 77.376733580000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -357,7 +362,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         end
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 548.395286190000000000
+          Left = 473.395286190000000000
           Width = 111.778947490000000000
           Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -369,6 +374,23 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
           HAlign = haCenter
           Memo.UTF8W = (
             'Prix Total')
+          ParentFont = False
+          Style = 'Header'
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Left = 585.827150000000000000
+          Width = 130.676597490000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Gram(kg)')
           ParentFont = False
           Style = 'Header'
         end
@@ -384,7 +406,7 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         RowCount = 0
         object Memo9: TfrxMemoView
           AllowVectorExport = True
-          Left = 76.000000000000000000
+          Left = 1.000000000000000000
           Width = 86.224973440000000000
           Height = 18.897650000000000000
           DataField = 'code_art'
@@ -395,15 +417,14 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Typ = []
+          Frame.Typ = [ftBottom]
           Memo.UTF8W = (
             '[frxDBDataset1."code_art"]')
           ParentFont = False
-          Style = 'Data'
         end
         object Memo10: TfrxMemoView
           AllowVectorExport = True
-          Left = 162.547793440000000000
+          Left = 87.547793440000000000
           Width = 308.384179160000000000
           Height = 18.897650000000000000
           DataField = 'designation_art'
@@ -414,15 +435,14 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Typ = []
+          Frame.Typ = [ftBottom]
           Memo.UTF8W = (
             '[frxDBDataset1."designation_art"]')
           ParentFont = False
-          Style = 'Data'
         end
         object Memo11: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.018552610000000000
+          Left = 396.018552610000000000
           Width = 77.376733580000000000
           Height = 18.897650000000000000
           DataField = 'qte'
@@ -433,16 +453,15 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Typ = []
+          Frame.Typ = [ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDataset1."qte"]')
           ParentFont = False
-          Style = 'Data'
         end
         object Memo12: TfrxMemoView
           AllowVectorExport = True
-          Left = 548.395286190000000000
+          Left = 473.395286190000000000
           Width = 111.778947490000000000
           Height = 18.897650000000000000
           DataSet = frxDBDataset1
@@ -454,12 +473,30 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Typ = []
+          Frame.Typ = [ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDataset1."prix"]')
           ParentFont = False
-          Style = 'Data'
+        end
+        object frxDBDataset1kilo: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 586.606680000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[(<frxDBDataset1."kilo">*<frxDBDataset1."qte">)]')
+          ParentFont = False
         end
       end
       object PageFooter1: TfrxPageFooter
@@ -505,43 +542,57 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
         Width = 718.110700000000000000
         object Memo19: TfrxMemoView
           AllowVectorExport = True
-          Left = 470.929133860000000000
+          Left = 395.929133860000000000
           Width = 77.480314960000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
+          Font.Color = clWindowText
+          Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBDataset1."qte">,MasterData1)]')
           ParentFont = False
-          Style = 'Title'
         end
         object Memo20: TfrxMemoView
           AllowVectorExport = True
-          Left = 548.409448820000000000
+          Left = 473.409448820000000000
           Width = 111.874027950000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
+          Font.Color = clWindowText
+          Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBDataset1."prix">,MasterData1)]')
           ParentFont = False
-          Style = 'Title'
+        end
+        object Memo22: TfrxMemoView
+          AllowVectorExport = True
+          Left = 586.582677170000000000
+          Width = 132.283464570000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[(sum(<frxDBDataset1."kilo">*<frxDBDataset1."qte">))]')
+          ParentFont = False
         end
       end
     end
@@ -555,13 +606,16 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     Top = 136
   end
   object SQLQuery1: TSQLQuery
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       
-        'select code_art, designation_art, sum(qte_art) as qte,sum(prixt)' +
-        ' as prix,f.code_clt,f.nom_clt'
-      'from  tb_facturation_detail d, tb_facturation f')
+        'select d.code_art, d.designation_art, ta.kilo, sum(qte_art) as q' +
+        'te,sum(prixt) as prix,f.code_clt,f.nom_clt '
+      'from  tb_facturation_detail d '
+      ' inner join tb_facturation f on f.num_fact = d.num_fact '
+      ' inner join tb_article ta on ta.code_art = d.code_art  ')
     SQLConnection = DM.SQLConnection1
     Left = 240
     Top = 192
