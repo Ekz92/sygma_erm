@@ -12,8 +12,8 @@ type
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label4: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
+    edCode: TEdit;
+    edDesign: TEdit;
     StringGrid1: TStringGrid;
     PopupMenu1: TPopupMenu;
     Dfiniruncotdachat1: TMenuItem;
@@ -22,6 +22,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure Dfiniruncotdachat1Click(Sender: TObject);
+    procedure edDesignChange(Sender: TObject);
+    procedure edCodeChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -35,7 +38,87 @@ implementation
 
 {$R *.dfm}
 
-uses UDM;
+uses UDM, UDefPrixArticle;
+
+procedure TfrmListe_article.Dfiniruncotdachat1Click(Sender: TObject);
+begin
+with frmDefPrixArticle, StringGrid1 do
+  begin
+    edcode.Text:=cells[0,Row];
+    eddesignation.Text:=cells[1,Row];
+    edCout.Text:=cells[3,Row];
+
+    ShowModal;
+  end;
+end;
+
+procedure TfrmListe_article.edCodeChange(Sender: TObject);
+var
+  Qliste :   TSQLQuery;
+  i :integer;
+begin
+
+  Qliste:=TSQLQuery.Create(self);
+  Qliste.SQLConnection :=dm.SQLConnection1;
+
+  with Qliste,SQL do
+    begin
+      Add('select * from tb_article a, tb_stock s'
+          +' where a.code_art = s.code_art'
+          +' and a.code_art like '+QuotedStr('%'+edCode.Text+'%')
+          );
+    end;
+
+    try
+      Qliste.Open;
+      StringGrid1.RowCount:=Qliste.RowsAffected+1;
+      for I := 1 to Qliste.RowsAffected+1 do
+        with StringGrid1, Qliste do
+          begin
+            Cells[0,i] := FieldByName('code_art').AsString;
+            Cells[1,i] := FieldByName('designation_art').AsString;
+            Cells[2,i] := FieldByName('type_art').AsString;
+            Cells[3,i] := FieldByName('cout_achat').AsString;
+            Qliste.Next;
+          end;
+    finally
+      Qliste.Free;
+    end;
+end;
+
+procedure TfrmListe_article.edDesignChange(Sender: TObject);
+var
+  Qliste :   TSQLQuery;
+  i :integer;
+begin
+
+  Qliste:=TSQLQuery.Create(self);
+  Qliste.SQLConnection :=dm.SQLConnection1;
+
+  with Qliste,SQL do
+    begin
+      Add('select * from tb_article a, tb_stock s'
+          +' where a.code_art = s.code_art'
+          +' and a.designation_art like '+QuotedStr('%'+edDesign.Text+'%')
+          );
+    end;
+
+    try
+      Qliste.Open;
+      StringGrid1.RowCount:=Qliste.RowsAffected+1;
+      for I := 1 to Qliste.RowsAffected+1 do
+        with StringGrid1, Qliste do
+          begin
+            Cells[0,i] := FieldByName('code_art').AsString;
+            Cells[1,i] := FieldByName('designation_art').AsString;
+            Cells[2,i] := FieldByName('type_art').AsString;
+            Cells[3,i] := FieldByName('cout_achat').AsString;
+            Qliste.Next;
+          end;
+    finally
+      Qliste.Free;
+    end;
+end;
 
 procedure TfrmListe_article.FormCreate(Sender: TObject);
 begin
@@ -60,7 +143,8 @@ begin
   with Qliste,SQL do
     begin
       Add('select * from tb_article a, tb_stock s'
-          +' where a.code_art = s.code_art');
+          +' where a.code_art = s.code_art'
+          );
     end;
 
     try

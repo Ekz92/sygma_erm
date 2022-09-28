@@ -1,0 +1,81 @@
+unit UDefPrixArticle;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmDefPrixArticle = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Bevel1: TBevel;
+    edcode: TEdit;
+    eddesignation: TEdit;
+    edCout: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    procedure Button2Click(Sender: TObject);
+    procedure edCoutKeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmDefPrixArticle: TfrmDefPrixArticle;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmDefPrixArticle.Button1Click(Sender: TObject);
+var
+  Psql : string;
+begin
+
+if MessageDlg('Voulez-vous modifier le prix de cet article ?',mtWarning,[mbYes,mbNo],0)= mrYes  then
+  begin
+    Psql := 'update tb_stock set cout_achat = '+edCout.Text
+            +' where code_art = '+QuotedStr(edcode.Text);
+
+    if (edcode.Text<>'') and (edCout.Text<>'') then
+      begin
+        dm.UpdateTable(Psql);
+        Button2.Click;
+      end
+    else
+      MessageDlg('Merci de saisir un montant',
+                  mtError,[mbRetry],0);
+  end;
+end;
+
+procedure TfrmDefPrixArticle.Button2Click(Sender: TObject);
+begin
+edcode.Clear;
+eddesignation.Clear;
+edCout.Clear;
+close;
+end;
+
+procedure TfrmDefPrixArticle.edCoutKeyPress(Sender: TObject; var Key: Char);
+begin
+if not (key in ['0'..'9','.',#13,#8])then Key:=#0;
+if key=#13 then Button1.Click;
+
+end;
+
+procedure TfrmDefPrixArticle.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+frmListe_article.OnShow(sender);
+end;
+
+end.

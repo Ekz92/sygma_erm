@@ -716,7 +716,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 275.905690000000000000
+        Top = 298.582870000000000000
         Width = 1046.929810000000000000
         object Memo25: TfrxMemoView
           Align = baWidth
@@ -750,13 +750,13 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       object Footer1: TfrxFooter
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 45.354360000000000000
         Top = 192.756030000000000000
         Width = 1046.929810000000000000
         object Memo28: TfrxMemoView
           AllowVectorExport = True
-          Left = 683.338582680000000000
-          Top = 1.000000000000000000
+          Left = 684.338582680000000000
+          Top = 3.779530000000000000
           Width = 62.740157480000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0n'
@@ -766,7 +766,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_vide">,MasterData1)]')
@@ -774,8 +774,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo29: TfrxMemoView
           AllowVectorExport = True
-          Left = 746.078740160000000000
-          Top = 1.000000000000000000
+          Left = 747.078740160000000000
+          Top = 3.779530000000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0f'
@@ -785,7 +785,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_fuite">,MasterData1)]')
@@ -793,8 +793,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo30: TfrxMemoView
           AllowVectorExport = True
-          Left = 810.330708660000000000
-          Top = 1.000000000000000000
+          Left = 811.330708660000000000
+          Top = 3.779530000000000000
           Width = 71.811023620000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0f'
@@ -804,7 +804,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_pleine">,MasterData1)]')
@@ -812,8 +812,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo32: TfrxMemoView
           AllowVectorExport = True
-          Left = 883.385826770000000000
-          Top = 1.000000000000000000
+          Left = 884.385826770000000000
+          Top = 3.779530000000000000
           Width = 77.480329610000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2f'
@@ -823,7 +823,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."kgfuite">,MasterData1)]')
@@ -831,8 +831,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo31: TfrxMemoView
           AllowVectorExport = True
-          Left = 962.188976380000000000
-          Top = 1.000000000000000000
+          Left = 963.188976380000000000
+          Top = 3.779530000000000000
           Width = 85.417337480000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2f'
@@ -842,10 +842,48 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."kgpleine">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo34: TfrxMemoView
+          AllowVectorExport = True
+          Left = 684.094930000000000000
+          Top = 23.456710000000000000
+          Width = 199.559055120000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[(sum(<frxDBFicheSortie."qte_vide">)+sum(<frxDBFicheSortie."qte_' +
+              'fuite">)+sum(<frxDBFicheSortie."qte_pleine">))]')
+          ParentFont = False
+        end
+        object Memo35: TfrxMemoView
+          AllowVectorExport = True
+          Left = 884.410020000000000000
+          Top = 23.566931570000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[(sum(<frxDBFicheSortie."kgfuite">)+sum(<frxDBFicheSortie."kgple' +
+              'ine">))]')
           ParentFont = False
         end
       end
@@ -860,7 +898,6 @@ object frmListeFcheSortie: TfrmListeFcheSortie
     Top = 48
   end
   object QFicheSortie: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1296,7 +1333,6 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Left = 683.411189830000000000
           Width = 62.634991770000000000
           Height = 18.897650000000000000
-          DataField = 'qte_vide'
           DataSet = frxDBLFicheSortie
           DataSetName = 'frxDBFicheSortie'
           Font.Charset = DEFAULT_CHARSET
@@ -1356,9 +1392,10 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Left = 883.341654440000000000
           Width = 77.629667650000000000
           Height = 18.897650000000000000
-          DataField = 'kgfuite'
           DataSet = frxDBLFicheSortie
           DataSetName = 'frxDBFicheSortie'
+          DisplayFormat.FormatStr = '%2.1n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1376,9 +1413,10 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Left = 962.294142090000000000
           Width = 85.312171770000000000
           Height = 18.897650000000000000
-          DataField = 'kgpleine'
           DataSet = frxDBLFicheSortie
           DataSetName = 'frxDBFicheSortie'
+          DisplayFormat.FormatStr = '%2.1n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1396,7 +1434,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 275.905690000000000000
+        Top = 302.362400000000000000
         Width = 1046.929810000000000000
         object Memo25: TfrxMemoView
           Align = baWidth
@@ -1430,13 +1468,13 @@ object frmListeFcheSortie: TfrmListeFcheSortie
       object Footer1: TfrxFooter
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 49.133890000000000000
         Top = 192.756030000000000000
         Width = 1046.929810000000000000
         object Memo28: TfrxMemoView
           AllowVectorExport = True
-          Left = 683.338582680000000000
-          Top = 1.000000000000000000
+          Left = 684.338582680000000000
+          Top = 6.000000000000000000
           Width = 62.740157480000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0n'
@@ -1446,7 +1484,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_vide">,MasterData1)]')
@@ -1454,8 +1492,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo29: TfrxMemoView
           AllowVectorExport = True
-          Left = 746.078740160000000000
-          Top = 1.000000000000000000
+          Left = 747.078740160000000000
+          Top = 6.000000000000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0f'
@@ -1465,7 +1503,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_fuite">,MasterData1)]')
@@ -1473,8 +1511,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo30: TfrxMemoView
           AllowVectorExport = True
-          Left = 810.330708660000000000
-          Top = 1.000000000000000000
+          Left = 811.330708660000000000
+          Top = 6.000000000000000000
           Width = 71.811023620000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.0f'
@@ -1484,7 +1522,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."qte_pleine">,MasterData1)]')
@@ -1492,8 +1530,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo32: TfrxMemoView
           AllowVectorExport = True
-          Left = 883.385826770000000000
-          Top = 1.000000000000000000
+          Left = 884.385826770000000000
+          Top = 6.000000000000000000
           Width = 77.480329610000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2f'
@@ -1503,7 +1541,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."kgfuite">,MasterData1)]')
@@ -1511,28 +1549,69 @@ object frmListeFcheSortie: TfrmListeFcheSortie
         end
         object Memo31: TfrxMemoView
           AllowVectorExport = True
-          Left = 962.188976380000000000
-          Top = 1.000000000000000000
+          Left = 963.188976380000000000
+          Top = 6.000000000000000000
           Width = 85.417337480000000000
           Height = 18.897650000000000000
-          DisplayFormat.FormatStr = '%2.2f'
+          DisplayFormat.FormatStr = '%2.1n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
             '[SUM(<frxDBFicheSortie."kgpleine">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo34: TfrxMemoView
+          AllowVectorExport = True
+          Left = 684.094930000000000000
+          Top = 25.677180000000000000
+          Width = 199.559055120000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[(sum(<frxDBFicheSortie."qte_vide">)+sum(<frxDBFicheSortie."qte_' +
+              'fuite">)+sum(<frxDBFicheSortie."qte_pleine">))]')
+          ParentFont = False
+        end
+        object Memo35: TfrxMemoView
+          AllowVectorExport = True
+          Left = 884.410020000000000000
+          Top = 25.787401570000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            
+              '[(sum(<frxDBFicheSortie."kgfuite">)+sum(<frxDBLFicheSortie."kgpl' +
+              'eine">))]')
           ParentFont = False
         end
       end
     end
   end
   object QLFicheSortie: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

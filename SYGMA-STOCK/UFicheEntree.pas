@@ -85,10 +85,12 @@ var
   vVide,vFuite,vPleine,vTotal: Integer;
   stockArt : TStock;
   article : TArticle;
-  codeArt,sqlUp,sqlUpFiche,SqlUpTFiche : string;
+  codeArt,sqlUp,SqlStockCam,SqlUpstkCam,sqlUpFiche,SqlUpTFiche : string;
   fichei_recap : Tfichei_recap;
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
+  StockCam : TStockCamion;
+  Stock : TStock;
 begin
   for I := 3 to st_ficheEntree.ColCount do
     for j := 1 to st_ficheEntree.RowCount-1 do
@@ -104,7 +106,7 @@ begin
   if Trim(edCodeclt.Text)='' then
     MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
   else
-  if Trim(edNomVeh.Text)='' then
+  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'CLIENT PERSONNEL') and (edNomClt.Text<>'CLIENT PASSAGE') then
     MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
@@ -162,33 +164,6 @@ begin
       SB12E_Iv:='';
       SB12E_Ip:='';
       SB12E_If:='';
-//      SB3A_Ov:='';
-//      SB3A_Op:='';
-//      SB3A_Of:='';
-//      SB3_Ov:='';
-//      SB3_Op:='';
-//      SB3_Of :='';
-//      SB6_Ov:='';
-//      SB6_Op:='';
-//      SB6_Of:='';
-//      SB6R_Ov:='';
-//      SB6R_Op:='';
-//      SB6R_Of:='';
-//      SB12_Ov:='';
-//      SB12_Op:='';
-//      SB12_Of:='';
-//      SB50_Ov:='';
-//      SB50_Op:='';
-//      SB50_Of:='';
-//      SB25_Ov:='';
-//      SB25_Op:='';
-//      SB25_Of:='';
-//      SB6E_Ov:='';
-//      SB6E_Op:='';
-//      SB6E_Of:='';
-//      SB12E_Ov:='';
-//      SB12E_Op:='';
-//      SB12E_Of :='';
     end;
     dm.InsertFicheiRecap(fichei_recap);
 
@@ -283,6 +258,22 @@ begin
                     +' qte_totale = '+IntToStr(stockArt.Nqte_total +StrToInt(Cells[3,i])+StrToInt(Cells[4,i])+StrToInt(Cells[5,i]))
                     +' where code_art = '+QuotedStr(codeArt);
             dm.UpdateTable(sqlUp);
+
+//            MAJ stock camion
+            SqlStockCam :=' where code_art = '+QuotedStr(codeArt)
+                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+            StockCam := dm.selectStockCamion(SqlStockCam);
+
+            SqlUpstkCam := ' update tb_stock_camion set '
+                          +' qte_vide = '+IntToStr(StockCam.NQte_vide - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
+                          +' qte_mag = '+IntToStr(StockCam.NQte_mag - StrToInt(Cells[5,i])) +','
+                          +' qte_total = '+IntToStr(StockCam.Nqte_total - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
+                          +' where code_art = '+QuotedStr(codeArt)
+                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+
+            dm.UpdateTable(SqlUpstkCam);
+
+
 //          Mise à jour dans la table fiche d'entree
             vVide := StrToInt(Cells[3,i]);
             vFuite :=StrToInt(Cells[4,i]);

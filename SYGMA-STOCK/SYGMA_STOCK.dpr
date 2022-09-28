@@ -40,7 +40,9 @@ uses
   URechBLRappel in 'URechBLRappel.pas' {frmRechBLRappel},
   UQteLivre2 in 'UQteLivre2.pas' {frmQteLivre2},
   UFicheRecapi in 'UFicheRecapi.pas' {frmFicheRecapi},
-  UFicheRecapo in 'UFicheRecapo.pas' {frmFicheRecapo};
+  UFicheRecapo in 'UFicheRecapo.pas' {frmFicheRecapo},
+  USortieVrac in 'USortieVrac.pas' {frmSortieVrac},
+  UDefPrixArticle in 'UDefPrixArticle.pas' {frmDefPrixArticle};
 
 {$R *.res}
 
@@ -86,5 +88,7 @@ begin
   Application.CreateForm(TfrmFicheRecapi, frmFicheRecapi);
   Application.CreateForm(TfrmFicheRecapi, frmFicheRecapi);
   Application.CreateForm(TfrmFicheRecapo, frmFicheRecapo);
+  Application.CreateForm(TfrmSortieVrac, frmSortieVrac);
+  Application.CreateForm(TfrmDefPrixArticle, frmDefPrixArticle);
   Application.Run;
 end.

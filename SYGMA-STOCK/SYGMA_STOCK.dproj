@@ -238,6 +238,14 @@
             <Form>frmFicheRecapo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="USortieVrac.pas">
+            <Form>frmSortieVrac</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UDefPrixArticle.pas">
+            <Form>frmDefPrixArticle</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

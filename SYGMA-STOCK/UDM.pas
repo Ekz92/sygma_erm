@@ -52,6 +52,7 @@ type
     function SelectMaxLettrage():TMaxLettrage;
     function SelectFicheEsH(Psql : string):TFicheEsHArray;
     function SelectFicheEs(Psql : string):TFiche_esArray;
+    function selectStockCamion(Psql : string):TStockCamion;
 
 
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
@@ -95,6 +96,39 @@ uses UFicheRecap_es, UListeBonCommande;
 
 
 {$R *.dfm}
+
+function TDM.selectStockCamion(Psql : string):TStockCamion;
+var
+  sql : string;
+  query : TSQLQuery;
+  stockCam : TStockCamion;
+begin
+  sql := 'Select * from tb_stock_camion '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+    query.Open;
+    with query, stockCam do
+      begin
+        Nid_stock := FieldByName('id_sc').AsInteger;
+        Svehicule := FieldByName('vehicule').AsString;
+        Scode_art := FieldByName('code_art').AsString;
+        SDesignation_art := FieldByName('designation_art').AsString;
+        NQte_vide := FieldByName('qte_vide').AsInteger;
+        NQte_mag := FieldByName('qte_mag').AsInteger;
+        Nqte_total := FieldByName('qte_total').AsInteger;
+      end;
+      Result := stockCam;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
 function TDM.SelectFicheEs(Psql : string):TFiche_esArray;
 var
   query : TSQLQuery;

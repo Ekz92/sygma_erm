@@ -6,6 +6,16 @@ TMaxNumRappel = record
   Nnumrappel : integer;
 end;
 
+TStockCamion = record
+  Nid_stock :integer;
+  Svehicule,
+  Scode_art,
+  SDesignation_art : String ;
+  NQte_vide,
+  NQte_mag ,
+  Nqte_total : Integer;
+end;
+TStockCamionArray = Array of TStockCamion;
 
 TFacturation_detail =record
   NId_fact : integer;

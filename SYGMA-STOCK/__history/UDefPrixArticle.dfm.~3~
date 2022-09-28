@@ -1,0 +1,88 @@
+object frmDefPrixArticle: TfrmDefPrixArticle
+  Left = 0
+  Top = 0
+  Caption = 'D'#233'finition de cout d'#39'achat d'#39'article'
+  ClientHeight = 118
+  ClientWidth = 341
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 16
+    Width = 30
+    Height = 13
+    Caption = 'code :'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 38
+    Width = 63
+    Height = 13
+    Caption = 'D'#233'signation :'
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 60
+    Width = 60
+    Height = 13
+    Caption = 'Co'#251't achat :'
+  end
+  object Bevel1: TBevel
+    Left = 3
+    Top = 4
+    Width = 334
+    Height = 85
+    Shape = bsFrame
+  end
+  object edcode: TEdit
+    Left = 96
+    Top = 13
+    Width = 97
+    Height = 21
+    ParentColor = True
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object eddesignation: TEdit
+    Left = 96
+    Top = 35
+    Width = 225
+    Height = 21
+    ParentColor = True
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object edCout: TEdit
+    Left = 96
+    Top = 57
+    Width = 97
+    Height = 21
+    ParentColor = True
+    TabOrder = 2
+  end
+  object Button1: TButton
+    Left = 3
+    Top = 89
+    Width = 75
+    Height = 25
+    Caption = 'D'#233'finir'
+    TabOrder = 3
+  end
+  object Button2: TButton
+    Left = 78
+    Top = 89
+    Width = 75
+    Height = 25
+    Caption = 'Annuler'
+    TabOrder = 4
+    OnClick = Button2Click
+  end
+end

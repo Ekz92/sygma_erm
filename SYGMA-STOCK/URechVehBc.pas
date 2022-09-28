@@ -17,6 +17,7 @@ type
     procedure St_vehDblClick(Sender: TObject);
     procedure St_vehDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
       State: TGridDrawState);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -65,6 +66,29 @@ with St_veh do
     Cells[2,0] := 'Kgs max' ;
   end;
 
+end;
+
+procedure TfrmRechVehBc.FormShow(Sender: TObject);
+var
+  Psql : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+  Psql := '';
+
+  vehs:=dm.SelectVehicule(Psql);
+  St_veh.RowCount := Length(vehs) +1;
+
+  for I := Low(vehs) to High(vehs) do
+    with St_veh do
+      begin
+       // Rows[i].Clear;
+        Cells[0,i+1] := vehs[i].SNum_mat ;
+        Cells[1,i+1] := vehs[i].SMarque;
+        Cells[2,i+1] := IntToStr(vehs[i].NPTAC);
+      end;
+
+      if St_veh.RowCount>1 then St_veh.FixedRows := 1;
 end;
 
 procedure TfrmRechVehBc.St_vehDblClick(Sender: TObject);

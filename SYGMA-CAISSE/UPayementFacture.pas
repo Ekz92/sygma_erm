@@ -212,6 +212,21 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
               SLibelle:=QuotedStr(edLibEncais.Text);
             end;
             dm.InsertReleveClient(RC);
+
+        //      Etat journal
+          with EtatJrn do
+            begin
+              Sdate_ej:= eddate.Text;
+              Snum_ope := edOperation.Text;
+              Snum_piece := edFacture.Text;
+              Slibelle := edLibEncais.Text;
+              Sdebit := '-';
+              Scredit := edMontant.Text;
+              Ssens := 'C';
+              Susager := vUsager;
+            end;
+          dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
         end ;
 
     if (cbTypEncais.Text='Avance') and (solde >= StrToFloat(edMontant.Text)) then
@@ -248,13 +263,27 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
         end;
         dm.InsertReleveClient(RC_avance);
 
-        { Mise à jour du compte client}
+    //      Etat journal
+      with EtatJrn do
+        begin
+          Sdate_ej:= eddate.Text;
+          Snum_ope := edOperation.Text;
+          Snum_piece := edFacture.Text;
+          Slibelle := edLibEncais.Text+' du client '+ednomclt.Text;
+          Sdebit := '-';
+          Scredit := '-';
+          Ssens := 'C';
+          Susager := vUsager;
+        end;
+      dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
 
-          SqlUpdate_cc := 'Update tb_compte_client set '
-                            +'solde = '+FloatToStr(solde - StrToFloat(edMontant.Text))
-                            +' where code_clt = '+QuotedStr(edcodeclt.Text);
+    { Mise à jour du compte client}
 
-          dm.UpdateTable(SqlUpdate_cc);
+      SqlUpdate_cc := 'Update tb_compte_client set '
+                        +'solde = '+FloatToStr(solde - StrToFloat(edMontant.Text))
+                        +' where code_clt = '+QuotedStr(edcodeclt.Text);
+
+      dm.UpdateTable(SqlUpdate_cc);
     end  else
     if (cbTypEncais.Text='Espèce') then
         begin
@@ -274,6 +303,21 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
               SLibelle:=QuotedStr(edLibEncais.Text);
             end;
             dm.InsertReleveClient(RC);
+
+            //      Etat journal
+        with EtatJrn do
+          begin
+            Sdate_ej:= eddate.Text;
+            Snum_ope := edOperation.Text;
+            Snum_piece := edFacture.Text;
+            Slibelle := edLibEncais.Text;
+            Sdebit := '-';
+            Scredit := edMontant.Text;
+            Ssens := 'C';
+            Susager := vUsager;
+          end;
+        dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
         end
      else
     if (cbTypEncais.Text='Avance') and (solde < StrToFloat(edMontant.Text)) then
@@ -395,19 +439,19 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
         end;
       end;
 
-//      Etat journal
-  with EtatJrn do
-    begin
-      Sdate_ej:= eddate.Text;
-      Snum_ope := edOperation.Text;
-      Snum_piece := edFacture.Text;
-      Slibelle := edLibEncais.Text;
-      Sdebit := '-';
-      Scredit := edMontant.Text;
-      Ssens := 'C';
-      Susager := vUsager;
-    end;
-  dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+////      Etat journal
+//  with EtatJrn do
+//    begin
+//      Sdate_ej:= eddate.Text;
+//      Snum_ope := edOperation.Text;
+//      Snum_piece := edFacture.Text;
+//      Slibelle := edLibEncais.Text;
+//      Sdebit := '-';
+//      Scredit := edMontant.Text;
+//      Ssens := 'C';
+//      Susager := vUsager;
+//    end;
+//  dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
 
 
 { Changement de statut }

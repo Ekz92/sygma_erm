@@ -2,8 +2,8 @@ object frmListe_article: TfrmListe_article
   Left = 0
   Top = 0
   Caption = 'Liste d'#39'article'
-  ClientHeight = 391
-  ClientWidth = 536
+  ClientHeight = 316
+  ClientWidth = 462
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmListe_article: TfrmListe_article
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 536
+    Width = 462
     Height = 58
     Align = alTop
     Caption = 'Recherche'
@@ -31,7 +31,7 @@ object frmListe_article: TfrmListe_article
     ParentFont = False
     TabOrder = 0
     StyleElements = [seBorder]
-    ExplicitWidth = 368
+    ExplicitWidth = 536
     object Label1: TLabel
       Left = 32
       Top = 17
@@ -60,7 +60,7 @@ object frmListe_article: TfrmListe_article
       ParentFont = False
       StyleElements = [seBorder]
     end
-    object Edit1: TEdit
+    object edCode: TEdit
       Left = 112
       Top = 11
       Width = 96
@@ -76,8 +76,9 @@ object frmListe_article: TfrmListe_article
       ParentFont = False
       TabOrder = 0
       StyleElements = [seBorder]
+      OnChange = edCodeChange
     end
-    object Edit2: TEdit
+    object edDesign: TEdit
       Left = 112
       Top = 31
       Width = 199
@@ -93,13 +94,14 @@ object frmListe_article: TfrmListe_article
       ParentFont = False
       TabOrder = 1
       StyleElements = [seBorder]
+      OnChange = edDesignChange
     end
   end
   object StringGrid1: TStringGrid
     Left = 0
     Top = 58
-    Width = 536
-    Height = 333
+    Width = 462
+    Height = 258
     Align = alClient
     Anchors = [akRight, akBottom]
     Color = clBtnFace
@@ -113,9 +115,8 @@ object frmListe_article: TfrmListe_article
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitTop = 71
-    ExplicitWidth = 368
-    ExplicitHeight = 213
+    ExplicitWidth = 536
+    ExplicitHeight = 333
     ColWidths = (
       84
       256
@@ -127,6 +128,7 @@ object frmListe_article: TfrmListe_article
     Top = 128
     object Dfiniruncotdachat1: TMenuItem
       Caption = 'D'#233'finir un co'#251't d'#39'achat'
+      OnClick = Dfiniruncotdachat1Click
     end
     object Voirlafichedestock1: TMenuItem
       Caption = 'Voir la fiche de stock'

@@ -1,0 +1,194 @@
+object frmSortieVrac: TfrmSortieVrac
+  Left = 0
+  Top = 0
+  AutoSize = True
+  Caption = 'Sortie en vrac'
+  ClientHeight = 218
+  ClientWidth = 447
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox2: TGroupBox
+    Left = 0
+    Top = 64
+    Width = 447
+    Height = 91
+    Align = alTop
+    Caption = 'Client'
+    TabOrder = 0
+    object Label3: TLabel
+      Left = 16
+      Top = 18
+      Width = 32
+      Height = 13
+      Caption = 'Code :'
+    end
+    object Label4: TLabel
+      Left = 16
+      Top = 40
+      Width = 28
+      Height = 13
+      Caption = 'Nom :'
+    end
+    object Label5: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Vehicule :'
+    end
+    object edCodeclt: TEdit
+      Left = 72
+      Top = 15
+      Width = 121
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 0
+      OnDblClick = edCodecltDblClick
+    end
+    object edNomClt: TEdit
+      Left = 72
+      Top = 37
+      Width = 353
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object edNomVeh: TComboBox
+      Left = 72
+      Top = 59
+      Width = 246
+      Height = 21
+      ParentColor = True
+      TabOrder = 2
+      OnChange = edNomVehCloseUp
+      OnCloseUp = edNomVehCloseUp
+    end
+    object cbMatVeh: TEdit
+      Left = 319
+      Top = 59
+      Width = 106
+      Height = 21
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 3
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 447
+    Height = 64
+    Align = alTop
+    Caption = 'En-t'#234'te'
+    TabOrder = 1
+    ExplicitLeft = -56
+    ExplicitWidth = 503
+    object Label1: TLabel
+      Left = 16
+      Top = 16
+      Width = 19
+      Height = 13
+      Caption = 'N'#176' :'
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 38
+      Width = 30
+      Height = 13
+      Caption = 'Date :'
+    end
+    object edNum: TEdit
+      Left = 72
+      Top = 13
+      Width = 121
+      Height = 21
+      NumbersOnly = True
+      ParentColor = True
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object cbdate: TDateTimePicker
+      Left = 72
+      Top = 35
+      Width = 121
+      Height = 21
+      Date = 44798.377164432870000000
+      Time = 44798.377164432870000000
+      ShowCheckbox = True
+      Checked = False
+      TabOrder = 1
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 155
+    Width = 447
+    Height = 36
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitTop = 170
+    object Label7: TLabel
+      Left = 16
+      Top = 1
+      Width = 33
+      Height = 26
+      Caption = 'Charg. en(kg)'
+      WordWrap = True
+    end
+    object edCharge: TEdit
+      Left = 72
+      Top = 6
+      Width = 121
+      Height = 21
+      ParentColor = True
+      TabOrder = 0
+      OnKeyPress = edChargeKeyPress
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 191
+    Width = 447
+    Height = 27
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 3
+    ExplicitTop = 206
+    object Button1: TButton
+      Left = 372
+      Top = 0
+      Width = 75
+      Height = 27
+      Align = alRight
+      Caption = 'Annuler'
+      TabOrder = 0
+      OnClick = Button1Click
+      ExplicitLeft = 300
+      ExplicitHeight = 36
+    end
+    object Button2: TButton
+      Left = 297
+      Top = 0
+      Width = 75
+      Height = 27
+      Align = alRight
+      Caption = 'Valider'
+      TabOrder = 1
+      OnClick = Button2Click
+      ExplicitLeft = 300
+      ExplicitHeight = 36
+    end
+  end
+end

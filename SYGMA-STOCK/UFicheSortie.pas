@@ -32,6 +32,8 @@ type
     edNomVeh: TComboBox;
     cbMatVeh: TEdit;
     st_ficheSortie: TStringGrid;
+    Label7: TLabel;
+    lbCharg: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edCodecltDblClick(Sender: TObject);
@@ -61,6 +63,7 @@ var
   frmFicheSortie: TfrmFicheSortie;
   vCodeMag : string;
   vNumHis : integer ;
+  Tkgtot : Real;
 
 implementation
 
@@ -297,8 +300,8 @@ procedure TfrmFicheSortie.btClotClick(Sender: TObject);
 begin
 if  MessageDlg('Etes-vous certain de vouloir clôturer ce lot ?',mtWarning,[mbYes,mbNo],0) = mrYes then
   begin
-    FormShow(sender);
     btAnnuler.Click;
+    FormShow(sender);
     vNumHis := 0;
 
     edCodeclt.Enabled:=True;
@@ -314,12 +317,13 @@ var
   fiche_es : TFiche_es;
   I,j,vVide,vFuite,vPleine,vTotal: Integer;
   stockArt : TStock;
-  codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
+  codeArt,sqlUp,sqlUpFiche,SqlUpstkCam,SqlStockCam,SqlSelFiche, SqlUpTFiche : string;
   article : TArticle;
   ficheo_recap : Tficheo_recap;
   FicheoRec : Tficheo_recap;
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
+  StockCam : TStockCamion;
 
 begin
   for I := 3 to st_ficheSortie.ColCount do
@@ -336,7 +340,7 @@ begin
   if Trim(edCodeclt.Text)='' then
     MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
   else
-  if Trim(edNomVeh.Text)='' then
+  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'CLIENT PERSONNEL') and (edNomClt.Text<>'CLIENT PASSAGE') then
     MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
@@ -357,7 +361,6 @@ begin
     end;
     dm.InsertFicheEsH(FicheEsH);
 
-
 //  INSERTION DANS fiche recap
   with ficheo_recap do
     begin
@@ -368,33 +371,6 @@ begin
       Snom_clt:=edNomClt.Text;
       Smatricule_veh:= cbMatVeh.Text;
       Smarque_veh := edNomVeh.Text;
-//      SB3A_Iv:='';
-//      SB3A_Ip:='';
-//      SB3A_If:='';
-//      SB3_Iv:='';
-//      SB3_Ip:='';
-//      SB3_If:='';
-//      SB6_Iv:='';
-//      SB6_Ip:='';
-//      SB6_If:='';
-//      SB6R_Iv:='';
-//      SB6R_Ip:='';
-//      SB6R_If:='';
-//      SB12_Iv:='';
-//      SB12_Ip:='';
-//      SB12_If:='';
-//      SB50_Iv:='';
-//      SB50_Ip:='';
-//      SB50_If:='';
-//      SB25_Iv:='';
-//      SB25_Ip:='';
-//      SB25_If:='';
-//      SB6E_Iv:='';
-//      SB6E_Ip:='';
-//      SB6E_If:='';
-//      SB12E_Iv:='';
-//      SB12E_Ip:='';
-//      SB12E_If:='';
       SB3A_Ov:='';
       SB3A_Op:='';
       SB3A_Of:='';
@@ -517,6 +493,21 @@ begin
                     +' where code_art = '+QuotedStr(codeArt);
             dm.UpdateTable(sqlUp);
 
+//            MAJ stock camion
+            SqlStockCam :=' where code_art = '+QuotedStr(codeArt)
+                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+            StockCam := dm.selectStockCamion(SqlStockCam);
+
+            SqlUpstkCam := ' update tb_stock_camion set '
+                          +' qte_vide = '+IntToStr(StockCam.NQte_vide + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
+                          +' qte_mag = '+IntToStr(StockCam.NQte_mag + StrToInt(Cells[5,i])) +','
+                          +' qte_total = '+IntToStr(StockCam.Nqte_total + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
+                          +' where code_art = '+QuotedStr(codeArt)
+                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+
+            dm.UpdateTable(SqlUpstkCam);
+
+
             vVide := StrToInt(Cells[3,i]);
             vFuite :=StrToInt(Cells[4,i]);
             vPleine:=StrToInt(Cells[5,i]);
@@ -586,6 +577,9 @@ begin
   edNomClt.Clear;
   edNomVeh.Clear;
   cbMatVeh.Clear;
+  lbCharg.Caption:='0';
+
+  Tkgtot := 0;
 
 
   //vider les cellules
@@ -733,6 +727,7 @@ var
   PsqlMag : string;
 begin
   cbdate.Checked := False;
+  cbdate.Date := Now;
 //vider les cellules
   for I := 3 to st_ficheSortie.ColCount do
     for j := 1 to st_ficheSortie.RowCount-1 do
@@ -762,9 +757,7 @@ begin
     begin
       edNomVeh.Items.Add(vehs[i].SMarque);
     end;
-
   edNum.Text := vUsager+IntToStr(dm.SelectMaxLettrage.numLettrage+1) ;
-
 end;
 
 procedure TfrmFicheSortie.SpeedButton1Click(Sender: TObject);
@@ -816,9 +809,12 @@ procedure TfrmFicheSortie.st_ficheSortieKeyPress(Sender: TObject;
   var Key: Char);
 var
   cellEmpty : Boolean;
-  I: Integer;
-  j: Integer;
+  I,j: Integer;
+  kgPleine,kgFuite,kgTot: Real;
+  codeArt : string;
+  article : TArticle;
 begin
+
 if key = #13 then
   begin
     for I := 3 to st_ficheSortie.ColCount do
@@ -826,9 +822,27 @@ if key = #13 then
         if Trim(st_ficheSortie.Cells[i,j]) = '' then
           begin
             st_ficheSortie.Cells[i,j] := '0';
-          end;
-          btSave.Enabled:=true;
-          btClot.Enabled:=false;
+          end ;
+//calcul de tonnage chargé
+    kgTot := 0;
+    kgPleine :=0;
+    kgFuite :=0;
+
+    for I := 1 to st_ficheSortie.RowCount do
+      begin
+        codeArt := st_ficheSortie.Cells[1,i] ;
+        article := dm.selectArticleByCode(codeArt);
+
+        kgFuite := kgFuite + (StrToInt(st_ficheSortie.Cells[4,i])*article.Rkilo);
+        kgPleine := kgPleine + (StrToInt(st_ficheSortie.Cells[5,i])*article.Rkilo);
+      end;
+      kgTot := kgPleine+kgFuite;
+//      Tkgtot := kgTot;
+      Tkgtot := Tkgtot + kgTot;
+      lbCharg.Caption := FloatToStrF(Tkgtot,ffNumber,15,2);
+
+      btSave.Enabled:=true;
+      btClot.Enabled:=false;
   end;
 end;
 

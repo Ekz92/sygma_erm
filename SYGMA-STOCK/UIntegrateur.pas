@@ -159,7 +159,7 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
   UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl, UFicheRecapi,
-  UFicheRecapo;
+  UFicheRecapo, USortieVrac;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -264,8 +264,9 @@ begin
       Cells[0,2]:='Liste des sortie du stock';
       Cells[0,3]:='Fiche de sortie' ;
       Cells[0,4]:='Liste de fiche de sortie';
+      Cells[0,5]:='Sortie en VRAC';
     end;
-    st_SideMenu.RowCount := 5;
+    st_SideMenu.RowCount := 6;
 end;
 
 procedure TfrmIntegrateur.Image4Click(Sender: TObject);
@@ -461,6 +462,10 @@ begin
 //Si cest le bouton de sortie et le sous menu liste fiche de sortie
   if (vBtn = 6) and (st_SideMenu.Row = 4) then
     frmListeFcheSortie.ShowModal;
+
+//Si cest le bouton de sortie et le sous menu sortie en vrac
+  if (vBtn = 6) and (st_SideMenu.Row = 5) then
+    frmSortieVrac.ShowModal;
 
 end;
 

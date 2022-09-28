@@ -19,6 +19,7 @@ type
       State: TGridDrawState);
     procedure St_RechDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -33,7 +34,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM, UFicheEntree, UFicheSortie;
+uses records, UDM, UFicheEntree, UFicheSortie, USortieVrac;
 
 procedure TfrmRechClt.edrech_nomExit(Sender: TObject);
 var
@@ -66,6 +67,28 @@ with St_Rech do
   end;
 end;
 
+procedure TfrmRechClt.FormShow(Sender: TObject);
+var
+  Psql : string;
+  Clts : TClientArray;
+  I: Integer;
+begin
+  Psql := '';
+
+  Clts := DM.selectClients(Psql);
+
+  St_Rech.RowCount := Length(Clts)+1;
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      with St_Rech do
+        begin
+          Cells[0,i+1]:=Clts[i].SCodeClt;
+          Cells[1,i+1]:=Clts[i].SnomClt;
+        end;
+    end;
+end;
+
 procedure TfrmRechClt.St_RechDblClick(Sender: TObject);
 begin
   if vSourceRclt='Entree' then
@@ -76,6 +99,12 @@ begin
       end else
   if vSourceRclt='Sortie' then
     with frmFicheSortie do
+      begin
+         edcodeClt.Text := St_Rech.Cells[0,St_Rech.Row];
+         edNomClt.Text := St_Rech.Cells[1,St_Rech.Row];
+      end  else
+  if vSourceRclt='vrac' then
+    with frmSortieVrac do
       begin
          edcodeClt.Text := St_Rech.Cells[0,St_Rech.Row];
          edNomClt.Text := St_Rech.Cells[1,St_Rech.Row];

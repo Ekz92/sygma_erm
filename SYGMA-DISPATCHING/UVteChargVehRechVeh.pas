@@ -112,19 +112,19 @@ begin
 end;
 
 procedure TfrmVteChargVehRechVeh.St_vehDblClick(Sender: TObject);
-//var
-//  cmds : TCommandeCamionArray;
-//  sql :string;
-//  chk_veh :Boolean;
-//  I: Integer;
+var
+  cmds : TCommandeCamionArray;
+  sql :string;
+  chk_veh :Boolean;
+  I: Integer;
 begin
- {  sql :=' where vehicule = '+QuotedStr(St_veh.Cells[0, St_veh.Row]);
+   sql :=' where vehicule = '+QuotedStr(St_veh.Cells[0, St_veh.Row]);
   cmds := dm.SelectCommandeCamion(sql);
 
   chk_veh:=True;
 
-Blocage du chargement tant que la commande en cours n'est pas bouclée}
- {
+//Blocage du chargement tant que la commande en cours n'est pas bouclée}
+
   for I := Low(cmds) to High(cmds) do
     begin
       if (cmds[i].Svehicule = St_veh.Cells[0, St_veh.Row]) and (cmds[i].Nstatut_cmd = 0) then
@@ -134,24 +134,30 @@ Blocage du chargement tant que la commande en cours n'est pas bouclée}
     end;
 
 
-  if chk_veh = True then}
+  if chk_veh = True then
+    begin
+      MessageDlg('Vous avez une commande encours avec ce vehicule. veullez clôturer cette commande avant de pouvoir le charger de nouveau',mtError,[mbRetry],0);
+      exit
+    end
+  else
+    begin
+      if vSourceForm = 'frmvteChargVeh' then
+        with frmvteChargVeh do
+          begin
+            edNumMat.Text := St_veh.Cells[0, St_veh.Row];
+            edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
+            edPtac.Text := St_veh.Cells[2, St_veh.Row];
+          end else
+      if vSourceForm = 'frmImportBl' then
+        with frmImportBl do
+          begin
+            edNumMat.Text := St_veh.Cells[0, St_veh.Row];
+            edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
+            edPtac.Text := St_veh.Cells[2, St_veh.Row];
 
-  if vSourceForm = 'frmvteChargVeh' then
-    with frmvteChargVeh do
-      begin
-        edNumMat.Text := St_veh.Cells[0, St_veh.Row];
-        edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
-        edPtac.Text := St_veh.Cells[2, St_veh.Row];
-      end else
-  if vSourceForm = 'frmImportBl' then
-    with frmImportBl do
-      begin
-        edNumMat.Text := St_veh.Cells[0, St_veh.Row];
-        edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
-        edPtac.Text := St_veh.Cells[2, St_veh.Row];
-
-      end;
-    close;
+          end;
+        close;
+    end;
 
 end;
 

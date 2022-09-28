@@ -289,12 +289,12 @@ end;
 procedure TfrmAdd_client.SpeedButton2Click(Sender: TObject);
 begin
 edNom.Clear;
-edAdresse.Clear;
-edTel.Clear;
+edAdresse.Text:='Lomé';
+edTel.Text := 'A completer';
 edEmail.Clear;
 MemoComment.Clear;
 edcodeclt.Clear;
-edCodeTarif.Clear;
+edCodeTarif.Text :='TNORG';
 
 edcodeclt.SetFocus;
 SpeedButton1.Caption:='Ajouter';

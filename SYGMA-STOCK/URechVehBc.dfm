@@ -13,6 +13,7 @@ object frmRechVehBc: TfrmRechVehBc
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -23,7 +24,6 @@ object frmRechVehBc: TfrmRechVehBc
     Align = alTop
     Caption = 'Recherche de vehicule'
     TabOrder = 0
-    ExplicitWidth = 368
     object Label1: TLabel
       Left = 24
       Top = 24
@@ -68,7 +68,6 @@ object frmRechVehBc: TfrmRechVehBc
     StyleElements = [seBorder]
     OnDblClick = St_vehDblClick
     OnDrawCell = St_vehDrawCell
-    ExplicitWidth = 368
     ColWidths = (
       74
       218
