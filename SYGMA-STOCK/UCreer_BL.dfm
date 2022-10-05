@@ -1629,7 +1629,6 @@ object frm_nouveau_BL: Tfrm_nouveau_BL
     Top = 241
   end
   object QBL: TSQLQuery
-    Active = True
     MaxBlobSize = 1
     Params = <>
     SQL.Strings = (

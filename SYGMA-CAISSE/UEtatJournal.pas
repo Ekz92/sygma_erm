@@ -54,7 +54,8 @@ if Trim(cbUser.Text)<>'' then
     sqlJrnl := 'select * from tb_etat_journal '
                 +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
                 +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-                +' and usager = '+QuotedStr(cbUser.Text);
+                +' and usager = '+QuotedStr(cbUser.Text)
+                +' order by date_ej desc ';
 
     sqlSumD:='select sum(debit) as TDebit from tb_etat_journal '
                 +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
@@ -70,7 +71,8 @@ if Trim(cbUser.Text)<>'' then
   begin
     sqlJrnl := 'select * from tb_etat_journal '
                 +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
-                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' order by date_ej desc ';
 
     sqlSumD:='select sum(debit) as TDebit from tb_etat_journal '
             +' where date_ej between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))

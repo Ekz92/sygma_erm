@@ -854,6 +854,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Top = 23.456710000000000000
           Width = 199.559055120000000000
           Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.0n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -873,6 +875,8 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Top = 23.566931570000000000
           Width = 162.519790000000000000
           Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -1572,7 +1576,7 @@ object frmListeFcheSortie: TfrmListeFcheSortie
           Top = 25.677180000000000000
           Width = 199.559055120000000000
           Height = 18.897650000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.0n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack

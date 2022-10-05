@@ -643,7 +643,7 @@ var
 begin
   Psql := ' Where nom_clt like '+QuotedStr('%'+edRechNomClt.Text+'%')
           +' and statut_canc = 0'
-          +' and usager = '+QuotedStr(vUsager)
+//          +' and usager = '+QuotedStr(vUsager)
           +' order by date_fact desc';
 
   factures:=dm.SelectFactures(Psql);

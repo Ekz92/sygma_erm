@@ -6,6 +6,20 @@ TMaxNumRappel = record
   Nnumrappel : integer;
 end;
 
+TVteChargVehd = record
+  NnumCharg : integer;
+  ScodeArt,
+  SdesignationArt : string;
+  Nqte : integer;
+  Rkilo,
+  RTkilo :real;
+end;
+TVteChargVehdArray = Array of TVteChargVehd;
+
+TMaxVteChargVeh = record
+  NnumMax : integer;
+end;
+
 TStockCamion = record
   Nid_stock :integer;
   Svehicule,
@@ -201,7 +215,28 @@ Tfichei_recap = record
 	SB6E_If ,
 	SB12E_Iv ,
 	SB12E_Ip ,
-	SB12E_If  : string;
+	SB12E_If ,
+	SB14_Iv ,
+	SB14_Ip ,
+	SB14_If ,
+  SB20_Iv ,
+	SB20_Ip ,
+	SB20_If ,
+  SB35_Iv ,
+	SB35_Ip ,
+	SB35_If,
+  SB6M_Iv ,
+  SB6M_Ip ,
+  SB6M_If ,
+  SB12M_Iv,
+  SB12M_Ip,
+  SB12M_If,
+  SB6T_Iv,
+  SB6T_Ip,
+  SB6T_If,
+  SB12T_Iv,
+  SB12T_Ip,
+  SB12T_If : string;
 end;
 Tfichei_recapArray = array of Tfichei_recap;
 
@@ -240,7 +275,29 @@ Tficheo_recap = record
 	SB6E_Of ,
 	SB12E_Ov ,
 	SB12E_Op ,
-	SB12E_Of : string;
+	SB12E_Of,
+  SB14_Ov ,
+	SB14_Op ,
+	SB14_Of ,
+  SB20_Ov ,
+	SB20_Op ,
+	SB20_Of ,
+  SB35_Ov ,
+	SB35_Op ,
+	SB35_Of,
+  SB6M_Ov ,
+  SB6M_Op ,
+  SB6M_Of ,
+  SB12M_Ov,
+  SB12M_Op,
+  SB12M_Of,
+  SB6T_Ov,
+  SB6T_Op,
+  SB6T_Of,
+  SB12T_Ov,
+  SB12T_Op,
+  SB12T_Of : string;
+
 end;
 Tficheo_recapArray = array of Tficheo_recap;
 
@@ -287,6 +344,10 @@ TFicheEsTotal = record
 	SB14_I ,
 	SB20_I ,
 	SB35_I ,
+  SB6M_I,
+  SB12M_I,
+  SB6T_I,
+  SB12T_I,
 
 	SB3A_S ,
 	SB3_S ,
@@ -299,11 +360,15 @@ TFicheEsTotal = record
 	SB12E_S ,
 	SB14_S ,
 	SB20_S ,
-	SB35_S : string;
+	SB35_S,
+  SB6M_S,
+  SB12M_S,
+  SB6T_S,
+  SB12T_S : string;
 
-	Ntype_ft : integer;
-	Susager :string;
-	Nstatut_canc : integer;
+//	Ntype_ft : integer;
+//	Susager :string;
+//	Nstatut_canc : integer;
 end;
 TFicheEsTotalArray = array of TFicheEsTotal;
 

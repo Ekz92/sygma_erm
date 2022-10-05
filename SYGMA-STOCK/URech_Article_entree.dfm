@@ -30,7 +30,6 @@ object frmrech_article_entree: Tfrmrech_article_entree
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 471
     object Label1: TLabel
       Left = 24
       Top = 18
@@ -61,6 +60,7 @@ object frmrech_article_entree: Tfrmrech_article_entree
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 0
+      OnChange = edcode_artChange
       OnKeyPress = edcode_artKeyPress
     end
     object Edit2: TEdit
@@ -100,7 +100,6 @@ object frmrech_article_entree: Tfrmrech_article_entree
     StyleElements = [seBorder]
     OnDblClick = StringGrid1DblClick
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 563
     ColWidths = (
       84
       276

@@ -21,6 +21,7 @@ type
     procedure StringGrid1DblClick(Sender: TObject);
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure edcode_artChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -36,6 +37,49 @@ implementation
 {$R *.dfm}
 
 uses UDM, UEntree_en_magasin, records, USortieDivers;
+
+procedure Tfrmrech_article_entree.edcode_artChange(Sender: TObject);
+var
+  Qrech_code :TSQLQuery;
+  i : integer;
+  SqlArt : string;
+begin
+  Qrech_code:=TSQLQuery.Create(self);
+  Qrech_code.SQLConnection:=dm.SQLConnection1;
+
+  begin
+      SqlArt := 'select * from tb_article '
+                +' where code_art like '+QuotedStr('%'+edcode_art.Text+'%');
+
+      try
+       Qrech_code.SQL.Add(SqlArt)           ;
+       Qrech_code.Open;
+
+       if Qrech_code.RecordCount=0 then
+          begin
+            MessageDlg('Resultat de la recherche : 0 ligne trouvée',mtInformation,[mbok],0);
+            StringGrid1.RowCount :=2;
+            StringGrid1.Rows[1].Clear;
+          end
+        else
+        Begin
+          for I := 1 to Qrech_code.RecordCount do
+            with StringGrid1, Qrech_code do
+              begin
+                Rows[i].Clear;
+                RowCount:=RecordCount+1;
+                Cells[0,i] := FieldByName('code_art').AsString;
+                Cells[1,i] := FieldByName('designation_art').AsString;
+                Cells[2,i] := FieldByName('type_art').AsString;
+                Qrech_code.Next ;
+              end;
+        End;
+        finally
+          Qrech_code.Free;
+          dm.SQLConnection1.Close;
+        end;
+      end;
+end;
 
 procedure Tfrmrech_article_entree.edcode_artKeyPress(Sender: TObject;
   var Key: Char);

@@ -170,8 +170,8 @@ procedure Tfrmadd_article.Modifier1Click(Sender: TObject);
 begin
 SpeedButton1.Caption := 'Modifier';
 edcode_art.ReadOnly:=True;
-edAlias.Enabled := False;
-edAlias_rb.Enabled:=false;
+//edAlias.Enabled := False;
+//edAlias_rb.Enabled:=false;
 
 vOldCodeArt := StringGrid1.Cells[0,StringGrid1.Row];
 
@@ -196,7 +196,10 @@ var
   Psql, SqlUpd_art,
   codeArt,SqlUpdateStock,
   sqlUpTarif,
-  sqlUpFicheEs : string;
+  sqlUpFicheEs ,
+  SqlAltFichei,
+  SqlAltFicheo,
+  SqlFicheEsTotal : string;
 
   chkSaisi : Boolean;
 begin
@@ -233,6 +236,22 @@ begin
             Rcoutachat := 0;
           end;
 
+//          ajout de l'article dans la table fiche entree et sortie
+
+//        SqlAltFichei := 'Alter table tb_fichei_recap '
+//                        +' add column if not exists '+edAlias.Text+'_Iv varchar(4)' +','
+//                        +' add column if not exists '+edAlias.Text+'_Ip varchar(4)'  +','
+//                        +' add column if not exists '+edAlias.Text+'_If varchar(4)' ;
+//
+//        SqlAltFicheo := 'Alter table tb_ficheo_recap '
+//                        +' add column if not exists '+edAlias.Text+'_Ov varchar(4)' +','
+//                        +' add column if not exists '+edAlias.Text+'_Op varchar(4)' +','
+//                        +' add column if not exists '+edAlias.Text+'_Of varchar(4)' ;
+//
+//        SqlFicheEsTotal:= 'Alter table tb_fichees_total '
+//                        +' add column if not exists '+edAlias.Text+'_I varchar(4)'+' before usager' +','
+//                        +' add column if not exists '+edAlias.Text+'_S varchar(4)'+' before usager';
+
       { Modification d'article dans la table article}
         SqlUpd_art := 'Update tb_article set '
                        +' designation_art = '+QuotedStr(edDesignation.Text)+','
@@ -265,6 +284,10 @@ begin
               begin
                 DM.InitStock(initStock);
                 dm.InsertArticle(article);
+
+//                dm.UpdateTable(SqlAltFichei);
+//                dm.UpdateTable(SqlAltFicheo);
+//                dm.UpdateTable(SqlFicheEsTotal);
               end else
               begin
                 MessageDlg('Cet article existe déjà dans la base',mtError,[mbOK],0);
@@ -292,6 +315,7 @@ begin
   edcode_art.Clear;
   edDesignation.Clear;
   edAlias.Clear;
+  edAlias_rb.Clear;
   cbtype.Clear;
   edKilo.Clear;
   cbMagasin.Clear;
@@ -338,15 +362,36 @@ end;
 
 procedure Tfrmadd_article.Supprimer1Click(Sender: TObject);
 var
-  Psql,Psql2 : string;
+  Psql,Psql2 ,
+  SqlFichei,
+  SqlFicheo,
+  SqlFicheTot,vAlias: string;
 begin
   Psql := 'Delete from tb_article where code_art = '+QuotedStr(StringGrid1.Cells[0,StringGrid1.Row]);
   Psql2 := 'Delete from tb_stock where code_art = '+QuotedStr(StringGrid1.Cells[0,StringGrid1.Row]);
+
+//  vAlias :=StringGrid1.Cells[2,StringGrid1.Row];
+//
+//  SqlFichei := 'alter table tb_fichei_recap drop column '+vAlias+'_Iv' +','
+//                                            +' drop column '+vAlias+'_Ip' +','
+//                                            +' drop column '+vAlias+'_If';
+//
+//  SqlFicheo := 'alter table tb_ficheo_recap drop column '+vAlias+'_Ov' +','
+//                                            +' drop column '+vAlias+'_Op' +','
+//                                            +' drop column '+vAlias+'_Of';
+//
+//  SqlFicheTot := 'alter table tb_fichees_total drop column '+vAlias+'_I' +','
+//                                              +'drop column '+vAlias+'_S';
+
 
   if MessageDlg('Voulez-vous supprimer cet article ?',mtWarning,[mbYes, mbNo],0)=mrYes  then
     begin
       dm.DeleteFromTable(Psql); // Suppresion dans tarticle
       dm.DeleteFromTable(Psql2);// Suppression dans tstock
+
+//      dm.UpdateTable(SqlFichei);
+//      dm.UpdateTable(SqlFicheo);
+//      dm.UpdateTable(SqlFicheTot);
     end;
     FormShow(sender);
 end;

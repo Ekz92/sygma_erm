@@ -69,6 +69,11 @@ begin
   edNomVeh.Clear;
   cbMatVeh.Clear;
 
+  edCodeclt.Enabled :=True;
+  edNomClt.Enabled :=True;
+  edNomVeh.Enabled :=True;
+  cbMatVeh.Enabled :=True;
+
 
   //vider les cellules
   for I := 3 to st_ficheEntree.ColCount do
@@ -164,6 +169,28 @@ begin
       SB12E_Iv:='';
       SB12E_Ip:='';
       SB12E_If:='';
+      SB14_Iv:='';
+      SB14_Ip:='';
+      SB14_If :='';
+      SB20_Iv:='';
+      SB20_Ip:='';
+      SB20_If :='';
+      SB35_Iv:='';
+      SB35_Ip:='';
+      SB35_If :='';
+      SB6M_Iv:='';
+      SB6M_Ip:='';
+      SB6M_If :='';
+      SB12M_Iv:='';
+      SB12M_Ip:='';
+      SB12M_If :='';
+      SB6T_Iv:='';
+      SB6T_Ip:='';
+      SB6T_If :='';
+      SB12T_Iv:='';
+      SB12T_Ip:='';
+      SB12T_If :='';
+
     end;
     dm.InsertFicheiRecap(fichei_recap);
 
@@ -189,6 +216,10 @@ begin
       SB14_I:='';
       SB20_I:='';
       SB35_I:='';
+      SB6M_I:='';
+      SB12M_I:='';
+      SB6T_I:='';
+      SB12T_I:='';
 
       SB3A_S:='';
       SB3_S:='';
@@ -202,10 +233,14 @@ begin
       SB14_S:='';
       SB20_S:='';
       SB35_S:='';
+      SB6M_S:='';
+      SB12M_S:='';
+      SB6T_S:='';
+      SB12T_S:='';
 
-      Ntype_ft := 0; // 0 Pour les entrées ; 1 pour les sorties
-      Susager := vUsager;
-      Nstatut_canc := 0;
+//      Ntype_ft := 0; // 0 Pour les entrées ; 1 pour les sorties
+//      Susager := vUsager;
+//      Nstatut_canc := 0;
     end;
   dm.InsertFicheEsTotal(ficheEsTotal);
 

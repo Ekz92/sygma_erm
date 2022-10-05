@@ -311,7 +311,7 @@ begin
                           Svehicule:=edNumMat.Text;
                           Scode_art:=Cells[0,i];
                           SDesignation_art := Cells[1,i];
-                          NQte_vide := 0;
+                          NQte_vide := 0 - StrToInt(Cells[3,i]);
                           NQte_mag := StrToInt(Cells[3,i]);
                           Nqte_total := StrToInt(Cells[3,i]);
                         end;

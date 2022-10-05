@@ -153,11 +153,11 @@ object frmFicheSortie: TfrmFicheSortie
         Caption = 'Date :'
       end
       object Label7: TLabel
-        Left = 328
+        Left = 319
         Top = 16
-        Width = 33
+        Width = 45
         Height = 13
-        Caption = 'Charg.'
+        Caption = 'Total kg :'
       end
       object lbCharg: TLabel
         Left = 368

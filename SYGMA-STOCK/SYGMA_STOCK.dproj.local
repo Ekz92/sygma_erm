@@ -132,11 +132,11 @@
     <Transaction>2022/09/17 21:44:57.000.871,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UFicheRecapi.pas</Transaction>
     <Transaction>2022/09/17 21:46:00.000.246,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UFicheRecapo.pas</Transaction>
     <Transaction>2022/09/17 21:52:48.000.371,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UFicheRecap_es.pas=</Transaction>
-    <Transaction>2022/09/28 06:09:45.964,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
-    <Transaction>2022/09/28 06:10:27.191,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\USortieVrac.pas=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
-    <Transaction>2022/09/28 06:10:27.191,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\USortieVrac.dfm=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.dfm</Transaction>
-    <Transaction>2022/09/28 10:57:06.704,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
-    <Transaction>2022/09/28 10:58:54.493,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UDefPrixArticle.pas=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
-    <Transaction>2022/09/28 10:58:54.493,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UDefPrixArticle.dfm=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.dfm</Transaction>
+    <Transaction>2022/09/28 06:09:45.000.964,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 06:10:27.000.191,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\USortieVrac.pas=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 06:10:27.000.191,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\USortieVrac.dfm=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.dfm</Transaction>
+    <Transaction>2022/09/28 10:57:06.000.704,=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 10:58:54.000.493,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UDefPrixArticle.pas=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 10:58:54.000.493,G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\UDefPrixArticle.dfm=G:\Projets\SODIGAZ\sygma_erm\SYGMA-STOCK\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

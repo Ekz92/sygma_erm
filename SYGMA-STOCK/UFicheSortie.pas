@@ -44,7 +44,7 @@ type
       Rect: TRect; State: TGridDrawState);
     procedure st_ficheSortieSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure btvaliderClick(Sender: TObject);
+//    procedure btvaliderClick(Sender: TObject);
     procedure cbMagasinCloseUp(Sender: TObject);
     procedure cbMatVehChange(Sender: TObject);
     procedure edNomVehCloseUp(Sender: TObject);
@@ -71,230 +71,230 @@ implementation
 
 uses URechClt, UDM, records, UConnexion;
 
-procedure TfrmFicheSortie.btvaliderClick(Sender: TObject);
-var
-  fiche_es : TFiche_es;
-  I,j,vVide,vFuite,vPleine,vTotal: Integer;
-  stockArt : TStock;
-  codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
-  article : TArticle;
-  ficheo_recap : Tficheo_recap;
-  FicheoRec : Tficheo_recap;
-  ficheEsTotal : TFicheEsTotal;
-begin
-  for I := 3 to st_ficheSortie.ColCount do
-    for j := 1 to st_ficheSortie.RowCount-1 do
-      if st_ficheSortie.Cells[i,j] = '' then
-        begin
-          MessageDlg('Cellule vude non autorisées',mtError,[mbRetry],0);
-          exit
-        end;
-
-  if Trim(edNum.Text)='' then
-    MessageDlg('Veillez spécifier le numéro d''entrée',mtError,[mbRetry],0)
-  else
-  if Trim(edCodeclt.Text)='' then
-    MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
-  else
-  if Trim(edNomVeh.Text)='' then
-    MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
-  else
-  if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
-  begin
-//  INSERTION DANS fiche recap
-  with ficheo_recap do
-    begin
-      Nnum_fes:=StrToInt(edNum.Text);
-      Sdate_fes:=DateToStr(cbdate.Date);
-      Scode_clt:=edCodeclt.Text;
-      Snom_clt:=edNomClt.Text;
-      Smatricule_veh:= cbMatVeh.Text;
-      Smarque_veh := edNomVeh.Text;
-//      SB3A_Iv:='';
-//      SB3A_Ip:='';
-//      SB3A_If:='';
-//      SB3_Iv:='';
-//      SB3_Ip:='';
-//      SB3_If:='';
-//      SB6_Iv:='';
-//      SB6_Ip:='';
-//      SB6_If:='';
-//      SB6R_Iv:='';
-//      SB6R_Ip:='';
-//      SB6R_If:='';
-//      SB12_Iv:='';
-//      SB12_Ip:='';
-//      SB12_If:='';
-//      SB50_Iv:='';
-//      SB50_Ip:='';
-//      SB50_If:='';
-//      SB25_Iv:='';
-//      SB25_Ip:='';
-//      SB25_If:='';
-//      SB6E_Iv:='';
-//      SB6E_Ip:='';
-//      SB6E_If:='';
-//      SB12E_Iv:='';
-//      SB12E_Ip:='';
-//      SB12E_If:='';
-      SB3A_Ov:='';
-      SB3A_Op:='';
-      SB3A_Of:='';
-      SB3_Ov:='';
-      SB3_Op:='';
-      SB3_Of :='';
-      SB6_Ov:='';
-      SB6_Op:='';
-      SB6_Of:='';
-      SB6R_Ov:='';
-      SB6R_Op:='';
-      SB6R_Of:='';
-      SB12_Ov:='';
-      SB12_Op:='';
-      SB12_Of:='';
-      SB50_Ov:='';
-      SB50_Op:='';
-      SB50_Of:='';
-      SB25_Ov:='';
-      SB25_Op:='';
-      SB25_Of:='';
-      SB6E_Ov:='';
-      SB6E_Op:='';
-      SB6E_Of:='';
-      SB12E_Ov:='';
-      SB12E_Op:='';
-      SB12E_Of :='';
-    end;
-    dm.InsertFicheoRecap(ficheo_recap);
+//procedure TfrmFicheSortie.btvaliderClick(Sender: TObject);
+//var
+//  fiche_es : TFiche_es;
+//  I,j,vVide,vFuite,vPleine,vTotal: Integer;
+//  stockArt : TStock;
+//  codeArt,sqlUp,sqlUpFiche,SqlSelFiche, SqlUpTFiche : string;
+//  article : TArticle;
+//  ficheo_recap : Tficheo_recap;
+//  FicheoRec : Tficheo_recap;
+//  ficheEsTotal : TFicheEsTotal;
+//begin
+//  for I := 3 to st_ficheSortie.ColCount do
+//    for j := 1 to st_ficheSortie.RowCount-1 do
+//      if st_ficheSortie.Cells[i,j] = '' then
+//        begin
+//          MessageDlg('Cellule vude non autorisées',mtError,[mbRetry],0);
+//          exit
+//        end;
+//
+//  if Trim(edNum.Text)='' then
+//    MessageDlg('Veillez spécifier le numéro d''entrée',mtError,[mbRetry],0)
+//  else
+//  if Trim(edCodeclt.Text)='' then
+//    MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
+//  else
+//  if Trim(edNomVeh.Text)='' then
+//    MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
+//  else
+//  if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
+//  begin
+////  INSERTION DANS fiche recap
+//  with ficheo_recap do
+//    begin
+//      Nnum_fes:=StrToInt(edNum.Text);
+//      Sdate_fes:=DateToStr(cbdate.Date);
+//      Scode_clt:=edCodeclt.Text;
+//      Snom_clt:=edNomClt.Text;
+//      Smatricule_veh:= cbMatVeh.Text;
+//      Smarque_veh := edNomVeh.Text;
+////      SB3A_Iv:='';
+////      SB3A_Ip:='';
+////      SB3A_If:='';
+////      SB3_Iv:='';
+////      SB3_Ip:='';
+////      SB3_If:='';
+////      SB6_Iv:='';
+////      SB6_Ip:='';
+////      SB6_If:='';
+////      SB6R_Iv:='';
+////      SB6R_Ip:='';
+////      SB6R_If:='';
+////      SB12_Iv:='';
+////      SB12_Ip:='';
+////      SB12_If:='';
+////      SB50_Iv:='';
+////      SB50_Ip:='';
+////      SB50_If:='';
+////      SB25_Iv:='';
+////      SB25_Ip:='';
+////      SB25_If:='';
+////      SB6E_Iv:='';
+////      SB6E_Ip:='';
+////      SB6E_If:='';
+////      SB12E_Iv:='';
+////      SB12E_Ip:='';
+////      SB12E_If:='';
+//      SB3A_Ov:='';
+//      SB3A_Op:='';
+//      SB3A_Of:='';
+//      SB3_Ov:='';
+//      SB3_Op:='';
+//      SB3_Of :='';
+//      SB6_Ov:='';
+//      SB6_Op:='';
+//      SB6_Of:='';
+//      SB6R_Ov:='';
+//      SB6R_Op:='';
+//      SB6R_Of:='';
+//      SB12_Ov:='';
+//      SB12_Op:='';
+//      SB12_Of:='';
+//      SB50_Ov:='';
+//      SB50_Op:='';
+//      SB50_Of:='';
+//      SB25_Ov:='';
+//      SB25_Op:='';
+//      SB25_Of:='';
+//      SB6E_Ov:='';
+//      SB6E_Op:='';
+//      SB6E_Of:='';
+//      SB12E_Ov:='';
+//      SB12E_Op:='';
+//      SB12E_Of :='';
+//    end;
+//    dm.InsertFicheoRecap(ficheo_recap);
 
 //insertion dans la table total fiche
-  with ficheEsTotal , st_ficheSortie do //Insertion dans la table de total fiche
-    begin
-      Nnum_ft := StrToInt(edNum.Text);
-      Sdate_ft := DateToStr(cbdate.Date);
-      Scode_clt:=edCodeclt.Text;
-      Snom_clt:=edNomClt.Text;
-      Smatricule_veh:=cbMatVeh.Text;
-      Smarque_veh := edNomVeh.Text;
-      SB3A_I:='';
-      SB3_I:='';
-      SB6_I:='';
-      SB6R_I:='';
-      SB12_I:='';
-      SB25_I:='';
-      SB50_I:='';
-      SB6E_I:='';
-      SB12E_I:='';
-      SB14_I:='';
-      SB20_I:='';
-      SB35_I:='';
+//  with ficheEsTotal , st_ficheSortie do //Insertion dans la table de total fiche
+//    begin
+//      Nnum_ft := StrToInt(edNum.Text);
+//      Sdate_ft := DateToStr(cbdate.Date);
+//      Scode_clt:=edCodeclt.Text;
+//      Snom_clt:=edNomClt.Text;
+//      Smatricule_veh:=cbMatVeh.Text;
+//      Smarque_veh := edNomVeh.Text;
+//      SB3A_I:='';
+//      SB3_I:='';
+//      SB6_I:='';
+//      SB6R_I:='';
+//      SB12_I:='';
+//      SB25_I:='';
+//      SB50_I:='';
+//      SB6E_I:='';
+//      SB12E_I:='';
+//      SB14_I:='';
+//      SB20_I:='';
+//      SB35_I:='';
+//
+//      SB3A_S:='';
+//      SB3_S:='';
+//      SB6_S:='';
+//      SB6R_S:='';
+//      SB12_S:='';
+//      SB25_S:='';
+//      SB50_S:='';
+//      SB6E_S:='';
+//      SB12E_S:='';
+//      SB14_S:='';
+//      SB20_S:='';
+//      SB35_S:='';
+//
+////      Ntype_ft := 1; // 0 Pour les entrées ; 1 pour les sorties
+////      Susager := vUsager;
+////      Nstatut_canc := 0;
+//    end;
+//    if vCodeMag <>'PFBC' then
+//      dm.InsertFicheEsTotal(ficheEsTotal);
+//
+//    for I := 1 to st_ficheSortie.RowCount-1 do
+//      begin
+//        with fiche_es , st_ficheSortie do
+//          begin
+//            //            selection de la qteen stock de l'article
+//
+//            codeArt := Cells[1,i];
+//            stockArt:=dm.selectStockByArticle(codeArt);
+//            article:=dm.selectArticleByCode(codeArt);
+//
+//
+//            Nnum_fes := StrToInt(edNum.Text);
+//            Sdate_fes := DateToStr(cbdate.Date);
+//            Scode_clt := edCodeclt.Text;
+//            Snom_clt := edNomClt.Text;
+//            Smatricule_veh := cbMatVeh.Text;
+//            Scode_art :=Cells[1,i];
+//            Sdesignation_art:=Cells[2,i];
+//            Nqte_vide:=StrToInt(Cells[3,i]);
+//            Nqte_fuite:=StrToInt(Cells[4,i]);
+//            Nqte_pleine:=StrToInt(Cells[5,i]);
+//            RkgArt:=article.Rkilo;
+//            RkgFuite:=article.Rkilo * StrToInt(Cells[4,i]);
+//            RkgPleine:=article.Rkilo * StrToInt(Cells[5,i]);
+//            Ntype_fes:= 1 ; // 0 Pour la fiche d'entrée et 1 pour la fiche de sortie
+//            Susager := vusager;
+//            Nstatut_canc := 0;          end;
+//          dm.InsertFiche_es(fiche_es);
+//      end;// end for
+//
+//
+//    for I := 1 to st_ficheSortie.RowCount-1 do
+//      begin
+//        with st_ficheSortie do
+//          begin
+////            selection de la qteen stock de l'article
+//            codeArt := Cells[1,i];
+//            stockArt:=dm.selectStockByArticle(codeArt);
+//            article:=dm.selectArticleByCode(codeArt);
+//
+////                 MAJ des qte en stock
+//            sqlUp:='update tb_stock set '
+//                    +' qte_vide = '+IntToStr(stockArt.NQte_vide - StrToInt(Cells[4,i]))+','
+//                    +' qte_mag = '+IntToStr(stockArt.NQte_mag - StrToInt(Cells[3,i]) - StrToInt(Cells[5,i]))+','
+//                    +' qte_totale = '+IntToStr(stockArt.Nqte_total - StrToInt(Cells[3,i]) - StrToInt(Cells[4,i])- StrToInt(Cells[5,i]))
+//                    +' where code_art = '+QuotedStr(codeArt);
+//            dm.UpdateTable(sqlUp);
+//
+//            vVide := StrToInt(Cells[3,i]);
+//            vFuite :=StrToInt(Cells[4,i]);
+//            vPleine:=StrToInt(Cells[5,i]);
+//
+//            vTotal := vVide+vFuite+vPleine;
+//
+////        Mise à jour du récap de fiche de sortie
+//
+//            if Cells[3,i]='0' then Cells[3,i]:='';
+//            if Cells[4,i]='0' then Cells[4,i]:='';
+//            if Cells[5,i]='0' then Cells[5,i]:='';
+//
+//            sqlUpFiche := 'update tb_fichees_recap set '
+//                          +article.Salias_art+'_Ov = '+QuotedStr(Cells[3,i])+','
+//                          +article.Salias_art+'_Of = '+QuotedStr(Cells[4,i])+','
+//                          +article.Salias_art+'_Op = '+QuotedStr(Cells[5,i])
+//                          +' where num_fes = '+edNum.Text;
+//            dm.UpdateTable(sqlUpFiche);
+//
+////Mise à jours dans la table total fiche d'sortie
+//
+//            if vTotal<>0 then
+//              SqlUpTFiche:='Update tb_ficheEs_Total set '
+//                            +article.Salias_art+'_S = '+QuotedStr(IntToStr(vTotal))
+//                            +' where num_ft = '+edNum.Text
+//            else
+//              SqlUpTFiche:='Update tb_ficheEs_Total set '
+//                            +article.Salias_art+'_S = '+QuotedStr('')
+//                            +' where num_ft = '+edNum.Text  ;
+//
+//            dm.UpdateTable(SqlUpTFiche);
+//          end;
+//      end;
+//      btAnnuler.Click;
+//      FormShow(sender);
+//  end;
 
-      SB3A_S:='';
-      SB3_S:='';
-      SB6_S:='';
-      SB6R_S:='';
-      SB12_S:='';
-      SB25_S:='';
-      SB50_S:='';
-      SB6E_S:='';
-      SB12E_S:='';
-      SB14_S:='';
-      SB20_S:='';
-      SB35_S:='';
-
-      Ntype_ft := 1; // 0 Pour les entrées ; 1 pour les sorties
-      Susager := vUsager;
-      Nstatut_canc := 0;
-    end;
-    if vCodeMag <>'PFBC' then
-      dm.InsertFicheEsTotal(ficheEsTotal);
-
-    for I := 1 to st_ficheSortie.RowCount-1 do
-      begin
-        with fiche_es , st_ficheSortie do
-          begin
-            //            selection de la qteen stock de l'article
-
-            codeArt := Cells[1,i];
-            stockArt:=dm.selectStockByArticle(codeArt);
-            article:=dm.selectArticleByCode(codeArt);
-
-
-            Nnum_fes := StrToInt(edNum.Text);
-            Sdate_fes := DateToStr(cbdate.Date);
-            Scode_clt := edCodeclt.Text;
-            Snom_clt := edNomClt.Text;
-            Smatricule_veh := cbMatVeh.Text;
-            Scode_art :=Cells[1,i];
-            Sdesignation_art:=Cells[2,i];
-            Nqte_vide:=StrToInt(Cells[3,i]);
-            Nqte_fuite:=StrToInt(Cells[4,i]);
-            Nqte_pleine:=StrToInt(Cells[5,i]);
-            RkgArt:=article.Rkilo;
-            RkgFuite:=article.Rkilo * StrToInt(Cells[4,i]);
-            RkgPleine:=article.Rkilo * StrToInt(Cells[5,i]);
-            Ntype_fes:= 1 ; // 0 Pour la fiche d'entrée et 1 pour la fiche de sortie
-            Susager := vusager;
-            Nstatut_canc := 0;          end;
-          dm.InsertFiche_es(fiche_es);
-      end;// end for
-
-
-    for I := 1 to st_ficheSortie.RowCount-1 do
-      begin
-        with st_ficheSortie do
-          begin
-//            selection de la qteen stock de l'article
-            codeArt := Cells[1,i];
-            stockArt:=dm.selectStockByArticle(codeArt);
-            article:=dm.selectArticleByCode(codeArt);
-
-//                 MAJ des qte en stock
-            sqlUp:='update tb_stock set '
-                    +' qte_vide = '+IntToStr(stockArt.NQte_vide - StrToInt(Cells[4,i]))+','
-                    +' qte_mag = '+IntToStr(stockArt.NQte_mag - StrToInt(Cells[3,i]) - StrToInt(Cells[5,i]))+','
-                    +' qte_totale = '+IntToStr(stockArt.Nqte_total - StrToInt(Cells[3,i]) - StrToInt(Cells[4,i])- StrToInt(Cells[5,i]))
-                    +' where code_art = '+QuotedStr(codeArt);
-            dm.UpdateTable(sqlUp);
-
-            vVide := StrToInt(Cells[3,i]);
-            vFuite :=StrToInt(Cells[4,i]);
-            vPleine:=StrToInt(Cells[5,i]);
-
-            vTotal := vVide+vFuite+vPleine;
-
-//        Mise à jour du récap de fiche de sortie
-
-            if Cells[3,i]='0' then Cells[3,i]:='';
-            if Cells[4,i]='0' then Cells[4,i]:='';
-            if Cells[5,i]='0' then Cells[5,i]:='';
-
-            sqlUpFiche := 'update tb_fichees_recap set '
-                          +article.Salias_art+'_Ov = '+QuotedStr(Cells[3,i])+','
-                          +article.Salias_art+'_Of = '+QuotedStr(Cells[4,i])+','
-                          +article.Salias_art+'_Op = '+QuotedStr(Cells[5,i])
-                          +' where num_fes = '+edNum.Text;
-            dm.UpdateTable(sqlUpFiche);
-
-//Mise à jours dans la table total fiche d'sortie
-
-            if vTotal<>0 then
-              SqlUpTFiche:='Update tb_ficheEs_Total set '
-                            +article.Salias_art+'_S = '+QuotedStr(IntToStr(vTotal))
-                            +' where num_ft = '+edNum.Text
-            else
-              SqlUpTFiche:='Update tb_ficheEs_Total set '
-                            +article.Salias_art+'_S = '+QuotedStr('')
-                            +' where num_ft = '+edNum.Text  ;
-
-            dm.UpdateTable(SqlUpTFiche);
-          end;
-      end;
-      btAnnuler.Click;
-      FormShow(sender);
-  end;
-
-end;
+//end;
 
 procedure TfrmFicheSortie.btClotClick(Sender: TObject);
 begin
@@ -315,7 +315,7 @@ end;
 procedure TfrmFicheSortie.btSaveClick(Sender: TObject);
 var
   fiche_es : TFiche_es;
-  I,j,vVide,vFuite,vPleine,vTotal: Integer;
+  I,j,vVide,vFuite,vPleine,vTotal,numCharg: Integer;
   stockArt : TStock;
   codeArt,sqlUp,sqlUpFiche,SqlUpstkCam,SqlStockCam,SqlSelFiche, SqlUpTFiche : string;
   article : TArticle;
@@ -324,6 +324,7 @@ var
   ficheEsTotal : TFicheEsTotal;
   FicheEsH : TFicheEsH;
   StockCam : TStockCamion;
+  vteChargd : TvteChargVehd;
 
 begin
   for I := 3 to st_ficheSortie.ColCount do
@@ -340,7 +341,7 @@ begin
   if Trim(edCodeclt.Text)='' then
     MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
   else
-  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'CLIENT PERSONNEL') and (edNomClt.Text<>'CLIENT PASSAGE') then
+  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'PERSONNEL') and (edNomClt.Text<>'PASSAGER') then
     MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
@@ -398,6 +399,27 @@ begin
       SB12E_Ov:='';
       SB12E_Op:='';
       SB12E_Of :='';
+      SB14_Ov:='';
+      SB14_Op:='';
+      SB14_Of :='';
+      SB20_Ov:='';
+      SB20_Op:='';
+      SB20_Of :='';
+      SB35_Ov:='';
+      SB35_Op:='';
+      SB35_Of :='';
+      SB6M_Ov:='';
+      SB6M_Op:='';
+      SB6M_Of :='';
+      SB12M_Ov:='';
+      SB12M_Op:='';
+      SB12M_Of :='';
+      SB6T_Ov:='';
+      SB6T_Op:='';
+      SB6T_Of :='';
+      SB12T_Ov:='';
+      SB12T_Op:='';
+      SB12T_Of :='';
     end;
     dm.InsertFicheoRecap(ficheo_recap);
 
@@ -423,6 +445,10 @@ begin
       SB14_I:='';
       SB20_I:='';
       SB35_I:='';
+      SB6M_I:='';
+      SB12M_I:='';
+      SB6T_I:='';
+      SB12T_I:='';
 
       SB3A_S:='';
       SB3_S:='';
@@ -436,10 +462,14 @@ begin
       SB14_S:='';
       SB20_S:='';
       SB35_S:='';
+      SB6M_S:='';
+      SB12M_S:='';
+      SB6T_S:='';
+      SB12T_S:='';
 
-      Ntype_ft := 1; // 0 Pour les entrées ; 1 pour les sorties
-      Susager := vUsager;
-      Nstatut_canc := 0;
+//      Ntype_ft := 1; // 0 Pour les entrées ; 1 pour les sorties
+//      Susager := vUsager;
+//      Nstatut_canc := 0;
     end;
     if vCodeMag <>'PFBC' then
       dm.InsertFicheEsTotal(ficheEsTotal);
@@ -487,8 +517,8 @@ begin
 
 //                 MAJ des qte en stock
             sqlUp:='update tb_stock set '
-                    +' qte_vide = '+IntToStr(stockArt.NQte_vide - StrToInt(Cells[4,i]))+','
-                    +' qte_mag = '+IntToStr(stockArt.NQte_mag - StrToInt(Cells[3,i]) - StrToInt(Cells[5,i]))+','
+                    +' qte_vide = '+IntToStr(stockArt.NQte_vide - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])))+','
+                    +' qte_mag = '+IntToStr(stockArt.NQte_mag - StrToInt(Cells[5,i]))+','
                     +' qte_totale = '+IntToStr(stockArt.Nqte_total - StrToInt(Cells[3,i]) - StrToInt(Cells[4,i])- StrToInt(Cells[5,i]))
                     +' where code_art = '+QuotedStr(codeArt);
             dm.UpdateTable(sqlUp);
@@ -498,14 +528,30 @@ begin
                           +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
             StockCam := dm.selectStockCamion(SqlStockCam);
 
-            SqlUpstkCam := ' update tb_stock_camion set '
-                          +' qte_vide = '+IntToStr(StockCam.NQte_vide + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
-                          +' qte_mag = '+IntToStr(StockCam.NQte_mag + StrToInt(Cells[5,i])) +','
-                          +' qte_total = '+IntToStr(StockCam.Nqte_total + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
-                          +' where code_art = '+QuotedStr(codeArt)
-                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+            if StockCam.Svehicule.IsEmpty then
+              begin
+                with stockCam,st_ficheSortie do
+                  begin
+                    Svehicule:=cbMatVeh.Text;
+                    Scode_art:=codeArt;
+                    SDesignation_art := Cells[2,i];
+                    NQte_vide := StrToInt(Cells[3,i]);
+                    NQte_mag := StrToInt(Cells[4,i]);
+                    Nqte_total := StrToInt(Cells[3,i])+StrToInt(Cells[4,i]);
+                  end;
+                  dm.InsertStockCamion(stockCam);
+              end
+            else
+              begin
+                SqlUpstkCam := ' update tb_stock_camion set '
+                              +' qte_vide = '+IntToStr(StockCam.NQte_vide + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
+                              +' qte_mag = '+IntToStr(StockCam.NQte_mag + StrToInt(Cells[5,i])) +','
+                              +' qte_total = '+IntToStr(StockCam.Nqte_total + (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
+                              +' where code_art = '+QuotedStr(codeArt)
+                              +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
 
-            dm.UpdateTable(SqlUpstkCam);
+                dm.UpdateTable(SqlUpstkCam);
+              end;
 
 
             vVide := StrToInt(Cells[3,i]);
@@ -581,6 +627,10 @@ begin
 
   Tkgtot := 0;
 
+  edCodeclt.Enabled :=True;
+  edNomClt.Enabled :=True;
+  edNomVeh.Enabled :=True;
+  cbMatVeh.Enabled :=True;
 
   //vider les cellules
   for I := 3 to st_ficheSortie.ColCount do
@@ -726,6 +776,9 @@ var
   Magasins : TMagasinArray;
   PsqlMag : string;
 begin
+  Tkgtot := 0;
+  lbCharg.Caption:='0';
+
   cbdate.Checked := False;
   cbdate.Date := Now;
 //vider les cellules

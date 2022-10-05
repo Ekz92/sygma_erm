@@ -2,7 +2,7 @@ object frmFicheEntree: TfrmFicheEntree
   Left = 0
   Top = 0
   Caption = 'Fiche d'#39'entr'#233'e'
-  ClientHeight = 403
+  ClientHeight = 497
   ClientWidth = 555
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmFicheEntree: TfrmFicheEntree
     Left = 0
     Top = 0
     Width = 504
-    Height = 403
+    Height = 497
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object frmFicheEntree: TfrmFicheEntree
       Left = 0
       Top = 153
       Width = 504
-      Height = 250
+      Height = 344
       Align = alClient
       ColCount = 6
       DefaultRowHeight = 15
@@ -167,7 +167,7 @@ object frmFicheEntree: TfrmFicheEntree
     Left = 504
     Top = 0
     Width = 51
-    Height = 403
+    Height = 497
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 1
@@ -229,7 +229,7 @@ object frmFicheEntree: TfrmFicheEntree
     end
     object btAnnuler: TButton
       Left = 0
-      Top = 361
+      Top = 455
       Width = 51
       Height = 42
       Align = alBottom
@@ -247,7 +247,7 @@ object frmFicheEntree: TfrmFicheEntree
     end
     object btClot: TButton
       Left = 0
-      Top = 319
+      Top = 413
       Width = 51
       Height = 42
       Hint = 'Enregistrer et passer au lot suivant'

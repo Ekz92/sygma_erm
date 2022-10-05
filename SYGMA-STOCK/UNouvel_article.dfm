@@ -186,6 +186,7 @@ object frmadd_article: Tfrmadd_article
       Top = 46
       Width = 103
       Height = 21
+      CharCase = ecUpperCase
       MaxLength = 5
       ParentColor = True
       TabOrder = 2
@@ -234,6 +235,7 @@ object frmadd_article: Tfrmadd_article
       Top = 68
       Width = 103
       Height = 21
+      CharCase = ecUpperCase
       MaxLength = 5
       ParentColor = True
       TabOrder = 3
