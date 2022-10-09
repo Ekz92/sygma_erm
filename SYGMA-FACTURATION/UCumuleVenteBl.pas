@@ -23,6 +23,7 @@ type
     frxReport1: TfrxReport;
     frxDBDataset1: TfrxDBDataset;
     SQLQuery1: TSQLQuery;
+    Label3: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);

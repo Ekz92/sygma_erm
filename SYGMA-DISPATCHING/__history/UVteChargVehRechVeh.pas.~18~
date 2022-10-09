@@ -18,6 +18,7 @@ type
       State: TGridDrawState);
     procedure St_vehDblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ednum_immatChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -33,6 +34,28 @@ implementation
 {$R *.dfm}
 
 uses records, UDM, UvteChargVeh, UImportBl;
+
+procedure TfrmVteChargVehRechVeh.ednum_immatChange(Sender: TObject);
+var
+  Psql : string;
+  vehs : TVehiculeArray;
+  i:integer;
+begin
+  Psql := ' where num_immat_veh like '+QuotedStr(ednum_immat.Text+'%');
+
+  vehs:=dm.SelectVehicule(Psql);
+  St_veh.RowCount := Length(vehs) +1;
+
+  for I := Low(vehs) to High(vehs) do
+    with St_veh do
+      begin
+       // Rows[i].Clear;
+        Cells[0,i+1] := vehs[i].SNum_mat ;
+        Cells[1,i+1] := vehs[i].SMarque;
+        Cells[2,i+1] := IntToStr(vehs[i].NPTAC);
+      end;
+ if St_veh.RowCount>1 then St_veh.FixedRows := 1;
+end;
 
 procedure TfrmVteChargVehRechVeh.ednum_immatExit(Sender: TObject);
 var
@@ -89,46 +112,52 @@ begin
 end;
 
 procedure TfrmVteChargVehRechVeh.St_vehDblClick(Sender: TObject);
-//var
-//  cmds : TCommandeCamionArray;
-//  sql :string;
-//  chk_veh :Boolean;
-//  I: Integer;
+var
+  cmds : TCommandeCamionArray;
+  sql :string;
+  chk_veh :Boolean;
+  I, statut_cmd: Integer;
 begin
- {  sql :=' where vehicule = '+QuotedStr(St_veh.Cells[0, St_veh.Row]);
+   sql :=' where vehicule = '+QuotedStr(St_veh.Cells[0, St_veh.Row]);
   cmds := dm.SelectCommandeCamion(sql);
 
   chk_veh:=True;
 
-Blocage du chargement tant que la commande en cours n'est pas bouclée}
- {
-  for I := Low(cmds) to High(cmds) do
+//Blocage du chargement tant que la commande en cours n'est pas bouclée}
+
+//  for I := Low(cmds) to High(cmds) do
+////  if cmds[i].Spiece.IsEmpty then chk_veh := false;
+//    begin
+//      if (cmds[i].Nstatut_cmd = 0) then
+//        begin
+//          chk_veh := False;
+//        end;
+//    end;
+//
+//  if chk_veh = True then
+//    begin
+//      MessageDlg('Vous avez une commande encours avec ce vehicule. veullez clôturer cette commande avant de pouvoir le charger de nouveau',mtError,[mbRetry],0);
+//      exit
+//    end
+//  else
     begin
-      if (cmds[i].Svehicule = St_veh.Cells[0, St_veh.Row]) and (cmds[i].Nstatut_cmd = 0) then
-        begin
-          chk_veh := False;
-        end;
+      if vSourceForm = 'frmvteChargVeh' then
+        with frmvteChargVeh do
+          begin
+            edNumMat.Text := St_veh.Cells[0, St_veh.Row];
+            edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
+            edPtac.Text := St_veh.Cells[2, St_veh.Row];
+          end else
+      if vSourceForm = 'frmImportBl' then
+        with frmImportBl do
+          begin
+            edNumMat.Text := St_veh.Cells[0, St_veh.Row];
+            edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
+            edPtac.Text := St_veh.Cells[2, St_veh.Row];
+
+          end;
+        close;
     end;
-
-
-  if chk_veh = True then}
-
-  if vSourceForm = 'frmvteChargVeh' then
-    with frmvteChargVeh do
-      begin
-        edNumMat.Text := St_veh.Cells[0, St_veh.Row];
-        edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
-        edPtac.Text := St_veh.Cells[2, St_veh.Row];
-      end else
-  if vSourceForm = 'frmImportBl' then
-    with frmImportBl do
-      begin
-        edNumMat.Text := St_veh.Cells[0, St_veh.Row];
-        edNomCamion.Text :=St_veh.Cells[1, St_veh.Row];
-        edPtac.Text := St_veh.Cells[2, St_veh.Row];
-
-      end;
-    close;
 
 end;
 

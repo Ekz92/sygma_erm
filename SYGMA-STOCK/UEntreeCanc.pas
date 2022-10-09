@@ -24,6 +24,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Déclarations privées }
   public
@@ -52,11 +53,8 @@ var
 begin
 if MessageDlg('Attention, cette action supprimera la facture. Voulez-vous Continuer ?',mtWarning,[mbyes,mbNo,mbCancel],0)=mrYes then
 begin
-
   code_art:=edArticle.Text;
-
   Stock := dm.selectStockByArticle(code_art);
-
   sqlEntree := ' where id_entree = '+edNum.Text;
   entree := dm.SelectEntree(sqlEntree);
 
@@ -132,7 +130,6 @@ begin
         end else
           dm.UpdateTable(PSql);
       Close;
-      frmListeEntree.Show;
     end else
     begin
       MessageDlg('Merci de renseigner le motif',mtError,[mbRetry],0);
@@ -148,6 +145,11 @@ edqte.Clear;
 edNum.Clear;
 memo.Clear;
 Close;
+end;
+
+procedure TfrmEntreeCanc.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+frmListeEntree.Button1.Click;
 end;
 
 procedure TfrmEntreeCanc.FormShow(Sender: TObject);

@@ -78,9 +78,12 @@ type
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edChaufDblClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure SaveCleaner();
+    procedure CloturerCleaner();
 
   public
     { Déclarations publiques }
@@ -94,7 +97,49 @@ implementation
 {$R *.dfm}
 
 uses UConnexion, records, UDM, URechLivreurChargement, UVteChargVehRechVeh,
-  URechCltChargCamion, UrechVenteChargVeh;
+  URechCltChargCamion, UrechVenteChargVeh, URechChaufVteChargCeh;
+
+procedure TfrmvteChargVeh.Button2Click(Sender: TObject);
+begin
+if  MessageDlg('Etes-vous certain de vouloir clôturer ce lot ?',mtWarning,[mbYes,mbNo],0) = mrYes then
+  begin
+    CloturerCleaner;
+    FormShow(sender);
+  end;
+end;
+
+procedure TfrmvteChargVeh.CloturerCleaner();
+var
+  I: Integer;
+begin
+  edNumMat.Clear;
+  edPtac.Clear;
+  edChauf.Clear;
+  edqte.Clear;
+  edPiece.Clear;
+  lbChauf.Caption:='';
+  lbTbout.Caption:='0';
+  lbTkilo.Caption:='0';
+  lbMontant.Caption:='0';
+
+  edNumMat.Clear;
+  edNomCamion.Clear;
+  edPtac.Clear;
+  edChauf.Clear;
+  lbChauf.Caption:='';
+
+  edcodeClt.Clear;
+  edNomClt.Clear;
+  cbPoint.Items.Clear;
+  edzone.Clear;
+  edPrixZone.Clear;
+
+
+  StringGrid1.RowCount:=1;
+  StringGrid1.Rows[1].Clear;
+//  edLot.Text := IntToStr(StrToInt(edLot.Text)+1);
+end;
+
 
 procedure TfrmvteChargVeh.Button3Click(Sender: TObject);
 var
@@ -266,7 +311,7 @@ begin
                           Svehicule:=edNumMat.Text;
                           Scode_art:=Cells[0,i];
                           SDesignation_art := Cells[1,i];
-                          NQte_vide := 0;
+                          NQte_vide := 0 - StrToInt(Cells[3,i]);
                           NQte_mag := StrToInt(Cells[3,i]);
                           Nqte_total := StrToInt(Cells[3,i]);
                         end;
@@ -393,6 +438,11 @@ begin
   rgType.ItemIndex := -1;
 end;
 
+
+procedure TfrmvteChargVeh.Button4Click(Sender: TObject);
+begin
+SaveCleaner;
+end;
 
 procedure TfrmvteChargVeh.cbPointCloseUp(Sender: TObject);
 var

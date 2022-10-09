@@ -25,7 +25,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     Align = alTop
     Caption = 'Crit'#232'res'
     TabOrder = 0
-    ExplicitWidth = 485
     object SpeedButton1: TSpeedButton
       Left = 406
       Top = 15
@@ -37,13 +36,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
       OnClick = SpeedButton1Click
       ExplicitLeft = 448
       ExplicitHeight = 64
-    end
-    object TLabel
-      Left = 8
-      Top = 19
-      Width = 34
-      Height = 13
-      Caption = 'Client :'
     end
     object Label1: TLabel
       Left = 8
@@ -58,6 +50,13 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
       Width = 20
       Height = 13
       Caption = 'Au :'
+    end
+    object Label3: TLabel
+      Left = 8
+      Top = 19
+      Width = 32
+      Height = 13
+      Caption = 'Cient :'
     end
     object d1: TDateTimePicker
       Left = 48
@@ -106,7 +105,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 525
     ColWidths = (
       60
       212
@@ -122,7 +120,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 485
     object Button1: TButton
       Left = 409
       Top = 0
@@ -132,7 +129,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
       Caption = 'Imprimer'
       TabOrder = 0
       OnClick = Button1Click
-      ExplicitLeft = 425
     end
   end
   object frxReport1: TfrxReport
@@ -606,7 +602,6 @@ object frmCumuleVenteBL: TfrmCumuleVenteBL
     Top = 136
   end
   object SQLQuery1: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

@@ -50,13 +50,14 @@ begin
 with SQLQuery1 do
   begin
     SQL.Clear;
-    SQL.Add('select code_art, designation_art, sum(qte_art) as qte,sum(prixt) as prix,f.code_clt,f.nom_clt '
-            +' from  tb_facturation_detail d, tb_facturation f '
-            +' WHERE f.num_fact = d.num_fact '
-            +' and f.nom_clt = '+QuotedStr(cbClient.Text)
+    SQL.Add('select d.code_art, d.designation_art, ta.kilo, sum(qte_art) as qte,sum(prixt) as prix,f.code_clt,f.nom_clt '
+            +' from  tb_facturation_detail d '
+            +' inner join tb_facturation f on f.num_fact = d.num_fact '
+            +' inner join tb_article ta on ta.code_art = d.code_art  '
+            +' WHERE f.nom_clt = '+QuotedStr(cbClient.Text)
             +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +'00:00:00 ')
             +' and '+ QuotedStr(FormatDateTime('yyyy-mm-dd', d2.Date) +' 23:59:59')
-            +' GROUP BY code_art,f.nom_clt '
+            +' GROUP BY d.code_art,f.nom_clt '
             );
     Open;
   end;
@@ -69,6 +70,7 @@ procedure TfrmCumuleVenteBL.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
 cbClient.Items.Clear;
+StringGrid1.RowCount:=1;
 
 end;
 
@@ -103,8 +105,10 @@ end;
 procedure TfrmCumuleVenteBL.SpeedButton1Click(Sender: TObject);
 var
   Cumules : TCumuleVenteBLArray;
-  Psql : String;
+  Psql,codeArt : String;
   I: Integer;
+  article : TArticle;
+
 begin
   Psql := ' and f.nom_clt = '+QuotedStr(cbClient.Text)
           +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +' 00:00:00 ')
@@ -121,10 +125,15 @@ begin
     begin
       with StringGrid1 do
         begin
+//        Selection du poid de l'article
+          codeArt := Cumules[i].Scode_art;
+          article := dm.selectArticleByCode(codeArt);
+//        Affichage dans la grille
           Cells[0,i+1] := Cumules[i].Scode_art;
           Cells[1,i+1] := Cumules[i].Sdesignation_art;
           Cells[2,i+1] := IntToStr(Cumules[i].Nqte);
-          Cells[3,i+1] := FloatToStr(Cumules[i].Rpt);
+          Cells[3,i+1] := FloatToStrF(Cumules[i].Rpt,ffNumber,15,2);
+          Cells[4,i+1] := FloatToStrF((article.Rkilo * Cumules[i].Nqte),ffNumber,15,2);
         end;
     end;
 end;

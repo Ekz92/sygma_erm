@@ -2,8 +2,8 @@ object frmListeEntree: TfrmListeEntree
   Left = 0
   Top = 0
   Caption = 'Liste des entr'#233'e'
-  ClientHeight = 400
-  ClientWidth = 680
+  ClientHeight = 303
+  ClientWidth = 539
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,11 +19,12 @@ object frmListeEntree: TfrmListeEntree
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 680
+    Width = 539
     Height = 51
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 680
     object Label2: TLabel
       Left = 23
       Top = 30
@@ -61,7 +62,7 @@ object frmListeEntree: TfrmListeEntree
       TabOrder = 1
     end
     object Button1: TButton
-      Left = 605
+      Left = 464
       Top = 0
       Width = 75
       Height = 51
@@ -69,18 +70,21 @@ object frmListeEntree: TfrmListeEntree
       Caption = 'Voir'
       TabOrder = 2
       OnClick = Button1Click
+      ExplicitLeft = 605
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 371
-    Width = 680
+    Top = 274
+    Width = 539
     Height = 29
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 371
+    ExplicitWidth = 680
     object Button2: TButton
-      Left = 615
+      Left = 474
       Top = 0
       Width = 65
       Height = 29
@@ -88,13 +92,14 @@ object frmListeEntree: TfrmListeEntree
       Caption = 'G'#233'n'#233'rer'
       TabOrder = 0
       OnClick = Button2Click
+      ExplicitLeft = 615
     end
   end
   object StringGrid1: TStringGrid
     Left = 0
     Top = 51
-    Width = 680
-    Height = 320
+    Width = 539
+    Height = 223
     Align = alClient
     ColCount = 7
     DefaultRowHeight = 15
@@ -106,13 +111,15 @@ object frmListeEntree: TfrmListeEntree
     TabOrder = 2
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
+    ExplicitWidth = 680
+    ExplicitHeight = 320
     ColWidths = (
-      55
-      98
-      258
-      54
-      64
-      77
+      36
+      61
+      229
+      38
+      49
+      52
       64)
   end
   object QLentree: TSQLQuery

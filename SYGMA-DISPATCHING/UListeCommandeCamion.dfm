@@ -2,8 +2,8 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
   Left = 0
   Top = 0
   Caption = 'Liste des commandes'
-  ClientHeight = 338
-  ClientWidth = 707
+  ClientHeight = 313
+  ClientWidth = 593
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,12 +19,12 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 707
+    Width = 593
     Height = 54
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 710
+    ExplicitWidth = 707
     object Label1: TLabel
       Left = 198
       Top = 9
@@ -47,7 +47,7 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
       Caption = 'Fin :'
     end
     object SpeedButton1: TSpeedButton
-      Left = 634
+      Left = 520
       Top = 0
       Width = 73
       Height = 54
@@ -110,8 +110,8 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
   object StringGrid1: TStringGrid
     Left = 0
     Top = 54
-    Width = 707
-    Height = 260
+    Width = 593
+    Height = 235
     Align = alClient
     ColCount = 8
     DefaultRowHeight = 15
@@ -124,37 +124,37 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 710
-    ExplicitHeight = 242
+    ExplicitWidth = 707
+    ExplicitHeight = 260
     ColWidths = (
-      104
-      89
-      81
+      70
+      50
+      56
       72
       100
       76
       95
-      82)
+      63)
   end
   object Panel2: TPanel
     Left = 0
-    Top = 314
-    Width = 707
+    Top = 289
+    Width = 593
     Height = 24
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 296
-    ExplicitWidth = 710
+    ExplicitTop = 314
+    ExplicitWidth = 707
     object Button1: TButton
-      Left = 632
+      Left = 518
       Top = 0
       Width = 75
       Height = 24
       Align = alRight
       Caption = 'Imprimer'
       TabOrder = 0
-      ExplicitLeft = 635
+      ExplicitLeft = 632
     end
   end
   object PopupMenu1: TPopupMenu

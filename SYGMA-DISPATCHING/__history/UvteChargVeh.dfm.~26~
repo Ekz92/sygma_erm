@@ -3,7 +3,7 @@ object frmvteChargVeh: TfrmvteChargVeh
   Top = 0
   Caption = 'Chargement de camions'
   ClientHeight = 499
-  ClientWidth = 574
+  ClientWidth = 557
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -32,7 +32,6 @@ object frmvteChargVeh: TfrmvteChargVeh
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 493
     object GroupBox4: TGroupBox
       Left = 0
       Top = 0
@@ -254,6 +253,7 @@ object frmvteChargVeh: TfrmvteChargVeh
         ParentFont = False
         ReadOnly = True
         TabOrder = 2
+        OnDblClick = edChaufDblClick
       end
       object edPiece: TEdit
         Left = 336
@@ -522,7 +522,7 @@ object frmvteChargVeh: TfrmvteChargVeh
       PopupMenu = PopupMenu1
       TabOrder = 4
       StyleElements = [seBorder]
-      ExplicitHeight = 237
+      OnDrawCell = StringGrid1DrawCell
       ColWidths = (
         64
         252
@@ -539,7 +539,6 @@ object frmvteChargVeh: TfrmvteChargVeh
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitTop = 467
       object label11: TLabel
         Left = 8
         Top = 6
@@ -587,17 +586,15 @@ object frmvteChargVeh: TfrmvteChargVeh
   object Panel3: TPanel
     Left = 510
     Top = 0
-    Width = 64
+    Width = 47
     Height = 499
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 62
-    ExplicitHeight = 493
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
-      Width = 64
+      Width = 47
       Height = 42
       Hint = 'Revenir au lot pr'#233'cedent'
       Align = alTop
@@ -616,7 +613,7 @@ object frmvteChargVeh: TfrmvteChargVeh
     object SpeedButton2: TSpeedButton
       Left = 0
       Top = 42
-      Width = 64
+      Width = 47
       Height = 42
       Hint = 'Passer au lot suivant'
       Align = alTop
@@ -635,7 +632,7 @@ object frmvteChargVeh: TfrmvteChargVeh
     object Button3: TButton
       Left = 0
       Top = 84
-      Width = 64
+      Width = 47
       Height = 42
       Hint = 'Enregistrer sans cloturer le lot'
       Align = alTop
@@ -649,12 +646,13 @@ object frmvteChargVeh: TfrmvteChargVeh
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      ExplicitWidth = 62
+      WordWrap = True
+      OnClick = Button3Click
     end
     object Button4: TButton
       Left = 0
       Top = 126
-      Width = 64
+      Width = 47
       Height = 42
       Align = alTop
       Caption = 'Annuler'
@@ -667,12 +665,12 @@ object frmvteChargVeh: TfrmvteChargVeh
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      ExplicitWidth = 62
+      OnClick = Button4Click
     end
     object Button2: TButton
       Left = 0
       Top = 168
-      Width = 64
+      Width = 47
       Height = 42
       Hint = 'Enregistrer et passer au lot suivant'
       Align = alTop
@@ -687,7 +685,7 @@ object frmvteChargVeh: TfrmvteChargVeh
       ShowHint = True
       TabOrder = 2
       WordWrap = True
-      ExplicitWidth = 62
+      OnClick = Button2Click
     end
   end
   object PopupMenu1: TPopupMenu

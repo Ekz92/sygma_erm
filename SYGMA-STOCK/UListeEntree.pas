@@ -51,6 +51,10 @@ var
   sql : string;
   i:integer;
 begin
+
+  StringGrid1.RowCount:=2;
+  StringGrid1.Rows[1].Clear;
+
   Query := TSQLQuery.Create(self);
   Query.SQLConnection := dm.SQLConnection1;
 
@@ -62,7 +66,6 @@ begin
          +' order by id_entree desc ';
 
   try
-
     Query.SQL.Add(sql);
     Query.Open;
     for I := 1 to Query.RowsAffected do
@@ -78,7 +81,6 @@ begin
             Cells[6,i] := FieldByName('num_piece').AsString;
           Query.Next ;
         end;
-
   finally
     Query.Free;
     dm.SQLConnection1.Close;
@@ -122,6 +124,7 @@ procedure TfrmListeEntree.FormShow(Sender: TObject);
 begin
 StringGrid1.RowCount := 2;
 StringGrid1.Rows[1].Clear;
+Button1.Click;
 d2.Date:=Now;
 end;
 
