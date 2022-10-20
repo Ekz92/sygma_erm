@@ -252,7 +252,6 @@ object frmFicheSortie: TfrmFicheSortie
         ParentColor = True
         TabOrder = 2
         OnCloseUp = cbMagasinCloseUp
-        OnKeyPress = cbMatVehKeyPress
       end
       object edNomVeh: TComboBox
         Left = 72

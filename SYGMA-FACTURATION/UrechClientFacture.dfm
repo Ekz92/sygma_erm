@@ -2,8 +2,8 @@ object frmRechClientFacture: TfrmRechClientFacture
   Left = 0
   Top = 0
   Caption = 'Recherche de client'
-  ClientHeight = 201
-  ClientWidth = 364
+  ClientHeight = 200
+  ClientWidth = 320
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,16 +14,18 @@ object frmRechClientFacture: TfrmRechClientFacture
   Position = poDesktopCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 364
+    Width = 320
     Height = 47
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
+    ExplicitWidth = 364
     object Label1: TLabel
       Left = 32
       Top = 19
@@ -44,8 +46,8 @@ object frmRechClientFacture: TfrmRechClientFacture
   object St_Rech: TStringGrid
     Left = 0
     Top = 47
-    Width = 364
-    Height = 154
+    Width = 320
+    Height = 153
     Align = alClient
     Color = clBtnFace
     ColCount = 2
@@ -59,12 +61,13 @@ object frmRechClientFacture: TfrmRechClientFacture
     Font.Style = []
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
     ParentFont = False
+    ScrollBars = ssNone
     TabOrder = 1
     StyleElements = [seBorder]
     OnDblClick = St_RechDblClick
     OnDrawCell = St_RechDrawCell
     ColWidths = (
-      113
+      69
       246)
   end
 end

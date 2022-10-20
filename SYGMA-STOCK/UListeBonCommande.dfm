@@ -3,7 +3,7 @@ object frmListeBonCommande: TfrmListeBonCommande
   Top = 0
   Caption = 'Liste de bon de commande'
   ClientHeight = 318
-  ClientWidth = 553
+  ClientWidth = 605
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object frmListeBonCommande: TfrmListeBonCommande
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 553
+    Width = 605
     Height = 55
     Align = alTop
     BevelOuter = bvNone
@@ -41,7 +41,7 @@ object frmListeBonCommande: TfrmListeBonCommande
     end
     object Label3: TLabel
       Left = 140
-      Top = 8
+      Top = 10
       Width = 35
       Height = 13
       Caption = 'BC N'#176' :'
@@ -79,7 +79,7 @@ object frmListeBonCommande: TfrmListeBonCommande
       TabOrder = 1
     end
     object Button1: TButton
-      Left = 478
+      Left = 530
       Top = 0
       Width = 75
       Height = 55
@@ -90,7 +90,7 @@ object frmListeBonCommande: TfrmListeBonCommande
     end
     object ednumbc: TEdit
       Left = 186
-      Top = 5
+      Top = 6
       Width = 102
       Height = 21
       ParentColor = True
@@ -98,7 +98,7 @@ object frmListeBonCommande: TfrmListeBonCommande
     end
     object cbVehicule: TComboBox
       Left = 186
-      Top = 29
+      Top = 28
       Width = 102
       Height = 21
       ParentColor = True
@@ -125,10 +125,10 @@ object frmListeBonCommande: TfrmListeBonCommande
   object StringGrid1: TStringGrid
     Left = 0
     Top = 55
-    Width = 553
-    Height = 233
+    Width = 605
+    Height = 239
     Align = alClient
-    ColCount = 6
+    ColCount = 9
     DefaultRowHeight = 15
     FixedCols = 0
     RowCount = 1
@@ -146,27 +146,44 @@ object frmListeBonCommande: TfrmListeBonCommande
       72
       181
       90
-      121
+      92
+      80
+      64
+      64
       64)
   end
   object Panel2: TPanel
     Left = 0
-    Top = 288
-    Width = 553
-    Height = 30
+    Top = 294
+    Width = 605
+    Height = 24
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
     object Label5: TLabel
-      Left = 376
-      Top = 8
+      Left = 462
+      Top = 6
       Width = 31
       Height = 13
       Caption = 'Total :'
     end
     object lbtotal: TLabel
-      Left = 416
-      Top = 8
+      Left = 500
+      Top = 6
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label7: TLabel
+      Left = 345
+      Top = 6
+      Width = 24
+      Height = 13
+      Caption = 'Tkg :'
+    end
+    object lbtkg: TLabel
+      Left = 377
+      Top = 6
       Width = 6
       Height = 13
       Caption = '0'
@@ -180,8 +197,12 @@ object frmListeBonCommande: TfrmListeBonCommande
       OnClick = Consuter1Click
     end
     object Valider1: TMenuItem
-      Caption = 'Valider'
+      Caption = 'Valider au d'#233'p'#244'ts'
       OnClick = Valider1Click
+    end
+    object Validerdanslecamion1: TMenuItem
+      Caption = 'Valider dans le camion'
+      OnClick = Validerdanslecamion1Click
     end
     object Annuler1: TMenuItem
       Caption = 'Annuler'
@@ -221,6 +242,10 @@ object frmListeBonCommande: TfrmListeBonCommande
       item
         DataSet = frxDBBonCom
         DataSetName = 'frxDBBonCom'
+      end
+      item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
       end>
     Variables = <>
     Style = <
@@ -298,7 +323,7 @@ object frmListeBonCommande: TfrmListeBonCommande
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 113.385900000000000000
+        Height = 188.976500000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo16: TfrxMemoView
@@ -320,7 +345,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 510.236220470000000000
-          Top = 74.677180000000000000
+          Top = 118.677180000000000000
           Width = 188.976500000000000000
           Height = 18.897650000000000000
           DataSet = frxDBBonCom
@@ -340,7 +365,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 77.149660000000000000
-          Top = 19.015770000000000000
+          Top = 60.015770000000000000
           Width = 120.944960000000000000
           Height = 18.897650000000000000
           DataField = 'vehicule'
@@ -350,7 +375,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
             '[frxDBBonCom."vehicule"]')
@@ -359,14 +384,14 @@ object frmListeBonCommande: TfrmListeBonCommande
         end
         object Memo17: TfrxMemoView
           AllowVectorExport = True
-          Top = 19.015770000000000000
+          Top = 60.015770000000000000
           Width = 71.811070000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
             'V'#233'hicule :')
@@ -375,14 +400,14 @@ object frmListeBonCommande: TfrmListeBonCommande
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Top = 38.692950000000000000
+          Top = 77.692950000000000000
           Width = 71.811070000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
             'Nom :')
@@ -393,7 +418,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 77.149660000000000000
-          Top = 38.692950000000000000
+          Top = 77.692950000000000000
           Width = 253.228510000000000000
           Height = 18.897650000000000000
           DataField = 'nom_vehicule'
@@ -403,7 +428,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
             '[frxDBBonCom."nom_vehicule"]')
@@ -413,7 +438,7 @@ object frmListeBonCommande: TfrmListeBonCommande
         object frxDBBonComdate_bc: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Left = 510.236220472440900000
+          Left = 510.236220472441000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
           DataField = 'date_bc'
@@ -432,9 +457,9 @@ object frmListeBonCommande: TfrmListeBonCommande
         end
         object Memo19: TfrxMemoView
           AllowVectorExport = True
-          Left = 510.236220472440900000
-          Top = 52.023607400000000000
-          Width = 94.488250000000000000
+          Left = 510.236220470000000000
+          Top = 96.023607400000000000
+          Width = 113.385900000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -451,7 +476,7 @@ object frmListeBonCommande: TfrmListeBonCommande
           IndexTag = 1
           AllowVectorExport = True
           Left = 510.236220470000000000
-          Top = 90.165430000000000000
+          Top = 134.165430000000000000
           Width = 196.535560000000000000
           Height = 18.897650000000000000
           DataField = 'nom_fourn'
@@ -468,12 +493,48 @@ object frmListeBonCommande: TfrmListeBonCommande
           ParentFont = False
           VAlign = vaCenter
         end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 21.897650000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Client :')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object frxDBParamnom: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 0.779530000000000000
+          Top = 42.354360000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          DataField = 'nom'
+          DataSet = DM.frxDBParam
+          DataSetName = 'frxDBParam'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBParam."nom"]')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 154.960730000000000000
+        Top = 230.551330000000000000
         Width = 718.110700000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
@@ -583,7 +644,7 @@ object frmListeBonCommande: TfrmListeBonCommande
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 238.110390000000000000
+        Top = 313.700990000000000000
         Width = 718.110700000000000000
         DataSet = frxDBBonCom
         DataSetName = 'frxDBBonCom'
@@ -693,7 +754,7 @@ object frmListeBonCommande: TfrmListeBonCommande
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 362.834880000000000000
+        Top = 438.425480000000000000
         Width = 718.110700000000000000
         object Memo13: TfrxMemoView
           Align = baWidth
@@ -728,7 +789,7 @@ object frmListeBonCommande: TfrmListeBonCommande
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 279.685220000000000000
+        Top = 355.275820000000000000
         Width = 718.110700000000000000
         object frxDBBonCommontant_bc: TfrxMemoView
           IndexTag = 1

@@ -56,6 +56,8 @@ begin
           Cells[1,i+1]:=Clts[i].SnomClt;
         end;
     end;
+    if St_Rech.RowCount > 1 then St_Rech.FixedRows := 1;
+    
 end;
 
 procedure TfrmRechClt.FormCreate(Sender: TObject);

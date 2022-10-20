@@ -56,6 +56,7 @@ type
     QFacture: TSQLQuery;
     frxFacturation: TfrxReport;
     frxQFacture: TfrxDBDataset;
+    cbFiger: TCheckBox;
     procedure st_saisieDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodeMagDblClick(Sender: TObject);
@@ -231,33 +232,36 @@ end;
 
 procedure TfrmSaisieFacture.Button2Click(Sender: TObject);
 begin
-edNumFact.Clear;
-edCodeMag.Clear;
-ed_article.Clear;
-eddesignation_art.Clear;
-edqte.Clear;
-ednomClient.Clear;
-eddesignation_mag.Clear;
-edCodeClient.Clear;
-edTarif.Clear;
-edTarif.Enabled:=True;
-cbTypeFact.ItemIndex := -1;
-edveh.Clear;
-edCommande.Clear;
-lbMontant.Caption := '0';
+  edNumFact.Clear;
+  edCodeMag.Clear;
+  ed_article.Clear;
+  eddesignation_art.Clear;
+  edqte.Clear;
+  ednomClient.Clear;
+  eddesignation_mag.Clear;
+  edCodeClient.Clear;
+  edTarif.Clear;
+  edTarif.Enabled:=True;
+  lbMontant.Caption := '0';
 
-st_saisie.RowCount:=1;
-st_saisie.Rows[1].Clear;
-FormShow(sender);
+  st_saisie.RowCount:=1;
+  st_saisie.Rows[1].Clear;
+  FormShow(sender);
 
-edTarif.Enabled:=True;
-edCodeMag.Enabled:=True;
-eddesignation_mag.Enabled:=True;
-edCodeClient.Enabled:=True;
-ednomClient.Enabled:=True;
-cbTypeFact.Enabled:=True;
-edveh.Enabled:=True;
+  edTarif.Enabled:=True;
+  edCodeMag.Enabled:=True;
+  eddesignation_mag.Enabled:=True;
+  edCodeClient.Enabled:=True;
+  ednomClient.Enabled:=True;
+  cbTypeFact.Enabled:=True;
+  edveh.Enabled:=True;
 
+  if cbFiger.Checked = False then
+    begin
+      cbTypeFact.ItemIndex := -1;
+      edveh.Clear;
+      edCommande.Clear;
+    end;
 end;
 
 procedure TfrmSaisieFacture.Button3Click(Sender: TObject);

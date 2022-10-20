@@ -142,6 +142,10 @@ object frmListeChargCamion: TfrmListeChargCamion
         DataSetName = 'DBQFactCam'
       end
       item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
+      item
         DataSet = frxDBRapport
         DataSetName = 'frxDBRapport'
       end>
@@ -343,7 +347,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'ETS BARRY GAZ & FRERES')
+            '[frxDBParam."nom"]')
           ParentFont = False
         end
         object Memo27: TfrxMemoView
@@ -361,7 +365,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'COMMERCE GENERAL')
+            '[frxDBParam."description"]')
           ParentFont = False
         end
       end
@@ -380,8 +384,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -398,8 +401,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -416,8 +418,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -434,8 +435,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -452,8 +452,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -470,8 +469,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -488,8 +486,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -500,7 +497,7 @@ object frmListeChargCamion: TfrmListeChargCamion
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
+        Height = 22.677180000000000000
         Top = 207.874150000000000000
         Width = 718.110700000000000000
         DataSet = frxDBRapport
@@ -519,8 +516,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -541,8 +537,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -563,8 +558,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -585,8 +579,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -607,8 +600,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -629,8 +621,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -652,8 +643,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -665,7 +655,7 @@ object frmListeChargCamion: TfrmListeChargCamion
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 294.803340000000000000
+        Top = 291.023810000000000000
         Width = 718.110700000000000000
         object Memo17: TfrxMemoView
           Align = baWidth
@@ -734,6 +724,10 @@ object frmListeChargCamion: TfrmListeChargCamion
       'end.')
     Top = 113
     Datasets = <
+      item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
       item
         DataSet = frxDBRapport
         DataSetName = 'frxDBRapport'
@@ -936,7 +930,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'ETS BARRY GAZ & FRERES')
+            '[frxDBParam."nom"]')
           ParentFont = False
         end
         object Memo27: TfrxMemoView
@@ -954,28 +948,26 @@ object frmListeChargCamion: TfrmListeChargCamion
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'COMMERCE GENERAL')
+            '[frxDBParam."description"]')
           ParentFont = False
         end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
-        Height = 30.236240000000000000
+        Height = 18.897637795275600000
         Top = 113.385900000000000000
         Width = 718.110700000000000000
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Top = 5.000000000000000000
           Width = 64.251968500000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -985,16 +977,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Left = 139.179217620000000000
-          Top = 5.000000000000000000
           Width = 91.842519685039400000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1004,16 +994,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo5: TfrxMemoView
           AllowVectorExport = True
           Left = 231.496400500000000000
-          Top = 5.000000000000000000
-          Width = 303.496062992126000000
-          Height = 22.677180000000000000
+          Width = 303.496062990000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
             'D'#233'signation')
@@ -1022,16 +1010,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo7: TfrxMemoView
           AllowVectorExport = True
           Left = 534.742544810000000000
-          Top = 5.000000000000000000
           Width = 50.645659530000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1041,16 +1027,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo8: TfrxMemoView
           AllowVectorExport = True
           Left = 585.233079240000000000
-          Top = 5.000000000000000000
           Width = 49.133846060000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1060,16 +1044,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo9: TfrxMemoView
           AllowVectorExport = True
           Left = 634.125777280000000000
-          Top = 5.000000000000000000
           Width = 80.000228940000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1079,16 +1061,14 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo23: TfrxMemoView
           AllowVectorExport = True
           Left = 64.252010000000000000
-          Top = 5.000000000000000000
           Width = 74.456692910000000000
-          Height = 22.677180000000000000
+          Height = 18.897637795275600000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
             'Date')
@@ -1098,15 +1078,14 @@ object frmListeChargCamion: TfrmListeChargCamion
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 204.094620000000000000
+        Height = 18.897650000000000000
+        Top = 192.756030000000000000
         Width = 718.110700000000000000
         DataSet = frxDBRapport
         DataSetName = 'frxDBRapport'
         RowCount = 0
         object Memo10: TfrxMemoView
           AllowVectorExport = True
-          Top = 2.000000000000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           DataField = 'numCharg'
@@ -1117,8 +1096,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1128,7 +1106,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo11: TfrxMemoView
           AllowVectorExport = True
           Left = 139.179217620000000000
-          Top = 2.000000000000000000
           Width = 91.842519685039400000
           Height = 18.897650000000000000
           DataSet = frxDBRapport
@@ -1138,8 +1115,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1149,7 +1125,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo12: TfrxMemoView
           AllowVectorExport = True
           Left = 231.496400500000000000
-          Top = 2.000000000000000000
           Width = 303.496062992126000000
           Height = 18.897650000000000000
           DataSet = frxDBRapport
@@ -1159,8 +1134,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
             '[frxDBRapport."designationArt"]')
@@ -1169,7 +1143,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo14: TfrxMemoView
           AllowVectorExport = True
           Left = 534.742544810000000000
-          Top = 2.000000000000000000
           Width = 50.645659530000000000
           Height = 18.897650000000000000
           DataSet = frxDBRapport
@@ -1179,8 +1152,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1190,7 +1162,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo15: TfrxMemoView
           AllowVectorExport = True
           Left = 585.233079240000000000
-          Top = 2.000000000000000000
           Width = 49.133846060000000000
           Height = 18.897650000000000000
           DataSet = frxDBRapport
@@ -1200,8 +1171,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1211,7 +1181,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo16: TfrxMemoView
           AllowVectorExport = True
           Left = 634.125777280000000000
-          Top = 2.000000000000000000
           Width = 80.000228940000000000
           Height = 18.897650000000000000
           DataSet = frxDBRapport
@@ -1221,8 +1190,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1232,7 +1200,6 @@ object frmListeChargCamion: TfrmListeChargCamion
         object Memo24: TfrxMemoView
           AllowVectorExport = True
           Left = 64.251968500000000000
-          Top = 1.889763780000000000
           Width = 74.456692910000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -1240,8 +1207,7 @@ object frmListeChargCamion: TfrmListeChargCamion
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Frame.Style = fsDash
-          Frame.Typ = [ftLeft, ftRight]
+          Frame.Typ = [ftBottom]
           Frame.Width = 0.100000000000000000
           HAlign = haCenter
           Memo.UTF8W = (
@@ -1253,7 +1219,7 @@ object frmListeChargCamion: TfrmListeChargCamion
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 287.244280000000000000
+        Top = 272.126160000000000000
         Width = 718.110700000000000000
         object Memo17: TfrxMemoView
           Align = baWidth

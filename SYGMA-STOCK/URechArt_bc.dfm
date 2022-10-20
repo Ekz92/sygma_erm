@@ -13,6 +13,7 @@ object frmRechArt_bc: TfrmRechArt_bc
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -23,8 +24,6 @@ object frmRechArt_bc: TfrmRechArt_bc
     Align = alTop
     Caption = 'Crit'#232're de recherche'
     TabOrder = 0
-    ExplicitLeft = -9
-    ExplicitWidth = 456
     object Label1: TLabel
       Left = 24
       Top = 18
@@ -49,6 +48,7 @@ object frmRechArt_bc: TfrmRechArt_bc
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 0
+      OnChange = edcode_artExit
       OnExit = edcode_artExit
     end
     object edDesignation: TEdit
@@ -79,9 +79,6 @@ object frmRechArt_bc: TfrmRechArt_bc
     StyleElements = [seBorder]
     OnDblClick = St_ArtDblClick
     OnDrawCell = St_ArtDrawCell
-    ExplicitLeft = -9
-    ExplicitWidth = 456
-    ExplicitHeight = 162
     ColWidths = (
       94
       284

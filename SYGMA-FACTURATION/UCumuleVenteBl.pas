@@ -56,10 +56,12 @@ with SQLQuery1 do
             +' inner join tb_facturation f on f.num_fact = d.num_fact '
             +' inner join tb_article ta on ta.code_art = d.code_art  '
             +' WHERE f.nom_clt = '+QuotedStr(cbClient.Text)
-            +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +'00:00:00 ')
+            +' and f.date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd', d1.Date) +' 00:00:00 ')
             +' and '+ QuotedStr(FormatDateTime('yyyy-mm-dd', d2.Date) +' 23:59:59')
+            +' and f.statut_canc = 0'
             +' GROUP BY d.code_art,f.nom_clt '
             );
+    sql.SaveToFile('g:\cumul.txt');
     Open;
   end;
 

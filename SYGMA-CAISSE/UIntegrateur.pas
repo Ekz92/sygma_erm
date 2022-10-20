@@ -142,7 +142,7 @@ uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
 if MessageDlg('Voulez-vous clôturer la journée ?', mtConfirmation,[mbYes,mbNo],0)=mryes then
-   frmClotureDay.ShowModal;
+//   frmClotureDay.ShowModal;
 
 end;
 

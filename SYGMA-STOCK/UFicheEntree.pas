@@ -30,6 +30,8 @@ type
     btSave: TButton;
     btAnnuler: TButton;
     btClot: TButton;
+    Label6: TLabel;
+    cbMagasin: TComboBox;
     procedure st_ficheEntreeDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodecltDblClick(Sender: TObject);
@@ -43,6 +45,7 @@ type
     procedure btSaveClick(Sender: TObject);
     procedure btClotClick(Sender: TObject);
     procedure btAnnulerClick(Sender: TObject);
+    procedure cbMagasinCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -370,6 +373,42 @@ begin
 
 end;
 
+procedure TfrmFicheEntree.cbMagasinCloseUp(Sender: TObject);
+var
+  Magasins : TMagasinArray;
+  PsqlMag,PsqlArt: string;
+  I: Integer;
+  articles : TarticleArray;
+  vCodeMag : string;
+
+begin
+  PsqlMag := ' where designation_mag = '+QuotedStr(cbMagasin.Text) ;
+  Magasins :=dm.selectMagasins(PsqlMag);
+
+  for I := Low(Magasins) to High(Magasins) do
+    begin
+      vCodeMag:=Magasins[i].SCode_mag;
+    end;
+
+//Selection d'article
+
+  PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag); //where code_mag = '+QuotedStr('PFGB');
+  articles := DM.selectArticles(PsqlArt)      ;
+  st_ficheEntree.RowCount := Length(articles)+1;
+
+  for I := Low(articles) to High(articles) do
+    begin
+       with st_ficheEntree do
+          begin
+            Cells[1,i+1] := articles[i].Scode_art;
+            Cells[2,i+1] := articles[i].Sdesignation_art;
+          end;
+    end;
+    if st_ficheEntree.RowCount>1 then st_ficheEntree.FixedRows:=1;
+
+    st_ficheEntree.Enabled := True;
+end;
+
 procedure TfrmFicheEntree.btClotClick(Sender: TObject);
 begin
 if  MessageDlg('Etes-vous certain de vouloir clôturer ce lot ?',mtWarning,[mbYes,mbNo],0) = mrYes then
@@ -435,11 +474,12 @@ end;
 
 procedure TfrmFicheEntree.FormShow(Sender: TObject);
 var
-  Psql,PsqlArt : string;
+  Psql,PsqlArt,PsqlMag : string;
   vehs : TVehiculeArray;
   i,j:integer;
 
   articles : TarticleArray;
+  Magasins : TMagasinArray;
 begin
   cbdate.Checked := False;
 //vider les cellules
@@ -460,6 +500,16 @@ begin
     begin
       edNomVeh.Items.Add(vehs[i].SMarque);
     end;
+// selection du magasin
+
+  PsqlMag := '';
+  Magasins :=dm.selectMagasins(PsqlMag);
+
+  for I := Low(Magasins) to High(Magasins) do
+    begin
+      cbMagasin.Items.Add(Magasins[i].Sdesignation_mag);
+    end;
+
 //Selection d'article
 
   PsqlArt := ' where code_mag = '+QuotedStr('PFGB');

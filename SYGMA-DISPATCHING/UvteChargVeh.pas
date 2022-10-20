@@ -325,8 +325,8 @@ begin
 
                     SqlUpCam := 'Update tb_stock_camion set'
                                 +' qte_vide = '+IntToStr(Qte_vide - StrToInt(StringGrid1.Cells[3,i]))+','
-                                +' qte_mag = '+IntToStr(Qte_mag + StrToInt(StringGrid1.Cells[3,i]))  //+','
-                  //              +' qte_total = '+IntToStr(Qte_totale + StrToInt(StringGrid1.Cells[3,i]))
+                                +' qte_mag = '+IntToStr(Qte_mag + StrToInt(StringGrid1.Cells[3,i]))+','
+                                +' qte_total = '+IntToStr(Qte_totale + StrToInt(StringGrid1.Cells[3,i]))
                                 +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i])
                                 +' and vehicule = '+QuotedStr(edNumMat.Text);
 

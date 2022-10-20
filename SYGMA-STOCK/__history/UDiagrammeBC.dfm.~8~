@@ -1,0 +1,83 @@
+object frmDiagrammeBC: TfrmDiagrammeBC
+  Left = 0
+  Top = 0
+  Caption = 'Diagramme de BC'
+  ClientHeight = 201
+  ClientWidth = 447
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 15
+    Top = 23
+    Width = 58
+    Height = 13
+    Caption = 'Fr'#233'quence :'
+  end
+  object Bevel1: TBevel
+    Left = 7
+    Top = 7
+    Width = 297
+    Height = 89
+    Shape = bsFrame
+  end
+  object ComboBox1: TComboBox
+    Left = 106
+    Top = 20
+    Width = 171
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 0
+    TabOrder = 0
+    Text = 'Quotidien'
+    Items.Strings = (
+      'Quotidien'
+      'Mensuel'
+      'Annuel')
+  end
+  object Button1: TButton
+    Left = 15
+    Top = 55
+    Width = 75
+    Height = 25
+    Caption = 'Valider'
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 96
+    Top = 55
+    Width = 75
+    Height = 25
+    Caption = 'Fermer'
+    TabOrder = 2
+  end
+  object QDay: TSQLQuery
+    Active = True
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from tb_boncom')
+    SQLConnection = DM.SQLConnection1
+    Left = 306
+    Top = 8
+  end
+  object frxDBDay: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = QDay
+    BCDToCurrency = False
+    Left = 350
+    Top = 8
+  end
+  object frxDay: TfrxChartObject
+    Left = 397
+    Top = 8
+  end
+end

@@ -1,0 +1,36 @@
+unit UDiagrammeBC;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Data.FMTBcd,
+  frxChart, frxClass, frxDBSet, Data.DB, Data.SqlExpr;
+
+type
+  TfrmDiagrammeBC = class(TForm)
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    Button1: TButton;
+    Button2: TButton;
+    Bevel1: TBevel;
+    QDay: TSQLQuery;
+    frxDBDay: TfrxDBDataset;
+    frxDay: TfrxChartObject;
+    RDay: TfrxReport;
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmDiagrammeBC: TfrmDiagrammeBC;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM;
+
+end.

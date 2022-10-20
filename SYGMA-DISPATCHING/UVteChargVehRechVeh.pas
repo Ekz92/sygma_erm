@@ -121,7 +121,7 @@ begin
    sql :=' where vehicule = '+QuotedStr(St_veh.Cells[0, St_veh.Row]);
   cmds := dm.SelectCommandeCamion(sql);
 
-  chk_veh:=True;
+  chk_veh:=false;
 //  ShowMessage(IntToStr(Length(cmds)));
 
 //Blocage du chargement tant que la commande en cours n'est pas bouclée}
@@ -133,9 +133,9 @@ begin
     begin
       for I := Low(cmds) to High(cmds) do
         begin
-          if (cmds[i].Nstatut_cmd = 1) then
+          if (cmds[i].Nstatut_cmd = 0) then //s'il y a une cmd encours
             begin
-              chk_veh := False;
+              chk_veh := true;
             end;
         end;
     end;

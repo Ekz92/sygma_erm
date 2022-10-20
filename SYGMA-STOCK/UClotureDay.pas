@@ -53,7 +53,14 @@ var
 
   SysDate : TDateTime;
   dd:TDateSys;
-  SqlUpDate : string;
+  SqlUpDate,
+  SqlDiagram,
+  SqlDiagram_mntT,SqlDiagram_mntP,SqlDiagram_mntR ,
+  PsqlDiagramDay, PsqlCumulBC,DelDiagramDay,
+  PsqlDiagramDayFact: string;
+
+  DiagramDayBC,CumulBC : TDiagramDayBC;
+  DiagramDayFact : TDiagramDayFact;
 begin
     RUser:=TSQLQuery.Create(self);
     RUser.SQLConnection := dm.SQLConnection1;
@@ -77,10 +84,61 @@ begin
   if Conn = 1 then
     begin
 
-          //Cursor := crHourGlass;
-          Label3.Visible := True;
-          sleep(10000);
+        //Cursor := crHourGlass;
+        Label3.Visible := True;
+//        sleep(10000);
 
+//        PsqlCumulBC :=' Where date_val = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+//        CumulBC := dm.selectCumulBc(PsqlCumulBC);
+
+//Cloture du bon de commande insertion diagram commande
+        PsqlDiagramDay := ' Where date_dbc = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+        DiagramDayBC := dm.selectDiagramDay(PsqlDiagramDay);
+
+        if not DiagramDayBC.Sdate_dbc.IsEmpty then //si la ligne du jour existe
+          begin
+            DelDiagramDay := ' Delete from tb_day_diagram_bc '
+                              +' Where date_dbc = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+            dm.DeleteFromTable(DelDiagramDay);
+          end ;
+                   // Insertion dans la table de diagramme de BC
+          SqlDiagram := ' insert into tb_day_diagram_bc (date_dbc,tkg) '
+                        +' Select date_val, sum(tkg) as Ttkg from tb_boncom Where date_val ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+          dm.InsertDiagramDay(SqlDiagram);
+
+//Cloture de la facturation insertion diagram facturation
+        PsqlDiagramDayFact := ' Where date_dbf = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+        DiagramDayFact := dm.selectDiagramDayFact(PsqlDiagramDayFact);
+
+        if not DiagramDayFact.Sdate_dbf.IsEmpty then //si la ligne du jour existe
+          begin
+            DelDiagramDay := ' Delete from tb_day_diagram_facture '
+                              +' Where date_dbf = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+            dm.DeleteFromTable(DelDiagramDay);
+          end ;
+                   // Insertion montant total facture
+          SqlDiagram_mntT := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
+                        +' Select date_fact, sum(mnt_t) as Tmnt_t, '+QuotedStr('Totale')
+                        +' from tb_facturation '
+                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+          dm.InsertDiagramDay(SqlDiagram_mntT);
+
+                   // Insertion montant total payee
+          SqlDiagram_mntP := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
+                        +' Select date_fact,  sum(mnt_p) as Tmnt_p, '+QuotedStr('Payée')
+                        +'from tb_facturation '
+                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+          dm.InsertDiagramDay(SqlDiagram_mntP);
+                   // Insertion montant restant
+          SqlDiagram_mntR := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
+                        +' Select date_fact, sum(mnt_r) as Tmnt_r ,'+QuotedStr('Impayée')
+                        +' from tb_facturation '
+                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+          dm.InsertDiagramDay(SqlDiagram_mntR);
+
+
+
+//        Réinitialisation des solde de caisse
         SqlCaisses := ' where num_compte <> 0000000001';
         Caisses := dm.SelectCaisses(SqlCaisses);
 

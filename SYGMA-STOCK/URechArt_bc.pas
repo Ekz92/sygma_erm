@@ -19,6 +19,7 @@ type
     procedure edcode_artExit(Sender: TObject);
     procedure St_ArtDblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -73,6 +74,12 @@ with St_Art do
     //Cells[3,0] := 'Type' ;
   end;
 
+end;
+
+procedure TfrmRechArt_bc.FormShow(Sender: TObject);
+begin
+edcode_art.Clear;
+edcode_art.SetFocus;
 end;
 
 procedure TfrmRechArt_bc.St_ArtDblClick(Sender: TObject);

@@ -135,7 +135,7 @@ end;
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
 if MessageDlg('Voulez-vous clôturer la journée ?', mtConfirmation,[mbYes,mbNo],0)=mryes then
-   frmClotureDay.ShowModal;
+//   frmClotureDay.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Consultationdecompte1Click(Sender: TObject);

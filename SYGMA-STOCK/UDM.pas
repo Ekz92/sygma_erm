@@ -46,6 +46,7 @@ type
     function SelectCommandeCamion(Psql :string):TCommandeCamionArray;
     function SelectMaxBc():TMaxBc;
     function selectBonCommande(Psql : string):TBonComArray;
+    function selectBonCommandeOnce(Psql : string):TBonCom;
     function selectBonCommandeDetail(Psql : string):TBonCom_detailArray;
     function SelectBlDetails(Psql : string):TBLDetailArray;
     function SelectBlDetail(Psql : string):TBLDetail;
@@ -54,7 +55,9 @@ type
     function SelectFicheEs(Psql : string):TFiche_esArray;
     function selectStockCamion(Psql : string):TStockCamion;
     function SelectMaxCharg():TMaxVteChargVeh;
-
+    function selectDiagramDay(Psql : string):TDiagramDayBC;
+    function selectDiagramDayFact(Psql : string):TDiagramDayFact;
+    function selectCumulBc(Psql :string):TDiagramDayBC;
 
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
     function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
@@ -77,6 +80,9 @@ type
     function InsertBonComDetail(boncomd : TBonCom_detail):Boolean;
     function InsertFicheEsH(FicheEsH : TFicheEsH):Boolean;
     function InsertStockCamion(var stockCam : TStockCamion):Boolean;
+    function InsertVteChargVeh(vteChargVeh : TvteChargVeh):Boolean;
+    function InsertVteChargVehd(VteChargVehd:TVteChargVehd):Boolean;
+    function InsertDiagramDay(Psql:string):Boolean;
 
     procedure UpdateTable(var Psql :string);
     procedure Update_moovStock(var mouv : TMouvStock);
@@ -98,6 +104,92 @@ uses UFicheRecap_es, UListeBonCommande;
 
 
 {$R *.dfm}
+function TDM.InsertDiagramDay(Psql:string):Boolean;
+var
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+    try
+      query.SQL.Add(Psql);
+//      query.SQL.SaveToFile('g:\SQLConnection.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.InsertVteChargVehd(VteChargVehd:TVteChargVehd):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with VteChargVehd do
+    begin
+      sql := 'Insert into tb_vte_chargvehd value(null,'
+              +IntToStr(NnumCharg) +','
+              +ScodeArt+','
+              +SdesignationArt+','
+              +IntToStr(Nqte) +','
+              +FloatToStr(RKilo)+','
+              +FloatToStr(RTKilo)
+              +');'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
+function TDM.InsertVteChargVeh(vteChargVeh : TvteChargVeh):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with vteChargVeh do
+    begin
+      sql := 'Insert into tb_vte_chargveh value(null,'
+              +Slettrage+','
+              +IntToStr(NnumCharg) +','
+              +IntToStr(NSrc_charg)+','
+              +ScodClient+','
+              +SnomClient+','
+              +SPiece+','
+              +SVehicule+','
+              +IntToStr(NnumMatChauf) +','
+              +SnomChauf+','
+              +QuotedStr(FormatDateTime('yyyy-mm-dd', StrToDate(SdateCharg)))+','
+              +IntToStr(NTboutteille) +','
+              +FloatToStr(RTKilo)  +','
+              +FloatToStr(RMontant)+','
+              +QuotedStr(SUsager)+','
+              +IntToStr(NStatut_canc)+','
+              +IntToStr(NStatut_com)
+              +');'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+//      query.SQL.SaveToFile('g:\tb_vte_chargveh.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
 function TDM.InsertStockCamion(var stockCam : TStockCamion):Boolean;
   var
   sql : string;
@@ -128,6 +220,7 @@ begin
     end;
 end;
 
+
 function TDM.SelectMaxCharg():TMaxVteChargVeh;
 var
   sql : string;
@@ -149,6 +242,92 @@ begin
   end;
   Result :=MaxVteChargVeh;
 end;
+function TDM.selectCumulBc(Psql :string):TDiagramDayBC;
+var
+  sql : string;
+  query : TSQLQuery;
+  DiagramDay : TDiagramDayBC;
+begin
+  sql := 'Select date_val, sum(tkg) as Ttkg from tb_boncom '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+    query.Open;
+
+    with query, DiagramDay do
+      begin
+//        Nid_dbc := FieldByName('id_dbc').AsInteger;
+        Sdate_dbc := FieldByName('date_val').AsString;
+        Rtkg := FieldByName('Ttkg').AsFloat;
+      end;
+      Result := DiagramDay;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+function TDM.selectDiagramDayFact(Psql : string):TDiagramDayFact;
+var
+  sql : string;
+  query : TSQLQuery;
+  DiagramDayFact : TDiagramDayFact;
+begin
+  sql := 'Select * from tb_day_diagram_facture '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+    query.Open;
+
+    with query, DiagramDayFact do
+      begin
+        Nid_dbf := FieldByName('id_dbf').AsInteger;
+        Sdate_dbf := FieldByName('date_dbf').AsString;
+        Rmontant := FieldByName('tmontant').AsFloat;
+        SLibelle := FieldByName('libelle').AsString;
+      end;
+      Result := DiagramDayFact;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.selectDiagramDay(Psql : string):TDiagramDayBC;
+var
+  sql : string;
+  query : TSQLQuery;
+  DiagramDay : TDiagramDayBC;
+begin
+  sql := 'Select * from tb_day_diagram_bc '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+    query.Open;
+
+    with query, DiagramDay do
+      begin
+        Nid_dbc := FieldByName('id_dbc').AsInteger;
+        Sdate_dbc := FieldByName('date_dbc').AsString;
+        Rtkg := FieldByName('tkg').AsFloat;
+      end;
+      Result := DiagramDay;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
+
 function TDM.selectStockCamion(Psql : string):TStockCamion;
 var
   sql : string;
@@ -161,8 +340,9 @@ begin
     query.SQLConnection:=SQLConnection1;
   try
     query.SQL.Add(sql);
-    //query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+//    query.SQL.SaveToFile('g:\tb_Select_camion.txt');
     query.Open;
+
     with query, stockCam do
       begin
         Nid_stock := FieldByName('id_sc').AsInteger;
@@ -492,6 +672,44 @@ begin
   end;
 end;
 
+function TDM.selectBonCommandeOnce(Psql : string):TBonCom;
+var
+  query : TSQLQuery;
+  sql : string;
+  BC : TBonCom;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_boncom '+Psql;
+
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query, BC do
+      with BC do
+        begin
+          Nid_bc:=FieldByName('id_bc').AsInteger;
+          Sdate_bc:=FieldByName('date_bc').AsString;
+          Nnum_bc:=FieldByName('num_bc').AsInteger;
+          Snom_four:=FieldByName('nom_fourn').AsString;
+          SVehicule:=FieldByName('Vehicule').AsString;
+          Rmontant_bc:=FieldByName('montant_bc').AsFloat;
+          Susager_init:=FieldByName('user_init').AsString;
+          Susager_val:=FieldByName('user_validate').AsString;
+          SnomVehicule:=FieldByName('nom_Vehicule').AsString;
+          Nstatut_bc:=FieldByName('statut_bc').AsInteger;
+        end;
+    Result := BC;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
 function TDM.selectBonCommande(Psql : string):TBonComArray;
 var
   query : TSQLQuery;
@@ -521,6 +739,7 @@ begin
               begin
                 Nid_bc:=FieldByName('id_bc').AsInteger;
                 Sdate_bc:=FieldByName('date_bc').AsString;
+                Sdate_val:=FieldByName('date_val').AsString ;
                 Nnum_bc:=FieldByName('num_bc').AsInteger;
                 Snom_four:=FieldByName('nom_fourn').AsString;
                 SVehicule:=FieldByName('Vehicule').AsString;
@@ -529,6 +748,9 @@ begin
                 Susager_val:=FieldByName('user_validate').AsString;
                 SnomVehicule:=FieldByName('nom_Vehicule').AsString;
                 Nstatut_bc:=FieldByName('statut_bc').AsInteger;
+                SDest:=FieldByName('dest').AsString;
+                NTBout:=FieldByName('tbout').AsInteger;
+                RTkg := FieldByName('tkg').AsFloat;
               end;
               BCs[i]:=BC;
               Inc(i);
@@ -541,6 +763,7 @@ begin
     SQLConnection1.Close;
   end;
 end;
+
 
 
 function TDM.InsertBonComDetail(boncomd : TBonCom_detail):Boolean;
@@ -586,6 +809,7 @@ begin
     begin
       sql := 'Insert into tb_boncom values(null,'
                 +Sdate_bc+','
+                +Sdate_val+','
                 +IntToStr(Nnum_bc)+','
                 +Scode_four+','
                 +Snom_four+','
@@ -594,7 +818,10 @@ begin
                 +Susager_val+','
                 +SVehicule+','
                 +SnomVehicule+','
-                +IntToStr(Nstatut_bc)
+                +IntToStr(Nstatut_bc)+','
+                +SDest+','
+                +IntToStr(NTBout)+','
+                +FloatToStr(RTkg)
                 +');' ;
     end;
 
@@ -1883,6 +2110,7 @@ begin
 
     try
       query.SQL.Add(Psql);
+//      query.SQL.SaveToFile('g:\del.txt');
       query.ExecSQL;
     finally
       query.Free;

@@ -28,7 +28,8 @@ uses
   UTypeService in 'UTypeService.pas' {frmtypeService},
   URapportParClient in 'URapportParClient.pas' {frmRapportParClient},
   UCumuleVenteBl in 'UCumuleVenteBl.pas' {frmCumuleVenteBL},
-  URechCommandeFacture in 'URechCommandeFacture.pas' {frmRechCommandeFacture};
+  URechCommandeFacture in 'URechCommandeFacture.pas' {frmRechCommandeFacture},
+  UDiagramDayFacture in 'UDiagramDayFacture.pas' {frmDiagramDayFact};
 
 {$R *.res}
 
@@ -61,5 +62,6 @@ begin
   Application.CreateForm(TfrmRapportParClient, frmRapportParClient);
   Application.CreateForm(TfrmCumuleVenteBL, frmCumuleVenteBL);
   Application.CreateForm(TfrmRechCommandeFacture, frmRechCommandeFacture);
+  Application.CreateForm(TfrmDiagramDayFact, frmDiagramDayFact);
   Application.Run;
 end.

@@ -2,9 +2,85 @@ unit records;
 
 interface
 type
+
+TDiagramDayBC = record
+	Nid_dbc  : integer ;
+	Sdate_dbc : String;
+	Rtkg : real;
+end;
+TDiagramDayBC_Array = Array of TDiagramDayBC;
+
+TDiagramDayFact = record
+	Nid_dbf : integer ;
+	Sdate_dbf : string;
+	Rmontant : real;
+	Slibelle : string;
+end;
+TDiagramDayFact_Array = Array of TDiagramDayFact;
+
 TMaxNumRappel = record
   Nnumrappel : integer;
 end;
+
+TLivraisonCamion = record
+  Nid_cc : integer;
+	Sdate_charg,
+  Slettrage :string;
+	Nnum_charg :integer;
+  Scode_liv,
+  Snom_liv,
+	Scode_clt ,
+	Snom_clt ,
+	Scamion ,
+	Spièce ,
+	SB3A ,
+	SB3  ,
+	SB6  ,
+	SB6R ,
+	SB12 ,
+	SB50 ,
+	SB25 ,
+	SB6E ,
+	SB12E ,
+	SRB3A ,
+	SRB3  ,
+	SRB6  ,
+	SRB6R ,
+	SRB12 ,
+	SRB50 ,
+	SRB25 ,
+	SRB6E ,
+	SRB12E,
+  SType :string;
+	Rmontant,
+  Rkilo_t :real;
+	Szone_liv :string;
+	Rprix_zone ,
+	Rprix_liv : real  ;
+	Susager : string;
+end;
+TLivraisonCamionArray = array of TLivraisonCamion;
+
+
+TvteChargVeh = record
+  Slettrage : string;
+  NnumCharg ,
+  NSrc_charg: integer;
+  ScodClient,
+  SnomClient,
+  SPiece,
+  SVehicule : string;
+  NnumMatChauf : integer;
+  SnomChauf   ,
+  SdateCharg : string;
+  NTboutteille : integer;
+  RTKilo ,
+  RMontant : Real;
+  SUsager : string;
+  NStatut_canc,
+  NStatut_com : integer;
+end;
+TvteChargVehArray = Array of TvteChargVeh;
 
 TVteChargVehd = record
   NnumCharg : integer;
@@ -447,7 +523,8 @@ TMagasinArray = Array of TMagasin;
 
 TBonCom = record
   Nid_bc :integer;
-  Sdate_bc : string;
+  Sdate_bc,
+  Sdate_val : string;
   Nnum_bc :Integer;
   Scode_four,
   Snom_four: String;
@@ -457,6 +534,9 @@ TBonCom = record
   SVehicule,
   SnomVehicule: string;
   Nstatut_bc : integer;
+  SDest : string;
+  NTBout: integer;
+  RTkg : real;
 end;
 TBonComArray = array of TBonCom;
 

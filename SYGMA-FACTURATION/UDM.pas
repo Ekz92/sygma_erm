@@ -70,7 +70,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses USaisieFacture;
+uses USaisieFacture, UDiagramDayFacture;
 
 {$R *.dfm}
 function TDM.selectCumuleVente(Psql : string):TCumuleVenteBLArray;
@@ -93,6 +93,7 @@ begin
 
   try
     query.SQL.Add(sql);
+    query.SQL.SaveToFile('g:\TCumuleVenteBL.txt');
     query.Open;
 
     with query do

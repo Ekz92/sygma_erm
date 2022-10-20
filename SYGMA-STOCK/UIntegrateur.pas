@@ -110,6 +110,7 @@ type
     RappeldeBL1: TMenuItem;
     ListedeBL1: TMenuItem;
     LivrsNonlivrs1: TMenuItem;
+    Diagramme1: TMenuItem;
     procedure ypedebouteil1Click(Sender: TObject);
     procedure Magasin1Click(Sender: TObject);
     procedure Entreeenmagasin1Click(Sender: TObject);
@@ -139,6 +140,7 @@ type
     procedure CrerunBC1Click(Sender: TObject);
     procedure ListedeBC1Click(Sender: TObject);
     procedure RappeldeBL1Click(Sender: TObject);
+    procedure Diagramme1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -148,6 +150,7 @@ type
 var
   frmIntegrateur: TfrmIntegrateur;
   vBtn : integer;
+  vDate : string;
 
 implementation
 
@@ -159,7 +162,7 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
   UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl, UFicheRecapi,
-  UFicheRecapo, USortieVrac;
+  UFicheRecapo, USortieVrac, UDiagrammeBC;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -176,6 +179,11 @@ end;
 procedure TfrmIntegrateur.CrerunBL1Click(Sender: TObject);
 begin
 frm_nouveau_BL.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Diagramme1Click(Sender: TObject);
+begin
+frmDiagrammeBC.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Entreeenmagasin1Click(Sender: TObject);
@@ -210,10 +218,13 @@ begin
 st_SideMenu.Cells[0,0]:='Sous-menu';
 st_SideMenu.RowCount:=2;
 st_SideMenu.Rows[1].Clear;
+
 vBtn :=0;
 
   dd := dm.selectCatDate;
   lbdate.Caption := dd.Sdate_cd;
+  vDate:=lbdate.Caption;
+
 
  if lbdate.Caption <> DateToStr(now) then
     begin

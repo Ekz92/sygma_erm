@@ -33,6 +33,9 @@ type
     frxDBBonCom: TfrxDBDataset;
     Label6: TLabel;
     cbStatut: TComboBox;
+    Validerdanslecamion1: TMenuItem;
+    Label7: TLabel;
+    lbtkg: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -44,6 +47,7 @@ type
     procedure StringGrid1DblClick(Sender: TObject);
     procedure cbStatutCloseUp(Sender: TObject);
     procedure Annuler1Click(Sender: TObject);
+    procedure Validerdanslecamion1Click(Sender: TObject);
 //    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
 //      Rect: TRect; State: TGridDrawState);
   private
@@ -59,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM, UConnexion;
+uses records, UDM, UConnexion, UIntegrateur;
 
 procedure TfrmListeBonCommande.Annuler1Click(Sender: TObject);
   var
@@ -69,12 +73,16 @@ procedure TfrmListeBonCommande.Annuler1Click(Sender: TObject);
   code_art, sqlUpdStock : string;
   i,qte_vide,qte_mag,qte_fin : integer;
   stock : TStock;
+  article : TArticle;
 
   date_op,code_mag : string;
 
   SelectMouv,
 //  insertMouv,
   UpdateMouv :TMouvStock;
+
+  stockCam : TStockCamion;
+  PStockCam,sqlUpdStockCam : string;
 
 begin
 if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes then
@@ -92,8 +100,7 @@ if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes th
       dm.UpdateTable(SqlUpBc);
     end else
     begin //si le BC est déjà valider
-
-    //  Changement du statut du Bon
+        //  Changement du statut du Bon
 
       SqlUpBc := ' Update tb_boncom set '
                 +' statut_bc = 1 ,'
@@ -109,52 +116,89 @@ if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes th
 
       SqlBc := ' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row]  ;
 
-        Bcs := dm.selectBonCommandeDetail(SqlBc);
+      Bcs := dm.selectBonCommandeDetail(SqlBc);
 
+      if StringGrid1.Cells[6,StringGrid1.Row] = 'Dépôt' then
+        begin
+          for I := Low(Bcs) to High(Bcs) do
+            begin
+            //---------------------------Selection de la quantité en stock----------
+              code_art := Bcs[i].Scode_art;
+              stock := dm.selectStockByArticle(code_art);
 
-        for I := Low(Bcs) to High(Bcs) do
-          begin
-          //---------------------------Selection de la quantité en stock----------
-            code_art := Bcs[i].Scode_art;
-            stock := dm.selectStockByArticle(code_art);
+              Qte_vide := stock.NQte_vide + Bcs[i].Nqte;
+              Qte_mag := stock.NQte_mag - Bcs[i].Nqte;
 
-            Qte_vide := stock.NQte_vide + Bcs[i].Nqte;
-            Qte_mag := stock.NQte_mag - Bcs[i].Nqte;
-
-          //------------------------ Modification de la quantité du stock ----------------------
-              if stock.Scode_mag = 'PFGB' then
-                sqlUpdStock := 'Update tb_stock set '
-                            +' qte_vide ='+IntToStr(Qte_vide)+','
-                            +' qte_mag = '+IntToStr(Qte_mag)+','
-                            +' qte_totale = '+IntToStr(Qte_vide + Qte_mag )
-                            +' where code_art = '+QuotedStr(Bcs[i].Scode_art)
-              ELSE
-                sqlUpdStock := 'Update tb_stock set '
-    //                        +' qte_vide ='+IntToStr(Qte_vide)+','
-                            +' qte_mag = '+IntToStr(Qte_mag)+','
-                            +' qte_totale = '+IntToStr(Qte_mag )
-                            +' where code_art = '+QuotedStr(Bcs[i].Scode_art) ;
+            //------------------------ Modification de la quantité du stock ----------------------
+                if stock.Scode_mag = 'PFGB' then
+                  sqlUpdStock := 'Update tb_stock set '
+                              +' qte_vide ='+IntToStr(Qte_vide)+','
+                              +' qte_mag = '+IntToStr(Qte_mag)+','
+                              +' qte_totale = '+IntToStr(Qte_vide + Qte_mag )
+                              +' where code_art = '+QuotedStr(Bcs[i].Scode_art)
+                ELSE
+                  sqlUpdStock := 'Update tb_stock set '
+      //                        +' qte_vide ='+IntToStr(Qte_vide)+','
+                              +' qte_mag = '+IntToStr(Qte_mag)+','
+                              +' qte_totale = '+IntToStr(Qte_mag )
+                              +' where code_art = '+QuotedStr(Bcs[i].Scode_art) ;
 
                   dm.UpdateTable(sqlUpdStock);
 
-    //          Ecriture dans la table des mouvement du stock TmouvemntStock
+      //          Ecriture dans la table des mouvement du stock TmouvemntStock
 
-            date_op := DateToStr(Now);
-            code_mag := stock.Scode_mag;
+              date_op := DateToStr(Now);
+              code_mag := stock.Scode_mag;
 
-             SelectMouv := dm.selectMouvStock(code_art,date_op,code_mag);
+               SelectMouv := dm.selectMouvStock(code_art,date_op,code_mag);
 
-            with UpdateMouv do
-              begin
-                NidMouvStock := SelectMouv.NidMouvStock;
-                Ddate_mouv := SelectMouv.Ddate_mouv;
-                Scode_art := SelectMouv.Scode_art;
-                Scode_mag := SelectMouv.Scode_mag;
-                Nqte_entree := SelectMouv.Nqte_entree-Bcs[i].Nqte;
-                Nqte_sortie := SelectMouv.Nqte_sortie ;
-              end;
-              dm.Update_moovStock(UpdateMouv);
-          end; //end for
+              with UpdateMouv do
+                begin
+                  NidMouvStock := SelectMouv.NidMouvStock;
+                  Ddate_mouv := SelectMouv.Ddate_mouv;
+                  Scode_art := SelectMouv.Scode_art;
+                  Scode_mag := SelectMouv.Scode_mag;
+                  Nqte_entree := SelectMouv.Nqte_entree-Bcs[i].Nqte;
+                  Nqte_sortie := SelectMouv.Nqte_sortie ;
+                end;
+                dm.Update_moovStock(UpdateMouv);
+            end; //end for
+        end else
+      if StringGrid1.Cells[6,StringGrid1.Row] = 'Camion' then
+        begin
+          for I := Low(Bcs) to High(Bcs) do
+            begin
+            //---------------------------Selection de la quantité en stock----------
+              code_art := Bcs[i].Scode_art;
+              article := dm.selectArticleByCode(code_art);
+
+              PStockCam := ' where code_art = '+QuotedStr(code_art)
+                            +' and vehicule = '+QuotedStr(StringGrid1.Cells[3,StringGrid1.Row]);
+
+              stockCam := dm.selectStockCamion(PStockCam);
+
+              Qte_vide := stockCam.NQte_vide + Bcs[i].Nqte;
+              Qte_mag := stockCam.NQte_mag - Bcs[i].Nqte;
+
+//              sqlUpdStockCam := 'Update tb_stock_camion set '
+//                                +' qte_vide = ';
+
+              if article.Scode_mag = 'PFGB' then
+                sqlUpdStockCam := 'Update tb_stock_camion set '
+                            +' qte_vide ='+IntToStr(Qte_vide)+','
+                            +' qte_mag = '+IntToStr(Qte_mag)+','
+                            +' qte_total = '+IntToStr(stockCam.Nqte_total - Bcs[i].Nqte)
+                            + PStockCam
+              ELSE
+                sqlUpdStockCam := 'Update tb_stock_camion set '
+    //                        +' qte_vide ='+IntToStr(Qte_vide)+','
+                            +' qte_mag = '+IntToStr(Qte_mag)+','
+                            +' qte_total = '+IntToStr(stockCam.Nqte_total - Bcs[i].Nqte )
+                            + PStockCam  ;
+
+              dm.UpdateTable(sqlUpdStockCam);
+            end;
+        end;
     end;
   end;
   Button1.Click;
@@ -166,9 +210,11 @@ var
   BCs : TBonComArray;
   I: Integer;
   vTot : real;
+  vTkg :Real;
 
 begin
   vTot := 0;
+  vTkg :=0 ;
 //  if cbStatut.ItemIndex = 0 then vStatut :=
 
 
@@ -198,14 +244,19 @@ begin
           Cells[2,i+1] := Bcs[i].Snom_four;
           Cells[3,i+1] := Bcs[i].SVehicule;
           Cells[4,i+1] := FloatToStrF(Bcs[i].Rmontant_bc,ffNumber,15,2);
-          Cells[5,i+1] := Bcs[i].Susager_val;
+          Cells[5,i+1] := FloatToStr(Bcs[i].RTkg);
+          Cells[6,i+1] := Bcs[i].Susager_val;
+          Cells[7,i+1] := Bcs[i].Sdate_val;
+          Cells[8,i+1] := Bcs[i].SDest;
 
           vTot := vTot + Bcs[i].Rmontant_bc;
+          vTkg := vTkg + Bcs[i].RTkg;
         end;
     end;
     lbtotal.Caption := FloatToStrF(vTot,ffNumber,15,2);
-    if StringGrid1.RowCount>1 then StringGrid1.FixedRows := 1;
+    lbtkg.Caption := FloatToStrF(vTkg,ffNumber,15,2);
 
+    if StringGrid1.RowCount>1 then StringGrid1.FixedRows := 1;
 end;
 
 procedure TfrmListeBonCommande.cbStatutCloseUp(Sender: TObject);
@@ -250,7 +301,10 @@ with StringGrid1 do
     Cells[2,0]:='Fournisseur';
     Cells[3,0]:='Véhicule';
     Cells[4,0]:='Montant';
-    Cells[5,0]:='User Val';
+    Cells[5,0]:='Tkg';
+    Cells[6,0]:='User Val';
+    Cells[7,0]:='Date val';
+    Cells[8,0]:='Dest';
   end;
 end;
 
@@ -260,10 +314,11 @@ var
   BCs : TBonComArray;
   I: Integer;
   vehs : TVehiculeArray;
-  vTot : real;
+  vTot,vTkg : real;
 begin
 d2.Date:= Now;
 vTot := 0;
+vTkg := 0;
 //
 // { Liste de vehicules dans cbox}
 //  vehs := DM.SelectVehicule(vPsql);
@@ -287,12 +342,18 @@ vTot := 0;
           Cells[2,i+1] := Bcs[i].Snom_four;
           Cells[3,i+1] := Bcs[i].SVehicule;
           Cells[4,i+1] := FloatToStrF(Bcs[i].Rmontant_bc,ffNumber,15,2);
-          Cells[5,i+1] := Bcs[i].Susager_val;
+          Cells[5,i+1] := FloatToStr(Bcs[i].RTkg);
+          Cells[6,i+1] := Bcs[i].Susager_val;
+          Cells[7,i+1] := Bcs[i].Sdate_val;
+          Cells[8,i+1] := Bcs[i].SDest;
 
           vTot := vTot + Bcs[i].Rmontant_bc;
+          vTkg := vTkg + Bcs[i].RTkg;
         end;
     end;
-        lbtotal.Caption := FloatToStrF(vTot,ffNumber,15,2);
+        lbtotal.Caption := FloatToStrF(vTot,ffNumber,15,0);
+        lbtkg.Caption := FloatToStrF(vTkg,ffNumber,15,2);
+
         if StringGrid1.RowCount>1 then StringGrid1.FixedRows := 1;
 end;
 
@@ -342,10 +403,9 @@ var
   SelectMouv,
   insertMouv,
   UpdateMouv :TMouvStock;
-
 begin
 //  Control si le bon a été deja validé
-  if Trim(StringGrid1.Cells[5,StringGrid1.Row]) <> '' then
+  if Trim(StringGrid1.Cells[6,StringGrid1.Row]) <> '' then
     begin
       MessageDlg('Ce bon a été déjà validé et ne peut plus faire objet de validation',mtError,[mbOK],0);
       Exit
@@ -433,7 +493,9 @@ begin
             end ;
 // Modification du statut du bl en statut valider
 
-              SqlVal := 'Update tb_boncom set user_validate = '+QuotedStr(vUsager)
+              SqlVal := 'Update tb_boncom set user_validate = '+QuotedStr(vUsager)+','
+                        +' dest = '+QuotedStr('Dépôt')+','
+                        +' date_val = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)))
                         +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
 
               dm.UpdateTable(SqlVal);
@@ -444,6 +506,200 @@ begin
               Button1.Click;
             end;
       end;
+end;
+
+procedure TfrmListeBonCommande.Validerdanslecamion1Click(Sender: TObject);
+var
+  numCharg : integer;
+  vteCharg : TvteChargVeh;
+  vteChargd : TvteChargVehd;
+  I: Integer;
+  PSqlCam,SqlUpCam,
+  SqlUpLiv,SqlUpStock,code_art,PsqlArt,SqlVal : string;
+  stockCam : TStockCamion;
+  stock :TStock;
+  article : TArticle;
+
+  sortie :TSortie;
+  SelectMouv,
+  insertMouv,
+  UpdateMouv :TMouvStock;
+
+  Qte_vide,
+  Qte_mag,
+  Qte_totale: integer;
+
+  LivraisonCamion : TLivraisonCamion;
+  lot , PSqlBc, PSqlBcd: string;
+
+  Bc : TBonCom;
+  Bcs : TBonCom_detailArray;
+begin
+  numCharg :=dm.SelectMaxCharg.NnumMax +1 ;
+  lot := vUsager+IntToStr(dm.SelectMaxLettrage.numLettrage+1) ;
+
+  PSqlBc := ' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
+  Bc := dm.selectBonCommandeOnce(PSqlBc);
+
+  PSqlBcd := ' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
+  Bcs := dm.selectBonCommandeDetail(PSqlBcd);
+//  Control si le bon a été deja validé
+  if Trim(StringGrid1.Cells[6,StringGrid1.Row]) <> '' then
+    begin
+      MessageDlg('Ce bon a été déjà validé et ne peut plus faire objet de validation',mtError,[mbOK],0);
+      Exit
+    end
+  else //sinon faire sa validation
+  if MessageDlg('Confirmez-vous la validation de l''ajout en camion?',mtConfirmation,[mbyes,mbno],0)=mryes then
+    begin
+    {Insertion dans la table chargement camion}
+    with  vteCharg do
+      begin
+        Slettrage := QuotedStr(lot);
+        NnumCharg := numCharg;
+        NSrc_charg:= 0;
+        ScodClient := QuotedStr('');
+        SnomClient := QuotedStr('');
+        SPiece := QuotedStr('');
+        SVehicule := QuotedStr(StringGrid1.Cells[3,StringGrid1.Row]);
+        NnumMatChauf:=StrToInt('9999');
+        SnomChauf:=QuotedStr('');
+        SdateCharg := StringGrid1.Cells[0,StringGrid1.Row];
+        NTboutteille := 0;//StrToInt(lbTbout.Caption);
+        RTKilo := 0;//StrToFloat(lbTkilo.Caption);
+        RMontant :=Bc.Rmontant_bc;
+        SUsager := vUsager;
+        NStatut_canc := 0;
+        NStatut_com := 0;
+      end;
+      dm.InsertVteChargVeh(vteCharg);
+//
+//      {Insertion de l'en-tête du chargement camion tb_livraison_camion}
+//
+//        with LivraisonCamion do
+//          begin
+//             Sdate_charg := QuotedStr(FormatDateTime('yyyy-mm-dd',DateCharg.Date));
+//             Slettrage := QuotedStr(edLot.Text);
+//             Nnum_charg := numCharg;
+//             Scode_liv := QuotedStr(edCodeLivreur.Text);
+//             Snom_liv := QuotedStr(edNomLivreur.Text);
+//             Scode_clt := QuotedStr(edcodeClt.Text);
+//             Snom_clt := QuotedStr(edNomClt.Text);
+//             Scamion := QuotedStr(edNumMat.Text);
+//             Spièce := QuotedStr(edPiece.Text);
+//             SB3A := QuotedStr('');
+//             SB3  := QuotedStr('');
+//             SB6 := QuotedStr('');
+//             SB6R := QuotedStr('');
+//             SB12 := QuotedStr('');
+//             SB50 := QuotedStr('');
+//             SB25 := QuotedStr('');
+//             SB6E := QuotedStr('');
+//             SB12E := QuotedStr('');
+//             SRB3A := QuotedStr('');
+//             SRB3 := QuotedStr('');
+//             SRB6 := QuotedStr('');
+//             SRB6R := QuotedStr('');
+//             SRB12 := QuotedStr('');
+//             SRB50 := QuotedStr('');
+//             SRB25 := QuotedStr('');
+//             SRB6E := QuotedStr('');
+//             SRB12E := QuotedStr('');
+//             SType := QuotedStr('');
+//             Rmontant := StrToFloat(lbMontant.Caption);
+//             Rkilo_t := StrToFloat(lbTkilo.Caption);
+//             Szone_liv:=QuotedStr(edzone.Text);
+//             Rprix_zone:=StrToFloat(edPrixZone.Text);
+//             Rprix_liv:=StrToFloat(edPrixZone.Text)*StrToFloat(lbTkilo.Caption);
+//             Susager := QuotedStr(vUsager);
+//          end;
+//          dm.InsertLivraisonCamion(LivraisonCamion);
+//
+      for I := Low(Bcs) to High(Bcs) do
+        begin
+          PsqlArt := ' where code_art = '+QuotedStr(Bcs[i].Scode_art);
+          article := dm.selectArticleByCode(PsqlArt);
+          {Insertion dans la table details chargement camion}
+          with vteChargd ,StringGrid1 do
+            begin
+              NnumCharg := numCharg;
+              ScodeArt := QuotedStr(Bcs[i].Scode_art);
+              SdesignationArt := QuotedStr(Bcs[i].Sdesignation_art) ;
+              Nqte := Bcs[i].Nqte ;
+              Rkilo := article.Rkilo ;
+              RTkilo := Bcs[i].Nqte * article.Rkilo;
+            end;
+            dm.InsertVteChargVehd(vteChargd);
+
+            //selection des quantité en stoock
+            PSqlCam := ' Where vehicule = '+QuotedStr(StringGrid1.Cells[3,StringGrid1.Row])
+                        +' and code_art = '+QuotedStr(Bcs[i].Scode_art);
+
+//            code_art := Bcs[i].Scode_art;
+
+            stockCam := dm.selectStockCamion(PSqlCam);
+            stock := dm.selectStockByArticle(code_art);
+//            article := dm.selectArticleByCode(code_art);
+
+            if stockCam.Scode_art.IsEmpty then {Insertion dans la table stock camion}
+              begin
+                with stockCam,StringGrid1 do
+                  begin
+                    Svehicule:=bc.SVehicule;
+                    Scode_art:=Bcs[i].Scode_art;
+                    SDesignation_art := Bcs[i].Sdesignation_art;
+                    NQte_vide := 0 - Bcs[i].Nqte;
+                    NQte_mag := Bcs[i].Nqte;
+                    Nqte_total := Bcs[i].Nqte;
+                  end;
+                  dm.InsertStockCamion(stockCam);
+              end
+            else {Mise à jour des quantités dans le camion}
+            begin
+              Qte_vide := stockCam.NQte_vide;
+              Qte_mag := stockCam.NQte_mag;
+              Qte_totale := stockCam.Nqte_total;
+
+              SqlUpCam :=' Update tb_stock_camion set'
+                          +' qte_vide = '+IntToStr(Qte_vide - Bcs[i].Nqte)+','
+                          +' qte_mag = '+IntToStr(Qte_mag + Bcs[i].Nqte) +','
+                          +' qte_total = '+IntToStr(Qte_totale + Bcs[i].Nqte)
+                          +' where code_art = '+QuotedStr(Bcs[i].Scode_art)
+                          +' and vehicule = '+QuotedStr(StringGrid1.Cells[3,StringGrid1.Row]);
+
+              dm.UpdateTable(SqlUpCam);
+            end;
+        end;
+        {Modification de la quantité dans la table des états tb_livraison_camion}
+
+//          if article.Stype_art = 'Charge gaz butane' then //si c'est une charge, renseigner le retour bouteille
+//            SqlUpLiv := 'update tb_livraison_camion set '
+//                          +StringGrid1.Cells[4,i]+'='+QuotedStr(StringGrid1.Cells[3,i])+','
+//                          +StringGrid1.Cells[5,i]+'='+QuotedStr(StringGrid1.Cells[3,i]) +','
+//                          +'type_ch = '+QuotedStr('Ch')
+//                          +' where num_charg = '+IntToStr(numCharg)
+//          else
+//            SqlUpLiv := 'update tb_livraison_camion set ' //Si c'est pas une charge, mettre la retour bouteille à vide
+//                          +StringGrid1.Cells[4,i]+'='+QuotedStr(StringGrid1.Cells[3,i])+','
+//                          +' type_ch = '+QuotedStr('Co')
+//                          +' where num_charg = '+IntToStr(numCharg);
+//
+//          dm.UpdateTable(SqlUpLiv);
+
+
+//        SaveCleaner;
+
+// Modification du statut du bl en statut valider
+
+  SqlVal := 'Update tb_boncom set user_validate = '+QuotedStr(vUsager)+','
+            +' dest = '+QuotedStr('Camion')
+            +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
+
+  dm.UpdateTable(SqlVal);
+//  Button1.Click;
+
+  FormShow(sender);
+  end;
 end;
 
 end.

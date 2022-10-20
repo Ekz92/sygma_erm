@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
   Data.DB, Data.SqlExpr, Vcl.Menus, Vcl.Grids, Vcl.StdCtrls, Vcl.ExtCtrls,
-  frxExportBaseDialog, frxExportPDF;
+  frxExportBaseDialog, frxExportPDF, Vcl.ComCtrls;
 
 type
   TfrmbonCommande = class(TForm)
@@ -14,7 +14,6 @@ type
     Label6: TLabel;
     Label7: TLabel;
     lbNumbc: TLabel;
-    lbDatebc: TLabel;
     Label8: TLabel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
@@ -62,7 +61,12 @@ type
     frxDBBonCom: TfrxDBDataset;
     frxPDFExport1: TfrxPDFExport;
     cbNormal: TCheckBox;
-    procedure FormActivate(Sender: TObject);
+    lbTkilo: TLabel;
+    Label9: TLabel;
+    lbTbout: TLabel;
+    label11: TLabel;
+    Label10: TLabel;
+    date_bc: TDateTimePicker;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edVehiculeDblClick(Sender: TObject);
@@ -97,6 +101,7 @@ var
   vTkg : real;
   stock : TStock;
   code_art : string;
+  Article : TArticle;
 begin
 
   if trim(edVehicule.Text) ='' then
@@ -119,12 +124,24 @@ begin
       Cells[3,nbLigne-1]:=edqte.Text;
       if cbNormal.Checked = True then Cells[4,nbLigne-1]:=FloatToStr(stock.Rcoutachat * StrToInt(edqte.Text)) else Cells[4,nbLigne-1]:='' ;
     end;
+    vTBout := 0;
+    vTkg := 0;
+
+    for I := 1 to StringGrid1.RowCount -1 do
+      begin
+        code_art := StringGrid1.Cells[0,i]       ;
+        Article := dm.selectArticleByCode(code_art);
+
+        vTBout:=vTBout+StrToInt(StringGrid1.Cells[3,i]);
+        vTkg:=vTkg+ (Article.Rkilo * StrToInt(StringGrid1.Cells[3,i]));
+      end;
+
+      lbTkilo.Caption := FloatToStr(vTkg);
+      lbTbout.Caption := IntToStr(vTBout);
+
 if StringGrid1.RowCount>1 then StringGrid1.FixedRows:=1;
-  Button2.Click;
 
-vTBout := 0;
-vTkg := 0;
-
+Button2.Click;
 cbNormal.Checked := True;
 end;
 
@@ -133,7 +150,10 @@ begin
 StringGrid1.RowCount:=1;
 edVehicule.Clear;
 ednomveh.Clear;
+
 lbmontant.Caption:='0';
+lbTkilo.Caption := '0';
+lbTbout.Caption := '0';
 
 Button2.Click;
 FormShow(sender);
@@ -160,7 +180,8 @@ if (edVehicule.Text<>'') and (lbmontant.Caption<>'0') then
       {Insertion dans commande}
         with bc do
           begin
-            Sdate_bc:=QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(lbDatebc.Caption) ));
+            Sdate_bc:=QuotedStr(FormatDateTime('yyyy-mm-dd',date_bc.Date ));
+            Sdate_val:=QuotedStr('1900-12-31');
             Nnum_bc := StrToInt(lbNumbc.Caption);
             Scode_four := QuotedStr(edcode_fourn.Text);
             Snom_four := QuotedStr(ednom_fourn.Text);
@@ -169,7 +190,10 @@ if (edVehicule.Text<>'') and (lbmontant.Caption<>'0') then
             Susager_val := QuotedStr('');
             SVehicule := QuotedStr(edVehicule.Text);
             SnomVehicule := QuotedStr(ednomveh.Text);
-            Nstatut_bc := 0
+            Nstatut_bc := 0  ;
+            SDest := QuotedStr('');
+            NTBout := StrToInt(lbTbout.Caption);
+            RTkg := StrToFloat(lbTkilo.Caption);
           end;
           dm.InsertBonCom(bc);
 
@@ -222,12 +246,6 @@ frmRechVehBc.showmodal;
 
 end;
 
-procedure TfrmbonCommande.FormActivate(Sender: TObject);
-begin
-lbDatebc.Caption := DateToStr(Now);
-
-end;
-
 procedure TfrmbonCommande.FormCreate(Sender: TObject);
 begin
 with StringGrid1 do
@@ -249,6 +267,7 @@ begin
   lbNumbc.Caption := IntToStr(MaxBc);
 
   cbNormal.Checked := True;
+  date_bc.Date := Now;
 
 end;
 
@@ -287,6 +306,9 @@ var
 //  mnt : real;
   code_art :string;
   stock : TStock;
+  vTBout : integer;
+  vTkg : real;
+  Article : TArticle;
 begin
 with StringGrid1 do
   begin
@@ -294,15 +316,32 @@ with StringGrid1 do
   code_art := Cells[0,Row];
 
   stock := dm.selectStockByArticle(code_art)  ;
-  if Trim(StringGrid1.Cells[2,StringGrid1.Row]) <> '' then lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * qte ));
+  if Trim(Cells[2,Row]) <> '' then lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * qte ));
 
-
+//Suppession de ligne
     k:=Row;
     for I := k to RowCount do
       begin
         Rows[i]:=Rows[i+1];
       end;
       RowCount:=RowCount-1;
+
+//MAJ du total kilo et qte
+    vTBout := 0;
+    vTkg := 0;
+
+    for I := 1 to StringGrid1.RowCount -1 do
+      begin
+        code_art := StringGrid1.Cells[0,i]       ;
+        Article := dm.selectArticleByCode(code_art);
+
+        vTBout:=vTBout+StrToInt(StringGrid1.Cells[3,i]);
+        vTkg:=vTkg+ (Article.Rkilo * StrToInt(StringGrid1.Cells[3,i]));
+      end;
+
+      lbTkilo.Caption := FloatToStr(vTkg);
+      lbTbout.Caption := IntToStr(vTBout);
+
   end;
 end;
 

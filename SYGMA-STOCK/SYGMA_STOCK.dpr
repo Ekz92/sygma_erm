@@ -42,7 +42,8 @@ uses
   UFicheRecapi in 'UFicheRecapi.pas' {frmFicheRecapi},
   UFicheRecapo in 'UFicheRecapo.pas' {frmFicheRecapo},
   USortieVrac in 'USortieVrac.pas' {frmSortieVrac},
-  UDefPrixArticle in 'UDefPrixArticle.pas' {frmDefPrixArticle};
+  UDefPrixArticle in 'UDefPrixArticle.pas' {frmDefPrixArticle},
+  UDiagrammeBC in 'UDiagrammeBC.pas' {frmDiagrammeBC};
 
 {$R *.res}
 
@@ -90,5 +91,6 @@ begin
   Application.CreateForm(TfrmFicheRecapo, frmFicheRecapo);
   Application.CreateForm(TfrmSortieVrac, frmSortieVrac);
   Application.CreateForm(TfrmDefPrixArticle, frmDefPrixArticle);
+  Application.CreateForm(TfrmDiagrammeBC, frmDiagrammeBC);
   Application.Run;
 end.

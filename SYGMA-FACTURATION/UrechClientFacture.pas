@@ -18,6 +18,7 @@ type
       State: TGridDrawState);
     procedure St_RechDblClick(Sender: TObject);
     procedure edrech_nomChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -53,6 +54,8 @@ begin
           Cells[1,i+1]:=Clts[i].SnomClt;
         end;
     end;
+    if St_Rech.RowCount>1 then St_Rech.FixedRows := 1;
+    
 end;
 
 procedure TfrmRechClientFacture.FormActivate(Sender: TObject);
@@ -84,6 +87,12 @@ with St_Rech do
     cells[0,0] := 'Code';
     cells[1,0] := 'Nom';
   end;
+end;
+
+procedure TfrmRechClientFacture.FormShow(Sender: TObject);
+begin
+edrech_nom.Clear;
+edrech_nom.SetFocus;
 end;
 
 procedure TfrmRechClientFacture.St_RechDblClick(Sender: TObject);
