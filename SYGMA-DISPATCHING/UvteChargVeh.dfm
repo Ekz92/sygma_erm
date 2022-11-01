@@ -36,7 +36,7 @@ object frmvteChargVeh: TfrmvteChargVeh
       Left = 0
       Top = 0
       Width = 507
-      Height = 65
+      Height = 46
       Align = alTop
       Caption = 'Chargement'
       Font.Charset = DEFAULT_CHARSET
@@ -67,8 +67,8 @@ object frmvteChargVeh: TfrmvteChargVeh
         ParentFont = False
       end
       object Label16: TLabel
-        Left = 8
-        Top = 40
+        Left = 208
+        Top = 17
         Width = 30
         Height = 13
         Caption = 'Date :'
@@ -79,6 +79,7 @@ object frmvteChargVeh: TfrmvteChargVeh
         Width = 145
         Height = 21
         Style = csDropDownList
+        Enabled = False
         ItemIndex = 1
         ParentColor = True
         TabOrder = 0
@@ -103,9 +104,9 @@ object frmvteChargVeh: TfrmvteChargVeh
         TabOrder = 1
       end
       object DateCharg: TDateTimePicker
-        Left = 55
-        Top = 37
-        Width = 145
+        Left = 255
+        Top = 14
+        Width = 98
         Height = 21
         Date = 36891.332817222220000000
         Time = 36891.332817222220000000
@@ -116,21 +117,10 @@ object frmvteChargVeh: TfrmvteChargVeh
         ParentDoubleBuffered = False
         TabOrder = 2
       end
-      object rgType: TRadioGroup
-        Left = 204
-        Top = 8
-        Width = 141
-        Height = 50
-        Caption = 'Type'
-        Items.Strings = (
-          'Transporteur'
-          'Achat')
-        TabOrder = 3
-      end
     end
     object GroupBox3: TGroupBox
       Left = 0
-      Top = 65
+      Top = 46
       Width = 507
       Height = 64
       Align = alTop
@@ -321,7 +311,7 @@ object frmvteChargVeh: TfrmvteChargVeh
     end
     object GroupBox1: TGroupBox
       Left = 0
-      Top = 129
+      Top = 110
       Width = 507
       Height = 62
       Align = alTop
@@ -443,7 +433,7 @@ object frmvteChargVeh: TfrmvteChargVeh
     end
     object GroupBox2: TGroupBox
       Left = 0
-      Top = 191
+      Top = 172
       Width = 507
       Height = 39
       Align = alTop
@@ -508,9 +498,9 @@ object frmvteChargVeh: TfrmvteChargVeh
     end
     object StringGrid1: TStringGrid
       Left = 0
-      Top = 230
+      Top = 211
       Width = 507
-      Height = 243
+      Height = 262
       Align = alClient
       ColCount = 6
       DefaultRowHeight = 18
@@ -693,6 +683,7 @@ object frmvteChargVeh: TfrmvteChargVeh
     Top = 240
     object Supprimer1: TMenuItem
       Caption = 'Supprimer'
+      OnClick = Supprimer1Click
     end
   end
 end

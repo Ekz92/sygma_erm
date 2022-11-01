@@ -31,7 +31,9 @@ uses
   UAddCommandeCamion in 'UAddCommandeCamion.pas' {frmAddCommandeCamion},
   URechChargCom in 'URechChargCom.pas' {frmRechChargCom},
   UListeCommandeCamion in 'UListeCommandeCamion.pas' {frmListeCommandeCamion},
-  UTransfertInterCamion in 'UTransfertInterCamion.pas' {frmTransfertInterCamion};
+  UTransfertInterCamion in 'UTransfertInterCamion.pas' {frmTransfertInterCamion},
+  UReguleStockCamion in 'UReguleStockCamion.pas' {frmReguleStockCamion},
+  URech_Article in 'URech_Article.pas' {frmrech_article};
 
 {$R *.res}
 
@@ -67,5 +69,7 @@ begin
   Application.CreateForm(TfrmRechChargCom, frmRechChargCom);
   Application.CreateForm(TfrmListeCommandeCamion, frmListeCommandeCamion);
   Application.CreateForm(TfrmTransfertInterCamion, frmTransfertInterCamion);
+  Application.CreateForm(TfrmReguleStockCamion, frmReguleStockCamion);
+  Application.CreateForm(Tfrmrech_article, frmrech_article);
   Application.Run;
 end.

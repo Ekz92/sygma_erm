@@ -250,6 +250,10 @@
             <Form>frmDiagrammeBC</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="UFiche_stock_gene.pas">
+            <Form>frmFiche_stock_gene</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

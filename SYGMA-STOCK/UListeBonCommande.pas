@@ -118,7 +118,7 @@ if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes th
 
       Bcs := dm.selectBonCommandeDetail(SqlBc);
 
-      if StringGrid1.Cells[6,StringGrid1.Row] = 'Dépôt' then
+      if StringGrid1.Cells[8,StringGrid1.Row] = 'Dépôt' then
         begin
           for I := Low(Bcs) to High(Bcs) do
             begin
@@ -164,7 +164,7 @@ if MessageDlg('Voulez-vous annumer ce BC ?',mtWarning,[mbYes,mbNo],0) = mryes th
                 dm.Update_moovStock(UpdateMouv);
             end; //end for
         end else
-      if StringGrid1.Cells[6,StringGrid1.Row] = 'Camion' then
+      if StringGrid1.Cells[8,StringGrid1.Row] = 'Camion' then
         begin
           for I := Low(Bcs) to High(Bcs) do
             begin
@@ -692,7 +692,8 @@ begin
 // Modification du statut du bl en statut valider
 
   SqlVal := 'Update tb_boncom set user_validate = '+QuotedStr(vUsager)+','
-            +' dest = '+QuotedStr('Camion')
+            +' dest = '+QuotedStr('Camion')+','
+            +' date_val = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)))
             +' where num_bc = '+StringGrid1.Cells[1,StringGrid1.Row];
 
   dm.UpdateTable(SqlVal);

@@ -173,6 +173,10 @@ object frmFicheRecapo: TfrmFicheRecapo
     Top = 25
     Datasets = <
       item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
+      item
         DataSet = frxDBRecap
         DataSetName = 'frxDBRecap'
       end
@@ -248,25 +252,125 @@ object frmFicheRecapo: TfrmFicheRecapo
       PaperWidth = 470.000000000000000000
       PaperHeight = 297.000000000000000000
       PaperSize = 256
-      LeftMargin = 2.000000000000000000
-      RightMargin = 2.000000000000000000
-      TopMargin = 2.000000000000000000
-      BottomMargin = 2.000000000000000000
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
+        Height = 41.574830000000000000
         Top = 18.897650000000000000
-        Width = 1761.260980000000000000
+        Width = 1700.788500000000000000
+        object Memo274: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 279.685220000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'LISTE DE SORTIE PAR FICHE')
+          ParentFont = False
+        end
+        object md1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 39.456710000000000000
+          Top = 20.984244650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo37: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 20.897650000000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Du :')
+          ParentFont = False
+        end
+        object md2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 175.519790000000000000
+          Top = 20.984244650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo38: TfrxMemoView
+          AllowVectorExport = True
+          Left = 139.842610000000000000
+          Top = 20.984244650000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Au :')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1400.796230000000000000
+          Width = 241.889775980000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1440.922006770000000000
+          Top = 19.897650000000000000
+          Width = 173.858235980000000000
+          Height = 15.118120000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."description"]')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
-        Height = 63.496062992126000000
-        Top = 68.031540000000000000
-        Width = 1761.260980000000000000
+        Height = 63.496062990000000000
+        Top = 83.149660000000000000
+        Width = 1700.788500000000000000
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Left = 2.093955400000000000
@@ -283,28 +387,12 @@ object frmFicheRecapo: TfrmFicheRecapo
             'Date')
           ParentFont = False
         end
-        object Memo6: TfrxMemoView
-          AllowVectorExport = True
-          Left = 72.600715170000000000
-          Top = 42.708661420000000000
-          Width = 109.606299210000000000
-          Height = 18.897637795275600000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'nom_clt')
-          ParentFont = False
-        end
         object Memo8: TfrxMemoView
           AllowVectorExport = True
-          Left = 183.005891420000000000
+          Left = 72.005891420000000000
           Top = 42.708661420000000000
-          Width = 107.338582680000000000
-          Height = 18.897637795275600000
+          Width = 141.354352680000000000
+          Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -317,7 +405,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo128: TfrxMemoView
           AllowVectorExport = True
-          Left = 829.929133860000000000
+          Left = 752.929133860000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -335,7 +423,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo129: TfrxMemoView
           AllowVectorExport = True
-          Left = 859.787401570000000000
+          Left = 782.787401570000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -353,7 +441,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo130: TfrxMemoView
           AllowVectorExport = True
-          Left = 890.023622050000000000
+          Left = 813.023622050000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -371,7 +459,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo131: TfrxMemoView
           AllowVectorExport = True
-          Left = 829.929133860000000000
+          Left = 752.929133860000000000
           Top = 21.795273150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -389,9 +477,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo135: TfrxMemoView
           AllowVectorExport = True
-          Left = 740.055118110236000000
+          Left = 663.055118110000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -407,7 +495,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo136: TfrxMemoView
           AllowVectorExport = True
-          Left = 769.535433070000000000
+          Left = 692.535433070000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -425,7 +513,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo137: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.717302190000000000
+          Left = 722.717302190000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -443,7 +531,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo138: TfrxMemoView
           AllowVectorExport = True
-          Left = 740.055118110000000000
+          Left = 663.055118110000000000
           Top = 21.795273150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -461,9 +549,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo142: TfrxMemoView
           AllowVectorExport = True
-          Left = 650.314960629921000000
+          Left = 573.314960630000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -479,7 +567,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo143: TfrxMemoView
           AllowVectorExport = True
-          Left = 680.173228346457000000
+          Left = 603.173228350000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -497,9 +585,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo144: TfrxMemoView
           AllowVectorExport = True
-          Left = 710.110932190000000000
+          Left = 633.110932190000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -515,9 +603,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo145: TfrxMemoView
           AllowVectorExport = True
-          Left = 650.314960629921000000
+          Left = 573.314960630000000000
           Top = 21.795273150000000000
-          Width = 88.440944881889800000
+          Width = 88.440944880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -533,9 +621,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo149: TfrxMemoView
           AllowVectorExport = True
-          Left = 560.685039370079000000
+          Left = 483.685039370000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -551,7 +639,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo150: TfrxMemoView
           AllowVectorExport = True
-          Left = 590.543307086614000000
+          Left = 513.543307090000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -569,9 +657,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo151: TfrxMemoView
           AllowVectorExport = True
-          Left = 620.401574803150000000
+          Left = 543.401574800000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -587,9 +675,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo152: TfrxMemoView
           AllowVectorExport = True
-          Left = 560.685039370079000000
+          Left = 483.685039370000000000
           Top = 21.795273150000000000
-          Width = 88.440944881889800000
+          Width = 88.440944880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -605,7 +693,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo156: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.055118110236000000
+          Left = 394.055118110000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -623,7 +711,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo157: TfrxMemoView
           AllowVectorExport = True
-          Left = 501.825963340000000000
+          Left = 424.825963340000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -641,7 +729,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo158: TfrxMemoView
           AllowVectorExport = True
-          Left = 530.898192190000000000
+          Left = 453.898192190000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -659,9 +747,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo159: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.055118110236000000
+          Left = 394.055118110000000000
           Top = 21.795273150000000000
-          Width = 88.440944881889800000
+          Width = 88.440944880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -677,9 +765,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo163: TfrxMemoView
           AllowVectorExport = True
-          Left = 381.070810000000000000
+          Left = 304.070810000000000000
           Top = 42.582674720000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -695,7 +783,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo164: TfrxMemoView
           AllowVectorExport = True
-          Left = 410.802463340000000000
+          Left = 333.802463340000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -713,7 +801,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo165: TfrxMemoView
           AllowVectorExport = True
-          Left = 440.874692190000000000
+          Left = 363.874692190000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -731,7 +819,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo166: TfrxMemoView
           AllowVectorExport = True
-          Left = 381.250513790000000000
+          Left = 304.250513790000000000
           Top = 21.795273150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -749,10 +837,10 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo170: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.346320000000000000
+          Left = 214.401574800000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
-          Height = 18.897637795275600000
+          Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -767,7 +855,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo171: TfrxMemoView
           AllowVectorExport = True
-          Left = 321.077973340000000000
+          Left = 244.077973340000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -785,7 +873,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo172: TfrxMemoView
           AllowVectorExport = True
-          Left = 351.150202190000000000
+          Left = 274.150202190000000000
           Top = 42.582674720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -803,7 +891,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo173: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.526023790000000000
+          Left = 214.401574800000000000
           Top = 21.795273150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -821,7 +909,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo224: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.440295590000000000
+          Left = 214.401574800000000000
           Top = 2.244092050000000000
           Width = 1432.441870000000000000
           Height = 18.897650000000000000
@@ -839,7 +927,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo69: TfrxMemoView
           AllowVectorExport = True
-          Left = 919.843230000000000000
+          Left = 842.843230000000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -857,7 +945,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo70: TfrxMemoView
           AllowVectorExport = True
-          Left = 919.843230000000000000
+          Left = 842.843230000000000000
           Top = 21.897650000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -875,7 +963,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo71: TfrxMemoView
           AllowVectorExport = True
-          Left = 948.945592200000000000
+          Left = 871.945592200000000000
           Top = 42.685051570000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -893,7 +981,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo72: TfrxMemoView
           AllowVectorExport = True
-          Left = 979.181812680000000000
+          Left = 902.181812680000000000
           Top = 42.685051570000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -911,8 +999,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo180: TfrxMemoView
           AllowVectorExport = True
-          Left = 1008.992890000000000000
-          Top = 42.708661417322800000
+          Left = 931.992890000000000000
+          Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -929,7 +1017,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo181: TfrxMemoView
           AllowVectorExport = True
-          Left = 1008.992890000000000000
+          Left = 931.992890000000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -947,7 +1035,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo182: TfrxMemoView
           AllowVectorExport = True
-          Left = 1039.095252200000000000
+          Left = 962.095252200000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -965,7 +1053,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo183: TfrxMemoView
           AllowVectorExport = True
-          Left = 1068.331472680000000000
+          Left = 991.331472680000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -983,7 +1071,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo191: TfrxMemoView
           AllowVectorExport = True
-          Left = 1097.481140000000000000
+          Left = 1020.481140000000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1001,7 +1089,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo192: TfrxMemoView
           AllowVectorExport = True
-          Left = 1097.481140000000000000
+          Left = 1020.481140000000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1019,7 +1107,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo193: TfrxMemoView
           AllowVectorExport = True
-          Left = 1127.583502200000000000
+          Left = 1050.583502200000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1037,7 +1125,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo194: TfrxMemoView
           AllowVectorExport = True
-          Left = 1156.819722680000000000
+          Left = 1079.819722680000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1055,7 +1143,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo57: TfrxMemoView
           AllowVectorExport = True
-          Left = 1185.551950000000000000
+          Left = 1108.551950000000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1073,7 +1161,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo58: TfrxMemoView
           AllowVectorExport = True
-          Left = 1215.410217720000000000
+          Left = 1138.410217720000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1091,7 +1179,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo127: TfrxMemoView
           AllowVectorExport = True
-          Left = 1185.551950000000000000
+          Left = 1108.551950000000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1109,7 +1197,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo59: TfrxMemoView
           AllowVectorExport = True
-          Left = 1245.325085410000000000
+          Left = 1168.325085410000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1127,7 +1215,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo60: TfrxMemoView
           AllowVectorExport = True
-          Left = 1275.181871260000000000
+          Left = 1198.181871260000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1145,7 +1233,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo126: TfrxMemoView
           AllowVectorExport = True
-          Left = 1275.181871260000000000
+          Left = 1198.181871260000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1163,7 +1251,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo61: TfrxMemoView
           AllowVectorExport = True
-          Left = 1304.284233460000000000
+          Left = 1227.284233460000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1181,7 +1269,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo62: TfrxMemoView
           AllowVectorExport = True
-          Left = 1334.520453940000000000
+          Left = 1257.520453940000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1199,7 +1287,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo202: TfrxMemoView
           AllowVectorExport = True
-          Left = 1364.748920000000000000
+          Left = 1287.748920000000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1217,7 +1305,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo203: TfrxMemoView
           AllowVectorExport = True
-          Left = 1394.607187720000000000
+          Left = 1317.607187720000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1235,7 +1323,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo204: TfrxMemoView
           AllowVectorExport = True
-          Left = 1364.748920000000000000
+          Left = 1287.748920000000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1253,7 +1341,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo205: TfrxMemoView
           AllowVectorExport = True
-          Left = 1424.522055410000000000
+          Left = 1347.522055410000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1271,7 +1359,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo206: TfrxMemoView
           AllowVectorExport = True
-          Left = 1454.378841260000000000
+          Left = 1377.378841260000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1289,7 +1377,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo207: TfrxMemoView
           AllowVectorExport = True
-          Left = 1454.378841260000000000
+          Left = 1377.378841260000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1307,7 +1395,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo208: TfrxMemoView
           AllowVectorExport = True
-          Left = 1484.481203460000000000
+          Left = 1407.481203460000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1325,7 +1413,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo209: TfrxMemoView
           AllowVectorExport = True
-          Left = 1514.717423940000000000
+          Left = 1437.717423940000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1343,7 +1431,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo252: TfrxMemoView
           AllowVectorExport = True
-          Left = 1544.827770000000000000
+          Left = 1467.827770000000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1361,7 +1449,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo253: TfrxMemoView
           AllowVectorExport = True
-          Left = 1574.686037720000000000
+          Left = 1497.686037720000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1379,7 +1467,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo254: TfrxMemoView
           AllowVectorExport = True
-          Left = 1544.827770000000000000
+          Left = 1467.827770000000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1397,7 +1485,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo255: TfrxMemoView
           AllowVectorExport = True
-          Left = 1604.600905410000000000
+          Left = 1527.600905410000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1415,7 +1503,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo256: TfrxMemoView
           AllowVectorExport = True
-          Left = 1634.457691260000000000
+          Left = 1557.457691260000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1433,7 +1521,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo257: TfrxMemoView
           AllowVectorExport = True
-          Left = 1634.457691260000000000
+          Left = 1557.457691260000000000
           Top = 21.677180000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1451,7 +1539,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo258: TfrxMemoView
           AllowVectorExport = True
-          Left = 1663.560053460000000000
+          Left = 1586.560053460000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1469,7 +1557,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo259: TfrxMemoView
           AllowVectorExport = True
-          Left = 1693.796273940000000000
+          Left = 1616.796273940000000000
           Top = 42.708661420000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1490,8 +1578,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 192.756030000000000000
-        Width = 1761.260980000000000000
+        Top = 207.874150000000000000
+        Width = 1700.788500000000000000
         DataSet = frxDBRecap
         DataSetName = 'frxDBRecap'
         RowCount = 0
@@ -1514,29 +1602,10 @@ object frmFicheRecapo: TfrmFicheRecapo
             '[frxDBRecap."date_fes"]')
           ParentFont = False
         end
-        object Memo66: TfrxMemoView
-          AllowVectorExport = True
-          Left = 72.600715170000000000
-          Width = 109.606299212598000000
-          Height = 18.897650000000000000
-          DataField = 'nom_clt'
-          DataSet = frxDBRecap
-          DataSetName = 'frxDBRecap'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Frame.Width = 0.100000000000000000
-          Memo.UTF8W = (
-            '[frxDBRecap."nom_clt"]')
-          ParentFont = False
-        end
         object Memo68: TfrxMemoView
           AllowVectorExport = True
-          Left = 183.005891420000000000
-          Width = 107.338582680000000000
+          Left = 72.005891420000000000
+          Width = 141.354352680000000000
           Height = 18.897650000000000000
           DataField = 'marque_veh'
           DataSet = frxDBRecap
@@ -1554,7 +1623,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo132: TfrxMemoView
           AllowVectorExport = True
-          Left = 829.929133860000000000
+          Left = 752.929133860000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1573,7 +1642,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo133: TfrxMemoView
           AllowVectorExport = True
-          Left = 859.787401570000000000
+          Left = 782.787401570000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1592,7 +1661,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo134: TfrxMemoView
           AllowVectorExport = True
-          Left = 890.023622050000000000
+          Left = 813.023622050000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1611,7 +1680,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo139: TfrxMemoView
           AllowVectorExport = True
-          Left = 740.055118110000000000
+          Left = 663.055118110000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1630,7 +1699,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo140: TfrxMemoView
           AllowVectorExport = True
-          Left = 769.535433070000000000
+          Left = 692.535433070000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1649,7 +1718,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo141: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.717302190000000000
+          Left = 722.717302190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1668,8 +1737,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo146: TfrxMemoView
           AllowVectorExport = True
-          Left = 650.314960629921000000
-          Width = 28.724409448818900000
+          Left = 573.314960630000000000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -1687,7 +1756,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo147: TfrxMemoView
           AllowVectorExport = True
-          Left = 680.173228346457000000
+          Left = 603.173228350000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1706,8 +1775,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo148: TfrxMemoView
           AllowVectorExport = True
-          Left = 710.110932190000000000
-          Width = 28.724409448818900000
+          Left = 633.110932190000000000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -1725,8 +1794,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo153: TfrxMemoView
           AllowVectorExport = True
-          Left = 560.685039370079000000
-          Width = 28.724409448818900000
+          Left = 483.685039370000000000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -1744,7 +1813,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo154: TfrxMemoView
           AllowVectorExport = True
-          Left = 590.543307086614000000
+          Left = 513.543307090000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1763,8 +1832,8 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo155: TfrxMemoView
           AllowVectorExport = True
-          Left = 620.401574803150000000
-          Width = 28.724409448818900000
+          Left = 543.401574800000000000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -1782,7 +1851,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo160: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.055118110000000000
+          Left = 394.055118110000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1801,7 +1870,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo161: TfrxMemoView
           AllowVectorExport = True
-          Left = 500.825963340000000000
+          Left = 423.825963340000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1820,7 +1889,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo162: TfrxMemoView
           AllowVectorExport = True
-          Left = 530.898192190000000000
+          Left = 453.898192190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1839,7 +1908,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo167: TfrxMemoView
           AllowVectorExport = True
-          Left = 381.070810000000000000
+          Left = 304.070810000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1858,7 +1927,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo168: TfrxMemoView
           AllowVectorExport = True
-          Left = 410.661417320000000000
+          Left = 333.661417320000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1877,7 +1946,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo169: TfrxMemoView
           AllowVectorExport = True
-          Left = 440.874692190000000000
+          Left = 363.874692190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1896,7 +1965,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo174: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.346320000000000000
+          Left = 214.401574800000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1915,7 +1984,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo175: TfrxMemoView
           AllowVectorExport = True
-          Left = 320.921259840000000000
+          Left = 243.921259840000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1934,7 +2003,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo176: TfrxMemoView
           AllowVectorExport = True
-          Left = 351.150202190000000000
+          Left = 274.150202190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1953,7 +2022,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo73: TfrxMemoView
           AllowVectorExport = True
-          Left = 919.843230000000000000
+          Left = 842.843230000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1972,7 +2041,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo74: TfrxMemoView
           AllowVectorExport = True
-          Left = 948.945592200000000000
+          Left = 871.945592200000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1991,7 +2060,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo75: TfrxMemoView
           AllowVectorExport = True
-          Left = 979.181812680000000000
+          Left = 902.181812680000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2010,7 +2079,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo184: TfrxMemoView
           AllowVectorExport = True
-          Left = 1008.992890000000000000
+          Left = 931.992890000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2029,7 +2098,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo185: TfrxMemoView
           AllowVectorExport = True
-          Left = 1039.095252200000000000
+          Left = 962.095252200000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2048,7 +2117,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo186: TfrxMemoView
           AllowVectorExport = True
-          Left = 1068.331472680000000000
+          Left = 991.331472680000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2067,7 +2136,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo195: TfrxMemoView
           AllowVectorExport = True
-          Left = 1097.481140000000000000
+          Left = 1020.481140000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2086,7 +2155,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo196: TfrxMemoView
           AllowVectorExport = True
-          Left = 1127.583502200000000000
+          Left = 1050.583502200000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2105,7 +2174,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo197: TfrxMemoView
           AllowVectorExport = True
-          Left = 1156.819722680000000000
+          Left = 1079.819722680000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2124,7 +2193,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo117: TfrxMemoView
           AllowVectorExport = True
-          Left = 1185.551950000000000000
+          Left = 1108.551950000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2143,7 +2212,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo118: TfrxMemoView
           AllowVectorExport = True
-          Left = 1215.410217720000000000
+          Left = 1138.410217720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2162,7 +2231,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo119: TfrxMemoView
           AllowVectorExport = True
-          Left = 1245.325085410000000000
+          Left = 1168.325085410000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2181,7 +2250,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo120: TfrxMemoView
           AllowVectorExport = True
-          Left = 1275.181871260000000000
+          Left = 1198.181871260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2200,7 +2269,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo121: TfrxMemoView
           AllowVectorExport = True
-          Left = 1304.284233460000000000
+          Left = 1227.284233460000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2219,7 +2288,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo122: TfrxMemoView
           AllowVectorExport = True
-          Left = 1334.520453940000000000
+          Left = 1257.520453940000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2238,7 +2307,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo210: TfrxMemoView
           AllowVectorExport = True
-          Left = 1364.748920000000000000
+          Left = 1287.748920000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2257,7 +2326,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo211: TfrxMemoView
           AllowVectorExport = True
-          Left = 1394.607187720000000000
+          Left = 1317.607187720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2276,7 +2345,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo212: TfrxMemoView
           AllowVectorExport = True
-          Left = 1424.522055410000000000
+          Left = 1347.522055410000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2295,7 +2364,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo213: TfrxMemoView
           AllowVectorExport = True
-          Left = 1454.378841260000000000
+          Left = 1377.378841260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2314,7 +2383,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo214: TfrxMemoView
           AllowVectorExport = True
-          Left = 1484.481203460000000000
+          Left = 1407.481203460000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2333,7 +2402,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo215: TfrxMemoView
           AllowVectorExport = True
-          Left = 1514.717423940000000000
+          Left = 1437.717423940000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2352,7 +2421,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo260: TfrxMemoView
           AllowVectorExport = True
-          Left = 1544.827770000000000000
+          Left = 1467.827770000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2371,7 +2440,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo261: TfrxMemoView
           AllowVectorExport = True
-          Left = 1574.686037720000000000
+          Left = 1497.686037720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2390,7 +2459,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo262: TfrxMemoView
           AllowVectorExport = True
-          Left = 1604.600905410000000000
+          Left = 1527.600905410000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2409,7 +2478,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo263: TfrxMemoView
           AllowVectorExport = True
-          Left = 1634.457691260000000000
+          Left = 1557.457691260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2428,7 +2497,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo264: TfrxMemoView
           AllowVectorExport = True
-          Left = 1663.560053460000000000
+          Left = 1586.560053460000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2447,7 +2516,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo265: TfrxMemoView
           AllowVectorExport = True
-          Left = 1693.796273940000000000
+          Left = 1616.796273940000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2469,12 +2538,12 @@ object frmFicheRecapo: TfrmFicheRecapo
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 340.157700000000000000
-        Width = 1761.260980000000000000
+        Top = 355.275820000000000000
+        Width = 1700.788500000000000000
         object Memo123: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
-          Width = 1761.260980000000000000
+          Width = 1700.788500000000000000
           Frame.Typ = [ftTop]
           Frame.Width = 2.000000000000000000
         end
@@ -2490,7 +2559,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         object Memo125: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 1685.670380000000000000
+          Left = 1625.197900000000000000
           Top = 1.000000000000000000
           Width = 75.590600000000000000
           Height = 22.677180000000000000
@@ -2504,11 +2573,11 @@ object frmFicheRecapo: TfrmFicheRecapo
         FillType = ftBrush
         Frame.Typ = []
         Height = 45.354360000000000000
-        Top = 234.330860000000000000
-        Width = 1761.260980000000000000
+        Top = 249.448980000000000000
+        Width = 1700.788500000000000000
         object Memo227: TfrxMemoView
           AllowVectorExport = True
-          Left = 829.929133860000000000
+          Left = 752.929133860000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2529,7 +2598,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo228: TfrxMemoView
           AllowVectorExport = True
-          Left = 859.787401570000000000
+          Left = 782.787401570000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2550,7 +2619,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo229: TfrxMemoView
           AllowVectorExport = True
-          Left = 890.023622050000000000
+          Left = 813.023622050000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2571,7 +2640,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo230: TfrxMemoView
           AllowVectorExport = True
-          Left = 740.055118110000000000
+          Left = 663.055118110000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2592,7 +2661,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo231: TfrxMemoView
           AllowVectorExport = True
-          Left = 769.535433070000000000
+          Left = 692.535433070000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2613,7 +2682,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo232: TfrxMemoView
           AllowVectorExport = True
-          Left = 799.748031496063000000
+          Left = 722.748031500000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2634,9 +2703,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo233: TfrxMemoView
           AllowVectorExport = True
-          Left = 650.314960629921000000
+          Left = 573.314960630000000000
           Top = 0.220470000000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -2655,7 +2724,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo234: TfrxMemoView
           AllowVectorExport = True
-          Left = 680.173228346457000000
+          Left = 603.173228350000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2676,9 +2745,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo235: TfrxMemoView
           AllowVectorExport = True
-          Left = 709.866962190000000000
+          Left = 632.866962190000000000
           Top = 0.220470000000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -2697,9 +2766,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo236: TfrxMemoView
           AllowVectorExport = True
-          Left = 560.685039370079000000
+          Left = 483.685039370000000000
           Top = 0.220470000000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -2718,7 +2787,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo237: TfrxMemoView
           AllowVectorExport = True
-          Left = 590.543307090000000000
+          Left = 513.543307090000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2739,9 +2808,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo238: TfrxMemoView
           AllowVectorExport = True
-          Left = 620.401574803150000000
+          Left = 543.401574800000000000
           Top = 0.220470000000000000
-          Width = 28.724409448818900000
+          Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -2760,7 +2829,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo239: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.055118110000000000
+          Left = 394.055118110000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2781,7 +2850,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo240: TfrxMemoView
           AllowVectorExport = True
-          Left = 500.581993340000000000
+          Left = 423.581993340000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2802,7 +2871,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo241: TfrxMemoView
           AllowVectorExport = True
-          Left = 530.654222190000000000
+          Left = 453.654222190000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2823,7 +2892,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo246: TfrxMemoView
           AllowVectorExport = True
-          Left = 380.826840000000000000
+          Left = 303.826840000000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2844,7 +2913,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo247: TfrxMemoView
           AllowVectorExport = True
-          Left = 410.661417320000000000
+          Left = 333.661417320000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2865,7 +2934,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo248: TfrxMemoView
           AllowVectorExport = True
-          Left = 440.897637800000000000
+          Left = 363.897637800000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2886,7 +2955,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo249: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.102350000000000000
+          Left = 214.401574800000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2907,7 +2976,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo250: TfrxMemoView
           AllowVectorExport = True
-          Left = 320.921259840000000000
+          Left = 243.921259840000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2928,7 +2997,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo251: TfrxMemoView
           AllowVectorExport = True
-          Left = 350.906232190000000000
+          Left = 273.906232190000000000
           Top = 0.220470000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -2949,7 +3018,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo285: TfrxMemoView
           AllowVectorExport = True
-          Left = 291.575140000000000000
+          Left = 214.401574800000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -2966,7 +3035,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo286: TfrxMemoView
           AllowVectorExport = True
-          Left = 381.181102360000000000
+          Left = 304.181102360000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -2985,7 +3054,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo287: TfrxMemoView
           AllowVectorExport = True
-          Left = 471.055118110000000000
+          Left = 394.055118110000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3002,7 +3071,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo288: TfrxMemoView
           AllowVectorExport = True
-          Left = 560.685039370000000000
+          Left = 483.685039370000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3021,9 +3090,9 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo289: TfrxMemoView
           AllowVectorExport = True
-          Left = 650.314960629921000000
+          Left = 573.314960630000000000
           Top = 20.251966060000000000
-          Width = 88.440944881889800000
+          Width = 88.440944880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -3040,7 +3109,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo290: TfrxMemoView
           AllowVectorExport = True
-          Left = 740.055118110000000000
+          Left = 663.055118110000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3059,7 +3128,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo291: TfrxMemoView
           AllowVectorExport = True
-          Left = 829.929133860000000000
+          Left = 752.929133860000000000
           Top = 20.251966060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3078,7 +3147,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo76: TfrxMemoView
           AllowVectorExport = True
-          Left = 919.843230000000000000
+          Left = 842.843230000000000000
           Top = 0.322846850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3099,7 +3168,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo177: TfrxMemoView
           AllowVectorExport = True
-          Left = 948.945592200000000000
+          Left = 871.945592200000000000
           Top = 0.322846850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3120,7 +3189,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo178: TfrxMemoView
           AllowVectorExport = True
-          Left = 979.181812680000000000
+          Left = 902.181812680000000000
           Top = 0.322846850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3141,7 +3210,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo179: TfrxMemoView
           AllowVectorExport = True
-          Left = 919.843230000000000000
+          Left = 842.843230000000000000
           Top = 20.354342910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3160,7 +3229,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo187: TfrxMemoView
           AllowVectorExport = True
-          Left = 1008.992890000000000000
+          Left = 931.992890000000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3181,7 +3250,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo188: TfrxMemoView
           AllowVectorExport = True
-          Left = 1039.095252200000000000
+          Left = 962.095252200000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3202,7 +3271,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo189: TfrxMemoView
           AllowVectorExport = True
-          Left = 1068.331472680000000000
+          Left = 991.331472680000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3223,7 +3292,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo190: TfrxMemoView
           AllowVectorExport = True
-          Left = 1008.992890000000000000
+          Left = 931.992890000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3242,7 +3311,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo198: TfrxMemoView
           AllowVectorExport = True
-          Left = 1097.481140000000000000
+          Left = 1020.481140000000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3263,7 +3332,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo199: TfrxMemoView
           AllowVectorExport = True
-          Left = 1127.583502200000000000
+          Left = 1050.583502200000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3284,7 +3353,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo200: TfrxMemoView
           AllowVectorExport = True
-          Left = 1156.819722680000000000
+          Left = 1079.819722680000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3305,7 +3374,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo201: TfrxMemoView
           AllowVectorExport = True
-          Left = 1097.481140000000000000
+          Left = 1020.481140000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3324,7 +3393,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo225: TfrxMemoView
           AllowVectorExport = True
-          Left = 1185.551950000000000000
+          Left = 1108.551950000000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3345,7 +3414,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo226: TfrxMemoView
           AllowVectorExport = True
-          Left = 1215.410217720000000000
+          Left = 1138.410217720000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3366,7 +3435,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo242: TfrxMemoView
           AllowVectorExport = True
-          Left = 1245.354330710000000000
+          Left = 1168.354330710000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3387,7 +3456,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo243: TfrxMemoView
           AllowVectorExport = True
-          Left = 1275.181871260000000000
+          Left = 1198.181871260000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3408,7 +3477,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo244: TfrxMemoView
           AllowVectorExport = True
-          Left = 1304.284233460000000000
+          Left = 1227.284233460000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3429,7 +3498,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo245: TfrxMemoView
           AllowVectorExport = True
-          Left = 1334.520453940000000000
+          Left = 1257.520453940000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3450,7 +3519,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo292: TfrxMemoView
           AllowVectorExport = True
-          Left = 1185.551950000000000000
+          Left = 1108.551950000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3469,7 +3538,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo293: TfrxMemoView
           AllowVectorExport = True
-          Left = 1275.181871260000000000
+          Left = 1198.181871260000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3488,7 +3557,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo216: TfrxMemoView
           AllowVectorExport = True
-          Left = 1364.748920000000000000
+          Left = 1287.748920000000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3509,7 +3578,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo217: TfrxMemoView
           AllowVectorExport = True
-          Left = 1394.607187720000000000
+          Left = 1317.607187720000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3530,7 +3599,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo218: TfrxMemoView
           AllowVectorExport = True
-          Left = 1424.551300710000000000
+          Left = 1347.551300710000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3551,7 +3620,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo219: TfrxMemoView
           AllowVectorExport = True
-          Left = 1454.378841260000000000
+          Left = 1377.378841260000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3572,7 +3641,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo220: TfrxMemoView
           AllowVectorExport = True
-          Left = 1484.481203460000000000
+          Left = 1407.481203460000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3593,7 +3662,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo221: TfrxMemoView
           AllowVectorExport = True
-          Left = 1514.717423940000000000
+          Left = 1437.717423940000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3614,7 +3683,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo222: TfrxMemoView
           AllowVectorExport = True
-          Left = 1364.748920000000000000
+          Left = 1287.748920000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3633,7 +3702,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo223: TfrxMemoView
           AllowVectorExport = True
-          Left = 1454.378841260000000000
+          Left = 1377.378841260000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3652,7 +3721,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo266: TfrxMemoView
           AllowVectorExport = True
-          Left = 1544.827770000000000000
+          Left = 1467.827770000000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3673,7 +3742,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo267: TfrxMemoView
           AllowVectorExport = True
-          Left = 1574.686037720000000000
+          Left = 1497.686037720000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3694,7 +3763,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo268: TfrxMemoView
           AllowVectorExport = True
-          Left = 1604.630150710000000000
+          Left = 1527.630150710000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3715,7 +3784,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo269: TfrxMemoView
           AllowVectorExport = True
-          Left = 1634.457691260000000000
+          Left = 1557.457691260000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3736,7 +3805,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo270: TfrxMemoView
           AllowVectorExport = True
-          Left = 1663.560053460000000000
+          Left = 1586.560053460000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3757,7 +3826,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo271: TfrxMemoView
           AllowVectorExport = True
-          Left = 1693.796273940000000000
+          Left = 1616.796273940000000000
           Top = 0.102376850000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -3778,7 +3847,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo272: TfrxMemoView
           AllowVectorExport = True
-          Left = 1544.827770000000000000
+          Left = 1467.827770000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3797,7 +3866,7 @@ object frmFicheRecapo: TfrmFicheRecapo
         end
         object Memo273: TfrxMemoView
           AllowVectorExport = True
-          Left = 1634.457691260000000000
+          Left = 1557.457691260000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3899,7 +3968,7 @@ object frmFicheRecapo: TfrmFicheRecapo
     CloseDataSource = False
     DataSet = QSUM
     BCDToCurrency = False
-    Left = 176
-    Top = 120
+    Left = 184
+    Top = 80
   end
 end

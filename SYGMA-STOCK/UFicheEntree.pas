@@ -32,6 +32,8 @@ type
     btClot: TButton;
     Label6: TLabel;
     cbMagasin: TComboBox;
+    Label8: TLabel;
+    mComment: TMemo;
     procedure st_ficheEntreeDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodecltDblClick(Sender: TObject);
@@ -55,6 +57,7 @@ type
 var
   frmFicheEntree: TfrmFicheEntree;
   vNumHis : integer ;
+
 
 implementation
 
@@ -114,7 +117,7 @@ begin
   if Trim(edCodeclt.Text)='' then
     MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
   else
-  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'CLIENT PERSONNEL') and (edNomClt.Text<>'CLIENT PASSAGE') then
+  if (Trim(edNomVeh.Text)='') and (vTypClt<>'CP01') and (vTypClt<>'CP02') then
     MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
@@ -129,6 +132,7 @@ begin
       Snom_clt:=edNomClt.Text;
       Snum_veh := cbMatVeh.Text;
       Snom_veh := edNomVeh.Text;
+      Scomment := mComment.Text;
       NType_fs := 0;   // 1 Pour la sortie et 0 pour l'entree
       Susager := vUsager;
       Nstatut_canc := 0;
@@ -482,6 +486,8 @@ var
   Magasins : TMagasinArray;
 begin
   cbdate.Checked := False;
+  mComment.Clear;
+
 //vider les cellules
   for I := 3 to st_ficheEntree.ColCount do
     for j := 1 to st_ficheEntree.RowCount-1 do

@@ -11,6 +11,11 @@ uses
 
 type
   TfrmDiagramDayFact = class(TForm)
+    DataSource1: TDataSource;
+    DBCrossTabSource1: TDBCrossTabSource;
+    Chart1: TChart;
+    Series1: TLineSeries;
+    Panel1: TPanel;
     Label1: TLabel;
     Bevel1: TBevel;
     Label2: TLabel;
@@ -20,18 +25,11 @@ type
     Button2: TButton;
     d1: TDateTimePicker;
     d2: TDateTimePicker;
-    QDay: TSQLQuery;
-    frxDBDay: TfrxDBDataset;
-    frxDay: TfrxChartObject;
-    RDay: TfrxReport;
-    DataSource1: TDataSource;
-    DBCrossTabSource1: TDBCrossTabSource;
-    Chart1: TChart;
-    SQLTable1: TSQLTable;
-    Series1: TLineSeries;
+    QDayFact: TSQLQuery;
     Series2: TLineSeries;
     Series3: TLineSeries;
     procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -48,9 +46,25 @@ implementation
 uses UDM;
 
 procedure TfrmDiagramDayFact.Button1Click(Sender: TObject);
+var
+  Psql : string;
+
 begin
-SQLTable1.Close;
-SQLTable1.Open;
+  Psql := 'select * from tb_day_diagram_facture '
+          +' where date_dbf between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date));
+
+  with QDayFact do
+    begin
+      SQL.Clear;
+      SQL.Add(Psql);
+      Open;
+    end;
+end;
+
+procedure TfrmDiagramDayFact.FormShow(Sender: TObject);
+begin
+d2.Date:=Now;
 end;
 
 end.

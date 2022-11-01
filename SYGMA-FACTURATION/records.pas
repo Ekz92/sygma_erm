@@ -44,6 +44,7 @@ TFacturation = record
   NId_fact: integer;
   Sdate_fact ,
   SNum_fact,
+  SCode_mag,
   Scode_clt,
   Snom_clt : string;
   NQte_total : integer;

@@ -94,26 +94,26 @@ if MessageDlg('Attention ! Cette action va annuler le chargement et dininuer le 
 {        AssignFile(SaveSql, 'G:\SaveSql.txt');
         Rewrite(SaveSql); //Pour la création du fichier s'il n'existe pas }
 
-        for I := Low(chd) to High(chd) do
-          with StringGrid1 do
-            begin
-              PsqlStockCam := ' where vehicule = '+QuotedStr(vVeh)
-                              +' and code_art = '+QuotedStr(chd[i].ScodeArt);
-              StockCam := dm.selectStockCamion(PsqlStockCam);{selection du stock d'article dans le camion}
-
-              PsqlUp := 'Update tb_stock_camion set '
-                        +' qte_vide = '+IntToStr(StockCam.NQte_vide + chd[i].Nqte)+','
-                        +' qte_mag ='+IntToStr(StockCam.NQte_mag - chd[i].Nqte)
-                        +' where code_art = '+QuotedStr(chd[i].ScodeArt)
-                        +' and vehicule = '+QuotedStr(vVeh) ;
-
-              dm.UpdateTable(PsqlUp); {Modification des quantités dans les véhicules}
-
-          {Enregistrement de la requete dans un fichier txt
-              Append(SaveSql);
-              Writeln(SaveSql, PsqlUp);
-              CloseFile(SaveSql);                       }
-            end;
+//        for I := Low(chd) to High(chd) do
+//          with StringGrid1 do
+//            begin
+//              PsqlStockCam := ' where vehicule = '+QuotedStr(vVeh)
+//                              +' and code_art = '+QuotedStr(chd[i].ScodeArt);
+//              StockCam := dm.selectStockCamion(PsqlStockCam);{selection du stock d'article dans le camion}
+//
+//              PsqlUp := 'Update tb_stock_camion set '
+//                        +' qte_vide = '+IntToStr(StockCam.NQte_vide + chd[i].Nqte)+','
+//                        +' qte_mag ='+IntToStr(StockCam.NQte_mag - chd[i].Nqte)
+//                        +' where code_art = '+QuotedStr(chd[i].ScodeArt)
+//                        +' and vehicule = '+QuotedStr(vVeh) ;
+//
+//              dm.UpdateTable(PsqlUp); {Modification des quantités dans les véhicules}
+//
+//          {Enregistrement de la requete dans un fichier txt
+//              Append(SaveSql);
+//              Writeln(SaveSql, PsqlUp);
+//              CloseFile(SaveSql);                       }
+//            end;
             SpeedButton1.Click;
   end;
 end;

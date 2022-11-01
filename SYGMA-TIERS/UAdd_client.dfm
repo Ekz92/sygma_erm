@@ -2,8 +2,8 @@ object frmAdd_client: TfrmAdd_client
   Left = 0
   Top = 0
   Caption = 'Nouveau client'
-  ClientHeight = 457
-  ClientWidth = 355
+  ClientHeight = 261
+  ClientWidth = 695
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -36,9 +36,9 @@ object frmAdd_client: TfrmAdd_client
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 355
-    Height = 203
-    Align = alTop
+    Width = 336
+    Height = 261
+    Align = alLeft
     Ctl3D = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -117,7 +117,7 @@ object frmAdd_client: TfrmAdd_client
     end
     object SpeedButton1: TSpeedButton
       Left = 168
-      Top = 176
+      Top = 200
       Width = 80
       Height = 25
       Caption = 'Ajouter'
@@ -143,7 +143,7 @@ object frmAdd_client: TfrmAdd_client
     end
     object SpeedButton2: TSpeedButton
       Left = 248
-      Top = 176
+      Top = 200
       Width = 80
       Height = 25
       Caption = 'Annuler'
@@ -187,6 +187,13 @@ object frmAdd_client: TfrmAdd_client
       Height = 13
       Caption = 'Tarif : *'
     end
+    object Label11: TLabel
+      Left = 7
+      Top = 179
+      Width = 68
+      Height = 13
+      Caption = 'Type client : *'
+    end
     object MemoComment: TMemo
       Left = 77
       Top = 105
@@ -196,7 +203,7 @@ object frmAdd_client: TfrmAdd_client
         'MemoComment')
       MaxLength = 254
       ParentColor = True
-      TabOrder = 4
+      TabOrder = 5
     end
     object edNom: TEdit
       Left = 77
@@ -207,7 +214,7 @@ object frmAdd_client: TfrmAdd_client
       Ctl3D = False
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 0
+      TabOrder = 1
     end
     object edAdresse: TEdit
       Left = 77
@@ -217,7 +224,7 @@ object frmAdd_client: TfrmAdd_client
       Ctl3D = False
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 1
+      TabOrder = 2
       Text = 'LOME'
     end
     object edTel: TEdit
@@ -228,7 +235,7 @@ object frmAdd_client: TfrmAdd_client
       Ctl3D = False
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 2
+      TabOrder = 3
       Text = 'A COMPLETER'
     end
     object edEmail: TEdit
@@ -239,7 +246,7 @@ object frmAdd_client: TfrmAdd_client
       Ctl3D = False
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object edcodeclt: TEdit
       Left = 77
@@ -251,7 +258,7 @@ object frmAdd_client: TfrmAdd_client
       MaxLength = 4
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 5
+      TabOrder = 9
     end
     object cbTarif: TComboBox
       Left = 77
@@ -273,63 +280,95 @@ object frmAdd_client: TfrmAdd_client
       ParentColor = True
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 7
+      TabOrder = 8
       Text = 'TNORG'
     end
-  end
-  object GroupBox1: TGroupBox
-    Left = 0
-    Top = 203
-    Width = 355
-    Height = 42
-    Align = alTop
-    Caption = 'Recherche'
-    TabOrder = 1
-    object Label6: TLabel
-      Left = 7
-      Top = 17
-      Width = 28
-      Height = 13
-      Caption = 'Nom :'
-    end
-    object edNomRech: TEdit
+    object cbtclient: TComboBox
       Left = 77
-      Top = 14
-      Width = 161
+      Top = 176
+      Width = 183
       Height = 21
+      Style = csDropDownList
+      TabOrder = 7
+      OnCloseUp = cbtclientCloseUp
+    end
+    object edcodetclt: TEdit
+      Left = 261
+      Top = 176
+      Width = 66
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      MaxLength = 4
       ParentColor = True
+      ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 0
-      OnChange = edNomRechChange
+      Text = 'CN01'
     end
   end
-  object StringGrid1: TStringGrid
-    Left = 0
-    Top = 245
-    Width = 355
-    Height = 212
+  object Panel2: TPanel
+    Left = 336
+    Top = 0
+    Width = 359
+    Height = 261
     Align = alClient
-    ColCount = 7
-    DefaultRowHeight = 15
-    FixedCols = 0
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
-    ParentColor = True
-    PopupMenu = PopupMenu1
-    ScrollBars = ssHorizontal
-    TabOrder = 2
-    StyleElements = [seBorder]
-    OnDrawCell = StringGrid1DrawCell
-    ColWidths = (
-      80
-      181
-      90
-      64
-      64
-      64
-      64)
+    TabOrder = 1
+    object GroupBox1: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 357
+      Height = 42
+      Align = alTop
+      Caption = 'Recherche'
+      TabOrder = 0
+      object Label6: TLabel
+        Left = 7
+        Top = 17
+        Width = 28
+        Height = 13
+        Caption = 'Nom :'
+      end
+      object edNomRech: TEdit
+        Left = 77
+        Top = 14
+        Width = 161
+        Height = 21
+        ParentColor = True
+        TabOrder = 0
+        OnChange = edNomRechChange
+      end
+    end
+    object StringGrid1: TStringGrid
+      Left = 1
+      Top = 43
+      Width = 357
+      Height = 217
+      Align = alClient
+      ColCount = 8
+      DefaultRowHeight = 15
+      FixedCols = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
+      ParentColor = True
+      PopupMenu = PopupMenu1
+      ScrollBars = ssHorizontal
+      TabOrder = 1
+      StyleElements = [seBorder]
+      OnDrawCell = StringGrid1DrawCell
+      ColWidths = (
+        80
+        181
+        90
+        64
+        64
+        64
+        64
+        64)
+    end
   end
   object PopupMenu1: TPopupMenu
-    Left = 240
-    Top = 304
+    Left = 392
+    Top = 154
     object Consulter1: TMenuItem
       Caption = 'Consulter'
     end

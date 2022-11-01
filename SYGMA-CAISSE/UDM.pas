@@ -38,7 +38,6 @@ type
     function selectCatalogueStock(Psql:string) : TCatalogueStock;
 
 
-
     function InsertReleveClient(rc : TReleve_client):Boolean;
     function InsertPayementCaisse(PayeCaisse : TPayement_caisse):Boolean;
     function InsertHisCaisse(his : THistoriqueCaisse):Boolean;
@@ -770,6 +769,7 @@ begin
       query.ExecSQL();
     finally
       query.Free;
+      SQLConnection1.Close;
     end;
 
 end;

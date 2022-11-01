@@ -43,7 +43,8 @@ uses
   UFicheRecapo in 'UFicheRecapo.pas' {frmFicheRecapo},
   USortieVrac in 'USortieVrac.pas' {frmSortieVrac},
   UDefPrixArticle in 'UDefPrixArticle.pas' {frmDefPrixArticle},
-  UDiagrammeBC in 'UDiagrammeBC.pas' {frmDiagrammeBC};
+  UDiagrammeBC in 'UDiagrammeBC.pas' {frmDiagrammeBC},
+  UFiche_stock_gene in 'UFiche_stock_gene.pas' {frmFiche_stock_gene};
 
 {$R *.res}
 
@@ -92,5 +93,6 @@ begin
   Application.CreateForm(TfrmSortieVrac, frmSortieVrac);
   Application.CreateForm(TfrmDefPrixArticle, frmDefPrixArticle);
   Application.CreateForm(TfrmDiagrammeBC, frmDiagrammeBC);
+  Application.CreateForm(TfrmFiche_stock_gene, frmFiche_stock_gene);
   Application.Run;
 end.

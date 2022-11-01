@@ -61,7 +61,7 @@ with SQLQuery1 do
             +' and f.statut_canc = 0'
             +' GROUP BY d.code_art,f.nom_clt '
             );
-    sql.SaveToFile('g:\cumul.txt');
+//    sql.SaveToFile('g:\cumul.txt');
     Open;
   end;
 

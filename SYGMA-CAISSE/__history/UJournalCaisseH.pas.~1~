@@ -1,0 +1,24 @@
+unit UJournalCaisseH;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmJournalCaisseH = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmJournalCaisseH: TfrmJournalCaisseH;
+
+implementation
+
+{$R *.dfm}
+
+end.

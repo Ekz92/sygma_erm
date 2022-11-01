@@ -27,6 +27,8 @@ type
     Panel2: TPanel;
     Button1: TButton;
     Button2: TButton;
+    Label8: TLabel;
+    mComment: TMemo;
     procedure edCodecltDblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edChargeKeyPress(Sender: TObject; var Key: Char);
@@ -86,6 +88,7 @@ begin
       Snom_clt:=edNomClt.Text;
       Snum_veh := cbMatVeh.Text;
       Snom_veh := edNomVeh.Text;
+      Scomment := mComment.Text;
       NType_fs := 1;   // 1 Pour la sortie et 0 pour l'entree
       Susager := vUsager;
       Nstatut_canc := 0;
@@ -163,6 +166,7 @@ var
 begin
   cbdate.Checked := False;
   cbdate.Date := Now;
+  mComment.Clear;
 //selection du véhicule
   Psql := '';
 

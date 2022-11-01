@@ -1,0 +1,125 @@
+unit UFiche_stock_gene;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.ExtCtrls, Vcl.Grids, Vcl.StdCtrls;
+
+type
+  TfrmFiche_stock_gene = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label4: TLabel;
+    cb_magasin: TComboBox;
+    edcode_mag: TEdit;
+    CheckBox1: TCheckBox;
+    Button2: TButton;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    QFiche_stock: TSQLQuery;
+    frxFiche_stock: TfrxDBDataset;
+    frxMAgasin: TfrxDBDataset;
+    QMagasin: TSQLQuery;
+    frxE_Fiche_stock: TfrxReport;
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmFiche_stock_gene: TfrmFiche_stock_gene;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmFiche_stock_gene.Button1Click(Sender: TObject);
+var
+  sql : string;
+begin
+  if CheckBox1.Checked then
+    begin
+      sql := 'select * from tb_article A, tb_stock_gene S'
+             +' where A.code_art = S.code_art '
+    end;
+//    else
+//    begin
+//      sql :='select * from tb_article A, tb_stock_gene S'
+//        +' where A.code_art = S.code_art '
+//        +' and s.code_mag = '+QuotedStr(edcode_mag.Text);
+//    end;
+
+
+
+    try
+      QFiche_stock.SQL.Clear;
+      QFiche_stock.SQL.Add(sql);
+      QFiche_stock.Open;
+      QMagasin.Open;
+      frxE_Fiche_stock.ShowReport();
+    finally
+//      QFiche_stock.Free;
+//      QMagasin.Free;
+    end;
+end;
+
+procedure TfrmFiche_stock_gene.Button2Click(Sender: TObject);
+var
+  QSelect_stock : TSQLQuery;
+  I: integer;
+  sql : string;
+begin
+  QSelect_stock:=TSQLQuery.Create(self);
+  QSelect_stock.SQLConnection := dm.SQLConnection1;
+
+  if CheckBox1.Checked then
+    begin
+      sql := 'select * from tb_article A, tb_stock_gene S'
+             +' where A.code_art = S.code_art '  ;
+    end;
+//    end else
+//    begin
+//      sql:='select * from tb_article A, tb_stock_gene S'
+//        +' where A.code_art = S.code_art '
+//        +' and s.code_mag = (select code_mag from tb_magasin where designation_mag = '+QuotedStr(cb_magasin.Text)+')'
+//    end;
+//
+    try
+      QSelect_stock.SQL.Add(sql);
+      QSelect_stock.Open;
+
+      if QSelect_stock.IsEmpty then
+        begin
+          StringGrid1.RowCount := 2;
+          StringGrid1.Rows[1].Clear;
+        end else
+        begin
+          for I := 1 to QSelect_stock.RowsAffected +1 do
+            with StringGrid1, QSelect_stock do
+             begin
+                RowCount:=RowsAffected+1;
+                Cells[0,i] := FieldByName('code_art').AsString;
+                Cells[1,i] := FieldByName('designation_art').AsString;
+                Cells[2,i] := FieldByName('code_mag').AsString;
+                Cells[3,i] := IntToStr(FieldByName('qte_vide').AsInteger);
+                Cells[4,i] := IntToStr(FieldByName('qte_mag').AsInteger);
+                Cells[5,i] := IntToStr(FieldByName('qte_totale').AsInteger);
+                QSelect_stock.Next;
+             end;
+            end;
+      finally
+          QSelect_stock.Free;
+      end;
+
+
+end;
+
+end.

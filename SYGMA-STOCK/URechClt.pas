@@ -28,7 +28,8 @@ type
 
 var
   frmRechClt: TfrmRechClt;
-  vSourceRclt : string;
+  vSourceRclt ,
+  vTypClt:string;
 
 implementation
 
@@ -54,6 +55,7 @@ begin
         begin
           Cells[0,i+1]:=Clts[i].SCodeClt;
           Cells[1,i+1]:=Clts[i].SnomClt;
+          Cells[2,i+1]:=Clts[i].STypeclt;
         end;
     end;
     if St_Rech.RowCount > 1 then St_Rech.FixedRows := 1;
@@ -65,7 +67,8 @@ begin
 with St_Rech do
   begin
     Cells[0,0]:='Client';
-    Cells[1,0]:='Nom'
+    Cells[1,0]:='Nom';
+    Cells[2,0]:='Type';
   end;
 end;
 
@@ -87,6 +90,7 @@ begin
         begin
           Cells[0,i+1]:=Clts[i].SCodeClt;
           Cells[1,i+1]:=Clts[i].SnomClt;
+          Cells[2,i+1]:=Clts[i].STypeclt;
         end;
     end;
 end;
@@ -112,6 +116,7 @@ begin
          edNomClt.Text := St_Rech.Cells[1,St_Rech.Row];
       end;
 
+  vTypClt:=St_Rech.Cells[2,St_Rech.Row];
   Close;
 end;
 

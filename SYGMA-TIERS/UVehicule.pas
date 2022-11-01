@@ -445,7 +445,7 @@ begin
     begin
       Add('select * from tb_vehicule '
           +' where marque_veh = '+QuotedStr(Cells[0,Row])
-          +' and modele_veh = '+QuotedStr(Cells[1,Row])
+//          +' and modele_veh = '+QuotedStr(Cells[1,Row])
           +' and num_immat_veh = '+QuotedStr(Cells[2,Row]));
     end;
    try

@@ -30,6 +30,7 @@ type
     function SelectCaisses(Psql : string):TCaisseArray;
     function SelectCaisse(Psql :string):TCaisse;
     function selectStock(Psql : String) :TStockArray;
+    function selectAllStockCamion(Psql : String) :TStockCamionArray;
     function selectCatalogueStock(Psql:string) : TCatalogueStock;
     function selectClients(Psql : string) : TClientArray;
     function SelectVehicule(Psql:string):TVehiculeArray;
@@ -54,10 +55,12 @@ type
     function SelectFicheEsH(Psql : string):TFicheEsHArray;
     function SelectFicheEs(Psql : string):TFiche_esArray;
     function selectStockCamion(Psql : string):TStockCamion;
+    function selectStockOnceStockGene(Psql : string):TStockGene;
     function SelectMaxCharg():TMaxVteChargVeh;
     function selectDiagramDay(Psql : string):TDiagramDayBC;
     function selectDiagramDayFact(Psql : string):TDiagramDayFact;
     function selectCumulBc(Psql :string):TDiagramDayBC;
+    function selectJournalCaisse(Psql:string):TJounalCaisse;
 
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
     function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
@@ -80,6 +83,7 @@ type
     function InsertBonComDetail(boncomd : TBonCom_detail):Boolean;
     function InsertFicheEsH(FicheEsH : TFicheEsH):Boolean;
     function InsertStockCamion(var stockCam : TStockCamion):Boolean;
+    function InsertStockGeneral(var stockGene : TStockGene):Boolean;
     function InsertVteChargVeh(vteChargVeh : TvteChargVeh):Boolean;
     function InsertVteChargVehd(VteChargVehd:TVteChargVehd):Boolean;
     function InsertDiagramDay(Psql:string):Boolean;
@@ -104,6 +108,9 @@ uses UFicheRecap_es, UListeBonCommande;
 
 
 {$R *.dfm}
+
+
+
 function TDM.InsertDiagramDay(Psql:string):Boolean;
 var
   query : TSQLQuery;
@@ -183,6 +190,34 @@ begin
     try
       query.SQL.Add(sql);
 //      query.SQL.SaveToFile('g:\tb_vte_chargveh.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+function TDM.InsertStockGeneral(var stockGene : TStockGene):Boolean;
+  var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with stockGene do
+    begin
+      sql := 'Insert into tb_stock_gene values(null,'
+                +QuotedStr(SCode_art)+','
+                +QuotedStr(SDesignation_art)+','
+                +IntToStr(NQte_vide)+','
+                +IntToStr(NQte_mag) + ','
+                +IntToStr(Nqte_total)
+                +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
       query.ExecSQL();
     finally
       query.Free;
@@ -326,7 +361,36 @@ begin
      SQLConnection1.Close;
   end;
 end;
+function TDM.selectStockOnceStockGene(Psql : string):TStockGene;
+var
+  sql : string;
+  query : TSQLQuery;
+  stockGene : TStockGene;
+begin
+  sql := 'Select * from tb_stock_gene '+Psql;
 
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_Select_camion.txt');
+    query.Open;
+
+    with query, stockGene do
+      begin
+        Nid_sg := FieldByName('id_sg').AsInteger;
+        Scode_art := FieldByName('code_art').AsString;
+        SDesignation_art := FieldByName('designation_art').AsString;
+        NQte_vide := FieldByName('qte_vide').AsInteger;
+        NQte_mag := FieldByName('qte_mag').AsInteger;
+        Nqte_total := FieldByName('qte_totale').AsInteger;
+      end;
+      Result := stockGene;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
 
 function TDM.selectStockCamion(Psql : string):TStockCamion;
 var
@@ -488,6 +552,7 @@ begin
               +QuotedStr(Snom_clt)+','
               +QuotedStr(Snum_veh)+','
               +QuotedStr(Snom_veh)+','
+              +QuotedStr(Scomment)+','
               +IntToStr(NType_fs)+','
               +QuotedStr(SUsager)+','
               +IntToStr(Nstatut_canc)
@@ -526,6 +591,39 @@ begin
   Result :=MaxLettrage;
 end;
 
+function TDM.selectJournalCaisse(Psql:string):TJounalCaisse;
+var
+  query : TSQLQuery;
+  sql : string;
+  JournCais :TJounalCaisse;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_jounalCaisse '+Psql;
+
+  try
+    query.SQL.Add(sql);
+    //query.SQL.SaveToFile('g:\ff.txt');
+    query.Open;
+
+    with query do
+      begin
+        with JournCais do
+          begin
+            Nid_jcd:=FieldByName('id_jcd').AsInteger;
+            Sdate_jcd:=FieldByName('date_jcd').AsString;
+            Rdebit:=FieldByName('debit').AsFloat;
+            Rcredit:=FieldByName('credit').AsFloat;
+            Rsolde:=FieldByName('solde').AsFloat;
+          end;
+          Result := JournCais;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
 
 function TDM.SelectBlDetail(Psql : string):TBLDetail;
 var
@@ -1862,6 +1960,8 @@ begin
                   Smail :=FieldByName('email_clt').AsString;
                   ScommentClt := FieldByName('comment_clt').AsString;
                   STarif := FieldByName('tarif').AsString;
+                  STypeclt:= FieldByName('TypClt').AsString;
+
                 end;
               clients[i]:=client;
               Inc(i);
@@ -1931,6 +2031,52 @@ begin
      SQLConnection1.Close;
   end;
 end;
+
+function TDM.selectAllStockCamion(Psql : String) :TStockCamionArray;
+var
+  sql : string;
+  query : TSQLQuery;
+  stockCam : TStockCamion;
+  stockCams : TStockCamionArray;
+  i:integer;
+begin
+  sql := 'Select * from tb_stock_camion '+Psql;
+
+    query:=TSQLQuery.Create(self);
+    query.SQLConnection:=SQLConnection1;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(stockCams,i+1);
+            with stockCam do
+              begin
+                Nid_stock := FieldByName('id_sc').AsInteger;
+                Scode_art := FieldByName('code_art').AsString;
+                SDesignation_art:=FieldByName('designation_art').AsString;
+                NQte_vide := FieldByName('qte_vide').AsInteger;
+                NQte_mag := FieldByName('qte_mag').AsInteger;
+                Nqte_total := FieldByName('qte_total').AsInteger;
+              end;
+            stockCams[i]:=stockCam;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := stockCams;
+  finally
+     query.Free;
+     SQLConnection1.Close;
+  end;
+end;
+
 function TDM.selectStock(Psql : String) :TStockArray;
 var
   sql : string;
@@ -1976,6 +2122,7 @@ begin
      SQLConnection1.Close;
   end;
 end;
+
 function TDM.InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
 var
   sql : string;

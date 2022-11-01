@@ -111,6 +111,7 @@ type
     ListedeBL1: TMenuItem;
     LivrsNonlivrs1: TMenuItem;
     Diagramme1: TMenuItem;
+    Etatdustockgnral1: TMenuItem;
     procedure ypedebouteil1Click(Sender: TObject);
     procedure Magasin1Click(Sender: TObject);
     procedure Entreeenmagasin1Click(Sender: TObject);
@@ -141,6 +142,7 @@ type
     procedure ListedeBC1Click(Sender: TObject);
     procedure RappeldeBL1Click(Sender: TObject);
     procedure Diagramme1Click(Sender: TObject);
+    procedure Etatdustockgnral1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -162,7 +164,7 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
   UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl, UFicheRecapi,
-  UFicheRecapo, USortieVrac, UDiagrammeBC;
+  UFicheRecapo, USortieVrac, UDiagrammeBC, UFiche_stock_gene;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -209,6 +211,11 @@ end;
 procedure TfrmIntegrateur.Etatdustock1Click(Sender: TObject);
 begin
 frmFiche_stock.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Etatdustockgnral1Click(Sender: TObject);
+begin
+frmFiche_stock_gene.ShowModal;
 end;
 
 procedure TfrmIntegrateur.FormShow(Sender: TObject);

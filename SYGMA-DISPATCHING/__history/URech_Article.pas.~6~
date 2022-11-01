@@ -1,0 +1,79 @@
+unit URech_Article;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.StdCtrls, Data.FMTBcd,
+  Data.DB, Data.SqlExpr;
+
+type
+  Tfrmrech_article = class(TForm)
+    Label4: TLabel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edcode_art: TEdit;
+    Edit2: TEdit;
+    StringGrid1: TStringGrid;
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmrech_article: Tfrmrech_article;
+  vFormSource_art : string;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM;
+
+procedure Tfrmrech_article.FormShow(Sender: TObject);
+var
+  QSelect_art : TSQLQuery;
+  I: Integer;
+  sql :string;
+begin
+  StringGrid1.RowCount := 2;
+  StringGrid1.Rows[1].Clear;
+
+  QSelect_art:=TSQLQuery.Create(self);
+  QSelect_art.SQLConnection:=dm.SQLConnection1;
+
+  //typeEntree := frmEntree_magasin.RgType.ItemIndex;
+   {if (vTypeEntree = 0) then
+    begin
+      MessageDlg('Type d''entrée non autorisé',mtError,[mbOK],0);
+      //close;
+     exit;
+    end else
+}
+      sql :=' Select * from tb_article ' ;
+
+    try
+
+      QSelect_art.SQL.Add(sql);
+      QSelect_art.Open;
+
+      for I := 1 to QSelect_art.RecordCount do
+        with StringGrid1, QSelect_art do
+          begin
+            RowCount:=RecordCount+1;
+            Cells[0,i] := FieldByName('code_art').AsString;
+            Cells[1,i] := FieldByName('designation_art').AsString;
+            Cells[2,i] := FieldByName('type_art').AsString;
+            QSelect_art.Next
+          end;
+    finally
+      QSelect_art.Free;
+      dm.SQLConnection1.Close;
+    end;
+
+end;
+
+end.

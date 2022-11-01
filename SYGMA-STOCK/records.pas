@@ -107,6 +107,17 @@ TStockCamion = record
 end;
 TStockCamionArray = Array of TStockCamion;
 
+TStockGene = record
+  Nid_sg :integer;
+  Scode_art,
+  SDesignation_art : String ;
+  NQte_vide,
+  NQte_mag ,
+  Nqte_total : Integer;
+end;
+TStockGeneArray = Array of TStockGene;
+
+
 TFacturation_detail =record
   NId_fact : integer;
   Sdate_fact,
@@ -465,7 +476,8 @@ TClient = record
   Smail,
   ScommentClt,
   SZone,
-  STarif : string;
+  STarif,
+  STypeclt : string;
 end;
 TClientArray = Array of TClient;
 
@@ -552,7 +564,8 @@ TFicheEsH = record
 	Scode_clt ,
 	Snom_clt ,
 	Snum_veh ,
-	Snom_veh : string;
+	Snom_veh,
+  Scomment : string;
   NType_fs : integer;
   Susager : string;
 	Nstatut_canc : integer;
@@ -581,6 +594,15 @@ TStock = record
   Rcoutachat : real;
 end;
 TStockArray = Array of TStock;
+
+TJounalCaisse = record
+	Nid_jcd : integer;
+	Sdate_jcd :string;
+	Rdebit ,
+	Rcredit ,
+	Rsolde : real
+end;
+TJounalCaisseArray = array of TJounalCaisse;
 
 TEntree = record
   Nid_entree : integer;

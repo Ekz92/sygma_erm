@@ -29,7 +29,8 @@ uses
   URapportParClient in 'URapportParClient.pas' {frmRapportParClient},
   UCumuleVenteBl in 'UCumuleVenteBl.pas' {frmCumuleVenteBL},
   URechCommandeFacture in 'URechCommandeFacture.pas' {frmRechCommandeFacture},
-  UDiagramDayFacture in 'UDiagramDayFacture.pas' {frmDiagramDayFact};
+  UDiagramDayFacture in 'UDiagramDayFacture.pas' {frmDiagramDayFact},
+  UCumulVenteCmd in 'UCumulVenteCmd.pas' {frmCumulVenteCmd};
 
 {$R *.res}
 
@@ -63,5 +64,6 @@ begin
   Application.CreateForm(TfrmCumuleVenteBL, frmCumuleVenteBL);
   Application.CreateForm(TfrmRechCommandeFacture, frmRechCommandeFacture);
   Application.CreateForm(TfrmDiagramDayFact, frmDiagramDayFact);
+  Application.CreateForm(TfrmCumulVenteCmd, frmCumulVenteCmd);
   Application.Run;
 end.

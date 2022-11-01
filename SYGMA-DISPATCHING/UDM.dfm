@@ -41,7 +41,7 @@ object DM: TDM
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
       'HostName=127.0.0.1'
-      'Database=gpa_db'
+      'Database=sygma_gazshop'
       'User_Name=root'
       'Password='
       'MaxBlobSize=-1'
@@ -51,6 +51,7 @@ object DM: TDM
       'BlobSize=-1'
       'ErrorResourceFile='
       '=')
+    Connected = True
     Left = 64
     Top = 32
   end

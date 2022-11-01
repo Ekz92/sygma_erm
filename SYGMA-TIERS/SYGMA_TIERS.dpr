@@ -17,7 +17,8 @@ uses
   UVehicule in 'UVehicule.pas' {frmvehicule},
   UType_vehicule in 'UType_vehicule.pas' {frmtype_vehicule},
   UChauffeur in 'UChauffeur.pas' {frmchauffeur},
-  UClotureDay in 'UClotureDay.pas' {frmClotureDay};
+  UClotureDay in 'UClotureDay.pas' {frmClotureDay},
+  UTypeClient in 'UTypeClient.pas' {frmTypeClient};
 
 {$R *.res}
 
@@ -39,5 +40,6 @@ begin
   Application.CreateForm(Tfrmtype_vehicule, frmtype_vehicule);
   Application.CreateForm(Tfrmchauffeur, frmchauffeur);
   Application.CreateForm(TfrmClotureDay, frmClotureDay);
+  Application.CreateForm(TfrmTypeClient, frmTypeClient);
   Application.Run;
 end.

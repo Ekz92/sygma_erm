@@ -34,6 +34,8 @@ type
     st_ficheSortie: TStringGrid;
     Label7: TLabel;
     lbCharg: TLabel;
+    mComment: TMemo;
+    Label8: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edCodecltDblClick(Sender: TObject);
@@ -341,7 +343,7 @@ begin
   if Trim(edCodeclt.Text)='' then
     MessageDlg('Veillez spécifier le Client',mtError,[mbRetry],0)
   else
-  if (Trim(edNomVeh.Text)='') and (edNomClt.Text<>'PERSONNEL') and (edNomClt.Text<>'PASSAGER') then
+  if (Trim(edNomVeh.Text)='') and (vTypClt<>'CP01') and (vTypClt<>'CP02') then
     MessageDlg('Veillez spécifier le vehicule',mtError,[mbRetry],0)
   else
   if MessageDlg('Voulez-vous enregistrer cette fiche d''entrée ?',mtInformation,[mbYes,mbNo],0) = mrYes then
@@ -356,6 +358,7 @@ begin
       Snom_clt:=edNomClt.Text;
       Snum_veh := cbMatVeh.Text;
       Snom_veh := edNomVeh.Text;
+      Scomment := mComment.Text;
       NType_fs := 1;   // 1 Pour la sortie et 0 pour l'entree
       Susager := vUsager;
       Nstatut_canc := 0;
@@ -778,6 +781,7 @@ var
 begin
   Tkgtot := 0;
   lbCharg.Caption:='0';
+  mComment.Clear;
 
   cbdate.Checked := False;
   cbdate.Date := Now;

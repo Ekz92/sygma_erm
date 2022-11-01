@@ -23,12 +23,13 @@ type
 
 var
   frmRechCommandeFacture: TfrmRechCommandeFacture;
+  gFormSrc : string;
 
 implementation
 
 {$R *.dfm}
 
-uses UDM, records, USaisieFacture;
+uses UDM, records, USaisieFacture, UCumulVenteCmd;
 
 procedure TfrmRechCommandeFacture.FormCreate(Sender: TObject);
 begin
@@ -67,11 +68,23 @@ end;
 
 procedure TfrmRechCommandeFacture.StRechDblClick(Sender: TObject);
 begin
-  with frmSaisieFacture ,StRech do
-    begin
-      edCommande.Text := Cells[1,Row];
-      edveh.Text := Cells[3,Row];
-    end;
+if gFormSrc = 'frmSaisieFacture' then
+  begin
+    with frmSaisieFacture ,StRech do
+      begin
+        edCommande.Text := Cells[1,Row];
+        edveh.Text := Cells[3,Row];
+      end
+  end else
+if gFormSrc = 'frmCumulVenteCmd' then
+  begin
+    with frmCumulVenteCmd, StRech do
+      begin
+        edNumCmd.Text := Cells[1,Row];
+        edveh.Text := Cells[3,Row];
+      end;
+  end;
+
     Close;
 end;
 

@@ -20,7 +20,8 @@ uses
   UListeEncaissement in 'UListeEncaissement.pas' {frmListeEncaissement},
   UClotureDay in 'UClotureDay.pas' {frmClotureDay},
   UEtatJournal in 'UEtatJournal.pas' {frmEtatJournal},
-  UCreer_BL in 'UCreer_BL.pas' {frm_nouveau_BL};
+  UCreer_BL in 'UCreer_BL.pas' {frm_nouveau_BL},
+  UJournalCaisseH in 'UJournalCaisseH.pas' {frmJournalCaisseH};
 
 {$R *.res}
 
@@ -45,5 +46,6 @@ begin
   Application.CreateForm(TfrmClotureDay, frmClotureDay);
   Application.CreateForm(TfrmEtatJournal, frmEtatJournal);
   Application.CreateForm(Tfrm_nouveau_BL, frm_nouveau_BL);
+  Application.CreateForm(TfrmJournalCaisseH, frmJournalCaisseH);
   Application.Run;
 end.

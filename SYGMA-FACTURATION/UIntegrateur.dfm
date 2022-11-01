@@ -553,8 +553,12 @@ object frmIntegrateur: TfrmIntegrateur
         Caption = 'Diagramme d'#39'activit'#233
       end
       object Cumuledachat1: TMenuItem
-        Caption = 'Cumule d'#39'achat'
+        Caption = 'Cumule de vente'
         OnClick = Cumuledachat1Click
+      end
+      object Cumuldeventeparcmd1: TMenuItem
+        Caption = 'Cumul de vente par cmd'
+        OnClick = Cumuldeventeparcmd1Click
       end
       object Diagrammedefacture1: TMenuItem
         Caption = 'Diagramme de facture'

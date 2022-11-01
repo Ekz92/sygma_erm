@@ -56,6 +56,10 @@ uses records, UDM;
 procedure TfrmRapprochementFicheEs.Button1Click(Sender: TObject);
 var
   Sql,SqlSum : string;
+
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
+
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
@@ -174,6 +178,22 @@ Sql := 'Select * from tb_fichees_total '
     +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
     +' and matricule_veh = '+QuotedStr(edMarque.Text) ;
     end;
+
+//****************************** Affichage date1 ***********************
+Component := frxLFicheRap.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxLFicheRap.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
 
   QFicheRap.SQL.Clear;
   QFicheRap.SQL.Add(Sql);

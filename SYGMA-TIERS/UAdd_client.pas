@@ -29,6 +29,7 @@ type
     edcodeclt: TEdit;
     cbTarif: TComboBox;
     edCodeTarif: TEdit;
+    Panel2: TPanel;
     GroupBox1: TGroupBox;
     Label6: TLabel;
     edNomRech: TEdit;
@@ -37,6 +38,9 @@ type
     Consulter1: TMenuItem;
     Modifier1: TMenuItem;
     Supprimer1: TMenuItem;
+    cbtclient: TComboBox;
+    Label11: TLabel;
+    edcodetclt: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -49,6 +53,7 @@ type
     procedure Supprimer1Click(Sender: TObject);
     procedure cbTarifCloseUp(Sender: TObject);
     procedure edNomRechChange(Sender: TObject);
+    procedure cbtclientCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -78,6 +83,23 @@ begin
       begin
         edCodeTarif.Text:=Tarifs[i].SCode_tarif;
       end;
+end;
+
+procedure TfrmAdd_client.cbtclientCloseUp(Sender: TObject);
+var
+  TClients : TTypeClientArray;
+  Psql : string;
+  I: Integer;
+begin
+   Psql := ' where designation_tclt = '+QuotedStr(cbtclient.Text);
+
+   TClients:=dm.selectTypeClients(Psql);
+
+   for I := Low(TClients) to High(TClients) do
+      begin
+        edcodetclt.Text:=TClients[i].Scode_tclt;
+      end;
+
 end;
 
 procedure TfrmAdd_client.edNomRechChange(Sender: TObject);
@@ -115,6 +137,7 @@ end;
 procedure TfrmAdd_client.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 cbTarif.Clear;
+cbtclient.Clear;
 end;
 
 procedure TfrmAdd_client.FormCreate(Sender: TObject);
@@ -127,21 +150,34 @@ with StringGrid1 do
     Cells[3,0]:='Adresse';
     Cells[4,0]:='E-mail';
     Cells[5,0]:='Comment.';
-    Cells[6,0]:='Tarif'
+    Cells[6,0]:='Tarif'  ;
+    Cells[7,0]:='Type Clt'
   end;
 end;
 
 procedure TfrmAdd_client.FormShow(Sender: TObject);
 var
   Clients : TClientArray;
+  TCLients : TTypeClientArray;
   Psql : string;
   I: Integer;
 
   Tarifs : TTarifArray;
-  //I: Integer;
-  Psql_tarif :string;
+  Psql_tarif,PSqlTClt :string;
+
 
 begin
+//************** Selection de type client ******
+
+  PSqlTClt := '';
+  TCLients:=dm.selectTypeClients(PSqlTClt);
+
+  for I := Low(TCLients) to High(TCLients) do
+    begin
+      cbtclient.Items.Add(TCLients[i].Sdesignation_tclt);
+    end;
+
+//************* Selection de lient**************
   Psql :=' order by id_clt desc';
   Clients:=dm.selectClients(Psql);
   StringGrid1.RowCount := Length(Clients)+1;
@@ -156,6 +192,7 @@ begin
           Cells[4,i+1] := Clients[i].Smail;
           Cells[5,i+1] := Clients[i].ScommentClt;
           Cells[6,i+1] := Clients[i].STarif;
+          Cells[7,i+1] := Clients[i].STypeclt;
         end;
     end;
     if StringGrid1.RowCount>1 then StringGrid1.FixedRows := 1;
@@ -173,18 +210,21 @@ end;
 
 procedure TfrmAdd_client.Modifier1Click(Sender: TObject);
 begin
-SpeedButton1.Caption:='Modifier';
-edcodeclt.ReadOnly:=True;
-with StringGrid1 do
-  begin
-    edcodeclt.Text:=Cells[0,Row];
-    edNom.Text:=Cells[1,Row];
-    edAdresse.Text:=Cells[3,Row];
-    edTel.Text:=Cells[2,Row];
-    edEmail.Text:=Cells[4,Row];
-    MemoComment.Text:=Cells[5,Row];
-    edCodeTarif.Text :=Cells[6,Row];
-  end;
+
+  SpeedButton1.Caption:='Modifier';
+  edcodeclt.ReadOnly:=True;
+
+  with StringGrid1 do
+    begin
+      edcodeclt.Text:=Cells[0,Row];
+      edNom.Text:=Cells[1,Row];
+      edAdresse.Text:=Cells[3,Row];
+      edTel.Text:=Cells[2,Row];
+      edEmail.Text:=Cells[4,Row];
+      MemoComment.Text:=Cells[5,Row];
+      edCodeTarif.Text :=Cells[6,Row];
+      edcodetclt.Text :=Cells[7,Row];
+    end;
 
 end;
 
@@ -207,9 +247,9 @@ begin
 
   if (edcodeclt.Text<>'') and (edNom.Text<>'') and
       (edAdresse.Text<>'')and(edTel.Text<>'')
-        and (edCodeTarif.Text<>'') then
+        and (edCodeTarif.Text<>'') and (edcodetclt.Text<>'') then
 
-    ChkSaisie:= True else ChkSaisie := False;
+      ChkSaisie:= True else ChkSaisie := False;
 
   Psql := '';
   Clts := dm.selectClients(Psql);
@@ -233,6 +273,7 @@ begin
         ScommentClt:=QuotedStr(MemoComment.Text);
         SZone:=QuotedStr('');
         STarif:=QuotedStr(edCodeTarif.Text);
+        STypeclt:=QuotedStr(edcodetclt.Text);
       end;
 
       with cmpt do {Insertion dans la table des comptes}
@@ -289,12 +330,16 @@ end;
 procedure TfrmAdd_client.SpeedButton2Click(Sender: TObject);
 begin
 edNom.Clear;
-edAdresse.Text:='Lomé';
-edTel.Text := 'A completer';
+edAdresse.Text:='LOME';
+edTel.Text := 'A COMPLETER';
 edEmail.Clear;
 MemoComment.Clear;
 edcodeclt.Clear;
 edCodeTarif.Text :='TNORG';
+edcodetclt.Text :='CN01';
+
+cbTarif.Clear;
+cbtclient.Clear;
 
 edcodeclt.SetFocus;
 SpeedButton1.Caption:='Ajouter';

@@ -333,6 +333,7 @@ begin
     begin
       Sdate_fact:=DateToStr(edDate.Date)+''+TimeToStr(now);
       SNum_fact:=edNumFact.Text;
+      SCode_mag:=edCodeMag.Text;
       Scode_clt:=edCodeClient.Text;
       Snom_clt := ednomClient.Text;
       NQte_total:=vQteTotal;
@@ -431,7 +432,6 @@ begin
                 Qte_mag := Qte_Stock - StrToInt(st_saisie.Cells[2,i]);
                 Qte_vide := stock.NQte_vide + StrToInt(st_saisie.Cells[2,i]);
                 Qte_total := stock.Nqte_total ;//- StrToInt(st_saisie.Cells[2,i]);
-
               end else
               begin
                 Qte_mag := Qte_Stock - StrToInt(st_saisie.Cells[2,i]);
@@ -453,8 +453,6 @@ begin
         if cbTypeFact.Text = 'Camion' then
           begin
         { Préparation Modification qte dans tb_stock  dans les camions}
-
-
             SqlSelectStockCam := ' where code_art = '+QuotedStr(st_saisie.Cells[0,i])
                                 +' and vehicule = '+QuotedStr(edveh.Text) ;
 
@@ -468,17 +466,16 @@ begin
             magasin := DM.selectMagasinByCode(code_mag);
             designation_mag := magasin.Sdesignation_mag; //OK designation_mag
 
-            if  article.Stype_art = 'Consignation' then //Vérification si c'est une consignation
+            if  article.Stype_art = 'Charge gaz butane' then //Vérification si c'est une consignation
+              begin
+                Qte_mag := Qte_Stock - StrToInt(st_saisie.Cells[2,i]);
+                Qte_vide := stockCam.NQte_vide + StrToInt(st_saisie.Cells[2,i]);
+                Qte_total := stockCam.Nqte_total - StrToInt(st_saisie.Cells[2,i]);
+              end else
               begin
                 Qte_mag := Qte_Stock - StrToInt(st_saisie.Cells[2,i]);
                 Qte_vide := 0;
                 Qte_total := Qte_mag;
-              end else
-    //        if article.Stype_art = 'Charge' then
-              begin
-                Qte_mag := Qte_Stock - StrToInt(st_saisie.Cells[2,i]);
-                Qte_vide := stockCam.NQte_vide + StrToInt(st_saisie.Cells[2,i]);
-                Qte_total := stockCam.Nqte_total ;//- StrToInt(st_saisie.Cells[2,i]);
               end;
 
             with stockCam_up do
@@ -595,6 +592,7 @@ end;
 
 procedure TfrmSaisieFacture.edCommandeDblClick(Sender: TObject);
 begin
+  gFormSrc := 'frmSaisieFacture';
   frmRechCommandeFacture.ShowModal;
 end;
 

@@ -209,6 +209,7 @@ object frmEtatJournal: TfrmEtatJournal
           Left = 799.906000000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
+          AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -19

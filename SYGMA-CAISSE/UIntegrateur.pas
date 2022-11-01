@@ -99,6 +99,9 @@ type
     Image1: TImage;
     Label11: TLabel;
     Image9: TImage;
+    journaldecaisse1: TMenuItem;
+    Vertical1: TMenuItem;
+    Horizontal1: TMenuItem;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);
@@ -121,6 +124,8 @@ type
     procedure st_SideMenuDblClick(Sender: TObject);
     procedure Image8Click(Sender: TObject);
     procedure CrerunBL1Click(Sender: TObject);
+    procedure Horizontal1Click(Sender: TObject);
+    procedure Vertical1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -137,7 +142,7 @@ implementation
 
 uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
   USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement, records, UDM,
-  UClotureDay, UEtatJournal, UCreer_BL;
+  UClotureDay, UEtatJournal, UCreer_BL, UJournalCaisseH;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -193,6 +198,11 @@ end;
 procedure TfrmIntegrateur.Historiquedecaisse1Click(Sender: TObject);
 begin
 frmJournalCaisse.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Horizontal1Click(Sender: TObject);
+begin
+frmEtatJournal.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Image1Click(Sender: TObject);
@@ -330,6 +340,11 @@ begin
       TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
     end;
 
+end;
+
+procedure TfrmIntegrateur.Vertical1Click(Sender: TObject);
+begin
+frmJournalCaisseH.ShowModal;
 end;
 
 end.

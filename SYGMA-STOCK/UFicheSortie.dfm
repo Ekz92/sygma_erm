@@ -2,7 +2,7 @@ object frmFicheSortie: TfrmFicheSortie
   Left = 0
   Top = 0
   Caption = 'Fiche de sortie '
-  ClientHeight = 453
+  ClientHeight = 500
   ClientWidth = 548
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmFicheSortie: TfrmFicheSortie
     Left = 503
     Top = 0
     Width = 45
-    Height = 453
+    Height = 500
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
@@ -85,7 +85,7 @@ object frmFicheSortie: TfrmFicheSortie
     end
     object btAnnuler: TButton
       Left = 0
-      Top = 411
+      Top = 458
       Width = 45
       Height = 42
       Align = alBottom
@@ -103,7 +103,7 @@ object frmFicheSortie: TfrmFicheSortie
     end
     object btClot: TButton
       Left = 0
-      Top = 369
+      Top = 416
       Width = 45
       Height = 42
       Hint = 'Enregistrer et passer au lot suivant'
@@ -126,7 +126,7 @@ object frmFicheSortie: TfrmFicheSortie
     Left = 0
     Top = 0
     Width = 503
-    Height = 453
+    Height = 500
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -192,7 +192,7 @@ object frmFicheSortie: TfrmFicheSortie
       Left = 0
       Top = 64
       Width = 503
-      Height = 106
+      Height = 141
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
@@ -219,10 +219,17 @@ object frmFicheSortie: TfrmFicheSortie
       end
       object Label6: TLabel
         Left = 16
-        Top = 85
+        Top = 121
         Width = 46
         Height = 13
         Caption = 'Magasin :'
+      end
+      object Label8: TLabel
+        Left = 16
+        Top = 84
+        Width = 56
+        Height = 13
+        Caption = 'Comment. :'
       end
       object edCodeclt: TEdit
         Left = 72
@@ -245,7 +252,7 @@ object frmFicheSortie: TfrmFicheSortie
       end
       object cbMagasin: TComboBox
         Left = 72
-        Top = 81
+        Top = 117
         Width = 246
         Height = 21
         Style = csDropDownList
@@ -272,12 +279,22 @@ object frmFicheSortie: TfrmFicheSortie
         ReadOnly = True
         TabOrder = 4
       end
+      object mComment: TMemo
+        Left = 72
+        Top = 81
+        Width = 353
+        Height = 34
+        Lines.Strings = (
+          'mComment')
+        ParentColor = True
+        TabOrder = 5
+      end
     end
     object st_ficheSortie: TStringGrid
       Left = 0
-      Top = 170
+      Top = 205
       Width = 503
-      Height = 283
+      Height = 295
       Align = alClient
       ColCount = 6
       DefaultRowHeight = 15

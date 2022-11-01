@@ -92,6 +92,7 @@ type
     Panel4: TPanel;
     Label10: TLabel;
     ImgEntree: TImage;
+    ypeClient1: TMenuItem;
     procedure Nouveau3Click(Sender: TObject);
     procedure Clients1Click(Sender: TObject);
     procedure Pointdevente1Click(Sender: TObject);
@@ -105,6 +106,7 @@ type
     procedure Chauffeur1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Cltureouverture1Click(Sender: TObject);
+    procedure ypeClient1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -120,7 +122,7 @@ implementation
 
 uses ULivreur, UAdd_client, UPoint_vente, UListe_client, UListePointVente,
   UNew_zone, UConsultCompteClient, UReleveClient, UVehicule, UType_vehicule,
-  UChauffeur, records, UDM, UClotureDay;
+  UChauffeur, records, UDM, UClotureDay, UTypeClient;
 
 procedure TfrmIntegrateur.Chauffeur1Click(Sender: TObject);
 begin
@@ -212,6 +214,11 @@ end;
 procedure TfrmIntegrateur.Vhicule1Click(Sender: TObject);
 begin
 frmvehicule.ShowModal;
+end;
+
+procedure TfrmIntegrateur.ypeClient1Click(Sender: TObject);
+begin
+frmTypeClient.ShowModal;
 end;
 
 procedure TfrmIntegrateur.ypevhicule1Click(Sender: TObject);

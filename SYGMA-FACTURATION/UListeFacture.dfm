@@ -2,7 +2,7 @@ object frmListeFacture: TfrmListeFacture
   Left = 0
   Top = 0
   Caption = 'Liste de facture'
-  ClientHeight = 291
+  ClientHeight = 372
   ClientWidth = 579
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,101 +20,61 @@ object frmListeFacture: TfrmListeFacture
     Left = 0
     Top = 0
     Width = 579
-    Height = 62
+    Height = 84
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
     object Label2: TLabel
-      Left = 185
-      Top = 17
+      Left = 9
+      Top = 62
       Width = 20
       Height = 13
       Caption = 'Du :'
     end
     object Label3: TLabel
-      Left = 184
-      Top = 41
+      Left = 137
+      Top = 63
       Width = 20
       Height = 13
       Caption = 'Au :'
     end
-    object SpeedButton1: TSpeedButton
-      Left = 509
-      Top = 15
-      Width = 68
-      Height = 45
-      Align = alRight
-      Caption = 'Rechercher'
-      Flat = True
-      OnClick = SpeedButton1Click
-      ExplicitLeft = 544
-      ExplicitHeight = 56
-    end
-    object Label4: TLabel
-      Left = 289
-      Top = 13
+    object Label1: TLabel
+      Left = 137
+      Top = 17
       Width = 31
       Height = 13
-      Caption = 'Total :'
+      Caption = 'Type :'
     end
-    object Label5: TLabel
-      Left = 289
-      Top = 29
-      Width = 58
+    object Label7: TLabel
+      Left = 137
+      Top = 40
+      Width = 46
       Height = 13
-      Caption = 'Total pay'#233' :'
+      Caption = 'V'#233'hicule :'
     end
-    object Label6: TLabel
-      Left = 289
-      Top = 45
-      Width = 59
+    object Label8: TLabel
+      Left = 8
+      Top = 17
+      Width = 37
       Height = 13
-      Caption = 'Total reste :'
+      Caption = 'Statut :'
     end
-    object lbtotal: TLabel
-      Left = 353
-      Top = 13
-      Width = 22
+    object Label9: TLabel
+      Left = 8
+      Top = 40
+      Width = 34
       Height = 13
-      Caption = '0.00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      StyleElements = [seClient, seBorder]
+      Caption = 'Client :'
     end
-    object lbtotpaye: TLabel
-      Left = 353
-      Top = 29
-      Width = 22
+    object Label4: TLabel
+      Left = 288
+      Top = 17
+      Width = 27
       Height = 13
-      Caption = '0.00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGreen
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      StyleElements = [seClient, seBorder]
-    end
-    object lbtotreste: TLabel
-      Left = 353
-      Top = 45
-      Width = 22
-      Height = 13
-      Caption = '0.00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      StyleElements = [seClient, seBorder]
+      Caption = 'Mag :'
     end
     object cbStatut: TComboBox
-      Left = 6
+      Left = 52
       Top = 14
       Width = 78
       Height = 21
@@ -130,9 +90,9 @@ object frmListeFacture: TfrmListeFacture
         'Forc'#233'e')
     end
     object d1: TDateTimePicker
-      Left = 206
-      Top = 14
-      Width = 76
+      Left = 52
+      Top = 59
+      Width = 78
       Height = 21
       Date = 44461.472379351850000000
       Time = 44461.472379351850000000
@@ -140,9 +100,9 @@ object frmListeFacture: TfrmListeFacture
       StyleElements = [seBorder]
     end
     object d2: TDateTimePicker
-      Left = 206
-      Top = 37
-      Width = 76
+      Left = 189
+      Top = 59
+      Width = 91
       Height = 21
       Date = 44461.472379351850000000
       Time = 44461.472379351850000000
@@ -150,7 +110,7 @@ object frmListeFacture: TfrmListeFacture
       StyleElements = [seBorder]
     end
     object edCodeClt: TEdit
-      Left = 6
+      Left = 52
       Top = 37
       Width = 78
       Height = 21
@@ -160,7 +120,7 @@ object frmListeFacture: TfrmListeFacture
       OnDblClick = edCodeCltDblClick
     end
     object cbType: TComboBox
-      Left = 89
+      Left = 189
       Top = 14
       Width = 91
       Height = 21
@@ -174,22 +134,34 @@ object frmListeFacture: TfrmListeFacture
         'Comptoire'
         'Camion')
     end
-    object edVehicule: TEdit
-      Left = 89
+    object cbVehicule: TComboBox
+      Left = 189
       Top = 37
       Width = 91
       Height = 21
+      Style = csDropDownList
       Enabled = False
-      ParentColor = True
       TabOrder = 5
-      TextHint = 'Vehicule'
+    end
+    object cbMagasin: TComboBox
+      Left = 323
+      Top = 14
+      Width = 62
+      Height = 21
+      Style = csDropDownList
+      ItemIndex = 0
+      TabOrder = 6
+      Text = 'Tous'
+      OnCloseUp = cbMagasinCloseUp
+      Items.Strings = (
+        'Tous')
     end
   end
   object St_listeFacture: TStringGrid
     Left = 0
-    Top = 62
+    Top = 114
     Width = 579
-    Height = 202
+    Height = 231
     Align = alClient
     ColCount = 7
     DefaultRowHeight = 15
@@ -206,6 +178,8 @@ object frmListeFacture: TfrmListeFacture
     StyleElements = [seBorder]
     OnDblClick = St_listeFactureDblClick
     OnDrawCell = St_listeFactureDrawCell
+    ExplicitLeft = -194
+    ExplicitTop = 81
     ColWidths = (
       59
       69
@@ -217,7 +191,7 @@ object frmListeFacture: TfrmListeFacture
   end
   object Panel1: TPanel
     Left = 0
-    Top = 264
+    Top = 345
     Width = 579
     Height = 27
     Align = alBottom
@@ -239,6 +213,27 @@ object frmListeFacture: TfrmListeFacture
       Caption = 'Imprimer'
       TabOrder = 0
       OnClick = Button1Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 84
+    Width = 579
+    Height = 30
+    Align = alTop
+    TabOrder = 3
+    object SpeedButton1: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 68
+      Height = 28
+      Align = alLeft
+      Caption = 'Rechercher'
+      Flat = True
+      OnClick = SpeedButton1Click
+      ExplicitLeft = 511
+      ExplicitTop = -15
+      ExplicitHeight = 56
     end
   end
   object PopupMenu1: TPopupMenu
@@ -541,6 +536,7 @@ object frmListeFacture: TfrmListeFacture
           Top = 3.779530000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
+          AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -554,14 +550,14 @@ object frmListeFacture: TfrmListeFacture
         end
         object Memo15: TfrxMemoView
           AllowVectorExport = True
-          Left = 507.007966770000000000
-          Top = 19.677180000000000000
+          Left = 503.007966770000000000
+          Top = 21.677180000000000000
           Width = 173.858235980000000000
           Height = 15.118120000000000000
           AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
@@ -731,7 +727,7 @@ object frmListeFacture: TfrmListeFacture
           Frame.Typ = []
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -759,7 +755,7 @@ object frmListeFacture: TfrmListeFacture
           Frame.Typ = []
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -786,7 +782,7 @@ object frmListeFacture: TfrmListeFacture
           Frame.Typ = []
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -813,7 +809,7 @@ object frmListeFacture: TfrmListeFacture
           Frame.Typ = []
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -843,7 +839,7 @@ object frmListeFacture: TfrmListeFacture
           HAlign = haCenter
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -874,7 +870,7 @@ object frmListeFacture: TfrmListeFacture
           HAlign = haCenter
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -904,7 +900,7 @@ object frmListeFacture: TfrmListeFacture
           HAlign = haCenter
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = clRed
-          Highlight.Font.Height = -13
+          Highlight.Font.Height = -11
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
           Highlight.Condition = '<frxRFactureListe."mnt_r"> > 0'
@@ -987,6 +983,7 @@ object frmListeFacture: TfrmListeFacture
     Top = 128
   end
   object QFactureListe: TSQLQuery
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1029,8 +1026,8 @@ object frmListeFacture: TfrmListeFacture
       'begin'
       ''
       'end.')
-    Left = 48
-    Top = 88
+    Left = 112
+    Top = 184
     Datasets = <
       item
         DataSet = frxDBConsultation

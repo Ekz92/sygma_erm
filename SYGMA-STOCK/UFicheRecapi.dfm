@@ -173,6 +173,10 @@ object frmFicheRecapi: TfrmFicheRecapi
     Top = 25
     Datasets = <
       item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
+      item
         DataSet = frxDBRecap
         DataSetName = 'frxDBRecap'
       end
@@ -248,25 +252,125 @@ object frmFicheRecapi: TfrmFicheRecapi
       PaperWidth = 470.000000000000000000
       PaperHeight = 297.000000000000000000
       PaperSize = 256
-      LeftMargin = 2.000000000000000000
-      RightMargin = 2.000000000000000000
-      TopMargin = 2.000000000000000000
-      BottomMargin = 2.000000000000000000
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
       Frame.Typ = []
       MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
+        Height = 45.354360000000000000
         Top = 18.897650000000000000
-        Width = 1761.260980000000000000
+        Width = 1700.788500000000000000
+        object Memo225: TfrxMemoView
+          AllowVectorExport = True
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 298.582870000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'LISTE D'#39'ENTREE PAR FICHE')
+          ParentFont = False
+        end
+        object md1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 45.015770000000000000
+          Top = 22.543304650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo37: TfrxMemoView
+          AllowVectorExport = True
+          Left = 9.338590000000000000
+          Top = 22.456710000000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Du :')
+          ParentFont = False
+        end
+        object md2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 181.078850000000000000
+          Top = 22.543304650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo38: TfrxMemoView
+          AllowVectorExport = True
+          Left = 145.401670000000000000
+          Top = 22.543304650000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Au :')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1408.764690000000000000
+          Width = 241.889775980000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1448.890466770000000000
+          Top = 19.897650000000000000
+          Width = 173.858235980000000000
+          Height = 15.118120000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."description"]')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
-        Height = 60.472480000000000000
-        Top = 68.031540000000000000
-        Width = 1761.260980000000000000
+        Height = 64.252010000000000000
+        Top = 86.929190000000000000
+        Width = 1700.788500000000000000
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Left = 8.093955400000000000
@@ -283,27 +387,11 @@ object frmFicheRecapi: TfrmFicheRecapi
             'Date')
           ParentFont = False
         end
-        object Memo6: TfrxMemoView
-          AllowVectorExport = True
-          Left = 67.275590550000000000
-          Top = 42.362204720000000000
-          Width = 109.440373340000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'nom_clt')
-          ParentFont = False
-        end
         object Memo8: TfrxMemoView
           AllowVectorExport = True
-          Left = 177.015748030000000000
+          Left = 67.015748030000000000
           Top = 42.362204720000000000
-          Width = 107.338582680000000000
+          Width = 152.692942680000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
@@ -317,7 +405,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo72: TfrxMemoView
           AllowVectorExport = True
-          Left = 823.937007874016000000
+          Left = 758.937007874016000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -335,7 +423,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo73: TfrxMemoView
           AllowVectorExport = True
-          Left = 853.417322834646000000
+          Left = 788.417322834646000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -353,7 +441,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo74: TfrxMemoView
           AllowVectorExport = True
-          Left = 883.653543310000000000
+          Left = 818.653543310000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -371,7 +459,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo75: TfrxMemoView
           AllowVectorExport = True
-          Left = 823.937007870000000000
+          Left = 758.937007870000000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -389,7 +477,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo76: TfrxMemoView
           AllowVectorExport = True
-          Left = 734.315400000000000000
+          Left = 669.315400000000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -407,7 +495,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo77: TfrxMemoView
           AllowVectorExport = True
-          Left = 764.220472440945000000
+          Left = 699.220472440945000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -425,7 +513,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo78: TfrxMemoView
           AllowVectorExport = True
-          Left = 794.078740160000000000
+          Left = 729.078740160000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -443,7 +531,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo79: TfrxMemoView
           AllowVectorExport = True
-          Left = 734.495103790000000000
+          Left = 669.495103790000000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -461,7 +549,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo80: TfrxMemoView
           AllowVectorExport = True
-          Left = 644.787401574803000000
+          Left = 579.787401574803000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -479,7 +567,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo81: TfrxMemoView
           AllowVectorExport = True
-          Left = 674.440683340000000000
+          Left = 609.440683340000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -497,7 +585,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo82: TfrxMemoView
           AllowVectorExport = True
-          Left = 704.512912190000000000
+          Left = 639.512912190000000000
           Top = 42.362204720000000000
           Width = 28.724409448818900000
           Height = 18.897650000000000000
@@ -515,7 +603,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo83: TfrxMemoView
           AllowVectorExport = True
-          Left = 644.787401574803000000
+          Left = 579.787401574803000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -533,7 +621,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo84: TfrxMemoView
           AllowVectorExport = True
-          Left = 555.755905511811000000
+          Left = 490.755905511811000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -551,7 +639,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo85: TfrxMemoView
           AllowVectorExport = True
-          Left = 584.834313340000000000
+          Left = 519.834313340000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -569,7 +657,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo86: TfrxMemoView
           AllowVectorExport = True
-          Left = 614.906542190000000000
+          Left = 549.906542190000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -587,7 +675,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo87: TfrxMemoView
           AllowVectorExport = True
-          Left = 555.755905510000000000
+          Left = 490.755905510000000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -605,7 +693,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo88: TfrxMemoView
           AllowVectorExport = True
-          Left = 465.496290000000000000
+          Left = 400.496290000000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -623,7 +711,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo89: TfrxMemoView
           AllowVectorExport = True
-          Left = 495.227943340000000000
+          Left = 430.227943340000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -641,7 +729,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo90: TfrxMemoView
           AllowVectorExport = True
-          Left = 525.300172190000000000
+          Left = 460.300172190000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -659,7 +747,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo91: TfrxMemoView
           AllowVectorExport = True
-          Left = 465.675993790000000000
+          Left = 400.675993790000000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -677,7 +765,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo97: TfrxMemoView
           AllowVectorExport = True
-          Left = 375.472790000000000000
+          Left = 310.472790000000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -695,7 +783,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo98: TfrxMemoView
           AllowVectorExport = True
-          Left = 405.204443340000000000
+          Left = 340.204443340000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -713,7 +801,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo99: TfrxMemoView
           AllowVectorExport = True
-          Left = 435.276672190000000000
+          Left = 370.276672190000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -731,7 +819,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo184: TfrxMemoView
           AllowVectorExport = True
-          Left = 375.652493790000000000
+          Left = 310.652493790000000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -749,7 +837,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo185: TfrxMemoView
           AllowVectorExport = True
-          Left = 286.110236220000000000
+          Left = 221.110236220000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -767,7 +855,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo186: TfrxMemoView
           AllowVectorExport = True
-          Left = 315.370078740157000000
+          Left = 250.370078740157000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -785,7 +873,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo187: TfrxMemoView
           AllowVectorExport = True
-          Left = 345.552182190000000000
+          Left = 280.552182190000000000
           Top = 42.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -803,7 +891,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo188: TfrxMemoView
           AllowVectorExport = True
-          Left = 286.110236220472000000
+          Left = 221.110236220472000000
           Top = 21.574803150000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -821,7 +909,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo223: TfrxMemoView
           AllowVectorExport = True
-          Left = 286.110236220000000000
+          Left = 221.110236220000000000
           Top = 3.118120000000000000
           Width = 1433.197128660000000000
           Height = 18.897650000000000000
@@ -839,10 +927,10 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo100: TfrxMemoView
           AllowVectorExport = True
-          Left = 914.673149210000000000
-          Top = 42.330708660000000000
+          Left = 849.673149210000000000
+          Top = 42.330708661417300000
           Width = 28.724409450000000000
-          Height = 18.897637795275600000
+          Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -857,7 +945,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo101: TfrxMemoView
           AllowVectorExport = True
-          Left = 914.607004650000000000
+          Left = 849.607004650000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -875,7 +963,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo102: TfrxMemoView
           AllowVectorExport = True
-          Left = 944.087319610000000000
+          Left = 879.087319610000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -893,7 +981,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo103: TfrxMemoView
           AllowVectorExport = True
-          Left = 973.945587330000000000
+          Left = 908.945587330000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -911,7 +999,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo111: TfrxMemoView
           AllowVectorExport = True
-          Left = 1004.381869210000000000
+          Left = 939.381869210000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -929,7 +1017,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo112: TfrxMemoView
           AllowVectorExport = True
-          Left = 1004.315724650000000000
+          Left = 939.315724650000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -947,7 +1035,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo113: TfrxMemoView
           AllowVectorExport = True
-          Left = 1033.796039610000000000
+          Left = 968.796039610000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -965,7 +1053,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo126: TfrxMemoView
           AllowVectorExport = True
-          Left = 1063.654307330000000000
+          Left = 998.654307330000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -983,7 +1071,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo134: TfrxMemoView
           AllowVectorExport = True
-          Left = 1092.870119210000000000
+          Left = 1027.870119210000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1001,7 +1089,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo135: TfrxMemoView
           AllowVectorExport = True
-          Left = 1092.803974650000000000
+          Left = 1027.803974650000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1019,7 +1107,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo136: TfrxMemoView
           AllowVectorExport = True
-          Left = 1122.284289610000000000
+          Left = 1057.284289610000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1037,7 +1125,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo137: TfrxMemoView
           AllowVectorExport = True
-          Left = 1152.142557330000000000
+          Left = 1087.142557330000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1055,7 +1143,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo69: TfrxMemoView
           AllowVectorExport = True
-          Left = 1181.992890000000000000
+          Left = 1116.992890000000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1073,7 +1161,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo70: TfrxMemoView
           AllowVectorExport = True
-          Left = 1212.472440944880000000
+          Left = 1147.472440944880000000
           Top = 42.330708660000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1091,7 +1179,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo71: TfrxMemoView
           AllowVectorExport = True
-          Left = 1181.858267720000000000
+          Left = 1116.858267720000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1109,7 +1197,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo92: TfrxMemoView
           AllowVectorExport = True
-          Left = 1241.796772190000000000
+          Left = 1176.796772190000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1127,7 +1215,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo93: TfrxMemoView
           AllowVectorExport = True
-          Left = 1271.506698980000000000
+          Left = 1206.506698980000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1145,7 +1233,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo94: TfrxMemoView
           AllowVectorExport = True
-          Left = 1271.440554420000000000
+          Left = 1206.440554420000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1163,7 +1251,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo95: TfrxMemoView
           AllowVectorExport = True
-          Left = 1300.920869380000000000
+          Left = 1235.920869380000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1181,7 +1269,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo96: TfrxMemoView
           AllowVectorExport = True
-          Left = 1330.779137100000000000
+          Left = 1265.779137100000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1199,7 +1287,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo145: TfrxMemoView
           AllowVectorExport = True
-          Left = 1360.629921259840000000
+          Left = 1295.629921259840000000
           Top = 42.330708660000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1217,7 +1305,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo146: TfrxMemoView
           AllowVectorExport = True
-          Left = 1390.937283340000000000
+          Left = 1325.937283340000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1235,7 +1323,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo147: TfrxMemoView
           AllowVectorExport = True
-          Left = 1360.629921259840000000
+          Left = 1295.629921259840000000
           Top = 21.543307090000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1253,7 +1341,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo148: TfrxMemoView
           AllowVectorExport = True
-          Left = 1421.009512190000000000
+          Left = 1356.009512190000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1271,7 +1359,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo149: TfrxMemoView
           AllowVectorExport = True
-          Left = 1450.719438980000000000
+          Left = 1385.719438980000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1289,7 +1377,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo150: TfrxMemoView
           AllowVectorExport = True
-          Left = 1450.653294420000000000
+          Left = 1385.653294420000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1307,7 +1395,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo151: TfrxMemoView
           AllowVectorExport = True
-          Left = 1480.133609380000000000
+          Left = 1415.133609380000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1325,7 +1413,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo152: TfrxMemoView
           AllowVectorExport = True
-          Left = 1509.991877100000000000
+          Left = 1444.991877100000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1343,7 +1431,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo167: TfrxMemoView
           AllowVectorExport = True
-          Left = 1540.268710000000000000
+          Left = 1475.268710000000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1361,7 +1449,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo168: TfrxMemoView
           AllowVectorExport = True
-          Left = 1570.000363340000000000
+          Left = 1505.000363340000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1379,7 +1467,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo169: TfrxMemoView
           AllowVectorExport = True
-          Left = 1540.448413790000000000
+          Left = 1475.448413790000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1397,7 +1485,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo170: TfrxMemoView
           AllowVectorExport = True
-          Left = 1600.072592190000000000
+          Left = 1535.072592190000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1415,7 +1503,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo171: TfrxMemoView
           AllowVectorExport = True
-          Left = 1629.782518980000000000
+          Left = 1564.782518980000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1433,7 +1521,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo172: TfrxMemoView
           AllowVectorExport = True
-          Left = 1629.716374420000000000
+          Left = 1564.716374420000000000
           Top = 21.543307086614200000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -1451,7 +1539,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo173: TfrxMemoView
           AllowVectorExport = True
-          Left = 1659.196689380000000000
+          Left = 1594.196689380000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1469,7 +1557,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo174: TfrxMemoView
           AllowVectorExport = True
-          Left = 1689.054957100000000000
+          Left = 1624.054957100000000000
           Top = 42.330708661417300000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
@@ -1490,8 +1578,8 @@ object frmFicheRecapi: TfrmFicheRecapi
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 188.976500000000000000
-        Width = 1761.260980000000000000
+        Top = 211.653680000000000000
+        Width = 1700.788500000000000000
         DataSet = frxDBRecap
         DataSetName = 'frxDBRecap'
         RowCount = 0
@@ -1515,30 +1603,10 @@ object frmFicheRecapi: TfrmFicheRecapi
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo66: TfrxMemoView
-          AllowVectorExport = True
-          Left = 67.275590551181100000
-          Width = 109.440373340000000000
-          Height = 18.897650000000000000
-          DataField = 'nom_clt'
-          DataSet = frxDBRecap
-          DataSetName = 'frxDBRecap'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Frame.Width = 0.100000000000000000
-          Memo.UTF8W = (
-            '[frxDBRecap."nom_clt"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
         object Memo68: TfrxMemoView
           AllowVectorExport = True
-          Left = 177.015748030000000000
-          Width = 107.338582680000000000
+          Left = 67.015748030000000000
+          Width = 152.692942680000000000
           Height = 18.897650000000000000
           DataField = 'marque_veh'
           DataSet = frxDBRecap
@@ -1557,7 +1625,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo195: TfrxMemoView
           AllowVectorExport = True
-          Left = 823.937007874016000000
+          Left = 758.937007874016000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1577,7 +1645,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo196: TfrxMemoView
           AllowVectorExport = True
-          Left = 853.417322834646000000
+          Left = 788.417322834646000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1597,7 +1665,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo197: TfrxMemoView
           AllowVectorExport = True
-          Left = 883.653543307087000000
+          Left = 818.653543307087000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1617,7 +1685,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo198: TfrxMemoView
           AllowVectorExport = True
-          Left = 734.315400000000000000
+          Left = 669.315400000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1637,7 +1705,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo199: TfrxMemoView
           AllowVectorExport = True
-          Left = 764.220472440945000000
+          Left = 699.220472440945000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1657,7 +1725,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo200: TfrxMemoView
           AllowVectorExport = True
-          Left = 794.078740157480000000
+          Left = 729.078740157480000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1677,7 +1745,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo201: TfrxMemoView
           AllowVectorExport = True
-          Left = 644.787401574803000000
+          Left = 579.787401574803000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1697,7 +1765,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo202: TfrxMemoView
           AllowVectorExport = True
-          Left = 674.622047244094000000
+          Left = 609.622047244094000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1717,7 +1785,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo203: TfrxMemoView
           AllowVectorExport = True
-          Left = 704.512912190000000000
+          Left = 639.512912190000000000
           Width = 28.724409448818900000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1737,7 +1805,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo204: TfrxMemoView
           AllowVectorExport = True
-          Left = 555.755905511811000000
+          Left = 490.755905511811000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1757,7 +1825,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo205: TfrxMemoView
           AllowVectorExport = True
-          Left = 584.992125980000000000
+          Left = 519.992125980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1777,7 +1845,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo206: TfrxMemoView
           AllowVectorExport = True
-          Left = 614.906542190000000000
+          Left = 549.906542190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1797,7 +1865,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo207: TfrxMemoView
           AllowVectorExport = True
-          Left = 465.496290000000000000
+          Left = 400.496290000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1817,7 +1885,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo208: TfrxMemoView
           AllowVectorExport = True
-          Left = 495.362204720000000000
+          Left = 430.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1837,7 +1905,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo209: TfrxMemoView
           AllowVectorExport = True
-          Left = 525.464566930000000000
+          Left = 460.464566930000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1857,7 +1925,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo214: TfrxMemoView
           AllowVectorExport = True
-          Left = 375.629921260000000000
+          Left = 310.629921260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1877,7 +1945,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo215: TfrxMemoView
           AllowVectorExport = True
-          Left = 405.322834650000000000
+          Left = 340.322834650000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1897,7 +1965,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo216: TfrxMemoView
           AllowVectorExport = True
-          Left = 435.276672190000000000
+          Left = 370.276672190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1917,7 +1985,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo217: TfrxMemoView
           AllowVectorExport = True
-          Left = 286.110236220000000000
+          Left = 221.110236220000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1937,7 +2005,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo218: TfrxMemoView
           AllowVectorExport = True
-          Left = 315.479953340000000000
+          Left = 250.479953340000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1957,7 +2025,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo219: TfrxMemoView
           AllowVectorExport = True
-          Left = 345.519685040000000000
+          Left = 280.519685040000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1977,7 +2045,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo104: TfrxMemoView
           AllowVectorExport = True
-          Left = 914.673149210000000000
+          Left = 849.673149210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -1997,7 +2065,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo105: TfrxMemoView
           AllowVectorExport = True
-          Left = 944.087319610000000000
+          Left = 879.087319610000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2017,7 +2085,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo106: TfrxMemoView
           AllowVectorExport = True
-          Left = 973.945587330000000000
+          Left = 908.945587330000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2037,7 +2105,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo127: TfrxMemoView
           AllowVectorExport = True
-          Left = 1004.381869210000000000
+          Left = 939.381869210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2057,7 +2125,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo128: TfrxMemoView
           AllowVectorExport = True
-          Left = 1033.796039610000000000
+          Left = 968.796039610000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2077,7 +2145,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo129: TfrxMemoView
           AllowVectorExport = True
-          Left = 1063.654307330000000000
+          Left = 998.654307330000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2097,7 +2165,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo138: TfrxMemoView
           AllowVectorExport = True
-          Left = 1092.870119210000000000
+          Left = 1027.870119210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2117,7 +2185,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo139: TfrxMemoView
           AllowVectorExport = True
-          Left = 1122.284289610000000000
+          Left = 1057.284289610000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2137,7 +2205,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo140: TfrxMemoView
           AllowVectorExport = True
-          Left = 1152.142557330000000000
+          Left = 1087.142557330000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2157,7 +2225,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo193: TfrxMemoView
           AllowVectorExport = True
-          Left = 1181.992890000000000000
+          Left = 1116.992890000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2177,7 +2245,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo194: TfrxMemoView
           AllowVectorExport = True
-          Left = 1212.472440944880000000
+          Left = 1147.472440944880000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2197,7 +2265,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo210: TfrxMemoView
           AllowVectorExport = True
-          Left = 1241.796772190000000000
+          Left = 1176.796772190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2217,7 +2285,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo211: TfrxMemoView
           AllowVectorExport = True
-          Left = 1271.506698980000000000
+          Left = 1206.506698980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2237,7 +2305,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo212: TfrxMemoView
           AllowVectorExport = True
-          Left = 1300.920869380000000000
+          Left = 1235.920869380000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2257,7 +2325,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo213: TfrxMemoView
           AllowVectorExport = True
-          Left = 1330.779137100000000000
+          Left = 1265.779137100000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2277,7 +2345,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo153: TfrxMemoView
           AllowVectorExport = True
-          Left = 1360.629921260000000000
+          Left = 1295.629921260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2297,7 +2365,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo154: TfrxMemoView
           AllowVectorExport = True
-          Left = 1390.763530640000000000
+          Left = 1325.763530640000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2317,7 +2385,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo155: TfrxMemoView
           AllowVectorExport = True
-          Left = 1421.009512190000000000
+          Left = 1356.009512190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2337,7 +2405,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo156: TfrxMemoView
           AllowVectorExport = True
-          Left = 1450.719438980000000000
+          Left = 1385.719438980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2357,7 +2425,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo157: TfrxMemoView
           AllowVectorExport = True
-          Left = 1480.133609380000000000
+          Left = 1415.133609380000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2377,7 +2445,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo158: TfrxMemoView
           AllowVectorExport = True
-          Left = 1509.991877100000000000
+          Left = 1444.991877100000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2397,7 +2465,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo175: TfrxMemoView
           AllowVectorExport = True
-          Left = 1540.268710000000000000
+          Left = 1475.268710000000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2417,7 +2485,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo176: TfrxMemoView
           AllowVectorExport = True
-          Left = 1569.826610640000000000
+          Left = 1504.826610640000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2437,7 +2505,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo177: TfrxMemoView
           AllowVectorExport = True
-          Left = 1600.072592190000000000
+          Left = 1535.072592190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2457,7 +2525,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo178: TfrxMemoView
           AllowVectorExport = True
-          Left = 1629.782518980000000000
+          Left = 1564.782518980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2477,7 +2545,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo179: TfrxMemoView
           AllowVectorExport = True
-          Left = 1659.196689380000000000
+          Left = 1594.196689380000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2497,7 +2565,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo180: TfrxMemoView
           AllowVectorExport = True
-          Left = 1689.054957100000000000
+          Left = 1624.054957100000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2520,12 +2588,12 @@ object frmFicheRecapi: TfrmFicheRecapi
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 328.819110000000000000
-        Width = 1761.260980000000000000
+        Top = 351.496290000000000000
+        Width = 1700.788500000000000000
         object Memo123: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
-          Width = 1761.260980000000000000
+          Width = 1700.788500000000000000
           Frame.Typ = [ftTop]
           Frame.Width = 2.000000000000000000
         end
@@ -2541,7 +2609,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         object Memo125: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 1685.670380000000000000
+          Left = 1625.197900000000000000
           Top = 1.000000000000000000
           Width = 75.590600000000000000
           Height = 22.677180000000000000
@@ -2555,11 +2623,11 @@ object frmFicheRecapi: TfrmFicheRecapi
         FillType = ftBrush
         Frame.Typ = []
         Height = 39.015770000000000000
-        Top = 230.551330000000000000
-        Width = 1761.260980000000000000
+        Top = 253.228510000000000000
+        Width = 1700.788500000000000000
         object Memo257: TfrxMemoView
           AllowVectorExport = True
-          Left = 823.937007874016000000
+          Left = 758.937007874016000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2580,7 +2648,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo258: TfrxMemoView
           AllowVectorExport = True
-          Left = 853.417322834646000000
+          Left = 788.417322834646000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2601,7 +2669,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo259: TfrxMemoView
           AllowVectorExport = True
-          Left = 883.653543307087000000
+          Left = 818.653543307087000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2622,7 +2690,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo260: TfrxMemoView
           AllowVectorExport = True
-          Left = 734.503937010000000000
+          Left = 669.503937010000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2643,7 +2711,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo261: TfrxMemoView
           AllowVectorExport = True
-          Left = 764.220472440945000000
+          Left = 699.220472440945000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2664,7 +2732,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo262: TfrxMemoView
           AllowVectorExport = True
-          Left = 794.078740157480000000
+          Left = 729.078740157480000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2685,7 +2753,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo263: TfrxMemoView
           AllowVectorExport = True
-          Left = 644.787401574803000000
+          Left = 579.787401574803000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2706,7 +2774,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo264: TfrxMemoView
           AllowVectorExport = True
-          Left = 674.622047244094000000
+          Left = 609.622047244094000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2727,7 +2795,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo265: TfrxMemoView
           AllowVectorExport = True
-          Left = 704.268942190000000000
+          Left = 639.268942190000000000
           Width = 28.724409448818900000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2748,7 +2816,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo266: TfrxMemoView
           AllowVectorExport = True
-          Left = 555.755905511811000000
+          Left = 490.755905511811000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2769,7 +2837,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo267: TfrxMemoView
           AllowVectorExport = True
-          Left = 584.992125980000000000
+          Left = 519.992125980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2790,7 +2858,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo268: TfrxMemoView
           AllowVectorExport = True
-          Left = 614.929133858268000000
+          Left = 549.929133858268000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2811,7 +2879,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo269: TfrxMemoView
           AllowVectorExport = True
-          Left = 465.637795275591000000
+          Left = 400.637795275591000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2832,7 +2900,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo270: TfrxMemoView
           AllowVectorExport = True
-          Left = 495.362204720000000000
+          Left = 430.362204720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2853,7 +2921,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo271: TfrxMemoView
           AllowVectorExport = True
-          Left = 525.464566930000000000
+          Left = 460.464566930000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2874,7 +2942,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo276: TfrxMemoView
           AllowVectorExport = True
-          Left = 375.629921260000000000
+          Left = 310.629921260000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2895,7 +2963,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo277: TfrxMemoView
           AllowVectorExport = True
-          Left = 405.322834650000000000
+          Left = 340.322834650000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2916,7 +2984,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo278: TfrxMemoView
           AllowVectorExport = True
-          Left = 435.401574803150000000
+          Left = 370.401574803150000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2937,7 +3005,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo279: TfrxMemoView
           AllowVectorExport = True
-          Left = 286.110236220000000000
+          Left = 221.110236220000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2958,7 +3026,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo280: TfrxMemoView
           AllowVectorExport = True
-          Left = 315.235983340000000000
+          Left = 250.235983340000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -2979,7 +3047,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo281: TfrxMemoView
           AllowVectorExport = True
-          Left = 345.519685040000000000
+          Left = 280.519685040000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3000,7 +3068,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo220: TfrxMemoView
           AllowVectorExport = True
-          Left = 285.685039370000000000
+          Left = 220.685039370000000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3018,7 +3086,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo221: TfrxMemoView
           AllowVectorExport = True
-          Left = 375.629921260000000000
+          Left = 310.629921260000000000
           Top = 20.118120000000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3038,9 +3106,9 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo222: TfrxMemoView
           AllowVectorExport = True
-          Left = 465.567410000000000000
+          Left = 400.567410000000000000
           Top = 20.031496060000000000
-          Width = 88.440944881889800000
+          Width = 88.440944880000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -3056,7 +3124,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo252: TfrxMemoView
           AllowVectorExport = True
-          Left = 555.755905510000000000
+          Left = 490.755905510000000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3076,7 +3144,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo253: TfrxMemoView
           AllowVectorExport = True
-          Left = 644.787401574803000000
+          Left = 579.787401574803000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3096,7 +3164,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo254: TfrxMemoView
           AllowVectorExport = True
-          Left = 734.503937010000000000
+          Left = 669.503937010000000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3116,7 +3184,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo282: TfrxMemoView
           AllowVectorExport = True
-          Left = 823.937007874016000000
+          Left = 758.937007874016000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3136,7 +3204,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo107: TfrxMemoView
           AllowVectorExport = True
-          Left = 914.429179210000000000
+          Left = 849.429179210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3157,7 +3225,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo108: TfrxMemoView
           AllowVectorExport = True
-          Left = 943.969209370000000000
+          Left = 878.969209370000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3178,7 +3246,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo109: TfrxMemoView
           AllowVectorExport = True
-          Left = 974.001118620000000000
+          Left = 909.001118620000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3199,7 +3267,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo110: TfrxMemoView
           AllowVectorExport = True
-          Left = 914.284170000000000000
+          Left = 849.284170000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3219,7 +3287,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo130: TfrxMemoView
           AllowVectorExport = True
-          Left = 1004.137899210000000000
+          Left = 939.137899210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3240,7 +3308,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo131: TfrxMemoView
           AllowVectorExport = True
-          Left = 1033.677929370000000000
+          Left = 968.677929370000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3261,7 +3329,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo132: TfrxMemoView
           AllowVectorExport = True
-          Left = 1063.709838620000000000
+          Left = 998.709838620000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3282,7 +3350,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo133: TfrxMemoView
           AllowVectorExport = True
-          Left = 1003.992890000000000000
+          Left = 938.992890000000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3302,7 +3370,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo141: TfrxMemoView
           AllowVectorExport = True
-          Left = 1092.626149210000000000
+          Left = 1027.626149210000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3323,7 +3391,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo142: TfrxMemoView
           AllowVectorExport = True
-          Left = 1122.166179370000000000
+          Left = 1057.166179370000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3344,7 +3412,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo143: TfrxMemoView
           AllowVectorExport = True
-          Left = 1152.198088620000000000
+          Left = 1087.198088620000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3365,7 +3433,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo144: TfrxMemoView
           AllowVectorExport = True
-          Left = 1092.481140000000000000
+          Left = 1027.481140000000000000
           Top = 20.031496060000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3385,7 +3453,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo255: TfrxMemoView
           AllowVectorExport = True
-          Left = 1181.858267720000000000
+          Left = 1116.858267720000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3406,7 +3474,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo256: TfrxMemoView
           AllowVectorExport = True
-          Left = 1212.472440944880000000
+          Left = 1147.472440944880000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3427,7 +3495,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo272: TfrxMemoView
           AllowVectorExport = True
-          Left = 1241.552802190000000000
+          Left = 1176.552802190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3448,7 +3516,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo273: TfrxMemoView
           AllowVectorExport = True
-          Left = 1271.262728980000000000
+          Left = 1206.262728980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3469,7 +3537,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo274: TfrxMemoView
           AllowVectorExport = True
-          Left = 1300.802759140000000000
+          Left = 1235.802759140000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3490,7 +3558,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo275: TfrxMemoView
           AllowVectorExport = True
-          Left = 1330.834668390000000000
+          Left = 1265.834668390000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3511,7 +3579,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo283: TfrxMemoView
           AllowVectorExport = True
-          Left = 1181.858267716540000000
+          Left = 1116.858267716540000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3531,7 +3599,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo284: TfrxMemoView
           AllowVectorExport = True
-          Left = 1271.117719770000000000
+          Left = 1206.117719770000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3551,7 +3619,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo159: TfrxMemoView
           AllowVectorExport = True
-          Left = 1360.629921259840000000
+          Left = 1295.629921259840000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3572,7 +3640,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo160: TfrxMemoView
           AllowVectorExport = True
-          Left = 1390.763530640000000000
+          Left = 1325.763530640000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3593,7 +3661,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo161: TfrxMemoView
           AllowVectorExport = True
-          Left = 1420.765542190000000000
+          Left = 1355.765542190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3614,7 +3682,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo162: TfrxMemoView
           AllowVectorExport = True
-          Left = 1450.475468980000000000
+          Left = 1385.475468980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3635,7 +3703,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo163: TfrxMemoView
           AllowVectorExport = True
-          Left = 1480.015499140000000000
+          Left = 1415.015499140000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3656,7 +3724,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo164: TfrxMemoView
           AllowVectorExport = True
-          Left = 1510.047408390000000000
+          Left = 1445.047408390000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3677,7 +3745,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo165: TfrxMemoView
           AllowVectorExport = True
-          Left = 1360.629921259840000000
+          Left = 1295.629921259840000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3697,7 +3765,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo166: TfrxMemoView
           AllowVectorExport = True
-          Left = 1450.330459770000000000
+          Left = 1385.330459770000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3717,7 +3785,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo181: TfrxMemoView
           AllowVectorExport = True
-          Left = 1540.346295680000000000
+          Left = 1475.346295680000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3738,7 +3806,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo182: TfrxMemoView
           AllowVectorExport = True
-          Left = 1569.826610640000000000
+          Left = 1504.826610640000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3759,7 +3827,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo183: TfrxMemoView
           AllowVectorExport = True
-          Left = 1599.828622190000000000
+          Left = 1534.828622190000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3780,7 +3848,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo189: TfrxMemoView
           AllowVectorExport = True
-          Left = 1629.538548980000000000
+          Left = 1564.538548980000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3801,7 +3869,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo190: TfrxMemoView
           AllowVectorExport = True
-          Left = 1659.078579140000000000
+          Left = 1594.078579140000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3822,7 +3890,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo191: TfrxMemoView
           AllowVectorExport = True
-          Left = 1689.110488390000000000
+          Left = 1624.110488390000000000
           Width = 28.724409450000000000
           Height = 18.897650000000000000
           DataSet = frxDBRecap
@@ -3843,7 +3911,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo192: TfrxMemoView
           AllowVectorExport = True
-          Left = 1540.346295680000000000
+          Left = 1475.346295680000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000
@@ -3863,7 +3931,7 @@ object frmFicheRecapi: TfrmFicheRecapi
         end
         object Memo224: TfrxMemoView
           AllowVectorExport = True
-          Left = 1629.393539770000000000
+          Left = 1564.393539770000000000
           Top = 20.133872910000000000
           Width = 88.440944880000000000
           Height = 18.897650000000000000

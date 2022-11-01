@@ -12,6 +12,9 @@ type
     StringGrid1: TStringGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure StringGrid1DblClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -25,7 +28,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM, UConnexion;
+uses records, UDM, UConnexion, UEtatLivraison;
 
 procedure TfrmRechLotElivraison.FormCreate(Sender: TObject);
 begin
@@ -60,6 +63,43 @@ begin
           Cells[2,i+1] := chs[i].SnomChauf;
           Cells[3,i+1] := chs[i].SdateCharg;
         end;
+    end;
+end;
+
+procedure TfrmRechLotElivraison.StringGrid1DblClick(Sender: TObject);
+begin
+with frmEtatLivraison do
+  begin
+    edlot.Text := StringGrid1.Cells[0,StringGrid1.Row];
+  end;
+  close;
+end;
+
+procedure TfrmRechLotElivraison.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
     end;
 end;
 

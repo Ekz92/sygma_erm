@@ -1,0 +1,24 @@
+unit UTypeClient;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmTypeClient = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmTypeClient: TfrmTypeClient;
+
+implementation
+
+{$R *.dfm}
+
+end.

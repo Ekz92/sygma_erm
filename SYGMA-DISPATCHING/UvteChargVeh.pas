@@ -18,7 +18,6 @@ type
     cbSource: TComboBox;
     edLot: TEdit;
     DateCharg: TDateTimePicker;
-    rgType: TRadioGroup;
     GroupBox3: TGroupBox;
     Label7: TLabel;
     Label3: TLabel;
@@ -80,6 +79,7 @@ type
     procedure edChaufDblClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Supprimer1Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure SaveCleaner();
@@ -171,11 +171,6 @@ begin
       MessageDlg('Merci de spécifier la date du chargement', mtError,[mbRetry],0);
       exit
     end else
-  if rgType.ItemIndex = -1  then
-    begin
-      MessageDlg('Merci de spécifier le type du chargement', mtError,[mbRetry],0);
-      exit
-    end else
   if edCodeLivreur.Text = ''   then
     begin
       MessageDlg('Merci de sélectionner le livreur ', mtError,[mbRetry],0);
@@ -186,11 +181,11 @@ begin
       MessageDlg('Merci de selectionner un camion', mtError,[mbRetry],0);
       exit
     end else
-  if edChauf.Text='' then
-  begin
-     MessageDlg('Merci de selectionner le chauffeur ', mtError,[mbRetry],0);
-     exit
-  end else
+//  if edChauf.Text='' then
+//  begin
+//     MessageDlg('Merci de selectionner le chauffeur ', mtError,[mbRetry],0);
+//     exit
+//  end else
   if edPiece.Text='' then
   begin
     MessageDlg('Merci de spécifier le numéro de la pièce ', mtError,[mbRetry],0);
@@ -223,7 +218,7 @@ begin
         SnomClient := QuotedStr(edNomClt.Text);
         SPiece := QuotedStr(edPiece.Text);
         SVehicule := QuotedStr(edNumMat.Text);
-        NnumMatChauf:=StrToInt(edChauf.Text);
+        NnumMatChauf:=999 ; //StrToInt(edChauf.Text);
         SnomChauf:=QuotedStr(lbChauf.Caption);
         SdateCharg := DateToStr(DateCharg.Date);
         NTboutteille := StrToInt(lbTbout.Caption);
@@ -291,48 +286,46 @@ begin
             dm.InsertVteChargVehd(vteChargd);
 
             //selection des quantité en stoock
-            PSqlCam := ' Where vehicule = '+QuotedStr(edNumMat.Text)
-                        +' and code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
+//            PSqlCam := ' Where vehicule = '+QuotedStr(edNumMat.Text)
+//                        +' and code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
+//
+//            code_art := StringGrid1.Cells[0,i];
+//
+//            stockCam := dm.selectStockCamion(PSqlCam);
+//            stock := dm.selectStockByArticle(code_art);
+//            article := dm.selectArticleByCode(code_art);
 
-            code_art := StringGrid1.Cells[0,i];
-
-            stockCam := dm.selectStockCamion(PSqlCam);
-            stock := dm.selectStockByArticle(code_art);
-            article := dm.selectArticleByCode(code_art);
-
-            if rgType.ItemIndex=1 then //Si le chargement est à destination des clients du camion
-              begin
-
-
-                  if stockCam.Scode_art.IsEmpty then {Insertion dans la table stock camion}
-                    begin
-                      with stockCam,StringGrid1 do
-                        begin
-                          Svehicule:=edNumMat.Text;
-                          Scode_art:=Cells[0,i];
-                          SDesignation_art := Cells[1,i];
-                          NQte_vide := 0 - StrToInt(Cells[3,i]);
-                          NQte_mag := StrToInt(Cells[3,i]);
-                          Nqte_total := StrToInt(Cells[3,i]);
-                        end;
-                        dm.InsertStockCamion(stockCam);
-                    end
-                  else {Mise à jour des quantités dans le camion}
-                  begin
-                    Qte_vide := stockCam.NQte_vide;
-                    Qte_mag := stockCam.NQte_mag;
-                    Qte_totale := stockCam.Nqte_total;
-
-                    SqlUpCam := 'Update tb_stock_camion set'
-                                +' qte_vide = '+IntToStr(Qte_vide - StrToInt(StringGrid1.Cells[3,i]))+','
-                                +' qte_mag = '+IntToStr(Qte_mag + StrToInt(StringGrid1.Cells[3,i]))+','
-                                +' qte_total = '+IntToStr(Qte_totale + StrToInt(StringGrid1.Cells[3,i]))
-                                +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i])
-                                +' and vehicule = '+QuotedStr(edNumMat.Text);
-
-                    dm.UpdateTable(SqlUpCam);
-                  end;
-              end;
+//            if rgType.ItemIndex=1 then //Si le chargement est à destination des clients du camion
+//              begin
+//                  if stockCam.Scode_art.IsEmpty then {Insertion dans la table stock camion}
+//                    begin
+//                      with stockCam,StringGrid1 do
+//                        begin
+//                          Svehicule:=edNumMat.Text;
+//                          Scode_art:=Cells[0,i];
+//                          SDesignation_art := Cells[1,i];
+//                          NQte_vide := 0 - StrToInt(Cells[3,i]);
+//                          NQte_mag := StrToInt(Cells[3,i]);
+//                          Nqte_total := StrToInt(Cells[3,i]);
+//                        end;
+//                        dm.InsertStockCamion(stockCam);
+//                    end
+//                  else {Mise à jour des quantités dans le camion}
+//                  begin
+//                    Qte_vide := stockCam.NQte_vide;
+//                    Qte_mag := stockCam.NQte_mag;
+//                    Qte_totale := stockCam.Nqte_total;
+//
+//                    SqlUpCam := 'Update tb_stock_camion set'
+//                                +' qte_vide = '+IntToStr(Qte_vide - StrToInt(StringGrid1.Cells[3,i]))+','
+//                                +' qte_mag = '+IntToStr(Qte_mag + StrToInt(StringGrid1.Cells[3,i]))+','
+//                                +' qte_total = '+IntToStr(Qte_totale + StrToInt(StringGrid1.Cells[3,i]))
+//                                +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i])
+//                                +' and vehicule = '+QuotedStr(edNumMat.Text);
+//
+//                    dm.UpdateTable(SqlUpCam);
+//                  end;
+//              end;
                 {Modification de la quantité dans la table des états tb_livraison_camion}
 
           if article.Stype_art = 'Charge gaz butane' then //si c'est une charge, renseigner le retour bouteille
@@ -350,68 +343,68 @@ begin
           dm.UpdateTable(SqlUpLiv);
 
           //Modification du stock  de production si le chargement vient de la production
-          if (cbSource.ItemIndex = 0) and (article.Stype_art = 'Charge gaz butane') then
-            begin
-              SqlUpStock := 'Update tb_stock set'
-                          +' qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(StringGrid1.Cells[3,i]))+','
-                          +' qte_mag = '+IntToStr(stock.NQte_mag - StrToInt(StringGrid1.Cells[3,i]))+','
-                          +' qte_totale = '+IntToStr(stock.Nqte_total - StrToInt(StringGrid1.Cells[3,i]))
-                          +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
-              dm.UpdateTable(SqlUpStock);
-            end else
-          if (cbSource.ItemIndex = 0) and (article.Stype_art <> 'Charge gaz butane') then
-            begin
-              SqlUpStock := 'Update tb_stock set'
-            //              +' qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(StringGrid1.Cells[3,i]))+','
-                          +' qte_mag = '+IntToStr(stock.NQte_mag - StrToInt(StringGrid1.Cells[3,i])) +','
-                          +' qte_totale = '+IntToStr(stock.Nqte_total - StrToInt(StringGrid1.Cells[3,i]))
-                          +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
-              dm.UpdateTable(SqlUpStock);
-            end;
-
+//          if (cbSource.ItemIndex = 0) and (article.Stype_art = 'Charge gaz butane') then
+//            begin
+//              SqlUpStock := 'Update tb_stock set'
+//                          +' qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(StringGrid1.Cells[3,i]))+','
+//                          +' qte_mag = '+IntToStr(stock.NQte_mag - StrToInt(StringGrid1.Cells[3,i]))+','
+//                          +' qte_totale = '+IntToStr(stock.Nqte_total - StrToInt(StringGrid1.Cells[3,i]))
+//                          +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
+//              dm.UpdateTable(SqlUpStock);
+//            end else
+//          if (cbSource.ItemIndex = 0) and (article.Stype_art <> 'Charge gaz butane') then
+//            begin
+//              SqlUpStock := 'Update tb_stock set'
+//            //              +' qte_vide = '+IntToStr(stock.NQte_vide + StrToInt(StringGrid1.Cells[3,i]))+','
+//                          +' qte_mag = '+IntToStr(stock.NQte_mag - StrToInt(StringGrid1.Cells[3,i])) +','
+//                          +' qte_totale = '+IntToStr(stock.Nqte_total - StrToInt(StringGrid1.Cells[3,i]))
+//                          +' where code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
+//              dm.UpdateTable(SqlUpStock);
+//            end;
+//
             {Ecriture dans la table de sortie tb_sortie}
-
-            With sortie do
-              Begin
-                SCode_art := code_art;
-                Scode_mag := article.Scode_mag;
-                NQte_sortie := StrToInt(StringGrid1.Cells[3,i]);
-                SUsager := vUsager;
-                Ddate_sortie := DateToStr(Now);
-              End;
-              dm.InsertSortie(sortie);
-            {Ecriture dans la table des mouvement du stock TmouvemntStock}
-
-            date_op:= DateToStr(Now);
-
-            SelectMouv := dm.selectMouvStock(code_art,date_op,article.Scode_mag);
-
-           if (SelectMouv.Ddate_mouv.IsEmpty) then
-            Begin
-                with insertMouv do
-                  begin
-                   // NidMouvStock := SelectMouv.NidMouvStock;
-                    Ddate_mouv := DateToStr(Now);
-                    Scode_art := code_art;
-                    Scode_mag := article.Scode_mag;
-                    Nqte_entree := 0;
-                    Nqte_sortie := StrToInt(StringGrid1.Cells[3,i]) ;
-                  end;
-                  dm.insertMouvStock(insertMouv);
-            End else
-      //    if (StrToDate(SelectMouv.Ddate_mouv) = StrToDateTime(edDate.Text)) and (code_art = SelectMouv.Scode_art) then
-            begin
-              with UpdateMouv do
-                begin
-                  NidMouvStock := SelectMouv.NidMouvStock;
-                  Ddate_mouv := SelectMouv.Ddate_mouv;
-                  Scode_art := SelectMouv.Scode_art;
-                  Scode_mag := SelectMouv.Scode_mag;
-                  Nqte_entree := SelectMouv.Nqte_entree;
-                  Nqte_sortie := SelectMouv.Nqte_sortie+StrToInt(StringGrid1.Cells[3,i]) ;
-                end;
-                dm.Update_moovStock(UpdateMouv);
-            end ;
+//
+//            With sortie do
+//              Begin
+//                SCode_art := code_art;
+//                Scode_mag := article.Scode_mag;
+//                NQte_sortie := StrToInt(StringGrid1.Cells[3,i]);
+//                SUsager := vUsager;
+//                Ddate_sortie := DateToStr(Now);
+//              End;
+//              dm.InsertSortie(sortie);
+//            {Ecriture dans la table des mouvement du stock TmouvemntStock}
+//
+//            date_op:= DateToStr(Now);
+//
+//            SelectMouv := dm.selectMouvStock(code_art,date_op,article.Scode_mag);
+//
+//           if (SelectMouv.Ddate_mouv.IsEmpty) then
+//            Begin
+//                with insertMouv do
+//                  begin
+//                   // NidMouvStock := SelectMouv.NidMouvStock;
+//                    Ddate_mouv := DateToStr(Now);
+//                    Scode_art := code_art;
+//                    Scode_mag := article.Scode_mag;
+//                    Nqte_entree := 0;
+//                    Nqte_sortie := StrToInt(StringGrid1.Cells[3,i]) ;
+//                  end;
+//                  dm.insertMouvStock(insertMouv);
+//            End else
+//      //    if (StrToDate(SelectMouv.Ddate_mouv) = StrToDateTime(edDate.Text)) and (code_art = SelectMouv.Scode_art) then
+//            begin
+//              with UpdateMouv do
+//                begin
+//                  NidMouvStock := SelectMouv.NidMouvStock;
+//                  Ddate_mouv := SelectMouv.Ddate_mouv;
+//                  Scode_art := SelectMouv.Scode_art;
+//                  Scode_mag := SelectMouv.Scode_mag;
+//                  Nqte_entree := SelectMouv.Nqte_entree;
+//                  Nqte_sortie := SelectMouv.Nqte_sortie+StrToInt(StringGrid1.Cells[3,i]) ;
+//                end;
+//                dm.Update_moovStock(UpdateMouv);
+//            end ;
         end; //fin for
         SaveCleaner;
   end;
@@ -435,7 +428,6 @@ begin
 
   StringGrid1.RowCount:=1;
   StringGrid1.Rows[1].Clear;
-  rgType.ItemIndex := -1;
 end;
 
 
@@ -609,6 +601,30 @@ begin
       TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
     end;
 
+end;
+
+procedure TfrmvteChargVeh.Supprimer1Click(Sender: TObject);
+var
+  k,i:integer;
+  code_art :string;
+  stock : TStock;
+begin
+with StringGrid1 do
+  begin
+
+  code_art := Cells[0,Row];
+  stock := dm.selectStockByArticle(code_art)  ;
+  lbMontant.Caption := FloatToStr(StrToFloat(lbMontant.Caption) - (stock.Rcoutachat * StrToInt(Cells[3,Row])));
+
+
+    k:=Row;
+    for I := k to RowCount do
+      begin
+        Rows[i]:=Rows[i+1];
+      end;
+
+      RowCount:=RowCount-1;
+  end;
 end;
 
 procedure TfrmvteChargVeh.v_edcodeArtDblClick(Sender: TObject);

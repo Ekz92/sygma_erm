@@ -20,17 +20,16 @@ object frmRechCommandeFacture: TfrmRechCommandeFacture
     Left = 0
     Top = 0
     Width = 367
-    Height = 53
+    Height = 42
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 366
   end
   object StRech: TStringGrid
     Left = 0
-    Top = 53
+    Top = 42
     Width = 367
-    Height = 148
+    Height = 159
     Align = alClient
     ColCount = 4
     DefaultRowHeight = 15
@@ -43,7 +42,8 @@ object frmRechCommandeFacture: TfrmRechCommandeFacture
     StyleElements = [seBorder]
     OnDblClick = StRechDblClick
     OnDrawCell = StRechDrawCell
-    ExplicitWidth = 366
+    ExplicitTop = 53
+    ExplicitHeight = 148
     ColWidths = (
       81
       102

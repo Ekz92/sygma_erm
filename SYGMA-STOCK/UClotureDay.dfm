@@ -66,8 +66,8 @@ object frmClotureDay: TfrmClotureDay
     OnKeyPress = edpwdKeyPress
   end
   object Button1: TButton
-    Left = 63
-    Top = 72
+    Left = 57
+    Top = 74
     Width = 75
     Height = 25
     Caption = 'Proceder'
@@ -81,8 +81,8 @@ object frmClotureDay: TfrmClotureDay
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 151
-    Top = 72
+    Left = 145
+    Top = 74
     Width = 75
     Height = 25
     Caption = 'Annuler'

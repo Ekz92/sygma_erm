@@ -17,6 +17,7 @@ type
     { Déclarations publiques }
     function selectLivreur(Psql : string):TLivreurArray;
     function selectClients(Psql : string) : TClientArray;
+    function selectTypeClients(Psql : string) : TTypeClientArray;
     function selectTarif(Psql:string) :TTarifArray ;
     function selectZones(Psql : string) : TZoneArray;
     function selectCodeclt(var vNomClt : string) : TClient;
@@ -30,6 +31,7 @@ type
 
     function InsertLivreur(livreur : TLivreur) : Boolean;
     function InsertClient(clt : TClient ):Boolean;
+    function InsertTypeClient(tclt : TTypeClient ):Boolean;
     function InsertCompteClt(cmpt : TCompteClient ):Boolean;
     function InsertPointVente(var point : TPointVente): Boolean;
     function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
@@ -518,10 +520,12 @@ begin
                   +'tel_clt = '+client.StelClt+','
                   +'email_clt = '+client.Smail+','
                   +'tarif = '+client.STarif+','
-                  +'comment_clt = '+client.ScommentClt
+                  +'comment_clt = '+client.ScommentClt+','
+                  +' typClt = '+client.STypeclt
                   +' where code_clt = '+client.SCodeClt;
     try
       Query.SQL.Add(sql);
+//      Query.SQL.SaveToFile('g:\typeClt.txt');
       Query.ExecSQL();
     finally
       Query.Free;
@@ -556,6 +560,32 @@ begin
     end;
 end;
 
+function TDM.InsertTypeClient(tclt : TTypeClient ):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with tclt do
+    begin
+      sql := 'Insert into tb_type_client value(null,'
+              +Scode_tclt+','
+              +Sdesignation_tclt
+              +');'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+//      query.SQL.SaveToFile('g:\client.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
 function TDM.InsertClient(clt : TClient ):Boolean;
 var
   sql : string;
@@ -574,7 +604,8 @@ begin
               +Smail+','
               +ScommentClt +','
               +SZone +','
-              +STarif
+              +STarif   +','
+              +STypeclt
               +');'       ;
     end;
 
@@ -584,6 +615,7 @@ begin
       query.ExecSQL();
     finally
       query.Free;
+      SQLConnection1.Close;
     end;
 
 end;
@@ -628,6 +660,48 @@ begin
   end;
 end;
 
+function TDM.selectTypeClients(Psql : string) : TTypeClientArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  Tclient : TTypeClient;
+  Tclients : TTypeClientArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := ' select * from tb_type_client '+Psql;
+  i:=0;
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\clt.txt');
+    query.Open;
+
+    with query do
+      begin
+          while not eof do
+            begin
+            SetLength(Tclients,i+1);
+              with Tclient do
+                begin
+                  Nid_tclt := FieldByName('id_tclt').AsInteger;
+                  Scode_tclt := FieldByName('code_tclt').AsString;
+                  Sdesignation_tclt := FieldByName('designation_tclt').AsString  ;
+                end;
+              Tclients[i]:=Tclient;
+              Inc(i);
+              query.Next;
+            end;
+      end;
+       Result := Tclients;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
 function TDM.selectClients(Psql : string) : TClientArray;
 var
   sql:string;
@@ -662,6 +736,7 @@ begin
                   Smail :=FieldByName('email_clt').AsString;
                   ScommentClt := FieldByName('comment_clt').AsString;
                   STarif := FieldByName('tarif').AsString;
+                  STypeclt:= FieldByName('TypClt').AsString;
                 end;
               clients[i]:=client;
               Inc(i);

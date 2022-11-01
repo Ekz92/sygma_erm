@@ -292,6 +292,7 @@ begin
 
       QRapport.SQL.Clear;
       QRapport.SQL.Add(Sql);
+//      QRapport.SQL.SaveToFile('g:\tb_boncom_detail.txt');
       QRapport.Open;
 
       Qsum.SQL.Clear;

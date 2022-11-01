@@ -459,7 +459,6 @@ object frmvehicule: Tfrmvehicule
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitHeight = 245
     ColWidths = (
       140
       50

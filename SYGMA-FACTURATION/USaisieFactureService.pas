@@ -147,6 +147,7 @@ begin
             begin
               Sdate_fact:=DateToStr(edDate.Date)+''+TimeToStr(now);
               SNum_fact:=vNumFact;
+              SCode_mag:=edCodeTypeSce.Text;
               Scode_clt:=edCodeClt.Text;
               Snom_clt := ednomClt.Text;
               NQte_total:=vQteTotal;
@@ -191,7 +192,7 @@ begin
                 begin
                   SCode_client:=QuotedStr(edCodeClt.Text);
                   Snom_client:=QuotedStr(ednomClt.Text);
-                  SDate_rs := QuotedStr(FormatDateTime('yyyy-mm-dd',Now));
+                  SDate_rs := QuotedStr(FormatDateTime('yyyy-mm-dd',eddate.Date));
                   SOperation:=QuotedStr(vNumFact);
                   SCaisse:=QuotedStr('Vente');
                   SPiece:=QuotedStr(vNumFact);

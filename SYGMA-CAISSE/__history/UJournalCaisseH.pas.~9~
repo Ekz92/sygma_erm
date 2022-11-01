@@ -1,0 +1,78 @@
+unit UJournalCaisseH;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, frxClass, frxDBSet,
+  Data.DB, Data.SqlExpr, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TfrmJournalCaisseH = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    Button1: TButton;
+    Button2: TButton;
+    QJournal: TSQLQuery;
+    frxJournalH: TfrxReport;
+    frxDBJournal: TfrxDBDataset;
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmJournalCaisseH: TfrmJournalCaisseH;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmJournalCaisseH.Button1Click(Sender: TObject);
+var
+  sqlJrnl : string;
+
+  Component: TfrxComponent;
+  MD1,MD2,Memo26 :TfrxMemoView;
+
+begin
+    sqlJrnl := ' select * from tb_jounalCaisse '
+                +' where date_jcd between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' order by date_jcd desc ';
+
+    QJournal.SQL.Clear;
+    QJournal.SQL.Add(sqlJrnl);
+    QJournal.Open;
+
+//****************************** Affichage date1 DIAGRAMME ***********************
+Component := frxJournalH.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxJournalH.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+
+    frxJournalH.ShowReport();
+end;
+
+procedure TfrmJournalCaisseH.FormShow(Sender: TObject);
+begin
+d2.Date := Now;
+
+end;
+
+end.

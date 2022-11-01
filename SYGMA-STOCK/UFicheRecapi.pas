@@ -54,6 +54,9 @@ uses records, UDM;
 procedure TfrmFicheRecapi.Button1Click(Sender: TObject);
 var
   Sql,SqlSum : string;
+
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
@@ -246,7 +249,20 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
     +' and matricule_veh = '+QuotedStr(edMarque.Text) ;
     end;
 
-
+//****************************** Affichage date1 ***********************
+Component := frxRecap.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxRecap.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
 
   QRecap.SQL.Clear;
   QRecap.SQL.Add(Sql);

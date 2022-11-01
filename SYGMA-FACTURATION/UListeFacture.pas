@@ -13,19 +13,11 @@ type
     GroupBox1: TGroupBox;
     Label2: TLabel;
     Label3: TLabel;
-    SpeedButton1: TSpeedButton;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    lbtotal: TLabel;
-    lbtotpaye: TLabel;
-    lbtotreste: TLabel;
     cbStatut: TComboBox;
     d1: TDateTimePicker;
     d2: TDateTimePicker;
     edCodeClt: TEdit;
     cbType: TComboBox;
-    edVehicule: TEdit;
     St_listeFacture: TStringGrid;
     Panel1: TPanel;
     Button1: TButton;
@@ -44,6 +36,15 @@ type
     Rediterlafacture1: TMenuItem;
     lbnbligne: TLabel;
     frxPDFExport1: TfrxPDFExport;
+    Label1: TLabel;
+    cbVehicule: TComboBox;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label4: TLabel;
+    cbMagasin: TComboBox;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -55,6 +56,7 @@ type
     procedure Supprimer1Click(Sender: TObject);
     procedure St_listeFactureDblClick(Sender: TObject);
     procedure Rediterlafacture1Click(Sender: TObject);
+    procedure cbMagasinCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -63,6 +65,7 @@ type
 
 var
   frmListeFacture: TfrmListeFacture;
+  gPsqlFact : string;
 
 implementation
 
@@ -107,7 +110,7 @@ Component := RFactureListe.FindObject('Mvehicule');
   if Component is TfrxMemoView then
   begin
         Mvehicule := Component as TfrxMemoView;
-        Mvehicule.Text := edVehicule.Text;
+        Mvehicule.Text := cbVehicule.Text;
   end;
 
 
@@ -118,112 +121,30 @@ Component := RFactureListe.FindObject('MStatut');
         MStatut.Text := cbStatut.Text;
   end;
 //**************************************
-//Toutes les factures
-if (cbStatut.Text = '') and (edCodeClt.Text='') and (cbType.ItemIndex=0) then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59');
 
-if (cbStatut.Text = '') and (edCodeClt.Text<>'') and (cbType.ItemIndex=0) then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)   ;
+  QFactureListe.SQL.Clear;
+  QFactureListe.Close;
+  QFactureListe.SQL.Add('select * from tb_facturation '+gPsqlFact);
+  QFactureListe.Open;
 
-if (cbStatut.Text <> '') and (edCodeClt.Text<>'') and (cbType.ItemIndex=0) then
-  PsqlFact := ' where statut='+QuotedStr(Statut)
-          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)    ;
+  RFactureListe.ShowReport();
+end;
 
-if (cbStatut.Text <> '') and (edCodeClt.Text='') and (cbType.ItemIndex=0) then
-  PsqlFact := ' where statut='+QuotedStr(Statut)
-          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59');
-//FActure comptoire
-if (cbStatut.Text = '') and (edCodeClt.Text='') and (cbType.ItemIndex=1) then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Comptoir');
-
-if (cbStatut.Text = '') and (edCodeClt.Text<>'') and (cbType.ItemIndex=1) then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and type_fact='+QuotedStr('Comptoir')   ;
-
-if (cbStatut.Text <> '') and (edCodeClt.Text<>'') and (cbType.ItemIndex=1) then
-  PsqlFact := ' where statut='+QuotedStr(Statut)
-          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and type_fact='+QuotedStr('Comptoir');
-
-if (cbStatut.Text <> '') and (edCodeClt.Text='') and (cbType.ItemIndex=1) then
-  PsqlFact := ' where statut='+QuotedStr(Statut)
-          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Comptoir');
-//FActure camion
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') and  (edVehicule.Text='')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Camion');
-
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') and  (edVehicule.Text='')then
-  PsqlFact := ' where statut='+QuotedStr(Statut)
-          +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Camion');
-
-
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') and  (edVehicule.Text='')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and type_fact='+QuotedStr('Camion')   ;
-
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') and  (edVehicule.Text='')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and statut = '+QuotedStr(Statut)
-          +' and type_fact='+QuotedStr('Camion')   ;
-
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') and  (edVehicule.Text<>'')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text);
-
-
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') and  (edVehicule.Text<>'')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text)   ;
-
-
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') and  (edVehicule.Text<>'')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and statut = '+QuotedStr(Statut)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text) ;
-
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') and  (edVehicule.Text<>'')then
-  PsqlFact := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
-          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and statut = '+QuotedStr(Statut)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text) ;
-
-QFactureListe.SQL.Clear;
-QFactureListe.Close;
-QFactureListe.SQL.Add('select * from tb_facturation '+PsqlFact+' and statut_canc = 0 order by date_fact desc');
-QFactureListe.Open;
-
-RFactureListe.ShowReport();
+procedure TfrmListeFacture.cbMagasinCloseUp(Sender: TObject);
+begin
+if cbMagasin.ItemIndex <> 0 then
+  begin
+    cbStatut.Enabled := False;
+    edCodeClt.Enabled := false;
+    cbType.Enabled := false;
+    cbVehicule.Enabled := False;
+  end else
+  begin
+    cbStatut.Enabled := True;
+    edCodeClt.Enabled := True;
+    cbType.Enabled := True;
+    cbVehicule.Enabled := True;
+  end;
 end;
 
 procedure TfrmListeFacture.Consultation1Click(Sender: TObject);
@@ -252,12 +173,20 @@ with St_listeFacture do
 end;
 
 procedure TfrmListeFacture.FormShow(Sender: TObject);
+var
+  Mags : TMagasinArray;
+  i : integer;
+  Psql : string;
 begin
+  Psql := '';
+  Mags := DM.selectMagasins(Psql);
+  for I := Low(Mags) to High(Mags) do
+    begin
+      cbMagasin.Items.Add(MAgs[i].SCode_mag);
+    end;
+
 d2.Date:=Now;
 St_listeFacture.RowCount:=1;
-lbtotal.Caption:='-';
-lbtotpaye.Caption:='-';
-lbtotreste.Caption:='-';
 end;
 
 procedure TfrmListeFacture.Rediterlafacture1Click(Sender: TObject);
@@ -282,7 +211,6 @@ var
   Factures : TFacturationArray;
   I: Integer;
 
-  vtot,vtotp,vtotr : real;
 begin
 if cbStatut.Text = 'Payée' then Statut := 'PA' else
 if cbStatut.Text = 'En attente' then Statut := 'AT' else
@@ -334,67 +262,65 @@ if (cbStatut.Text <> '') and (edCodeClt.Text='') and (cbType.ItemIndex=1) then
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and type_fact = '+QuotedStr('Comptoir');
 //facture camion
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') and  (edVehicule.Text='')then
+if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and type_fact = '+QuotedStr('Camion');
 
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') and  (edVehicule.Text='')then
+if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') then
   Psql := ' where statut='+QuotedStr(Statut)
           +' and date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and type_fact = '+QuotedStr('Camion');
 
 
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') and  (edVehicule.Text='')then
+if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and code_clt = '+QuotedStr(edCodeClt.Text)
           +' and type_fact='+QuotedStr('Camion')   ;
 
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') and  (edVehicule.Text='')then
+if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and code_clt = '+QuotedStr(edCodeClt.Text)
           +' and statut = '+QuotedStr(Statut)
           +' and type_fact='+QuotedStr('Camion')   ;
 
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') and  (edVehicule.Text<>'')then
+if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text='') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
-          +' and type_fact = '+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text);
+          +' and type_fact = '+QuotedStr('Camion');
 
 
-if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') and  (edVehicule.Text<>'')then
+if (cbType.ItemIndex=2) and (cbStatut.Text = '') and (edCodeClt.Text<>'') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and code_clt = '+QuotedStr(edCodeClt.Text)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text)   ;
+          +' and type_fact='+QuotedStr('Camion');
 
-
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') and  (edVehicule.Text<>'')then
+if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text<>'') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and code_clt = '+QuotedStr(edCodeClt.Text)
           +' and statut = '+QuotedStr(Statut)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text) ;
+          +' and type_fact='+QuotedStr('Camion');
 
-if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') and  (edVehicule.Text<>'')then
+if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') then
   Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
           +' and statut = '+QuotedStr(Statut)
-          +' and type_fact='+QuotedStr('Camion')
-          +' and vehicule = '+QuotedStr(edVehicule.Text) ;
+          +' and type_fact='+QuotedStr('Camion');
 
-  Factures := dm.SelectFactures(Psql +' and statut_canc = 0 order by date_fact desc');
+if cbMagasin.ItemIndex <> 0 then
+  Psql := ' where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d1.Date)+'00:00:00')
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd ',d2.Date)+'23:59:59')
+          +' and code_mag = '+QuotedStr(cbMagasin.Text);
+
+  Psql := Psql + ' and statut_canc = 0 order by date_fact desc' ;
+  gPsqlFact := Psql;
+  Factures := dm.SelectFactures(Psql);
   St_listeFacture.RowCount := Length(Factures)+1;
-
-  vtot :=0;
-  vtotp:=0;
-  vtotr:=0;
 
   for I := Low(Factures) to High(Factures) do
     begin
@@ -408,18 +334,10 @@ if (cbType.ItemIndex=2) and (cbStatut.Text <> '') and (edCodeClt.Text='') and  (
           Cells[5,i+1] := FloatToStr(Factures[i].Rmnt_r);
           Cells[6,i+1] := Factures[i].Sstatut;
         end;
-        vtot := vtot + Factures[i].Rmnt_t;
-        vtotp:= vtotp + Factures[i].Rmnt_p;
-        vtotr:= vtotr +Factures[i].Rmnt_r;
-
         lbnbligne.Caption := IntToStr(i+1)+' Lignes';
     end;
     if St_listeFacture.RowCount>1 then
       St_listeFacture.FixedRows := 1;
-
-    lbtotal.Caption := FloatToStrF(vtot,TFloatFormat(ffNumber),15,2)   ;
-    lbtotpaye.Caption := FloatToStrF(vtotp,TFloatFormat(ffNumber),15,2) ;
-    lbtotreste.Caption := FloatToStrF(vtotr,TFloatFormat(ffNumber),15,2)
 
 end;
 

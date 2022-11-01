@@ -93,7 +93,7 @@ begin
 
   try
     query.SQL.Add(sql);
-    query.SQL.SaveToFile('g:\TCumuleVenteBL.txt');
+//    query.SQL.SaveToFile('g:\TCumuleVenteBL.txt');
     query.Open;
 
     with query do
@@ -1120,6 +1120,7 @@ begin
       sql:='Insert into tb_facturation values(null,'
             +QuotedStr(FormatDateTime('yyy-mm-dd hh:mm:ss', StrToDateTime(Sdate_fact)))+','
             +QuotedStr(SNum_fact)+','
+            +QuotedStr(SCode_mag)+','
             +QuotedStr(Scode_clt)+','
             +QuotedStr(Snom_clt)+','
             +IntToStr(NQte_total)+','
@@ -1138,7 +1139,7 @@ begin
       query.ExecSQL;
     finally
       query.Free;
-
+      SQLConnection1.Close;
     end;
 end;
 

@@ -132,29 +132,35 @@ var
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
-    Sql := ' select * from tb_fiche_es tfe where type_fes = 0 '
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 0 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and statut_canc = 0 '
+          +' and tfes.statut_canc = 0 '
           +' order by id_fes desc ';
   end else
   if edcodeClt.Text<>'' then
   begin
-    Sql := 'select * from tb_fiche_es tfe where type_fes = 0 '
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 0 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
           +' and code_clt = '+QuotedStr(edcodeClt.Text)
-          +' and statut_canc = 0 '
+          +' and tfes.statut_canc = 0 '
           +' order by id_fes desc ';
   end else
   if edMarque.Text<>'' then
     begin
-      Sql := 'select * from tb_fiche_es tfe where type_fes = 0 '
-                +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
-                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-                +' and matricule_veh = '+QuotedStr(cbVeh.Text)
-                +' and statut_canc = 0 '
-                +' order by id_fes desc ';
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 0 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and tfes.statut_canc = 0 '
+          +' order by id_fes desc ';
     end;
   QLFicheEntree.SQL.Clear;
   QLFicheEntree.SQL.Add(Sql);
@@ -259,32 +265,35 @@ var
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
-    Sql := ' Select * from tb_fiche_es '
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
           +' where type_fes = 0 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and tb_fiche_es.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
-          +' and tb_fiche_es.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
   end else
   if edcodeClt.Text<>'' then
   begin
     Sql := ' Select * from tb_fiche_es '
+          +' inner join tb_fiche_esh tfeh on tfe.num_fes = tfeh.num_fh '
           +' where type_fes= 0 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and code_clt = '+QuotedStr(edcodeClt.Text)
-          +' and tb_fiche_es.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
-          +' and tb_fiche_es.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfes.code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
   end else
   if edMarque.Text<>'' then
     begin
     Sql := ' Select * from tb_fiche_es '
+          +' inner join tb_fiche_esh tfeh on tfe.num_fes = tfeh.num_fh '
           +' where type_fes = 0 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
           +' and matricule_veh = '+QuotedStr(cbVeh.Text)
-          +' and tb_fiche_es.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
-          +' and tb_fiche_es.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
     end;
 
 

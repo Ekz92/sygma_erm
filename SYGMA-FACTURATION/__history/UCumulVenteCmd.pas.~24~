@@ -1,0 +1,140 @@
+unit UCumulVenteCmd;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.ComCtrls,
+  Vcl.Buttons;
+
+type
+  TfrmCumulVenteCmd = class(TForm)
+    GroupBox1: TGroupBox;
+    SpeedButton1: TSpeedButton;
+    Label3: TLabel;
+    StringGrid1: TStringGrid;
+    Panel1: TPanel;
+    Button1: TButton;
+    frxReport1: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    edNumCmd: TEdit;
+    Label1: TLabel;
+    edveh: TEdit;
+    procedure edNumCmdDblClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmCumulVenteCmd: TfrmCumulVenteCmd;
+  gPsql : string;
+
+implementation
+
+{$R *.dfm}
+
+uses URechCommandeFacture, records, UDM;
+
+procedure TfrmCumulVenteCmd.Button1Click(Sender: TObject);
+begin
+  frxReport1.ShowReport();
+end;
+
+procedure TfrmCumulVenteCmd.edNumCmdDblClick(Sender: TObject);
+begin
+  gFormSrc := 'frmCumulVenteCmd';
+  frmRechCommandeFacture.Show;
+end;
+
+procedure TfrmCumulVenteCmd.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+StringGrid1.RowCount:=1;
+
+end;
+
+procedure TfrmCumulVenteCmd.FormCreate(Sender: TObject);
+begin
+with StringGrid1 do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Désignation';
+    Cells[2,0]:='Qte';
+  end;
+end;
+
+procedure TfrmCumulVenteCmd.SpeedButton1Click(Sender: TObject);
+var
+  Cumules : TCumuleVenteBLArray;
+  Psql,codeArt : String;
+  I: Integer;
+  article : TArticle;
+
+begin
+  gPsql := ' SELECT code_art, designation_art, sum(qte_art) as qte, num_comc '
+          +' from tb_facturation tf inner join tb_facturation_detail tfd '
+          +' on tf.num_fact = tfd.num_fact '
+          +' where tf.num_comc  = '+QuotedStr(edNumCmd.Text)
+          +' group by tfd.code_art ' ;
+
+  with SQLQuery1 do
+    begin
+      SQL.Clear;
+      SQL.Add(gPsql);
+//      sql.SaveToFile('g:\cumul.txt');
+      Open;
+    end;
+
+  StringGrid1.RowCount := SQLQuery1.RowsAffected +1;
+
+  for I := 0 to SQLQuery1.RowsAffected -1 do
+    begin
+      with StringGrid1 ,SQLQuery1 do
+        begin
+          Cells[0,i+1] := FieldByName('code_art').AsString;
+          Cells[1,i+1] := FieldByName('designation_art').AsString;
+          Cells[2,i+1] := FieldByName('qte').AsString;
+        end;
+    end;
+end;
+
+procedure TfrmCumulVenteCmd.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+end.

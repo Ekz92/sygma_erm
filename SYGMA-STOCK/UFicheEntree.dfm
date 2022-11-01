@@ -2,7 +2,7 @@ object frmFicheEntree: TfrmFicheEntree
   Left = 0
   Top = 0
   Caption = 'Fiche d'#39'entr'#233'e'
-  ClientHeight = 449
+  ClientHeight = 502
   ClientWidth = 555
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,16 +20,15 @@ object frmFicheEntree: TfrmFicheEntree
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 504
-    Height = 449
+    Width = 509
+    Height = 502
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 497
     object GroupBox1: TGroupBox
       Left = 0
       Top = 0
-      Width = 504
+      Width = 509
       Height = 64
       Align = alTop
       Caption = 'En-t'#234'te'
@@ -72,8 +71,8 @@ object frmFicheEntree: TfrmFicheEntree
     object GroupBox2: TGroupBox
       Left = 0
       Top = 64
-      Width = 504
-      Height = 107
+      Width = 509
+      Height = 140
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
@@ -100,10 +99,17 @@ object frmFicheEntree: TfrmFicheEntree
       end
       object Label6: TLabel
         Left = 16
-        Top = 85
+        Top = 120
         Width = 46
         Height = 13
         Caption = 'Magasin :'
+      end
+      object Label8: TLabel
+        Left = 16
+        Top = 84
+        Width = 56
+        Height = 13
+        Caption = 'Comment. :'
       end
       object edCodeclt: TEdit
         Left = 72
@@ -145,7 +151,7 @@ object frmFicheEntree: TfrmFicheEntree
       end
       object cbMagasin: TComboBox
         Left = 72
-        Top = 81
+        Top = 116
         Width = 246
         Height = 21
         Style = csDropDownList
@@ -153,12 +159,22 @@ object frmFicheEntree: TfrmFicheEntree
         TabOrder = 4
         OnCloseUp = cbMagasinCloseUp
       end
+      object mComment: TMemo
+        Left = 72
+        Top = 81
+        Width = 353
+        Height = 34
+        Lines.Strings = (
+          'Memo1')
+        ParentColor = True
+        TabOrder = 5
+      end
     end
     object st_ficheEntree: TStringGrid
       Left = 0
-      Top = 171
-      Width = 504
-      Height = 278
+      Top = 204
+      Width = 509
+      Height = 298
       Align = alClient
       ColCount = 6
       DefaultRowHeight = 15
@@ -172,8 +188,6 @@ object frmFicheEntree: TfrmFicheEntree
       OnDrawCell = st_ficheEntreeDrawCell
       OnKeyPress = st_ficheEntreeKeyPress
       OnSelectCell = st_ficheEntreeSelectCell
-      ExplicitTop = 153
-      ExplicitHeight = 344
       ColWidths = (
         2
         74
@@ -184,18 +198,17 @@ object frmFicheEntree: TfrmFicheEntree
     end
   end
   object Panel3: TPanel
-    Left = 504
+    Left = 509
     Top = 0
-    Width = 51
-    Height = 449
+    Width = 46
+    Height = 502
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 497
     object SpeedButton1: TSpeedButton
       Left = 0
       Top = 0
-      Width = 51
+      Width = 46
       Height = 42
       Hint = 'Revenir au lot pr'#233'cedent'
       Align = alTop
@@ -213,7 +226,7 @@ object frmFicheEntree: TfrmFicheEntree
     object SpeedButton2: TSpeedButton
       Left = 0
       Top = 42
-      Width = 51
+      Width = 46
       Height = 42
       Hint = 'Passer au lot suivant'
       Align = alTop
@@ -231,7 +244,7 @@ object frmFicheEntree: TfrmFicheEntree
     object btSave: TButton
       Left = 0
       Top = 84
-      Width = 51
+      Width = 46
       Height = 42
       Hint = 'Enregistrer sans cloturer le lot'
       Align = alTop
@@ -250,8 +263,8 @@ object frmFicheEntree: TfrmFicheEntree
     end
     object btAnnuler: TButton
       Left = 0
-      Top = 407
-      Width = 51
+      Top = 460
+      Width = 46
       Height = 42
       Align = alBottom
       Caption = 'Annuler'
@@ -265,12 +278,11 @@ object frmFicheEntree: TfrmFicheEntree
       ShowHint = True
       TabOrder = 1
       OnClick = btAnnulerClick
-      ExplicitTop = 455
     end
     object btClot: TButton
       Left = 0
-      Top = 365
-      Width = 51
+      Top = 418
+      Width = 46
       Height = 42
       Hint = 'Enregistrer et passer au lot suivant'
       Align = alBottom
@@ -286,7 +298,6 @@ object frmFicheEntree: TfrmFicheEntree
       TabOrder = 2
       WordWrap = True
       OnClick = btClotClick
-      ExplicitTop = 413
     end
   end
 end

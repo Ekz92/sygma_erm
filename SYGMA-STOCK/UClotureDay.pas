@@ -44,6 +44,7 @@ var
   Caisse : TCaisse;
   Cat_cais : TCatalogueCaisse;
   I: Integer;
+  vDate_fin : string;
 
   stocks : TStockArray;
   sqlSelStk,
@@ -56,11 +57,21 @@ var
   SqlUpDate,
   SqlDiagram,
   SqlDiagram_mntT,SqlDiagram_mntP,SqlDiagram_mntR ,
-  PsqlDiagramDay, PsqlCumulBC,DelDiagramDay,
+  PsqlDiagramDay, PsqlCumulBC,DelDiagramDay,Del,
   PsqlDiagramDayFact: string;
 
   DiagramDayBC,CumulBC : TDiagramDayBC;
   DiagramDayFact : TDiagramDayFact;
+
+  code_art : string;
+  Article : TArticle;
+
+  StkCam : TStockCamionArray;
+  StockGene : TStockGene;
+  StockDepot : TStockArray;
+
+  SqlstkCam,SqlstkGene,UpdStkGeneDep,UpdStkGeneCam,
+  StkDepot ,sqlJrnCaisse,DelJrnCaisse: string;
 begin
     RUser:=TSQLQuery.Create(self);
     RUser.SQLConnection := dm.SQLConnection1;
@@ -86,10 +97,94 @@ begin
 
         //Cursor := crHourGlass;
         Label3.Visible := True;
-//        sleep(10000);
+        sleep(5000);
 
-//        PsqlCumulBC :=' Where date_val = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
-//        CumulBC := dm.selectCumulBc(PsqlCumulBC);
+// **************************Cloture de la caisse
+      vDate_fin := QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+
+      DelJrnCaisse := 'Delete from tb_jounalCaisse where date_jcd = '+vDate_fin;
+      dm.DeleteFromTable(DelJrnCaisse);
+
+      sqlJrnCaisse := ' insert into tb_jounalCaisse (date_jcd,debit,credit,solde) '
+                  +' select '+vDate_fin+', sum(debit) as debit, sum(credit) as credit, (sum(credit) - sum(debit)) as solde  from tb_etat_journal '
+                  +' where date_ej = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+      dm.UpdateTable(sqlJrnCaisse);
+//************Cloture stock generale partie camion
+
+    // Initialisation stock general
+       Del := ' truncate table tb_stock_gene ';
+       dm.DeleteFromTable(Del);
+
+    // selection stock camion
+       SqlstkCam := '';
+       StkCam := dm.selectAllStockCamion(SqlstkCam);
+
+       for I := Low(StkCam) to High(StkCam) do
+         begin
+           //Vérification si la ligne existe dans le stk gene
+
+            SqlstkGene := ' where code_art = '+QuotedStr(stkCam[i].Scode_art);
+            StockGene := dm.selectStockOnceStockGene(SqlstkGene);
+
+            if StockGene.Scode_art.IsEmpty then //Si l'article n'existe pas
+              begin
+                with StockGene do
+                  begin
+                    Scode_art:= stkcam[i].Scode_art;
+                    SDesignation_art:= stkcam[i].SDesignation_art;
+                    NQte_vide:= stkcam[i].NQte_vide;
+                    NQte_mag:= stkcam[i].NQte_mag;
+                    Nqte_total:= stkcam[i].Nqte_total;
+                  end;
+                  dm.InsertStockGeneral(StockGene);
+              end else // Si l'article existe dans la table de stock general
+              begin
+                UpdStkGeneCam := ' Update tb_stock_gene set '
+                              +' qte_vide = '+IntToStr(stkCam[i].NQte_vide + StockGene.NQte_vide)+','
+                              +' qte_mag = '+IntToStr(stkCam[i].NQte_mag + StockGene.NQte_mag)+','
+                              +' qte_totale = '+IntToStr(stkCam[i].Nqte_total + StockGene.Nqte_total)
+                              +' where code_art = '+QuotedStr(stkCam[i].Scode_art);
+                dm.UpdateTable(UpdStkGeneCam);
+              end;
+         end;
+//************Cloture stock generale partie dépôt
+    // selection stock depot
+       StkDepot := '';
+       StockDepot := dm.selectStock(SqlstkCam);
+
+       for I := Low(StockDepot) to High(StockDepot) do
+         begin
+           //Vérification si la ligne existe dans le stk gene
+            code_art :=StockDepot[i].Scode_art;
+
+            SqlstkGene := ' where code_art = '+QuotedStr(StockDepot[i].Scode_art);
+            StockGene := dm.selectStockOnceStockGene(SqlstkGene);
+
+            Article := DM.selectArticleByCode(code_art);
+
+            if StockGene.Scode_art.IsEmpty then //Si l'article n'existe pas
+              begin
+                with StockGene do
+                  begin
+                    Scode_art:= StockDepot[i].Scode_art;
+                    SDesignation_art:= Article.SDesignation_art;
+                    NQte_vide:= StockDepot[i].NQte_vide;
+                    NQte_mag:= StockDepot[i].NQte_mag;
+                    Nqte_total:= StockDepot[i].Nqte_total;
+                  end;
+                  dm.InsertStockGeneral(StockGene);
+              end else // Si l'article existe dans la table de stock general
+              begin
+                UpdStkGeneDep := ' Update tb_stock_gene set '
+                              +' qte_vide = '+IntToStr(StockDepot[i].NQte_vide + StockGene.NQte_vide)+','
+                              +' qte_mag = '+IntToStr(StockDepot[i].NQte_mag + StockGene.NQte_mag)+','
+                              +' qte_totale = '+IntToStr(StockDepot[i].Nqte_total + StockGene.Nqte_total)
+                              +' where code_art = '+QuotedStr(StockDepot[i].Scode_art);
+                dm.UpdateTable(UpdStkGeneDep);
+              end;
+         end;
+
+
 
 //Cloture du bon de commande insertion diagram commande
         PsqlDiagramDay := ' Where date_dbc = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
@@ -113,27 +208,33 @@ begin
         if not DiagramDayFact.Sdate_dbf.IsEmpty then //si la ligne du jour existe
           begin
             DelDiagramDay := ' Delete from tb_day_diagram_facture '
-                              +' Where date_dbf = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+                            +' Where date_dbf between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
+                            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
             dm.DeleteFromTable(DelDiagramDay);
           end ;
                    // Insertion montant total facture
           SqlDiagram_mntT := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
                         +' Select date_fact, sum(mnt_t) as Tmnt_t, '+QuotedStr('Totale')
                         +' from tb_facturation '
-                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+                        +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
           dm.InsertDiagramDay(SqlDiagram_mntT);
 
                    // Insertion montant total payee
           SqlDiagram_mntP := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
                         +' Select date_fact,  sum(mnt_p) as Tmnt_p, '+QuotedStr('Payée')
                         +'from tb_facturation '
-                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+                        +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
+
           dm.InsertDiagramDay(SqlDiagram_mntP);
                    // Insertion montant restant
           SqlDiagram_mntR := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
                         +' Select date_fact, sum(mnt_r) as Tmnt_r ,'+QuotedStr('Impayée')
                         +' from tb_facturation '
-                        +' Where date_fact ='+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
+                        +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
+
           dm.InsertDiagramDay(SqlDiagram_mntR);
 
 

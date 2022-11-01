@@ -112,6 +112,8 @@ var
   articles : TarticleArray;
   I: Integer;
 begin
+  edcode_art.Clear;
+  edcode_art.SetFocus;
 
    Psql := '';
 

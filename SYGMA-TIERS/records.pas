@@ -4,6 +4,13 @@ interface
 
 type
 
+TTypeClient = record
+	Nid_tclt : integer;
+	Scode_tclt :string;
+	Sdesignation_tclt :string;
+end;
+TTypeClientArray = array of TTypeClient;
+
 TLivreur = record
   Nid_liv : integer ;
   SCode_liv ,
@@ -23,7 +30,8 @@ TClient = record
   Smail,
   ScommentClt,
   SZone,
-  STarif : string;
+  STarif,
+  STypeclt : string;
 end;
 TClientArray = Array of TClient;
 

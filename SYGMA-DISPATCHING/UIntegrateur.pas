@@ -96,6 +96,7 @@ type
     frxFiche_mission_spec: TfrxReport;
     frxFiche_mission_ord: TfrxReport;
     ransfertintercamion1: TMenuItem;
+    Rgulstockcamion1: TMenuItem;
     procedure Saisieduchargement1Click(Sender: TObject);
     procedure Listeduchargement1Click(Sender: TObject);
     procedure Saisiedechargement1Click(Sender: TObject);
@@ -111,6 +112,7 @@ type
     procedure Liste4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ransfertintercamion1Click(Sender: TObject);
+    procedure Rgulstockcamion1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -127,7 +129,8 @@ implementation
 uses UChargement_veh, UListe_chargement, UvteChargVeh, UStockcamion,
   UListeChargCamion, UListeChargementCamion, UListeLotLivraison,
   UCumulQteChargeCam, UEtatLivraison, UDiagrammeChargement, URetourBouteille,
-  UAddCommandeCamion, UListeCommandeCamion, records, UDM, UTransfertInterCamion;
+  UAddCommandeCamion, UListeCommandeCamion, records, UDM, UTransfertInterCamion,
+  UReguleStockCamion;
 
 procedure TfrmIntegrateur.Consultationdechargement1Click(Sender: TObject);
 begin
@@ -221,6 +224,11 @@ end;
 procedure TfrmIntegrateur.Retourbouteilles1Click(Sender: TObject);
 begin
 frmRetourBouteille.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Rgulstockcamion1Click(Sender: TObject);
+begin
+frmReguleStockCamion.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Saisiedechargement1Click(Sender: TObject);
