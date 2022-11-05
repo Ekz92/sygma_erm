@@ -666,7 +666,9 @@ begin
 
 //Selection d'article
 
-  PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag); //where code_mag = '+QuotedStr('PFGB');
+  PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag)
+            +' order by ordre asc ';
+
   articles := DM.selectArticles(PsqlArt)      ;
   st_ficheSortie.RowCount := Length(articles)+1;
 

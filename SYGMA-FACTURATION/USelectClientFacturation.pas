@@ -155,6 +155,7 @@ begin
 
     edcodeClt.Clear;
     edNomClt.Clear;
+    edNomClt.SetFocus;
 
 end;
 

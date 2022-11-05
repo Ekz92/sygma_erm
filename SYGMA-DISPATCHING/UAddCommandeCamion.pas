@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
-  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ExtCtrls;
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls;
 
 type
   TfrmAddCommandeCamion = class(TForm)
@@ -17,7 +17,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     edCommande: TEdit;
-    edDate: TEdit;
     edChargement: TEdit;
     edVéhicule: TEdit;
     edMontant: TEdit;
@@ -27,6 +26,7 @@ type
     frxQComCam: TfrxReport;
     frxDBQComCam: TfrxDBDataset;
     QComCam: TSQLQuery;
+    edDate: TDateTimePicker;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -60,7 +60,7 @@ if Trim(edChargement.Text)<>'' then
   with ComCam do
     begin
       Nnum_comc := StrToInt(edCommande.Text);
-      Sdate_com:=QuotedStr(FormatDateTime('yyyy-mm-dd',Now));
+      Sdate_com:=QuotedStr(FormatDateTime('yyyy-mm-dd',edDate.Date));
       Nchargement := StrToInt(edChargement.Text);
       Spiece := QuotedStr(edPiece.Text);
       Svehicule := QuotedStr(edVéhicule.Text);
@@ -117,7 +117,7 @@ procedure TfrmAddCommandeCamion.FormShow(Sender: TObject);
 begin
   numCom :=dm.SelectMaxComCam.NnumMax +1 ;
   edCommande.Text := IntToStr(numCom);
-  edDate.Text := DateToStr(Now);
+  edDate.Date := Now;
 end;
 
 end.

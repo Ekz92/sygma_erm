@@ -3,7 +3,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
   Top = 0
   Caption = 'Liste d'#39'entr'#233'e'
   ClientHeight = 409
-  ClientWidth = 653
+  ClientWidth = 765
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,13 +19,14 @@ object frmListeFcheEntree: TfrmListeFcheEntree
   object Panel2: TPanel
     Left = 0
     Top = 137
-    Width = 653
+    Width = 765
     Height = 27
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
+    ExplicitWidth = 653
     object Button1: TButton
-      Left = 502
+      Left = 614
       Top = 1
       Width = 75
       Height = 25
@@ -33,25 +34,28 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       Caption = 'Recherche'
       TabOrder = 0
       OnClick = Button1Click
+      ExplicitLeft = 502
     end
     object Button2: TButton
-      Left = 577
+      Left = 689
       Top = 1
       Width = 75
       Height = 25
       Align = alRight
       Caption = 'Annuler'
       TabOrder = 1
+      ExplicitLeft = 577
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 653
+    Width = 765
     Height = 137
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 653
     object Label1: TLabel
       Left = 4
       Top = 6
@@ -158,10 +162,10 @@ object frmListeFcheEntree: TfrmListeFcheEntree
   object StringGrid1: TStringGrid
     Left = 0
     Top = 164
-    Width = 653
+    Width = 765
     Height = 219
     Align = alClient
-    ColCount = 7
+    ColCount = 8
     DefaultRowHeight = 15
     FixedCols = 0
     RowCount = 1
@@ -174,6 +178,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     StyleElements = [seBorder]
     OnDblClick = StringGrid1DblClick
     OnDrawCell = StringGrid1DrawCell
+    ExplicitWidth = 653
     ColWidths = (
       75
       78
@@ -181,17 +186,19 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       70
       156
       73
-      136)
+      136
+      112)
   end
   object Panel3: TPanel
     Left = 0
     Top = 383
-    Width = 653
+    Width = 765
     Height = 26
     Align = alBottom
     TabOrder = 3
+    ExplicitWidth = 653
     object Button3: TButton
-      Left = 577
+      Left = 689
       Top = 1
       Width = 75
       Height = 24
@@ -199,6 +206,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       Caption = 'Pr'#233'visualiser'
       TabOrder = 0
       OnClick = Button3Click
+      ExplicitLeft = 577
     end
   end
   object frxFicheEntree: TfrxReport
@@ -301,7 +309,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 26.456710000000000000
+        Height = 49.133890000000000000
         Top = 18.897650000000000000
         Width = 1046.929810000000000000
         object Memo33: TfrxMemoView
@@ -320,12 +328,60 @@ object frmListeFcheEntree: TfrmListeFcheEntree
             'Liste des entr'#233'es par fiche d'#39'entr'#233'e')
           ParentFont = False
         end
+        object md1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 39.456710000000000000
+          Top = 26.543304650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo37: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 26.456710000000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Du :')
+          ParentFont = False
+        end
+        object md2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 175.519790000000000000
+          Top = 26.543304650000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+        end
+        object Memo38: TfrxMemoView
+          AllowVectorExport = True
+          Left = 139.842610000000000000
+          Top = 26.543304650000000000
+          Width = 30.236240000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Au :')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 68.031540000000000000
+        Top = 90.708720000000000000
         Width = 1046.929810000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
@@ -495,7 +551,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
         FillType = ftBrush
         Frame.Typ = []
         Height = 18.897650000000000000
-        Top = 151.181200000000000000
+        Top = 173.858380000000000000
         Width = 1046.929810000000000000
         DataSet = frxDBFicheEntree
         DataSetName = 'frxDBFicheEntree'
@@ -679,7 +735,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
         FillType = ftBrush
         Frame.Typ = []
         Height = 26.456710000000000000
-        Top = 351.496290000000000000
+        Top = 374.173470000000000000
         Width = 1046.929810000000000000
         object Memo25: TfrxMemoView
           Align = baWidth
@@ -714,7 +770,7 @@ object frmListeFcheEntree: TfrmListeFcheEntree
         FillType = ftBrush
         Frame.Typ = []
         Height = 99.157531570000000000
-        Top = 192.756030000000000000
+        Top = 215.433210000000000000
         Width = 1046.929810000000000000
         object Memo28: TfrxMemoView
           AllowVectorExport = True
@@ -865,19 +921,14 @@ object frmListeFcheEntree: TfrmListeFcheEntree
             'Commentaire :')
           ParentFont = False
         end
-        object frxDBLFicheEntreecomment: TfrxMemoView
-          IndexTag = 1
+        object mComment: TfrxMemoView
           AllowVectorExport = True
-          Left = 110.606370000000000000
+          Left = 109.606370000000000000
           Top = 45.354360000000000000
-          Width = 79.370130000000000000
+          Width = 94.488250000000000000
           Height = 18.897650000000000000
           AutoWidth = True
-          DataSet = frxDBLFicheEntree
-          DataSetName = 'frxDBLFicheEntree'
           Frame.Typ = []
-          Memo.UTF8W = (
-            '[frxDBFicheEntree."comment"]')
         end
       end
     end
@@ -891,7 +942,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     Top = 88
   end
   object QFicheEntree: TSQLQuery
-    Active = True
     MaxBlobSize = 1
     Params = <>
     SQL.Strings = (
@@ -1564,7 +1614,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     Top = 272
   end
   object QLFicheEntree: TSQLQuery
-    Active = True
     MaxBlobSize = 1
     Params = <>
     SQL.Strings = (

@@ -396,7 +396,9 @@ begin
 
 //Selection d'article
 
-  PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag); //where code_mag = '+QuotedStr('PFGB');
+  PsqlArt := ' where code_mag = '+QuotedStr(vCodeMag)
+            +' order by ordre asc ';
+
   articles := DM.selectArticles(PsqlArt)      ;
   st_ficheEntree.RowCount := Length(articles)+1;
 
@@ -516,21 +518,21 @@ begin
       cbMagasin.Items.Add(Magasins[i].Sdesignation_mag);
     end;
 
-//Selection d'article
-
-  PsqlArt := ' where code_mag = '+QuotedStr('PFGB');
-  articles := DM.selectArticles(PsqlArt)      ;
-  st_ficheEntree.RowCount := Length(articles)+1;
-
-  for I := Low(articles) to High(articles) do
-    begin
-       with st_ficheEntree do
-          begin
-            Cells[1,i+1] := articles[i].Scode_art;
-            Cells[2,i+1] := articles[i].Sdesignation_art;
-          end;
-    end;
-    if st_ficheEntree.RowCount>1 then st_ficheEntree.FixedRows:=1;
+////Selection d'article
+//
+//  PsqlArt := ' where code_mag = '+QuotedStr('PFGB');
+//  articles := DM.selectArticles(PsqlArt)      ;
+//  st_ficheEntree.RowCount := Length(articles)+1;
+//
+//  for I := Low(articles) to High(articles) do
+//    begin
+//       with st_ficheEntree do
+//          begin
+//            Cells[1,i+1] := articles[i].Scode_art;
+//            Cells[2,i+1] := articles[i].Sdesignation_art;
+//          end;
+//    end;
+//    if st_ficheEntree.RowCount>1 then st_ficheEntree.FixedRows:=1;
 
   edNum.Text := vUsager+IntToStr(dm.SelectMaxLettrage.numLettrage+1) ;
 

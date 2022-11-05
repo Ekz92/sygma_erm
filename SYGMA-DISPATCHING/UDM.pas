@@ -582,7 +582,7 @@ begin
   query:=TSQLQuery.Create(self);
   query.SQLConnection := SQLConnection1;
 
-  sql := 'select max(numCharg) as numCharg from tb_vte_chargveh';
+  sql := 'select max(num_charg) as numCharg from tb_livraison_camion';
 
   try
     query.SQL.Add(sql);

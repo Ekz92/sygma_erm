@@ -182,6 +182,7 @@ TArticle = record
   Stype_art : String;
   Rkilo : real;
   Scode_mag : string;
+  Nordre : integer;
 end;
 TarticleArray = array of TArticle;
 

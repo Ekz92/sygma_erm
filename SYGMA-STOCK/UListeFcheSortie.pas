@@ -111,6 +111,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           Cells[4,i+1] := Fhs[i].Snom_clt;
           Cells[5,i+1] := Fhs[i].Snum_veh;
           Cells[6,i+1] := Fhs[i].Snom_veh;
+          Cells[7,i+1] := Fhs[i].Scomment;
         end;
       if StringGrid1.RowCount>1 then StringGrid1.FixedRows:=1;
 
@@ -166,14 +167,14 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
     end;
 
 //****************************** Affichage date1 ***********************
-Component := frxFicheSortie.FindObject('md1');
+Component := frxLFicheSortie.FindObject('md1');
   if Component is TfrxMemoView then
   begin
         MD1 := Component as TfrxMemoView;
         MD1.Text := DateToStr(d1.DateTime);
   end;
 //*****
-Component := frxFicheSortie.FindObject('md2');
+Component := frxLFicheSortie.FindObject('md2');
   if Component is TfrxMemoView then
   begin
         MD2 := Component as TfrxMemoView;
@@ -287,14 +288,6 @@ Component := frxFicheSortie.FindObject('md2');
         MD2.Text := DateToStr(d2.DateTime);
   end;
 
-//*****
-Component := frxFicheSortie.FindObject('mComment');
-  if Component is TfrxMemoView then
-  begin
-        mComment := Component as TfrxMemoView;
-        mComment.Text := DateToStr(d2.DateTime);
-  end;
-
   QFicheSortie.SQL.Clear;
   QFicheSortie.SQL.Add(Sql);
 //  QFicheSortie.SQL.SaveToFile('g:\got.txt');
@@ -325,6 +318,7 @@ with StringGrid1 do
     Cells[4,0] := 'Nom';
     Cells[5,0] := 'Véhicule';
     Cells[6,0] := 'Nom';
+    Cells[7,0] := 'Comment';
   end;
 end;
 

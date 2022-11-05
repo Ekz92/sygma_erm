@@ -228,7 +228,7 @@ begin
         NStatut_canc := 0;
         NStatut_com := 0;
       end;
-      dm.InsertVteChargVeh(vteCharg);
+//      dm.InsertVteChargVeh(vteCharg);
 
       {Insertion de l'en-tête du chargement camion tb_livraison_camion}
 
@@ -289,11 +289,11 @@ begin
 //            PSqlCam := ' Where vehicule = '+QuotedStr(edNumMat.Text)
 //                        +' and code_art = '+QuotedStr(StringGrid1.Cells[0,i]);
 //
-//            code_art := StringGrid1.Cells[0,i];
+            code_art := StringGrid1.Cells[0,i];
 //
 //            stockCam := dm.selectStockCamion(PSqlCam);
-//            stock := dm.selectStockByArticle(code_art);
-//            article := dm.selectArticleByCode(code_art);
+            stock := dm.selectStockByArticle(code_art);
+            article := dm.selectArticleByCode(code_art);
 
 //            if rgType.ItemIndex=1 then //Si le chargement est à destination des clients du camion
 //              begin

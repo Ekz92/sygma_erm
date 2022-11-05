@@ -1,0 +1,457 @@
+unit UListeFcheSortie;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.FMTBcd, Data.DB, Data.SqlExpr,
+  frxClass, frxDBSet, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.Menus;
+
+type
+  TfrmListeFcheSortie = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    d1: TDateTimePicker;
+    d2: TDateTimePicker;
+    cbClient: TComboBox;
+    edcodeClt: TEdit;
+    cbVeh: TComboBox;
+    edMarque: TEdit;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    frxFicheSortie: TfrxReport;
+    frxDBFicheSortie: TfrxDBDataset;
+    QFicheSortie: TSQLQuery;
+    StringGrid1: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    Consulter1: TMenuItem;
+    Supprimer1: TMenuItem;
+    Panel3: TPanel;
+    Button3: TButton;
+    frxLFicheSortie: TfrxReport;
+    QLFicheSortie: TSQLQuery;
+    frxDBLFicheSortie: TfrxDBDataset;
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure cbVehChange(Sender: TObject);
+    procedure cbClientCloseUp(Sender: TObject);
+    procedure cbVehCloseUp(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure Consulter1Click(Sender: TObject);
+    procedure StringGrid1DblClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Supprimer1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmListeFcheSortie: TfrmListeFcheSortie;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmListeFcheSortie.Button1Click(Sender: TObject);
+var
+  Sql : string;
+  Fhs : TFicheEsHArray;
+  i:integer;
+begin
+if (edcodeClt.Text='') and (edMarque.Text='') then
+  begin
+    Sql := ' where typeFs = 1 '
+          +' and date_fh between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and statut_canc = 0 '
+          +' order by id_fh desc ';
+  end else
+  if edcodeClt.Text<>'' then
+  begin
+    Sql := ' where typeFs= 1 '
+          +' and date_fh between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and statut_canc = 0 '
+          +' order by id_fh desc ';
+  end else
+  if edMarque.Text<>'' then
+    begin
+      Sql := ' where typeFs = 1 '
+                +' and date_fh between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and num_veh = '+QuotedStr(edMarque.Text)
+                +' and statut_canc = 0 '
+                +' order by id_fh desc ';
+    end;
+
+    Fhs := dm.SelectFicheEsH(Sql);
+    StringGrid1.RowCount := Length(Fhs)+1;
+
+    for I := Low(Fhs) to High(Fhs) do
+      with StringGrid1 do
+        begin
+          Cells[0,i+1] := Fhs[i].Sdate_fh;
+          Cells[1,i+1] := IntToStr(Fhs[i].Nnum_fh);
+          Cells[2,i+1] := IntToStr(Fhs[i].Nnum_his);
+          Cells[3,i+1] := Fhs[i].Scode_clt;
+          Cells[4,i+1] := Fhs[i].Snom_clt;
+          Cells[5,i+1] := Fhs[i].Snum_veh;
+          Cells[6,i+1] := Fhs[i].Snom_veh;
+        end;
+      if StringGrid1.RowCount>1 then StringGrid1.FixedRows:=1;
+
+
+//  QFicheSortie.SQL.Clear;
+//  QFicheSortie.SQL.Add(Sql);
+//  QFicheSortie.Open;
+
+//  frxLFicheSortie.ShowReport();
+end;
+
+procedure TfrmListeFcheSortie.Button3Click(Sender: TObject);
+var
+  Sql : string;
+  Fhs : TFicheEsHArray;
+  i:integer;
+
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
+
+begin
+if (edcodeClt.Text='') and (edMarque.Text='') then
+  begin
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and tfes.statut_canc = 0 '
+          +' order by id_fes desc ';
+  end else
+  if edcodeClt.Text<>'' then
+  begin
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and tfes.statut_canc = 0 '
+          +' order by id_fes desc ';
+  end else
+  if edMarque.Text<>'' then
+    begin
+    Sql := ' Select * from tb_fiche_es tfes '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and tfes.statut_canc = 0 '
+          +' order by id_fes desc ';
+    end;
+
+//****************************** Affichage date1 ***********************
+Component := frxFicheSortie.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxFicheSortie.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+
+
+  QLFicheSortie.SQL.Clear;
+  QLFicheSortie.SQL.Add(Sql);
+  QLFicheSortie.Open;
+//
+  frxLFicheSortie.ShowReport();
+end;
+
+procedure TfrmListeFcheSortie.cbClientCloseUp(Sender: TObject);
+var
+  Psql : string;
+  Clts : TClientArray;
+  I: Integer;
+begin
+
+    Psql := ' where nom_clt = '+QuotedStr(cbClient.Text);
+
+    Clts := DM.selectClients(Psql);
+
+    for I := Low(Clts) to High(Clts) do
+      begin
+        edcodeClt.Text:=Clts[i].SCodeClt;
+      end;
+
+      edMarque.Clear;
+end;
+
+procedure TfrmListeFcheSortie.cbVehChange(Sender: TObject);
+begin
+edMarque.Clear;
+cbVehCloseUp(sender);
+end;
+
+procedure TfrmListeFcheSortie.cbVehCloseUp(Sender: TObject);
+var
+  vehs : TVehiculeArray;
+  Psql_veh : string;
+  i: integer;
+begin
+//selection du véhicule
+    Psql_veh := ' where marque_veh = '+QuotedStr(cbVeh.Text) ;
+
+    vehs:=dm.SelectVehicule(Psql_veh);
+    for I := Low(vehs) to High(vehs) do
+      begin
+        edMarque.Text := vehs[i].SNum_mat;
+      end;
+
+      edcodeClt.Clear;
+end;
+
+procedure TfrmListeFcheSortie.Consulter1Click(Sender: TObject);
+var
+  Sql : string;
+
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
+begin
+if (edcodeClt.Text='') and (edMarque.Text='') then
+  begin
+    Sql := ' Select * from tb_fiche_es tfes'
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+  end else
+  if edcodeClt.Text<>'' then
+  begin
+    Sql := ' Select * from tb_fiche_es tfes'
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes= 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and tfes.code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+  end else
+  if edMarque.Text<>'' then
+    begin
+    Sql := ' Select * from tb_fiche_es '
+          +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
+          +' where type_fes = 1 '
+          +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+          +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+          +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+    end;
+
+//****************************** Affichage date1 ***********************
+Component := frxFicheSortie.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxFicheSortie.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+//*****
+Component := frxFicheSortie.FindObject('mComment');
+  if Component is TfrxMemoView then
+  begin
+        mComment := Component as TfrxMemoView;
+        mComment.Text := DateToStr(d2.DateTime);
+  end;
+
+  QFicheSortie.SQL.Clear;
+  QFicheSortie.SQL.Add(Sql);
+//  QFicheSortie.SQL.SaveToFile('g:\got.txt');
+  QFicheSortie.Open;
+
+//*****
+Component := frxFicheSortie.FindObject('mComment');
+  if Component is TfrxMemoView then
+  begin
+        mComment := Component as TfrxMemoView;
+        mComment.Text := QFicheSortie.FieldByName('comment').AsString;
+  end;
+
+  frxFicheSortie.ShowReport();
+end;
+
+procedure TfrmListeFcheSortie.FormCreate(Sender: TObject);
+begin
+cbClient.Clear;
+cbVeh.Clear;
+
+with StringGrid1 do
+  begin
+    Cells[0,0] := 'Date';
+    Cells[1,0] := 'N°Fiche';
+    Cells[2,0] := 'N°his';
+    Cells[3,0] := 'Client';
+    Cells[4,0] := 'Nom';
+    Cells[5,0] := 'Véhicule';
+    Cells[6,0] := 'Nom';
+  end;
+end;
+
+procedure TfrmListeFcheSortie.FormShow(Sender: TObject);
+var
+  Psql,Psql_veh : string;
+  Clts : TClientArray;
+  I: Integer;
+  vehs : TVehiculeArray;
+begin
+  d2.Date := Now;
+  Psql := '';
+
+  Clts := DM.selectClients(Psql);
+
+  for I := Low(Clts) to High(Clts) do
+    begin
+      cbClient.Items.Add(Clts[i].SnomClt);
+    end;
+
+//selection du véhicule
+  Psql_veh := '';
+
+  vehs:=dm.SelectVehicule(Psql_veh);
+  for I := Low(vehs) to High(vehs) do
+    begin
+      cbVeh.Items.Add(vehs[i].SMarque);
+    end;
+
+    Button1.Click;
+end;
+
+procedure TfrmListeFcheSortie.StringGrid1DblClick(Sender: TObject);
+begin
+Consulter1.Click;
+end;
+
+procedure TfrmListeFcheSortie.StringGrid1DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+    with Sender As TStringGrid do with canvas do
+    begin
+      { selection de la couleur de fond}
+      if gdFixed in State then
+        Brush.Color:=clBtnFace
+      else
+        if gdSelected in State then
+          Brush.Color:=clNavy//$00000046
+        else
+          if Odd(ARow) then
+            Brush.Color :=$006A9BFF//$FFE0FF clgreen
+          else
+            Brush.Color:=$00FBDA97;//$FFFFE0  clBlue
+      {Design du fond}
+      FillRect(Rect);
+      {Selection de la couleur d'ecriture}
+      if gdSelected in State then
+        font.Color:=clwhite
+        else
+        font.Color:=clblack;
+      {Design du texte}
+      TextOut(Rect.Left,Rect.Top,Cells[ACol,ARow]);
+    end;
+
+end;
+
+procedure TfrmListeFcheSortie.Supprimer1Click(Sender: TObject);
+var
+  PDel_fes,
+  PDel_fesh,
+  PDel_fest,
+  PDel_fesRec, SqlUpStk,SqlSelStk,SqlSelFiche,
+  codeArt : string;
+
+  Fiche : TFiche_esArray;
+  Stock : TStock;
+  i : integer;
+begin
+if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes,mbNo],0) = mrYes then
+  begin
+    PDel_fes := ' delete from tb_ficheo_recap '
+            +' where num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+            +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
+
+    PDel_fesh := ' delete from tb_fiche_esH '
+            +' where num_fh = '+StringGrid1.Cells[1,StringGrid1.Row]
+            +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
+
+    PDel_fest := ' delete from tb_fichees_total '
+            +' where num_ft = '+StringGrid1.Cells[1,StringGrid1.Row]
+            +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
+
+
+    PDel_fesRec := ' delete from tb_fiche_es '
+            +' where num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+            +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
+
+//    selection de la fiche
+    SqlSelFiche:=' where num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
+                +' and num_his = '+StringGrid1.Cells[2,StringGrid1.Row];
+
+    Fiche := dm.SelectFicheEs(SqlSelFiche);
+
+//    for
+    for I := Low(Fiche) to High(Fiche) do
+      begin
+//          selection du stock
+        codeArt := Fiche[i].Scode_art;
+        Stock := dm.selectStockByArticle(codeArt);
+
+//            MAJ des qte en stock
+      SqlUpStk:='update tb_stock set '
+              +' qte_vide = '+IntToStr(stock.NQte_vide + (Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite))+','
+              +' qte_mag = '+IntToStr(stock.NQte_mag + Fiche[i].Nqte_pleine)+','
+              +' qte_totale = '+IntToStr(stock.Nqte_total +(Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite + Fiche[i].Nqte_pleine ))
+              +' where code_art = '+QuotedStr(codeArt);
+      dm.UpdateTable(SqlUpStk);
+      end; //end for
+
+    dm.DeleteFromTable(PDel_fes);
+    dm.DeleteFromTable(PDel_fesh);
+    dm.DeleteFromTable(PDel_fest);
+    dm.DeleteFromTable(PDel_fesRec);
+
+    Button1.Click;
+  end;
+
+end;
+
+end.

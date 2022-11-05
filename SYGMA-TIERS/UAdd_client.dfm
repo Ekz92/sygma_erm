@@ -258,7 +258,7 @@ object frmAdd_client: TfrmAdd_client
       MaxLength = 4
       ParentColor = True
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 0
     end
     object cbTarif: TComboBox
       Left = 77
@@ -303,7 +303,7 @@ object frmAdd_client: TfrmAdd_client
       ParentColor = True
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 9
       Text = 'CN01'
     end
   end

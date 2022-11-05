@@ -223,6 +223,7 @@ begin
               Stype_art := cbtype.Text;
               Rkilo:= StrToFloat(edKilo.Text);
               Scode_mag := Trim(edcode_mag.Text);
+              Nordre:=999;
           end;
       //-------------------------Création de l'article dans la table stock---------------
 
@@ -256,6 +257,7 @@ begin
         SqlUpd_art := 'Update tb_article set '
                        +' designation_art = '+QuotedStr(edDesignation.Text)+','
                        +' alias_art = '+QuotedStr(edAlias.Text)+','
+                       +' alias_ret = '+QuotedStr(edAlias_rb.Text)+','
                        +' type_art = '+QuotedStr(cbtype.Text)+','
                        +' kilo = '+edKilo.Text+','
                        +' code_mag = '+QuotedStr(edcode_mag.Text)

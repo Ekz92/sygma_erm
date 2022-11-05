@@ -518,6 +518,7 @@ begin
                 Snom_clt:=FieldByName('nom_clt').AsString;
                 Snum_veh:= FieldByName('num_veh').AsString;
                 Snom_veh:=FieldByName('nom_veh').AsString;
+                Scomment:=FieldByName('comment').AsString;
                 NType_fs:=FieldByName('typeFs').AsInteger;
                 Susager:=FieldByName('usager').AsString;
                 Nstatut_canc:=FieldByName('statut_canc').AsInteger;
@@ -2782,7 +2783,8 @@ begin
           +QuotedStr(Salias_ret)+','
           +QuotedStr(Stype_art)+','
           +FloatToStr(Rkilo)+','
-          +QuotedStr(Scode_mag) +');'
+          +QuotedStr(Scode_mag)+','
+          +IntToStr(Nordre) +');'
     end;
 
     try
@@ -2909,8 +2911,7 @@ begin
   query:=TSQLQuery.Create(self);
   query.SQLConnection:=dm.SQLConnection1;
 
-  sql := 'select * from tb_article '+Psql
-         +' order by kilo asc ';
+  sql := 'select * from tb_article '+Psql;
 
   i:=0;
 

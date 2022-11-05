@@ -114,6 +114,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           Cells[4,i+1] := Fhs[i].Snom_clt;
           Cells[5,i+1] := Fhs[i].Snum_veh;
           Cells[6,i+1] := Fhs[i].Snom_veh;
+          Cells[7,i+1] := Fhs[i].Scomment;
         end;
       if StringGrid1.RowCount>1 then StringGrid1.FixedRows:=1;
 
@@ -129,6 +130,10 @@ var
   Sql : string;
   Fhs : TFicheEsHArray;
   i:integer;
+
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
+
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
@@ -162,6 +167,25 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' and tfes.statut_canc = 0 '
           +' order by id_fes desc ';
     end;
+
+//****************************** Affichage date1 ***********************
+Component := frxLFicheEntree.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxLFicheEntree.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
+
+
+
+
   QLFicheEntree.SQL.Clear;
   QLFicheEntree.SQL.Add(Sql);
   QLFicheEntree.Open;
@@ -262,6 +286,9 @@ end;
 procedure TfrmListeFcheEntree.Consulter1Click(Sender: TObject);
 var
   Sql : string;
+  Component: TfrxComponent;
+  MD1,MD2,mComment :TfrxMemoView;
+
 begin
 if (edcodeClt.Text='') and (edMarque.Text='') then
   begin
@@ -296,12 +323,35 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
     end;
 
+//****************************** Affichage date1 ***********************
+Component := frxFicheEntree.FindObject('md1');
+  if Component is TfrxMemoView then
+  begin
+        MD1 := Component as TfrxMemoView;
+        MD1.Text := DateToStr(d1.DateTime);
+  end;
+//*****
+Component := frxFicheEntree.FindObject('md2');
+  if Component is TfrxMemoView then
+  begin
+        MD2 := Component as TfrxMemoView;
+        MD2.Text := DateToStr(d2.DateTime);
+  end;
 
   QFicheEntree.SQL.Clear;
   QFicheEntree.SQL.Add(Sql);
 //  QFicheSortie.SQL.SaveToFile('g:\got.txt');
   QFicheEntree.Open;
-//
+
+//*****
+Component := frxFicheEntree.FindObject('mComment');
+  if Component is TfrxMemoView then
+  begin
+        mComment := Component as TfrxMemoView;
+        mComment.Text := QFicheEntree.FieldByName('comment').AsString;
+  end;
+
+
   frxFicheEntree.ShowReport();
 end;
 
@@ -319,6 +369,7 @@ with StringGrid1 do
     Cells[4,0] := 'Nom';
     Cells[5,0] := 'Véhicule';
     Cells[6,0] := 'Nom';
+    Cells[7,0] := 'Comment';
   end;
 
 end;
@@ -391,12 +442,13 @@ var
   PDel_fes,
   PDel_fesh,
   PDel_fest,
-  PDel_fesRec, SqlUpStk,SqlSelStk,SqlSelFiche,
-  codeArt : string;
+  PDel_fesRec, SqlStockCam,SqlUpStk,SqlSelStk,SqlSelFiche,
+  codeArt ,SqlUpstkCam: string;
 
   Fiche : TFiche_esArray;
   Stock : TStock;
   i : integer;
+  StockCam : TStockCamion;
 begin
 if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes,mbNo],0) = mrYes then
   begin
@@ -430,7 +482,6 @@ if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes
         codeArt := Fiche[i].Scode_art;
         Stock := dm.selectStockByArticle(codeArt);
 
-
 //            MAJ des qte en stock
       SqlUpStk:='update tb_stock set '
               +' qte_vide = '+IntToStr(stock.NQte_vide - (Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite))+','
@@ -438,6 +489,23 @@ if MessageDlg('Etes-vous sûr de vouloir annuler cette sortie ?',mtWarning,[mbYes
               +' qte_totale = '+IntToStr(stock.Nqte_total -(Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite + Fiche[i].Nqte_pleine ))
               +' where code_art = '+QuotedStr(codeArt);
       dm.UpdateTable(SqlUpStk);
+
+//          selection du stock camion
+        codeArt := Fiche[i].Scode_art;
+
+        SqlStockCam :=' where code_art = '+QuotedStr(codeArt)
+                      +' and vehicule = '+QuotedStr(StringGrid1.Cells[5,StringGrid1.Row])  ;
+        StockCam := dm.selectStockCamion(SqlStockCam);
+
+//            MAJ des qte en stock camion
+         SqlUpstkCam := ' update tb_stock_camion set '
+                    +' qte_vide = '+IntToStr(StockCam.NQte_vide + (Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite)) +','
+                    +' qte_mag = '+IntToStr(StockCam.NQte_mag + Fiche[i].Nqte_pleine) +','
+                    +' qte_total = '+IntToStr(StockCam.Nqte_total + (Fiche[i].Nqte_vide + Fiche[i].Nqte_fuite + Fiche[i].Nqte_pleine))
+                    +SqlStockCam;
+
+        dm.UpdateTable(SqlUpstkCam);
+
       end; //end for
 
     dm.DeleteFromTable(PDel_fes);
