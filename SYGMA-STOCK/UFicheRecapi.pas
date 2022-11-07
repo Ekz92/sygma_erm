@@ -15,8 +15,6 @@ type
     d1: TDateTimePicker;
     d2: TDateTimePicker;
     Label3: TLabel;
-    cbClient: TComboBox;
-    Label4: TLabel;
     edcodeClt: TEdit;
     Label5: TLabel;
     cbVeh: TComboBox;
@@ -32,10 +30,9 @@ type
     frxDBSUM: TfrxDBDataset;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure cbVehChange(Sender: TObject);
-    procedure cbClientCloseUp(Sender: TObject);
     procedure cbVehCloseUp(Sender: TObject);
+    procedure edcodeCltDblClick(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -49,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM;
+uses records, UDM, URechClt;
 
 procedure TfrmFicheRecapi.Button1Click(Sender: TObject);
 var
@@ -125,7 +122,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
     Sql := 'Select * from tb_fichei_recap '
           +' where date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and code_clt IN ('+edcodeClt.Text+')'
           +' order by id_fes desc ';
 
   //
@@ -182,7 +179,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
     +' from tb_fichei_recap '
     +' where date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
     +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-    +' and code_clt = '+QuotedStr(edcodeClt.Text) ;
+    +' and code_clt IN ('+edcodeClt.Text+')'
   end else
   if edMarque.Text<>'' then
     begin
@@ -277,25 +274,6 @@ Component := frxRecap.FindObject('md2');
   frxRecap.ShowReport();
 end;
 
-procedure TfrmFicheRecapi.cbClientCloseUp(Sender: TObject);
-var
-  Psql : string;
-  Clts : TClientArray;
-  I: Integer;
-begin
-
-    Psql := ' where nom_clt = '+QuotedStr(cbClient.Text);
-
-    Clts := DM.selectClients(Psql);
-
-    for I := Low(Clts) to High(Clts) do
-      begin
-        edcodeClt.Text:=Clts[i].SCodeClt;
-      end;
-
-      edMarque.Clear;
-end;
-
 procedure TfrmFicheRecapi.cbVehChange(Sender: TObject);
 begin
 edMarque.Clear;
@@ -320,10 +298,10 @@ begin
       edcodeClt.Clear;
 end;
 
-procedure TfrmFicheRecapi.FormCreate(Sender: TObject);
+procedure TfrmFicheRecapi.edcodeCltDblClick(Sender: TObject);
 begin
-cbClient.Clear;
-cbVeh.Clear;
+vSourceRclt:='FicheRecapi';
+frmRechClt.ShowModal;
 end;
 
 procedure TfrmFicheRecapi.FormShow(Sender: TObject);
@@ -334,14 +312,6 @@ var
   vehs : TVehiculeArray;
 begin
   d2.Date := Now;
-  Psql := '';
-
-  Clts := DM.selectClients(Psql);
-
-  for I := Low(Clts) to High(Clts) do
-    begin
-      cbClient.Items.Add(Clts[i].SnomClt);
-    end;
 
 //selection du véhicule
   Psql_veh := '';

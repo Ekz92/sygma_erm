@@ -143,6 +143,14 @@ object frmSaisieFacture: TfrmSaisieFacture
         ReadOnly = True
         TabOrder = 1
       end
+      object cbFiger_mag: TCheckBox
+        Left = 223
+        Top = 14
+        Width = 97
+        Height = 17
+        Caption = 'Figer '
+        TabOrder = 2
+      end
     end
     object GbClient: TGroupBox
       Left = 0

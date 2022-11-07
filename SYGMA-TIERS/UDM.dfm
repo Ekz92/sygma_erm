@@ -43,7 +43,7 @@ object DM: TDM
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
       'HostName=127.0.0.1'
-      'Database=sygma_zener'
+      'Database=sygma_gazshop'
       'User_Name=root'
       'Password='
       'MaxBlobSize=-1'

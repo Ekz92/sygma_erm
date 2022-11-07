@@ -48,7 +48,11 @@ var
   Psql : string;
   I: Integer;
 begin
-  Psql := ' Where statut_cmd = 0 order by num_comc desc '  ;
+  if gFormSrc = 'frmCumulVenteCmd' then
+    Psql := ' order by num_comc desc '
+  else
+    Psql := ' Where statut_cmd = 0 order by num_comc desc '  ;
+
   Coms := dm.SelectCommandeCamion(Psql);
   StRech.RowCount := Length(Coms)+1;
 

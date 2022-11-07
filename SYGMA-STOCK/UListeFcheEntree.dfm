@@ -24,7 +24,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitWidth = 653
     object Button1: TButton
       Left = 614
       Top = 1
@@ -34,7 +33,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       Caption = 'Recherche'
       TabOrder = 0
       OnClick = Button1Click
-      ExplicitLeft = 502
     end
     object Button2: TButton
       Left = 689
@@ -44,7 +42,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       Align = alRight
       Caption = 'Annuler'
       TabOrder = 1
-      ExplicitLeft = 577
     end
   end
   object Panel1: TPanel
@@ -55,7 +52,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 653
     object Label1: TLabel
       Left = 4
       Top = 6
@@ -178,7 +174,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     StyleElements = [seBorder]
     OnDblClick = StringGrid1DblClick
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 653
     ColWidths = (
       75
       78
@@ -196,7 +191,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
     Height = 26
     Align = alBottom
     TabOrder = 3
-    ExplicitWidth = 653
     object Button3: TButton
       Left = 689
       Top = 1
@@ -206,7 +200,6 @@ object frmListeFcheEntree: TfrmListeFcheEntree
       Caption = 'Pr'#233'visualiser'
       TabOrder = 0
       OnClick = Button3Click
-      ExplicitLeft = 577
     end
   end
   object frxFicheEntree: TfrxReport

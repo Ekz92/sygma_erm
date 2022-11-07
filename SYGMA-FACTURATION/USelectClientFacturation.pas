@@ -141,6 +141,7 @@ var
   Psql : string;
   i:integer;
 begin
+  edcodeClt.SetFocus;
   Psql := '';
   clients := DM.selectClients(Psql);
   StringGrid1.RowCount:=Length(clients)+1;

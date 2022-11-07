@@ -77,7 +77,7 @@ object frmRechClt: TfrmRechClt
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
     ParentFont = False
     ScrollBars = ssNone
     TabOrder = 1

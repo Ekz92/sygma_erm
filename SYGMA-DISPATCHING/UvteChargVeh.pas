@@ -228,7 +228,7 @@ begin
         NStatut_canc := 0;
         NStatut_com := 0;
       end;
-//      dm.InsertVteChargVeh(vteCharg);
+      dm.InsertVteChargVeh(vteCharg);
 
       {Insertion de l'en-tête du chargement camion tb_livraison_camion}
 
@@ -283,7 +283,7 @@ begin
               Rkilo := StrToFloat(Cells[2,i]) ;
               RTkilo := StrToFloat(Cells[3,i]) * StrToFloat(Cells[2,i]);
             end;
-            dm.InsertVteChargVehd(vteChargd);
+//            dm.InsertVteChargVehd(vteChargd);
 
             //selection des quantité en stoock
 //            PSqlCam := ' Where vehicule = '+QuotedStr(edNumMat.Text)

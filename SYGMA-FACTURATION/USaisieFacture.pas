@@ -57,6 +57,7 @@ type
     frxFacturation: TfrxReport;
     frxQFacture: TfrxDBDataset;
     cbFiger: TCheckBox;
+    cbFiger_mag: TCheckBox;
     procedure st_saisieDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodeMagDblClick(Sender: TObject);
@@ -234,12 +235,10 @@ end;
 procedure TfrmSaisieFacture.Button2Click(Sender: TObject);
 begin
   edNumFact.Clear;
-  edCodeMag.Clear;
   ed_article.Clear;
   eddesignation_art.Clear;
   edqte.Clear;
   ednomClient.Clear;
-  eddesignation_mag.Clear;
   edCodeClient.Clear;
   edTarif.Clear;
   edTarif.Enabled:=True;
@@ -264,6 +263,13 @@ begin
       edveh.Clear;
       edCommande.Clear;
     end;
+
+  if cbFiger_mag.Checked = False then
+    begin
+      edCodeMag.Clear;
+      eddesignation_mag.Clear;
+    end;
+
 end;
 
 procedure TfrmSaisieFacture.Button3Click(Sender: TObject);

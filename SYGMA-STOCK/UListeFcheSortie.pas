@@ -141,7 +141,8 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
           +' and tfes.statut_canc = 0 '
-          +' order by id_fes desc ';
+          +' and tfeh.num_his = tfes.num_his '
+          +' order by id_fh desc ';
   end else
   if edcodeClt.Text<>'' then
   begin
@@ -150,9 +151,10 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' where type_fes = 1 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and code_clt = '+QuotedStr(edcodeClt.Text)
+          +' and tfeh.code_clt = '+QuotedStr(edcodeClt.Text)
           +' and tfes.statut_canc = 0 '
-          +' order by id_fes desc ';
+          +' and tfeh.num_his = tfes.num_his '
+          +' order by id_fh desc ';
   end else
   if edMarque.Text<>'' then
     begin
@@ -161,9 +163,10 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' where type_fes = 1 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and tfeh.num_veh = '+QuotedStr(edMarque.Text)
           +' and tfes.statut_canc = 0 '
-          +' order by id_fes desc ';
+          +' and tfeh.num_his = tfes.num_his '
+          +' order by id_fh desc ';
     end;
 
 //****************************** Affichage date1 ***********************
@@ -249,6 +252,7 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
           +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
           +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfeh.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
   end else
   if edcodeClt.Text<>'' then
   begin
@@ -260,17 +264,19 @@ if (edcodeClt.Text='') and (edMarque.Text='') then
           +' and tfes.code_clt = '+QuotedStr(edcodeClt.Text)
           +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
           +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfeh.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
   end else
   if edMarque.Text<>'' then
     begin
-    Sql := ' Select * from tb_fiche_es '
+    Sql := ' Select * from tb_fiche_es tfes'
           +' inner join tb_fiche_esh tfeh on tfes.num_fes = tfeh.num_fh '
           +' where type_fes = 1 '
           +' and date_fes between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-          +' and matricule_veh = '+QuotedStr(cbVeh.Text)
+          +' and matricule_veh = '+QuotedStr(StringGrid1.Cells[5,StringGrid1.Row])
           +' and tfes.num_fes = '+StringGrid1.Cells[1,StringGrid1.Row]
           +' and tfes.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
+          +' and tfeh.num_his = '+StringGrid1.Cells[2,StringGrid1.Row]
     end;
 
 //****************************** Affichage date1 ***********************

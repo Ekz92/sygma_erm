@@ -35,7 +35,8 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM, UFicheEntree, UFicheSortie, USortieVrac;
+uses records, UDM, UFicheEntree, UFicheSortie, USortieVrac, UFicheRecapi,
+  UFicheRecapo;
 
 procedure TfrmRechClt.edrech_nomExit(Sender: TObject);
 var
@@ -114,7 +115,23 @@ begin
       begin
          edcodeClt.Text := St_Rech.Cells[0,St_Rech.Row];
          edNomClt.Text := St_Rech.Cells[1,St_Rech.Row];
-      end;
+      end else
+  if vSourceRclt='FicheRecapi' then
+    with frmFicheRecapi do
+      begin
+        if Length(edcodeClt.Text)=0 then
+         edcodeClt.Text := QuotedStr(St_Rech.Cells[0,St_Rech.Row])
+        else
+         edcodeClt.Text := edcodeClt.Text+','+ QuotedStr(St_Rech.Cells[0,St_Rech.Row]);
+      end else
+  if vSourceRclt='FicheRecapo' then
+    with frmFicheRecapo do
+      begin
+        if Length(edcodeClt.Text)=0 then
+         edcodeClt.Text := QuotedStr(St_Rech.Cells[0,St_Rech.Row])
+        else
+         edcodeClt.Text := edcodeClt.Text+','+ QuotedStr(St_Rech.Cells[0,St_Rech.Row]);
+      end ;
 
   vTypClt:=St_Rech.Cells[2,St_Rech.Row];
   Close;
