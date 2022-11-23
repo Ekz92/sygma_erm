@@ -252,6 +252,9 @@ begin
              SB25 := QuotedStr('');
              SB6E := QuotedStr('');
              SB12E := QuotedStr('');
+             SB14 := QuotedStr('');
+             SB20 := QuotedStr('');
+             SB35 := QuotedStr('');
              SRB3A := QuotedStr('');
              SRB3 := QuotedStr('');
              SRB6 := QuotedStr('');
@@ -261,6 +264,9 @@ begin
              SRB25 := QuotedStr('');
              SRB6E := QuotedStr('');
              SRB12E := QuotedStr('');
+             SRB14 := QuotedStr('');
+             SRB20 := QuotedStr('');
+             SRB35 := QuotedStr('');
              SType := QuotedStr('');
              Rmontant := StrToFloat(lbMontant.Caption);
              Rkilo_t := StrToFloat(lbTkilo.Caption);

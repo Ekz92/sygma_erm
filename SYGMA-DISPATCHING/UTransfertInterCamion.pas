@@ -56,11 +56,19 @@ implementation
 uses records, UDM;
 
 procedure TfrmTransfertInterCamion.AnnulerClick(Sender: TObject);
+var
+  I: Integer;
 begin
 cbVehS.Text:='';
 edVehS.Clear;
 cbVehD.Text:='';
 edVehD.Clear;
+
+  for I := 1 to StringGrid1.RowCount -1 do
+    begin
+      StringGrid1.Rows[i].Clear;
+    end;
+
 StringGrid1.RowCount:=1;
 btSave.Enabled:=False;
 end;

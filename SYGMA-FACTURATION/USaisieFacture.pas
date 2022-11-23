@@ -58,6 +58,7 @@ type
     frxQFacture: TfrxDBDataset;
     cbFiger: TCheckBox;
     cbFiger_mag: TCheckBox;
+    cbSsVal: TCheckBox;
     procedure st_saisieDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodeMagDblClick(Sender: TObject);
@@ -605,8 +606,135 @@ begin
 end;
 
 procedure TfrmSaisieFacture.edqteKeyPress(Sender: TObject; var Key: Char);
+var
+  k,i:integer;
+  PsqlPrix:string;
+  TarifPrix : TTarif_defPrixArray;
+
+  chkArt : Boolean;
+
+  SqlSelectStockCam : string;
+  stockCam : TStockCamion;
+
 begin
-if key=#13 then Button1.Click;
+  if key = #13 then
+    begin
+      gDate := DateToStr(eddate.Date);
+      chkArt := False;
+
+//Blockagee de doublon d'article lors de la selection
+//      for I := 0 to st_saisie.RowCount -1 do
+//        begin
+//          if st_saisie.Cells[0,i] = ed_article.Text then
+//            begin
+//              chkArt := True;
+//            end;
+//        end;
+//
+//      if chkArt = True then
+//        begin
+//          MessageDlg('Cette article est déjà selectionné',mtWarning,[mbok],0);
+//        end else
+      if
+        (edCodeMag.Text<>'')and
+          (edTarif.Text<>'')and
+            (edCodeClient.Text<>'')and
+              (ed_article.Text<>'')and
+                (edqte.Text<>'') and (chkArt <> True)
+      then
+
+      begin
+      { Si c'est une vente de camion et que l'article n'est pas disponible dans le camion}
+        if cbTypeFact.Text = 'Camion' then
+          begin
+            SqlSelectStockCam := ' where code_art = '+QuotedStr(ed_article.Text)
+                                +' and vehicule = '+QuotedStr(edveh.Text) ;
+
+            stockCam := dm.selectStockCamion(SqlSelectStockCam);
+
+            if (stockCam.Scode_art.IsEmpty) or (stockCam.NQte_mag <= 0) then
+              begin
+                MessageDlg('Cet article n''existe pas, ou sa quantité est nulle dans ce camion',mtError,[mbOK],0);
+                exit
+              end else
+            if stockCam.NQte_mag < StrToInt(edqte.Text) then
+              begin
+                MessageDlg('La quantité saisie est supérieur à la quantité disponible dans le camion',mtError,[mbOK],0);
+                exit
+              end;
+          end;
+
+        {Si la quantité saisie est nulle}
+
+        if StrToInt(edqte.Text) = 0 then
+          begin
+            MessageDlg('La quantité nulle non n''autorisée',mtError,[mbOK],0);
+            exit
+          end;
+
+      //selection du prix de vente selon le typeclt
+        PsqlPrix:=' where code_tarif = '+QuotedStr(edTarif.Text)
+                  + ' and code_art = '+QuotedStr(ed_article.Text);
+
+        vPrixVente := 0;
+
+        TarifPrix := DM.SelectParametragePrixclt(PsqlPrix);
+
+        for I := Low(TarifPrix) to High(TarifPrix) do
+          begin
+            vPrixVente:=TarifPrix[i].Rprix;
+          end;
+        //***************
+
+        if vPrixVente <> 0 then
+          begin
+            if cbSsVal.Checked = True then vPrixVente := 0;
+            with st_saisie do
+              begin
+                RowCount := RowCount+1;
+                k:=RowCount-1;
+                Cells[0,k]:= ed_article.Text;
+                Cells[1,k]:= eddesignation_art.Text;
+                Cells[2,k]:= edqte.Text;
+                Cells[3,k]:= FloatToStr(vPrixVente);
+                Cells[4,k]:= FloatToStr(StrToInt(Cells[2,k]) * vPrixVente) ;
+
+                if RowCount>1 then
+                  FixedRows:=1;
+
+                edTarif.Enabled:=False;
+                edCodeMag.Enabled:=False;
+                eddesignation_mag.Enabled:=False;
+                edCodeClient.Enabled:=False;
+                ednomClient.Enabled:=False;
+                cbTypeFact.Enabled:=false;
+                edveh.Enabled:=false;
+                edCommande.Enabled:=False;
+              end;
+
+              vMnt_t := 0;
+              vQteTotal:=0;
+
+              for I := 1 to st_saisie.RowCount-1 do
+                begin
+                  vMnt_t := vMnt_t + StrToFloat(st_saisie.Cells[4,i]);
+                  vQteTotal := vQteTotal + StrToInt(st_saisie.Cells[2,i]);
+                end;
+            //***********
+            lbMontant.Caption:=FloatToStrF(vMnt_t,ffNumber,15,2);
+
+             refresh_art;
+            end else
+          begin
+            MessageDlg('Aucun prix n''est définit pour cet article sur ce tarif. Merci de revoir le parametrage des prix ',mtError,[mbRetry],0);
+          end;
+        end else
+          begin
+            MessageDlg('Tous les champs sont obligatoires, Merci de les renseigner',mtError,[mbOK],0);
+          end;
+    end;
+
+//if key=#13 then Button1.Click;
 end;
 
 procedure TfrmSaisieFacture.ed_articleDblClick(Sender: TObject);

@@ -97,7 +97,7 @@ begin
 
         //Cursor := crHourGlass;
         Label3.Visible := True;
-        sleep(5000);
+//        sleep(5000);
 
 // **************************Cloture de la caisse
       vDate_fin := QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate)));
@@ -212,12 +212,14 @@ begin
                             +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
             dm.DeleteFromTable(DelDiagramDay);
           end ;
+
                    // Insertion montant total facture
           SqlDiagram_mntT := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
                         +' Select date_fact, sum(mnt_t) as Tmnt_t, '+QuotedStr('Totale')
                         +' from tb_facturation '
                         +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
-                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59')
+                        +' and statut_canc = 0 ';
           dm.InsertDiagramDay(SqlDiagram_mntT);
 
                    // Insertion montant total payee
@@ -225,15 +227,17 @@ begin
                         +' Select date_fact,  sum(mnt_p) as Tmnt_p, '+QuotedStr('Payée')
                         +'from tb_facturation '
                         +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
-                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
-
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59')
+                        +' and statut_canc = 0 ';
           dm.InsertDiagramDay(SqlDiagram_mntP);
+
                    // Insertion montant restant
           SqlDiagram_mntR := ' insert into tb_day_diagram_facture (date_dbf,tmontant,libelle) '
                         +' Select date_fact, sum(mnt_r) as Tmnt_r ,'+QuotedStr('Impayée')
                         +' from tb_facturation '
                         +' Where date_fact between '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 00:00:00')
-                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59');
+                        +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(vDate))+' 23:59:59')
+                        +' and statut_canc = 0 ';
 
           dm.InsertDiagramDay(SqlDiagram_mntR);
 

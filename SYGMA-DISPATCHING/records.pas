@@ -152,6 +152,9 @@ TLivraisonCamion = record
 	SB25 ,
 	SB6E ,
 	SB12E ,
+  SB14,
+  SB20,
+  SB35,
 	SRB3A ,
 	SRB3  ,
 	SRB6  ,
@@ -161,6 +164,9 @@ TLivraisonCamion = record
 	SRB25 ,
 	SRB6E ,
 	SRB12E,
+  SRB14,
+  SRB20,
+  SRB35,
   SType :string;
 	Rmontant,
   Rkilo_t :real;

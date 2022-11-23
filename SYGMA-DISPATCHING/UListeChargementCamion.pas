@@ -211,13 +211,13 @@ begin
     sql := ' where dateCharg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
             +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
             +' and statut_canc = 0'
-            +' order by numCharg desc'
+            +' order by dateCharg desc'
   else
     sql := ' where dateCharg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
             +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
             +' and vehicule = '+QuotedStr(cbVehicule.Text)
             +' and statut_canc = 0'
-            +' order by numCharg desc';
+            +' order by dateCharg desc';
 
 
   Chs := dm.selectChargementCamion(sql);

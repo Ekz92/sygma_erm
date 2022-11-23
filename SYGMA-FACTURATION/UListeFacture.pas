@@ -154,6 +154,7 @@ end;
 
 procedure TfrmListeFacture.edCodeCltDblClick(Sender: TObject);
 begin
+gSrcformClt := 'TfrmListeFacture';
 frmRechClientFacture.ShowModal;
 end;
 

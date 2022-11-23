@@ -78,6 +78,8 @@ begin
   Psql := ' ';
 
   Clts := DM.selectClients(Psql);
+  edrech_nom.Clear;
+  edrech_nom.SetFocus;
 
   St_Rech.RowCount := Length(Clts)+1;
 

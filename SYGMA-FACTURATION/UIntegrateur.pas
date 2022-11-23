@@ -68,6 +68,7 @@ type
     Cumuledachat1: TMenuItem;
     Diagrammedefacture1: TMenuItem;
     Cumuldeventeparcmd1: TMenuItem;
+    Cumuledeventeparclient1: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure Produit1Click(Sender: TObject);
     procedure Service1Click(Sender: TObject);
@@ -84,6 +85,7 @@ type
     procedure Bnficesurvente1Click(Sender: TObject);
     procedure Diagrammedefacture1Click(Sender: TObject);
     procedure Cumuldeventeparcmd1Click(Sender: TObject);
+    procedure Cumuledeventeparclient1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -101,7 +103,7 @@ uses UDM, records, USaisieFacture, USaisieFactureService, UListeParamPrix,
   UListeFacture, UListeFactureAnnulee, UListeFactureCommande,
   UParametreNumFacture, UParametrage_prix_clt, Uadd_type_client, UTypeService,
   URapportParClient, UCumuleVenteBl, UBeneficeVente, UDiagramDayFacture,
-  UCumulVenteCmd;
+  UCumulVenteCmd, UCumuleFacture;
 
 procedure TfrmIntegrateur.Bnficesurvente1Click(Sender: TObject);
 begin
@@ -116,6 +118,11 @@ end;
 procedure TfrmIntegrateur.Cumuledachat1Click(Sender: TObject);
 begin
 frmCumuleVenteBL.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Cumuledeventeparclient1Click(Sender: TObject);
+begin
+frmCumuleFacture.ShowModal;
 end;
 
 procedure TfrmIntegrateur.Diagrammedefacture1Click(Sender: TObject);

@@ -146,7 +146,7 @@ object frmSaisieFacture: TfrmSaisieFacture
       object cbFiger_mag: TCheckBox
         Left = 223
         Top = 14
-        Width = 97
+        Width = 53
         Height = 17
         Caption = 'Figer '
         TabOrder = 2
@@ -267,6 +267,14 @@ object frmSaisieFacture: TfrmSaisieFacture
         ParentColor = True
         TabOrder = 2
         OnKeyPress = edqteKeyPress
+      end
+      object cbSsVal: TCheckBox
+        Left = 223
+        Top = 14
+        Width = 58
+        Height = 17
+        Caption = 'Sans val.'
+        TabOrder = 3
       end
     end
     object gbEtete: TGroupBox
@@ -391,6 +399,7 @@ object frmSaisieFacture: TfrmSaisieFacture
         Width = 75
         Height = 25
         Caption = 'Ajouter'
+        Enabled = False
         TabOrder = 0
         OnClick = Button1Click
       end

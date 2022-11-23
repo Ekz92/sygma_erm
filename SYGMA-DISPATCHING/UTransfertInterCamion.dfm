@@ -35,7 +35,6 @@ object frmTransfertInterCamion: TfrmTransfertInterCamion
     OnDrawCell = StringGrid1DrawCell
     OnKeyPress = StringGrid1KeyPress
     OnSelectCell = StringGrid1SelectCell
-    ExplicitHeight = 234
     ColWidths = (
       2
       66
@@ -51,7 +50,6 @@ object frmTransfertInterCamion: TfrmTransfertInterCamion
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 509
     object GroupBox1: TGroupBox
       Left = 207
       Top = 0
@@ -144,7 +142,6 @@ object frmTransfertInterCamion: TfrmTransfertInterCamion
     Height = 29
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 353
     object btSave: TButton
       Left = 263
       Top = 1
@@ -154,9 +151,6 @@ object frmTransfertInterCamion: TfrmTransfertInterCamion
       Caption = 'Enregistrer'
       TabOrder = 0
       OnClick = btSaveClick
-      ExplicitLeft = 262
-      ExplicitTop = 2
-      ExplicitHeight = 25
     end
     object Annuler: TButton
       Left = 338
@@ -167,9 +161,6 @@ object frmTransfertInterCamion: TfrmTransfertInterCamion
       Caption = 'Annuler'
       TabOrder = 1
       OnClick = AnnulerClick
-      ExplicitLeft = 337
-      ExplicitTop = 2
-      ExplicitHeight = 25
     end
   end
   object GroupBox3: TGroupBox

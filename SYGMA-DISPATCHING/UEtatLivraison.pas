@@ -29,51 +29,6 @@ type
     QRapport: TSQLQuery;
     Qsum: TSQLQuery;
     frxDBsum: TfrxDBDataset;
-    QRapportid_cc: TIntegerField;
-    QRapportdate_charg: TDateField;
-    QRapportlettrage: TStringField;
-    QRapportnum_charg: TIntegerField;
-    QRapportcode_livreur: TStringField;
-    QRapportnom_livreur: TStringField;
-    QRapportcode_clt: TStringField;
-    QRapportnom_clt: TStringField;
-    QRapportcamion: TStringField;
-    QRapportpièce: TStringField;
-    QRapportB3A: TStringField;
-    QRapportB3: TStringField;
-    QRapportB6: TStringField;
-    QRapportB6R: TStringField;
-    QRapportB12: TStringField;
-    QRapportB50: TStringField;
-    QRapportB25: TStringField;
-    QRapportB6E: TStringField;
-    QRapportB12E: TStringField;
-    QRapportRB3A: TStringField;
-    QRapportRB3: TStringField;
-    QRapportRB6: TStringField;
-    QRapportRB6R: TStringField;
-    QRapportRB12: TStringField;
-    QRapportRB50: TStringField;
-    QRapportRB25: TStringField;
-    QRapportRB6E: TStringField;
-    QRapportRB12E: TStringField;
-    QRapporttype_ch: TStringField;
-    QRapportmontant: TFloatField;
-    QRapportkilo_t: TFloatField;
-    QRapportzone_liv: TStringField;
-    QRapportprix_zone: TFloatField;
-    QRapportprix_liv: TFloatField;
-    QRapportusager: TStringField;
-    QRapportid_veh: TIntegerField;
-    QRapportMarque_veh: TStringField;
-    QRapportcode_clt_1: TStringField;
-    QRapportNum_Immat_veh: TStringField;
-    QRapportCouleur_veh: TStringField;
-    QRapportCompteur_veh: TIntegerField;
-    QRapportType_veh: TStringField;
-    QRapportKilo_max: TIntegerField;
-    QRapportdate_mise_sce: TDateField;
-    QRapportdispo_parc: TIntegerField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -127,6 +82,9 @@ begin
                   +'sum(B12) as TC12,  '
                   +'sum(B50) as TC50,   '
                   +'sum(B25) as TC25,  '
+                  +'sum(B14) as TC14,  '
+                  +'sum(B20) as TC20,  '
+                  +'sum(B35) as TC35,  '
                   +'sum(B6E) as TC6E,  '
                   +'sum(B12E) as TC12E,'
                   +'sum(RB3A) as TK3A,  '
@@ -167,6 +125,9 @@ begin
                   +'sum(B12) as TC12,  '
                   +'sum(B50) as TC50,   '
                   +'sum(B25) as TC25,  '
+                  +'sum(B14) as TC14,  '
+                  +'sum(B20) as TC20,  '
+                  +'sum(B35) as TC35,  '
                   +'sum(B6E) as TC6E,  '
                   +'sum(B12E) as TC12E,'
                   +'sum(RB3A) as TK3A,  '
@@ -206,6 +167,9 @@ begin
                   +'sum(B12) as TC12,  '
                   +'sum(B50) as TC50,   '
                   +'sum(B25) as TC25,  '
+                  +'sum(B14) as TC14,  '
+                  +'sum(B20) as TC20,  '
+                  +'sum(B35) as TC35,  '
                   +'sum(B6E) as TC6E,  '
                   +'sum(B12E) as TC12E,'
                   +'sum(RB3A) as TK3A,  '
@@ -246,6 +210,9 @@ begin
                   +'sum(B12) as TC12,  '
                   +'sum(B50) as TC50,   '
                   +'sum(B25) as TC25,  '
+                  +'sum(B14) as TC14,  '
+                  +'sum(B20) as TC20,  '
+                  +'sum(B35) as TC35,  '
                   +'sum(B6E) as TC6E,  '
                   +'sum(B12E) as TC12E,'
                   +'sum(RB3A) as TK3A,  '

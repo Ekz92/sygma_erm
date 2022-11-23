@@ -27,12 +27,12 @@ type
 
 var
   frmRechClientFacture: TfrmRechClientFacture;
-
+  gSrcformClt : string;
 implementation
 
 {$R *.dfm}
 
-uses records, UDM, UListeFacture;
+uses records, UDM, UListeFacture, UCumuleFacture;
 
 procedure TfrmRechClientFacture.edrech_nomChange(Sender: TObject);
 var
@@ -97,9 +97,22 @@ end;
 
 procedure TfrmRechClientFacture.St_RechDblClick(Sender: TObject);
 begin
-with frmListeFacture do
+if gSrcformClt = 'TfrmListeFacture' then
   begin
-    edCodeClt.Text := St_Rech.Cells[0,St_Rech.Row];
+    with frmListeFacture do
+      begin
+        edCodeClt.Text := St_Rech.Cells[0,St_Rech.Row];
+      end;
+  end else
+if gSrcformClt = 'TfrmCumuleFacture' then
+  begin
+    with frmCumuleFacture do
+      begin
+        if Trim(edCodeClt.Text)='' then
+          edCodeClt.Text := QuotedStr(St_Rech.Cells[0,St_Rech.Row])
+        else
+          edCodeClt.Text := edCodeClt.Text+','+ QuotedStr(St_Rech.Cells[0,St_Rech.Row]);
+      end;
   end;
   Close;
 

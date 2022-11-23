@@ -25,7 +25,6 @@ object frmRechClientFacture: TfrmRechClientFacture
     Align = alTop
     Caption = 'Recherche'
     TabOrder = 0
-    ExplicitWidth = 364
     object Label1: TLabel
       Left = 32
       Top = 19

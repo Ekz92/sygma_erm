@@ -3949,7 +3949,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB50_Iv">*50)]')
+            '[(<frxDBSUM."TB50_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -3971,7 +3971,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB50_If">*50)]')
+            '[(<frxDBSUM."TB50_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4015,7 +4015,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB25_Iv">*25)]')
+            '[(<frxDBSUM."TB25_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4037,7 +4037,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB25_If">*25)]')
+            '[(<frxDBSUM."TB25_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4081,7 +4081,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12_Iv">*12)]')
+            '[(<frxDBSUM."TB12_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4103,7 +4103,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12_If">*12)]')
+            '[(<frxDBSUM."TB12_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4147,7 +4147,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6R_Iv">*6)]')
+            '[(<frxDBSUM."TB6R_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4169,7 +4169,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6R_If">*6)]')
+            '[(<frxDBSUM."TB6R_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4213,7 +4213,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6_Iv">*6)]')
+            '[(<frxDBSUM."TB6_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4235,7 +4235,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6_If">*6)]')
+            '[(<frxDBSUM."TB6_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4279,7 +4279,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB3A_Iv">*3)]')
+            '[(<frxDBSUM."TB3A_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4301,7 +4301,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB3A_If">*3)]')
+            '[(<frxDBSUM."TB3A_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4331,7 +4331,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           AllowVectorExport = True
           Left = 221.196996850000000000
           Top = 40.574830000000000000
-          Width = 37.417322834645700000
+          Width = 37.417322830000000000
           Height = 22.677180000000000000
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
@@ -4345,7 +4345,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB3_Iv">*3)]')
+            '[(<frxDBSUM."TB3_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4367,7 +4367,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB3_If">*3)]')
+            '[(<frxDBSUM."TB3_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4410,7 +4410,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB3_Iv">*3)+(<frxDBSUM."TB3_If">*3)+(<frxDBSUM."TB' +
+              '[((<frxDBSUM."TB3_Iv">*0)+(<frxDBSUM."TB3_If">*0)+(<frxDBSUM."TB' +
               '3_Ip">*3))]')
           ParentFont = False
           VAlign = vaCenter
@@ -4432,7 +4432,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB3A_Iv">*3)+(<frxDBSUM."TB3A_If">*3)+(<frxDBSUM."' +
+              '[((<frxDBSUM."TB3A_Iv">*0)+(<frxDBSUM."TB3A_If">*0)+(<frxDBSUM."' +
               'TB3A_Ip">*3))]')
           ParentFont = False
           VAlign = vaCenter
@@ -4452,7 +4452,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB6_Iv">*6)+(<frxDBSUM."TB6_If">*6)+(<frxDBSUM."TB' +
+              '[((<frxDBSUM."TB6_Iv">*0)+(<frxDBSUM."TB6_If">*0)+(<frxDBSUM."TB' +
               '6_Ip">*6))]')
           ParentFont = False
           VAlign = vaCenter
@@ -4472,7 +4472,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB6R_Iv">*6)+(<frxDBSUM."TB6R_If">*6)+(<frxDBSUM."' +
+              '[((<frxDBSUM."TB6R_Iv">*0)+(<frxDBSUM."TB6R_If">*0)+(<frxDBSUM."' +
               'TB6R_Ip">*6))]')
           ParentFont = False
           VAlign = vaCenter
@@ -4492,8 +4492,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB12_Iv">*12)+(<frxDBSUM."TB12_If">*12)+(<frxDBSUM' +
-              '."TB12_Ip">*12))]')
+              '[((<frxDBSUM."TB12_Iv">*0)+(<frxDBSUM."TB12_If">*0)+(<frxDBSUM."' +
+              'TB12_Ip">*12))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4512,8 +4512,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB25_Iv">*25)+(<frxDBSUM."TB25_If">*25)+(<frxDBSUM' +
-              '."TB25_Ip">*25))]')
+              '[((<frxDBSUM."TB25_Iv">*0)+(<frxDBSUM."TB25_If">*0)+(<frxDBSUM."' +
+              'TB25_Ip">*25))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4532,8 +4532,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB50_Iv">*50)+(<frxDBSUM."TB50_If">*50)+(<frxDBSUM' +
-              '."TB50_Ip">*50))]')
+              '[((<frxDBSUM."TB50_Iv">*0)+(<frxDBSUM."TB50_If">*0)+(<frxDBSUM."' +
+              'TB50_Ip">*50))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4555,7 +4555,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB14_Iv">*14)]')
+            '[(<frxDBSUM."TB14_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4577,7 +4577,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB14_If">*14)]')
+            '[(<frxDBSUM."TB14_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4618,8 +4618,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB14_Iv">*14)+(<frxDBSUM."TB14_If">*14)+(<frxDBSUM' +
-              '."TB14_Ip">*14))]')
+              '[((<frxDBSUM."TB14_Iv">*0)+(<frxDBSUM."TB14_If">*0)+(<frxDBSUM."' +
+              'TB14_Ip">*14))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4641,7 +4641,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB20_Iv">*20)]')
+            '[(<frxDBSUM."TB20_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4663,7 +4663,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB20_If">*20)]')
+            '[(<frxDBSUM."TB20_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4704,8 +4704,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB20_Iv">*20)+(<frxDBSUM."TB20_If">*20)+(<frxDBSUM' +
-              '."TB20_Ip">*20))]')
+              '[((<frxDBSUM."TB20_Iv">*0)+(<frxDBSUM."TB20_If">*0)+(<frxDBSUM."' +
+              'TB20_Ip">*20))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4727,7 +4727,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB35_Iv">*35)]')
+            '[(<frxDBSUM."TB35_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4749,7 +4749,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB35_If">*35)]')
+            '[(<frxDBSUM."TB35_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4790,8 +4790,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB35_Iv">*35)+(<frxDBSUM."TB35_If">*35)+(<frxDBSUM' +
-              '."TB35_Ip">*35))]')
+              '[((<frxDBSUM."TB35_Iv">*0)+(<frxDBSUM."TB35_If">*0)+(<frxDBSUM."' +
+              'TB35_Ip">*35))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4813,7 +4813,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6E_Iv">*6)]')
+            '[(<frxDBSUM."TB6E_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4835,7 +4835,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6E_If">*6)]')
+            '[(<frxDBSUM."TB6E_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4879,7 +4879,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12E_Iv">*12)]')
+            '[(<frxDBSUM."TB12E_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4901,7 +4901,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12E_If">*12)]')
+            '[(<frxDBSUM."TB12E_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4942,7 +4942,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB6E_Iv">*6)+(<frxDBSUM."TB6E_If">*6)+(<frxDBSUM."' +
+              '[((<frxDBSUM."TB6E_Iv">*0)+(<frxDBSUM."TB6E_If">*0)+(<frxDBSUM."' +
               'TB6E_Ip">*6))]')
           ParentFont = False
           VAlign = vaCenter
@@ -4962,8 +4962,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB12E_Iv">*12)+(<frxDBSUM."TB12E_If">*12)+(<frxDBS' +
-              'UM."TB12E_Ip">*12))]')
+              '[((<frxDBSUM."TB12E_Iv">*0)+(<frxDBSUM."TB12E_If">*0)+(<frxDBSUM' +
+              '."TB12E_Ip">*12))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -4985,7 +4985,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6M_Iv">*6)]')
+            '[(<frxDBSUM."TB6M_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5007,7 +5007,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6M_If">*6)]')
+            '[(<frxDBSUM."TB6M_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5051,7 +5051,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12M_Iv">*12)]')
+            '[(<frxDBSUM."TB12M_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5073,7 +5073,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12M_If">*12)]')
+            '[(<frxDBSUM."TB12M_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5114,7 +5114,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB6M_Iv">*6)+(<frxDBSUM."TB6M_If">*6)+(<frxDBSUM."' +
+              '[((<frxDBSUM."TB6M_Iv">*0)+(<frxDBSUM."TB6M_If">*0)+(<frxDBSUM."' +
               'TB6M_Ip">*6))]')
           ParentFont = False
           VAlign = vaCenter
@@ -5134,8 +5134,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB12M_Iv">*12)+(<frxDBSUM."TB12M_If">*12)+(<frxDBS' +
-              'UM."TB12M_Ip">*12))]')
+              '[((<frxDBSUM."TB12M_Iv">*0)+(<frxDBSUM."TB12M_If">*0)+(<frxDBSUM' +
+              '."TB12M_Ip">*12))]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5157,7 +5157,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6T_Iv">*6)]')
+            '[(<frxDBSUM."TB6T_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5179,7 +5179,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB6T_If">*6)]')
+            '[(<frxDBSUM."TB6T_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5223,7 +5223,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12T_Iv">*12)]')
+            '[(<frxDBSUM."TB12T_Iv">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5245,7 +5245,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Fill.BackColor = 12120018
           HAlign = haCenter
           Memo.UTF8W = (
-            '[(<frxDBSUM."TB12T_If">*12)]')
+            '[(<frxDBSUM."TB12T_If">*0)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5286,7 +5286,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB6T_Iv">*6)+(<frxDBSUM."TB6T_If">*6)+(<frxDBSUM."' +
+              '[((<frxDBSUM."TB6T_Iv">*0)+(<frxDBSUM."TB6T_If">*0)+(<frxDBSUM."' +
               'TB6T_Ip">*6))]')
           ParentFont = False
           VAlign = vaCenter
@@ -5306,8 +5306,8 @@ object frmFicheRecapi: TfrmFicheRecapi
           HAlign = haCenter
           Memo.UTF8W = (
             
-              '[((<frxDBSUM."TB12T_Iv">*12)+(<frxDBSUM."TB12T_If">*12)+(<frxDBS' +
-              'UM."TB12T_Ip">*12))]')
+              '[((<frxDBSUM."TB12T_Iv">*0)+(<frxDBSUM."TB12T_If">*0)+(<frxDBSUM' +
+              '."TB12T_Ip">*12))]')
           ParentFont = False
           VAlign = vaCenter
         end
