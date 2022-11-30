@@ -927,7 +927,7 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Left = 66.439091090000000000
           Width = 138.515179540000000000
           Height = 18.897650000000000000
-          DataField = 'marque_veh'
+          DataField = 'nom_clt'
           DataSet = frxDBFicheRap
           DataSetName = 'frxDBFicheRap'
           Font.Charset = DEFAULT_CHARSET
@@ -938,7 +938,7 @@ object frmRapprochementFicheEs: TfrmRapprochementFicheEs
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBFicheRap."marque_veh"]')
+            '[frxDBFicheRap."nom_clt"]')
           ParentFont = False
           VAlign = vaCenter
         end

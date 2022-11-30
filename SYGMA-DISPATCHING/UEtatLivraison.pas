@@ -72,7 +72,7 @@ begin
             +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
             +' and date_charg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
                                      +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-            +' order by num_charg desc';
+            +' order by date_charg desc';
 
       SqlSum := 'select '
                   +'sum(B3A) as TC3A,'
@@ -103,7 +103,7 @@ begin
                   +' and lettrage = '+QuotedStr(edlot.Text)
                   +' and date_charg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
                                            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-                  +' order by num_charg desc';
+                  +' order by date_charg desc';
 
     end
   else if (cbVehicule.Text='') and (edlot.Text <> '') then
@@ -114,7 +114,7 @@ begin
                                      +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
             +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
             +' and lettrage = '+QuotedStr(edlot.Text)
-            +' order by num_charg desc' ;
+            +' order by date_charg desc' ;
 
 
       SqlSum := 'select '
@@ -145,7 +145,7 @@ begin
                                            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
                   +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
                   +' and lettrage = '+QuotedStr(edlot.Text)
-                  +' order by num_charg desc' ;
+                  +' order by date_charg desc' ;
     end;
 //Si le lot n'est pas préciser
   if (cbVehicule.Text<>'') and (edlot.Text='') then
@@ -157,7 +157,7 @@ begin
             +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
             +' and date_charg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
                                      +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-            +' order by num_charg desc';
+            +' order by date_charg desc';
 
       SqlSum := 'select '
                   +'sum(B3A) as TC3A,'
@@ -188,7 +188,7 @@ begin
               //    +' and lettrage = '+QuotedStr(edlot.Text)
                   +' and date_charg between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
                                            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-                  +' order by num_charg desc';
+                  +' order by date_charg desc';
 
     end
   else if (cbVehicule.Text='') and (edlot.Text = '') then
@@ -199,7 +199,7 @@ begin
                                      +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
             +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
            // +' and lettrage = '+QuotedStr(edlot.Text)
-            +' order by num_charg desc' ;
+            +' order by date_charg desc' ;
 
 
       SqlSum := 'select '
@@ -230,7 +230,7 @@ begin
                                            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
                   +' and nom_livreur = '+QuotedStr(cbLivreur.Text)
              //     +' and lettrage = '+QuotedStr(edlot.Text)
-                  +' order by num_charg desc' ;
+                  +' order by date_charg desc' ;
     end;
 
 

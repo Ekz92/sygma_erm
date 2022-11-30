@@ -4276,7 +4276,7 @@ object frmFicheRecapo: TfrmFicheRecapo
           Left = 72.005891420000000000
           Width = 141.354352680000000000
           Height = 18.897650000000000000
-          DataField = 'marque_veh'
+          DataField = 'nom_clt'
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
           Font.Charset = DEFAULT_CHARSET
@@ -4287,7 +4287,7 @@ object frmFicheRecapo: TfrmFicheRecapo
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
-            '[frxDBRecap."marque_veh"]')
+            '[frxDBRecap."nom_clt"]')
           ParentFont = False
         end
         object Memo132: TfrxMemoView

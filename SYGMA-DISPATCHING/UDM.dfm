@@ -41,7 +41,7 @@ object DM: TDM
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
       'HostName=127.0.0.1'
-      'Database=sygma_gazshop'
+      'Database=sygma_pdt'
       'User_Name=root'
       'Password='
       'MaxBlobSize=-1'

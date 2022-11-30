@@ -1590,7 +1590,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Left = 67.015748030000000000
           Width = 152.692942680000000000
           Height = 18.897650000000000000
-          DataField = 'marque_veh'
+          DataField = 'nom_clt'
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
           Font.Charset = DEFAULT_CHARSET
@@ -1601,7 +1601,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
-            '[frxDBRecap."marque_veh"]')
+            '[frxDBRecap."nom_clt"]')
           ParentFont = False
           VAlign = vaCenter
         end

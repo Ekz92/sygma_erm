@@ -163,7 +163,6 @@ object frmCumuleFacture: TfrmCumuleFacture
       70)
   end
   object QCumule: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

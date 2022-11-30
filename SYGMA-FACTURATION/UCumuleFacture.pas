@@ -74,7 +74,7 @@ Component := frxCumule.FindObject('md2');
 
   QCumule.SQL.Clear;
   QCumule.SQL.Add(gSql);
-  QCumule.SQL.SaveToFile('g:\TfrmCumuleFacture.txt');
+//  QCumule.SQL.SaveToFile('g:\TfrmCumuleFacture.txt');
   QCumule.Open;
 
   frxCumule.ShowReport();

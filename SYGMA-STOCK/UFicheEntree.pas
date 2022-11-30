@@ -306,14 +306,30 @@ begin
                           +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
             StockCam := dm.selectStockCamion(SqlStockCam);
 
-            SqlUpstkCam := ' update tb_stock_camion set '
-                          +' qte_vide = '+IntToStr(StockCam.NQte_vide - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
-                          +' qte_mag = '+IntToStr(StockCam.NQte_mag - StrToInt(Cells[5,i])) +','
-                          +' qte_total = '+IntToStr(StockCam.Nqte_total - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
-                          +' where code_art = '+QuotedStr(codeArt)
-                          +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
+            if StockCam.Svehicule.IsEmpty then
+              begin
+                with stockCam,st_ficheEntree do
+                  begin
+                    Svehicule:=cbMatVeh.Text;
+                    Scode_art:=codeArt;
+                    SDesignation_art := Cells[2,i];
+                    NQte_vide := StrToInt(Cells[3,i]);
+                    NQte_mag := StrToInt(Cells[4,i]);
+                    Nqte_total := StrToInt(Cells[3,i])+StrToInt(Cells[4,i]);
+                  end;
+                  dm.InsertStockCamion(stockCam);
+              end
+            else
+              begin
+                SqlUpstkCam := ' update tb_stock_camion set '
+                              +' qte_vide = '+IntToStr(StockCam.NQte_vide - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i]))) +','
+                              +' qte_mag = '+IntToStr(StockCam.NQte_mag - StrToInt(Cells[5,i])) +','
+                              +' qte_total = '+IntToStr(StockCam.Nqte_total - (StrToInt(Cells[3,i]) + StrToInt(Cells[4,i])+StrToInt(Cells[5,i])))
+                              +' where code_art = '+QuotedStr(codeArt)
+                              +' and vehicule = '+QuotedStr(cbMatVeh.Text)  ;
 
-            dm.UpdateTable(SqlUpstkCam);
+                dm.UpdateTable(SqlUpstkCam);
+              end;
 
 
 //          Mise à jour dans la table fiche d'entree
