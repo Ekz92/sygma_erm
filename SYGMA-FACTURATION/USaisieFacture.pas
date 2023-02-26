@@ -59,6 +59,8 @@ type
     cbFiger: TCheckBox;
     cbFiger_mag: TCheckBox;
     cbSsVal: TCheckBox;
+    Label15: TLabel;
+    cbpdvcdp: TComboBox;
     procedure st_saisieDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure edCodeMagDblClick(Sender: TObject);
@@ -73,6 +75,7 @@ type
     procedure Supprimer1Click(Sender: TObject);
     procedure cbTypeFactCloseUp(Sender: TObject);
     procedure edCommandeDblClick(Sender: TObject);
+    procedure edCodeClientChange(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -345,6 +348,7 @@ begin
       SCode_mag:=edCodeMag.Text;
       Scode_clt:=edCodeClient.Text;
       Snom_clt := ednomClient.Text;
+      Spdv_cdp := cbpdvcdp.Text;
       NQte_total:=vQteTotal;
       Rmnt_t:=vMnt_t;
       Rmnt_p:=0;
@@ -575,6 +579,23 @@ if cbTypeFact.Text<>'Comptoir' then
    edCommande.Enabled := False;
   end;
 
+end;
+
+procedure TfrmSaisieFacture.edCodeClientChange(Sender: TObject);
+var
+  PdVs : TPointVenteArray;
+  Psql : string;
+  I: Integer;
+begin
+  cbpdvcdp.Clear;
+
+  Psql := ' where code_client = '+QuotedStr(edCodeClient.Text);
+  PdVs := dm.selectPoints(Psql);
+
+  for I := Low(PdVs) to High(PdVs) do
+    begin
+      cbpdvcdp.Items.Add(PdVs[i].Snom_pint);
+    end;
 end;
 
 procedure TfrmSaisieFacture.edCodeClientDblClick(Sender: TObject);

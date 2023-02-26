@@ -31,7 +31,6 @@ object frmJournalCaisse: TfrmJournalCaisse
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 686
     object SpeedButton1: TSpeedButton
       Left = 615
       Top = 0
@@ -203,7 +202,6 @@ object frmJournalCaisse: TfrmJournalCaisse
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 686
     object Label6: TLabel
       Left = 16
       Top = 3
@@ -236,8 +234,6 @@ object frmJournalCaisse: TfrmJournalCaisse
     TabOrder = 2
     StyleElements = [seBorder]
     OnDrawCell = St_journalDrawCell
-    ExplicitWidth = 686
-    ExplicitHeight = 255
     ColWidths = (
       65
       64
@@ -258,8 +254,6 @@ object frmJournalCaisse: TfrmJournalCaisse
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitTop = 350
-    ExplicitWidth = 686
     object Button1: TButton
       Left = 610
       Top = 1

@@ -3,6 +3,17 @@ unit records;
 interface
 type
 
+TUser =record
+  Nid_user : integer;
+  Snom_user,
+  Sprenom_user,
+  Susager,
+  Spwd,
+  Snum_caisse,
+  Sprofil : String;
+end;
+TUserArray = Array of TUser;
+
 TDiagramDayBC = record
 	Nid_dbc  : integer ;
 	Sdate_dbc : String;

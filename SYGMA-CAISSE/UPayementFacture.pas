@@ -310,7 +310,7 @@ if MessageDlg('Voulez-vous pocéder au payement de cette facture ?',mtWarning,[mb
             Sdate_ej:= eddate.Text;
             Snum_ope := edOperation.Text;
             Snum_piece := edFacture.Text;
-            Slibelle := edLibEncais.Text;
+            Slibelle := edLibEncais.Text+' du client '+ednomclt.Text;
             Sdebit := '-';
             Scredit := edMontant.Text;
             Ssens := 'C';

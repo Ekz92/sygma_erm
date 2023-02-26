@@ -12,12 +12,10 @@ type
   TfrmListeDepense = class(TForm)
     stDep: TStringGrid;
     Panel1: TPanel;
-    Bevel1: TBevel;
     Label1: TLabel;
     Label2: TLabel;
     SpeedButton1: TSpeedButton;
     Label3: TLabel;
-    lbTotal: TLabel;
     d1: TDateTimePicker;
     d2: TDateTimePicker;
     PopupMenu1: TPopupMenu;
@@ -27,6 +25,11 @@ type
     frxLDepense: TfrxReport;
     SqlDepense: TSQLQuery;
     frxDBDepense: TfrxDBDataset;
+    cbTdepense: TComboBox;
+    cbGroup: TComboBox;
+    Label5: TLabel;
+    frxLDTab: TfrxReport;
+    frxDBLDTab: TfrxDBDataset;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -34,6 +37,9 @@ type
       State: TGridDrawState);
     procedure Annulercettedpense1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cbGroupCloseUp(Sender: TObject);
+    procedure cbTdepenseCloseUp(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -42,6 +48,7 @@ type
 
 var
   frmListeDepense: TfrmListeDepense;
+  gPsql : string;
 
 implementation
 
@@ -127,36 +134,76 @@ var
 
 begin
 
-  Psql := ' select * from tb_depense '
-              +' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
-              +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-              +' and statut_canc = 0'
-              +' order by id_dep desc';
+if (cbGroup.ItemIndex = -1) and (cbTdepense.ItemIndex <> -1) then
+  begin
+    Psql := ' select * from tb_depense '+gPsql;
 
-//****************************** Affichage date1 DIAGRAMME ***********************
-  Component := frxLDepense.FindObject('md1');
+    SqlDepense.SQL.Clear;
+    SqlDepense.SQL.Add(Psql);
+    SqlDepense.Open;
+
+  //****************************** Affichage date1  ***********************
+    Component := frxLDepense.FindObject('md1');
+      if Component is TfrxMemoView then
+      begin
+            MD1 := Component as TfrxMemoView;
+            MD1.Text := DateToStr(d1.DateTime);
+      end;
+    //*****
+    Component := frxLDepense.FindObject('md2');
+      if Component is TfrxMemoView then
+      begin
+            MD2 := Component as TfrxMemoView;
+            MD2.Text := DateToStr(d2.DateTime);
+      end;
+
+    frxLDTab.ShowReport();
+  end ;
+
+if cbGroup.ItemIndex = 0 then
+  begin
+    Psql := ' select typedep, sum(montant_dep) as montant from tb_depense '
+           +' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+           +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+           +' group by typedep ';
+
+//****************************** Affichage date1  ***********************
+  Component := frxLDTab.FindObject('md1');
     if Component is TfrxMemoView then
     begin
           MD1 := Component as TfrxMemoView;
           MD1.Text := DateToStr(d1.DateTime);
     end;
   //*****
-  Component := frxLDepense.FindObject('md2');
+  Component := frxLDTab.FindObject('md2');
     if Component is TfrxMemoView then
     begin
           MD2 := Component as TfrxMemoView;
           MD2.Text := DateToStr(d2.DateTime);
     end;
 
+    SqlDepense.SQL.Clear;
+    SqlDepense.SQL.Add(Psql);
+//    SqlDepense.SQL.SaveToFile('g:\typedep.txt');
+    SqlDepense.Open;
 
-  SqlDepense.SQL.Clear;
-  SqlDepense.SQL.Add(Psql);
-  SqlDepense.Open;
+    frxLDTab.ShowReport();
+  end;
+end;
 
-  frxLDepense.ShowReport();
+procedure TfrmListeDepense.cbGroupCloseUp(Sender: TObject);
+begin
+if cbGroup.ItemIndex <> -1 then cbTdepense.ItemIndex := -1 ;
+end;
 
+procedure TfrmListeDepense.cbTdepenseCloseUp(Sender: TObject);
+begin
+if cbTdepense.ItemIndex <> -1 then cbGroup.ItemIndex := -1 ;
+end;
 
-
+procedure TfrmListeDepense.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+cbTdepense.Clear;
 end;
 
 procedure TfrmListeDepense.FormCreate(Sender: TObject);
@@ -168,30 +215,51 @@ with stDep do
     Cells[2,0] := 'Pièce';
     Cells[3,0] := 'Libellé';
     Cells[4,0] := 'Montant';
+    Cells[5,0] := 'Type dep';
   end;
 
 end;
 
 procedure TfrmListeDepense.FormShow(Sender: TObject);
+var
+  Tdeps : TTypeDepenseArray;
+  I:integer;
+
+  PsqltDep : string;
 begin
-d2.Date := Now;
+  d2.Date := Now;
+
+  PsqltDep := '' ;
+  tdeps:=DM.SelectTypeDep(PsqltDep);
+
+  cbTdepense.Items.Add('*');
+  for I := Low(tdeps) to High(tdeps) do
+    begin
+      cbTdepense.Items.Add(tdeps[i].Sdesigntdep);
+    end;
 
 end;
 
 procedure TfrmListeDepense.SpeedButton1Click(Sender: TObject);
 var
-  Psql : string;
   deps : TDepenseArray;
   I: Integer;
   vTDep : Real;
 begin
+  if cbTdepense.ItemIndex = 0 then
+    gPsql := ' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+            +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+            +' and statut_canc = 0'
+            +' order by id_dep desc'
+  else
+    gPsql := ' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
+                +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
+                +' and typedep = '+QuotedStr(cbTdepense.Text)
+                +' and statut_canc = 0'
+                +' order by id_dep desc';
 
-  Psql := ' where dateDep between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
-              +' and '+QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-              +' and statut_canc = 0'
-              +' order by id_dep desc';
 
-  deps := dm.selectDepense(Psql) ;
+  deps := dm.selectDepense(gPsql) ;
   stDep.RowCount := Length(deps)+1;
 
   vTDep := 0;
@@ -205,12 +273,13 @@ begin
           Cells[2,i+1]:=deps[i].SPiece;
           Cells[3,i+1]:=deps[i].SLibelle;
           Cells[4,i+1]:=FloatToStr(deps[i].RMontant);
+          Cells[5,i+1]:=deps[i].STypDep;
 
           vTDep := vTDep + deps[i].RMontant;
         end;
     end;
 
-    lbTotal.Caption:=FloatToStrF(vTDep,ffNumber,15,2);
+//    lbTotal.Caption:=FloatToStrF(vTDep,ffNumber,15,2);
 
     if stDep.RowCount>1 then stDep.FixedRows:=1;
 end;

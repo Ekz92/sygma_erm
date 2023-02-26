@@ -1,0 +1,34 @@
+object frmAllInOneCaisse: TfrmAllInOneCaisse
+  Left = 0
+  Top = 0
+  Align = alClient
+  Caption = 'Gestion de caisse'
+  ClientHeight = 611
+  ClientWidth = 1108
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 513
+    Height = 611
+    Align = alLeft
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 0
+      Top = 0
+      Width = 513
+      Height = 433
+      Align = alTop
+      TabOrder = 0
+    end
+  end
+end

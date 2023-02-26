@@ -216,96 +216,13 @@ object frmIntegrateur: TfrmIntegrateur
   object Panel3: TPanel
     Left = 0
     Top = 90
-    Width = 201
+    Width = 81
     Height = 497
     Align = alLeft
     BevelKind = bkFlat
+    Color = clSilver
+    ParentBackground = False
     TabOrder = 2
-    object SpeedButton6: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 195
-      Height = 41
-      Align = alTop
-      Caption = 'Cr'#233'er un BL'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGreen
-      Font.Height = -19
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 5
-      ExplicitTop = 8
-      ExplicitWidth = 184
-    end
-    object SpeedButton7: TSpeedButton
-      Left = 1
-      Top = 42
-      Width = 195
-      Height = 41
-      Align = alTop
-      Caption = 'Chargement'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGreen
-      Font.Height = -19
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 5
-      ExplicitTop = 49
-      ExplicitWidth = 184
-    end
-    object SpeedButton8: TSpeedButton
-      Left = 1
-      Top = 83
-      Width = 195
-      Height = 41
-      Align = alTop
-      Caption = 'Mission'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGreen
-      Font.Height = -19
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 5
-      ExplicitTop = 90
-      ExplicitWidth = 184
-    end
-    object SpeedButton9: TSpeedButton
-      Left = 1
-      Top = 165
-      Width = 195
-      Height = 41
-      Align = alTop
-      Caption = 'Contr'#244'le'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGreen
-      Font.Height = -19
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 5
-      ExplicitTop = 172
-      ExplicitWidth = 184
-    end
-    object SpeedButton10: TSpeedButton
-      Left = 1
-      Top = 124
-      Width = 195
-      Height = 41
-      Align = alTop
-      Caption = 'Entr'#233'e en stock'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clGreen
-      Font.Height = -19
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 5
-      ExplicitTop = 131
-      ExplicitWidth = 184
-    end
   end
   object MainMenu1: TMainMenu
     Left = 432

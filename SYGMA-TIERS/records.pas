@@ -4,12 +4,33 @@ interface
 
 type
 
+TUser =record
+  Nid_user : integer;
+  Snom_user,
+  Sprenom_user,
+  Susager,
+  Spwd,
+  Snum_caisse,
+  Sprofil : String;
+end;
+TUserArray = Array of TUser;
+
 TTypeClient = record
 	Nid_tclt : integer;
 	Scode_tclt :string;
 	Sdesignation_tclt :string;
 end;
 TTypeClientArray = array of TTypeClient;
+
+TFournisseur = record
+	Nid_fourn :integer;
+  Scode_fourn,
+	Snom_fourn ,
+	Stel_fourn ,
+	Semail_fourn ,
+	Sadresse_froun : string;
+end;
+TFournisseurArray = Array of TFournisseur;
 
 TLivreur = record
   Nid_liv : integer ;

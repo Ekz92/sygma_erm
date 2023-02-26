@@ -89,7 +89,7 @@ begin
     begin
       StringGrid1.Cells[0,i+1]:=caisses[i].Scompte;
       StringGrid1.Cells[1,i+1]:=caisses[i].Snom_caisse;
-      StringGrid1.Cells[2,i+1]:=FloatToStr(caisses[i].RSolde);
+      StringGrid1.Cells[2,i+1]:=FloatToStrF(caisses[i].RSolde,ffNumber,15,2);
     end;
 end;
 

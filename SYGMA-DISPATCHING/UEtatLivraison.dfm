@@ -351,8 +351,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Fill.BackColor = clSilver
           HAlign = haCenter
           Memo.UTF8W = (
-            '3kg'
-            'anse')
+            '3kg')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -371,7 +370,8 @@ object frmEtatLivraison: TfrmEtatLivraison
           Fill.BackColor = clSilver
           HAlign = haCenter
           Memo.UTF8W = (
-            '3kg')
+            '3kg'
+            'anse')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -448,7 +448,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Fill.BackColor = clSilver
           HAlign = haCenter
           Memo.UTF8W = (
-            '50kg')
+            '25kg')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -467,7 +467,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Fill.BackColor = clSilver
           HAlign = haCenter
           Memo.UTF8W = (
-            '25kg')
+            '50kg')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -868,7 +868,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBRapport."B3A"]')
+            '[frxDBRapport."B3"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -887,7 +887,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBRapport."B3"]')
+            '[frxDBRapport."B3A"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -953,25 +953,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Left = 353.049955020000000000
           Width = 28.000000000000000000
           Height = 22.677165350000000000
-          DataSet = frxDBRapport
-          DataSetName = 'frxDBRapport'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBRapport."B50"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo35: TfrxMemoView
-          AllowVectorExport = True
-          Left = 382.049955020000000000
-          Width = 28.000000000000000000
-          Height = 22.677165350000000000
+          DataField = 'B25'
           DataSet = frxDBRapport
           DataSetName = 'frxDBRapport'
           Font.Charset = DEFAULT_CHARSET
@@ -983,6 +965,26 @@ object frmEtatLivraison: TfrmEtatLivraison
           HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBRapport."B25"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo35: TfrxMemoView
+          AllowVectorExport = True
+          Left = 382.049955020000000000
+          Width = 28.000000000000000000
+          Height = 22.677165350000000000
+          DataField = 'B50'
+          DataSet = frxDBRapport
+          DataSetName = 'frxDBRapport'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRapport."B50"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -1065,7 +1067,7 @@ object frmEtatLivraison: TfrmEtatLivraison
         object Memo40: TfrxMemoView
           AllowVectorExport = True
           Left = 546.141732280000000000
-          Width = 31.748031496062990000
+          Width = 31.748031496063000000
           Height = 22.677165350000000000
           DataSet = frxDBRapport
           DataSetName = 'frxDBRapport'
@@ -1342,27 +1344,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Left = 190.756030000000000000
           Top = 2.000000000000000000
           Width = 33.637795280000000000
-          Height = 22.677165354330700000
-          DataSet = frxDBRapport
-          DataSetName = 'frxDBRapport'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBsum."TC3A"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo71: TfrxMemoView
-          AllowVectorExport = True
-          Left = 225.905636300000000000
-          Top = 2.133858270000000000
-          Width = 29.388203720000000000
-          Height = 22.677165354330700000
+          Height = 22.677165350000000000
           DataSet = frxDBRapport
           DataSetName = 'frxDBRapport'
           Font.Charset = DEFAULT_CHARSET
@@ -1374,6 +1356,26 @@ object frmEtatLivraison: TfrmEtatLivraison
           HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBsum."TC3"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo71: TfrxMemoView
+          AllowVectorExport = True
+          Left = 225.905636300000000000
+          Top = 2.133858270000000000
+          Width = 29.388203720000000000
+          Height = 22.677165350000000000
+          DataSet = frxDBRapport
+          DataSetName = 'frxDBRapport'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBsum."TC3A"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -1442,7 +1444,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Left = 353.007874020000000000
           Top = 1.889763780000000000
           Width = 28.000000000000000000
-          Height = 22.677165354330700000
+          Height = 22.677165350000000000
           DataSet = frxDBRapport
           DataSetName = 'frxDBRapport'
           Font.Charset = DEFAULT_CHARSET
@@ -1453,7 +1455,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBsum."TC50"]')
+            '[frxDBsum."TC25"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -1473,7 +1475,7 @@ object frmEtatLivraison: TfrmEtatLivraison
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBsum."TC25"]')
+            '[frxDBsum."TC50"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -1859,6 +1861,7 @@ object frmEtatLivraison: TfrmEtatLivraison
     Top = 8
   end
   object Qsum: TSQLQuery
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

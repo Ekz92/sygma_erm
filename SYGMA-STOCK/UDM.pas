@@ -61,6 +61,7 @@ type
     function selectDiagramDayFact(Psql : string):TDiagramDayFact;
     function selectCumulBc(Psql :string):TDiagramDayBC;
     function selectJournalCaisse(Psql:string):TJounalCaisse;
+    function SelectUsers(Psql : string):TUserArray;
 
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
     function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
@@ -88,11 +89,14 @@ type
     function InsertVteChargVehd(VteChargVehd:TVteChargVehd):Boolean;
     function InsertDiagramDay(Psql:string):Boolean;
 
+    procedure UpdatePwd(Psql : string);
     procedure UpdateTable(var Psql :string);
     procedure Update_moovStock(var mouv : TMouvStock);
     Procedure UpdateStock(var stock : TStock);
 
     procedure DeleteFromTable(Psql : string);
+
+    function CheckUser(Psql:string):Boolean;
 
   end;
 
@@ -108,6 +112,49 @@ uses UFicheRecap_es, UListeBonCommande;
 
 
 {$R *.dfm}
+procedure TDM.UpdatePwd(Psql : string);
+var
+query : TSQLQuery;
+begin
+  Query := TSQLQuery.Create(self);
+  Query.SQLConnection := DM.SQLConnection1;
+
+  with Query,sql do
+    begin
+      Add(Psql);
+    end;
+    try
+      Query.ExecSQL();
+    finally
+      Query.Free;
+    end;
+end;
+
+
+function TDM.CheckUser(Psql:string):Boolean;
+var
+  Query : TSQLQuery;
+  sql : string;
+
+begin
+  Query := TSQLQuery.Create(self);
+  Query.SQLConnection := DM.SQLConnection1;
+
+  sql:='select * from tb_user '+Psql;
+
+  try
+    Query.SQL.Add(sql);
+    Query.Open;
+
+    if Query.IsEmpty then
+      Result:= False
+    else
+      Result:=True;
+  finally
+    Query.Free;
+  end;
+
+end;
 
 
 
@@ -592,6 +639,53 @@ begin
   Result :=MaxLettrage;
 end;
 
+function TDM.SelectUsers(Psql : string):TUserArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  user :TUser;
+  users :TUserArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_user '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(users,i+1);
+            with user do
+              begin
+                Nid_user:=FieldByName('id_user').AsInteger;
+                Snom_user:=FieldByName('nom_user').AsString;
+                Sprenom_user:=FieldByName('prenom_user').AsString;
+                Susager:=FieldByName('usager').AsString;
+                Spwd := FieldByName('password').AsString;
+                Snum_caisse := FieldByName('num_caisse').AsString;
+                Sprofil:=FieldByName('profil').AsString;
+              end;
+              users[i]:=user;
+              Inc(i);
+              query.Next;
+          end;
+          Result := users;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
 function TDM.selectJournalCaisse(Psql:string):TJounalCaisse;
 var
   query : TSQLQuery;
@@ -784,7 +878,7 @@ begin
 
   try
     query.SQL.Add(sql);
- //   query.SQL.SaveToFile('g:\ff.txt');
+//    query.SQL.SaveToFile('g:\ff.txt');
     query.Open;
 
     with query, BC do

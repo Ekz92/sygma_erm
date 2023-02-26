@@ -32,8 +32,6 @@ object frmAddCaisse: TfrmAddCaisse
     TabOrder = 0
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitTop = 80
-    ExplicitHeight = 315
     ColWidths = (
       89
       165

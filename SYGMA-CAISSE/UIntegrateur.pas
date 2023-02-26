@@ -51,8 +51,6 @@ type
     BC1: TMenuItem;
     Outils1: TMenuItem;
     Opration1: TMenuItem;
-    Dchargementdevhicule1: TMenuItem;
-    Cltureouverture1: TMenuItem;
     Contrle1: TMenuItem;
     Retourbouteille1: TMenuItem;
     Listedecontrle1: TMenuItem;
@@ -102,6 +100,25 @@ type
     journaldecaisse1: TMenuItem;
     Vertical1: TMenuItem;
     Horizontal1: TMenuItem;
+    ypedpense1: TMenuItem;
+    Bkopration1: TMenuItem;
+    Versement1: TMenuItem;
+    irerunchque1: TMenuItem;
+    Emettreunvirement1: TMenuItem;
+    Etat1: TMenuItem;
+    Relevdecompte1: TMenuItem;
+    Chquetirs1: TMenuItem;
+    Virementsmis1: TMenuItem;
+    Versementffectus1: TMenuItem;
+    ransfertdefondsbanketcaisse1: TMenuItem;
+    SpeedButton1: TSpeedButton;
+    Saisie1: TMenuItem;
+    Crance1: TMenuItem;
+    Dette1: TMenuItem;
+    Saisirunecrance1: TMenuItem;
+    Listedecrances1: TMenuItem;
+    Saisirunedette1: TMenuItem;
+    ListedeDettes1: TMenuItem;
     procedure Listefacture1Click(Sender: TObject);
     procedure Nouvelcaisse1Click(Sender: TObject);
     procedure Historiquedecaisse1Click(Sender: TObject);
@@ -126,6 +143,12 @@ type
     procedure CrerunBL1Click(Sender: TObject);
     procedure Horizontal1Click(Sender: TObject);
     procedure Vertical1Click(Sender: TObject);
+    procedure ypedpense1Click(Sender: TObject);
+    procedure Nouveau2Click(Sender: TObject);
+    procedure Liste2Click(Sender: TObject);
+    procedure ransfertdefondsbanketcaisse1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Saisirunecrance1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -142,7 +165,8 @@ implementation
 
 uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
   USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement, records, UDM,
-  UClotureDay, UEtatJournal, UCreer_BL, UJournalCaisseH;
+  UClotureDay, UEtatJournal, UCreer_BL, UJournalCaisseH, UTypeDepense, UaddBank,
+  UbankListe, UTransfertBkCaisse, UAllInOneCaisse;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin
@@ -252,6 +276,11 @@ begin
 frmAddAvance.ShowModal;
 end;
 
+procedure TfrmIntegrateur.Liste2Click(Sender: TObject);
+begin
+frmListeBank.ShowModal;
+end;
+
 procedure TfrmIntegrateur.Liste3Click(Sender: TObject);
 begin
 frmListeEncaissement.ShowModal;
@@ -272,9 +301,19 @@ begin
 frmPayementFacture.ShowModal;
 end;
 
+procedure TfrmIntegrateur.Nouveau2Click(Sender: TObject);
+begin
+frmAddBank.ShowModal;
+end;
+
 procedure TfrmIntegrateur.Nouvelcaisse1Click(Sender: TObject);
 begin
 frmAddCaisse.showModal;
+end;
+
+procedure TfrmIntegrateur.ransfertdefondsbanketcaisse1Click(Sender: TObject);
+begin
+frmTransfertBkCaisse.ShowModal;
 end;
 
 procedure TfrmIntegrateur.S1Click(Sender: TObject);
@@ -290,6 +329,16 @@ end;
 procedure TfrmIntegrateur.Saisie3Click(Sender: TObject);
 begin
 frmEncaissement.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Saisirunecrance1Click(Sender: TObject);
+begin
+frmCreanceClient.ShowModal;
+end;
+
+procedure TfrmIntegrateur.SpeedButton1Click(Sender: TObject);
+begin
+frmAllInOneCaisse.ShowModal;
 end;
 
 procedure TfrmIntegrateur.st_SideMenuDblClick(Sender: TObject);
@@ -345,6 +394,11 @@ end;
 procedure TfrmIntegrateur.Vertical1Click(Sender: TObject);
 begin
 frmJournalCaisseH.ShowModal;
+end;
+
+procedure TfrmIntegrateur.ypedpense1Click(Sender: TObject);
+begin
+frmTypeDepense.ShowModal;
 end;
 
 end.

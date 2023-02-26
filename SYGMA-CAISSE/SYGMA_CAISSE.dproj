@@ -160,6 +160,34 @@
             <Form>frmJournalCaisseH</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="UTypeDepense.pas">
+            <Form>frmTypeDepense</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UaddBank.pas">
+            <Form>frmAddBank</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UbankListe.pas">
+            <Form>frmListeBank</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UTransfertBkCaisse.pas">
+            <Form>frmTransfertBkCaisse</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UAllInOneCaisse.pas">
+            <Form>frmAllInOneCaisse</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Ubkversement.pas">
+            <Form>frmbkversement</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UCreanceClient.pas">
+            <Form>frmCreanceClient</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

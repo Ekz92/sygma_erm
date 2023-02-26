@@ -2,8 +2,8 @@ object frmListeDepense: TfrmListeDepense
   Left = 0
   Top = 0
   Caption = 'Liste de d'#233'pense'
-  ClientHeight = 329
-  ClientWidth = 477
+  ClientHeight = 333
+  ClientWidth = 617
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,19 +12,22 @@ object frmListeDepense: TfrmListeDepense
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object stDep: TStringGrid
     Left = 0
-    Top = 61
-    Width = 477
+    Top = 65
+    Width = 617
     Height = 244
     Align = alClient
+    ColCount = 6
     DefaultRowHeight = 15
     FixedCols = 0
-    RowCount = 2
+    RowCount = 1
+    FixedRows = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
     ParentColor = True
     PopupMenu = PopupMenu1
@@ -32,29 +35,24 @@ object frmListeDepense: TfrmListeDepense
     TabOrder = 0
     StyleElements = [seBorder]
     OnDrawCell = stDepDrawCell
-    ExplicitHeight = 225
     ColWidths = (
       63
       41
       74
       229
-      64)
+      64
+      136)
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 477
-    Height = 61
+    Width = 617
+    Height = 65
     Align = alTop
-    BevelOuter = bvNone
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    BevelWidth = 2
     TabOrder = 1
-    object Bevel1: TBevel
-      Left = 3
-      Top = 3
-      Width = 472
-      Height = 54
-      Shape = bsFrame
-    end
     object Label1: TLabel
       Left = 7
       Top = 10
@@ -70,28 +68,24 @@ object frmListeDepense: TfrmListeDepense
       Caption = 'Date Fin :'
     end
     object SpeedButton1: TSpeedButton
-      Left = 393
-      Top = 6
-      Width = 78
-      Height = 47
-      Align = alCustom
+      Left = 550
+      Top = 4
+      Width = 63
+      Height = 57
+      Align = alRight
       Caption = 'Recherche'
       Flat = True
       OnClick = SpeedButton1Click
+      ExplicitLeft = 409
+      ExplicitTop = 6
+      ExplicitHeight = 47
     end
     object Label3: TLabel
-      Left = 183
+      Left = 163
       Top = 10
       Width = 31
       Height = 13
-      Caption = 'Total :'
-    end
-    object lbTotal: TLabel
-      Left = 221
-      Top = 10
-      Width = 6
-      Height = 13
-      Caption = '0'
+      Caption = 'Type :'
     end
     object d1: TDateTimePicker
       Left = 69
@@ -116,27 +110,57 @@ object frmListeDepense: TfrmListeDepense
       TabOrder = 1
       StyleElements = [seBorder]
     end
+    object cbTdepense: TComboBox
+      Left = 209
+      Top = 7
+      Width = 168
+      Height = 21
+      Style = csDropDownList
+      ParentColor = True
+      TabOrder = 2
+      OnCloseUp = cbTdepenseCloseUp
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 305
-    Width = 477
+    Top = 309
+    Width = 617
     Height = 24
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 262
+    object Label5: TLabel
+      Left = 331
+      Top = 1
+      Width = 42
+      Height = 22
+      Align = alRight
+      Alignment = taCenter
+      Caption = 'Groupe :'
+      ExplicitHeight = 13
+    end
     object Button1: TButton
-      Left = 401
+      Left = 541
       Top = 1
       Width = 75
       Height = 22
       Align = alRight
-      Caption = 'Imprimer'
+      Caption = 'Visualiser'
       TabOrder = 0
       OnClick = Button1Click
-      ExplicitLeft = 400
-      ExplicitTop = 8
-      ExplicitHeight = 25
+    end
+    object cbGroup: TComboBox
+      Left = 373
+      Top = 1
+      Width = 168
+      Height = 21
+      Align = alRight
+      Style = csDropDownList
+      ParentColor = True
+      TabOrder = 1
+      OnCloseUp = cbGroupCloseUp
+      Items.Strings = (
+        'Tableau'
+        'Diagramme')
     end
   end
   object PopupMenu1: TPopupMenu
@@ -277,7 +301,7 @@ object frmListeDepense: TfrmListeDepense
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
@@ -293,7 +317,7 @@ object frmListeDepense: TfrmListeDepense
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
@@ -307,7 +331,7 @@ object frmListeDepense: TfrmListeDepense
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
@@ -323,7 +347,7 @@ object frmListeDepense: TfrmListeDepense
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
@@ -335,6 +359,7 @@ object frmListeDepense: TfrmListeDepense
           Top = 2.779530000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
+          AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -19
@@ -661,7 +686,7 @@ object frmListeDepense: TfrmListeDepense
         object Memo18: TfrxMemoView
           AllowVectorExport = True
           Left = 574.031496060000000000
-          Width = 143.622140000000000000
+          Width = 99.401574803149610000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2n'
           DisplayFormat.Kind = fkNumeric
@@ -700,10 +725,13 @@ object frmListeDepense: TfrmListeDepense
     MaxBlobSize = 1
     Params = <>
     SQL.Strings = (
-      'select * from tb_depense')
+      
+        ' select typedep, sum(montant_dep) as montant from tb_depense  wh' +
+        'ere dateDep between '#39'2022-04-12'#39' and '#39'2022-12-15'#39' group by typed' +
+        'ep ')
     SQLConnection = DM.SQLConnection1
-    Left = 344
-    Top = 200
+    Left = 376
+    Top = 112
   end
   object frxDBDepense: TfrxDBDataset
     UserName = 'frxDBDepense'
@@ -711,6 +739,420 @@ object frmListeDepense: TfrmListeDepense
     DataSet = SqlDepense
     BCDToCurrency = False
     Left = 344
-    Top = 152
+    Top = 192
+  end
+  object frxLDTab: TfrxReport
+    Version = '6.9.3'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44828.259265775500000000
+    ReportOptions.LastChange = 44828.259265775500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 408
+    Top = 248
+    Datasets = <
+      item
+        DataSet = frxDBDepense
+        DataSetName = 'frxDBDepense'
+      end
+      item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end>
+    Variables = <>
+    Style = <
+      item
+        Name = 'Title'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        Fill.BackColor = clGray
+      end
+      item
+        Name = 'Header'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clMaroon
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+      end
+      item
+        Name = 'Group header'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clMaroon
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+        Fill.BackColor = 16053492
+      end
+      item
+        Name = 'Data'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = []
+      end
+      item
+        Name = 'Group footer'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Frame.Typ = []
+      end
+      item
+        Name = 'Header line'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Frame.Typ = [ftBottom]
+        Frame.Width = 2.000000000000000000
+      end>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 45.354360000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo25: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 170.078850000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Liste de d'#233'pense')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 23.236240000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Du :')
+          ParentFont = False
+        end
+        object md1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 38.354360000000000000
+          Top = 23.236240000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          AllowVectorExport = True
+          Left = 114.842610000000000000
+          Top = 23.236240000000000000
+          Width = 30.236240000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Au :')
+          ParentFont = False
+        end
+        object md2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 149.417440000000000000
+          Top = 23.236240000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          AllowVectorExport = True
+          Left = 473.205010000000000000
+          Top = 2.779530000000000000
+          Width = 241.889775980000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
+          ParentFont = False
+        end
+        object Memo35: TfrxMemoView
+          AllowVectorExport = True
+          Left = 513.330786770000000000
+          Top = 22.677180000000000000
+          Width = 173.858235980000000000
+          Height = 15.118120000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBParam."description"]')
+          ParentFont = False
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 86.929190000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Width = 676.535406220000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftBottom]
+          Frame.Width = 2.000000000000000000
+          HAlign = haCenter
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo6: TfrxMemoView
+          AllowVectorExport = True
+          Width = 528.378091890000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Cat'#233'gorie de d'#233'pense')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo7: TfrxMemoView
+          AllowVectorExport = True
+          Left = 529.000000000000000000
+          Width = 148.472480000000000000
+          Height = 22.677180000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Montant')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 170.078850000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBDepense
+        DataSetName = 'frxDBDepense'
+        RowCount = 0
+        object Memo12: TfrxMemoView
+          AllowVectorExport = True
+          Width = 528.378091890000000000
+          Height = 18.897650000000000000
+          DataField = 'typedep'
+          DataSet = frxDBDepense
+          DataSetName = 'frxDBDepense'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            '[frxDBDepense."typedep"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo13: TfrxMemoView
+          AllowVectorExport = True
+          Left = 529.000000000000000000
+          Width = 148.472480000000000000
+          Height = 18.897650000000000000
+          DataSet = frxDBDepense
+          DataSetName = 'frxDBDepense'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDepense."montant"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 26.456710000000000000
+        Top = 291.023810000000000000
+        Width = 718.110700000000000000
+        object Memo15: TfrxMemoView
+          Align = baWidth
+          AllowVectorExport = True
+          Width = 718.110700000000000000
+          Frame.Typ = [ftTop]
+          Frame.Width = 2.000000000000000000
+        end
+        object Memo16: TfrxMemoView
+          AllowVectorExport = True
+          Top = 1.000000000000000000
+          Height = 22.677180000000000000
+          AutoWidth = True
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Date] [Time]')
+        end
+        object Memo17: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 642.520100000000000000
+          Top = 1.000000000000000000
+          Width = 75.590600000000000000
+          Height = 22.677180000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page#]')
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897650000000000000
+        Top = 211.653680000000000000
+        Width = 718.110700000000000000
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Left = 529.031496060000000000
+          Width = 148.535464800000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[SUM(<frxDBDepense."montant">,MasterData1)]')
+          ParentFont = False
+          VAlign = vaCenter
+          Formats = <
+            item
+              FormatStr = '%2.2n'
+              Kind = fkNumeric
+            end
+            item
+            end>
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Width = 528.377952760000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Total')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+    end
+  end
+  object frxDBLDTab: TfrxDBDataset
+    UserName = 'frxDBDepense'
+    CloseDataSource = False
+    DataSet = SqlDepense
+    BCDToCurrency = False
+    Left = 408
+    Top = 200
   end
 end

@@ -21,12 +21,15 @@ type
     mLibelle: TMemo;
     Button1: TButton;
     Button2: TButton;
+    Label6: TLabel;
+    cbTdepense: TComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure edMontantKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Déclarations privées }
   public
@@ -90,6 +93,7 @@ begin
           Sope :=QuotedStr('ope'+IntToStr(Maxope));
           SdateDep:=QuotedStr(FormatDateTime('yyyy-mm-dd',DateDep.Date));
           SNumCaisse := QuotedStr(cbCaisse.Text);
+          STypDep := QuotedStr(cbTdepense.Text);
           SPiece := QuotedStr(edPiece.Text);
           SLibelle := QuotedStr(mLibelle.Text);
           RMontant := StrToFloat(edMontant.Text);
@@ -154,17 +158,32 @@ begin
 
 end;
 
+procedure TfrmSaisiDepense.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+cbTdepense.Clear;
+end;
+
 procedure TfrmSaisiDepense.FormCreate(Sender: TObject);
 begin
   mLibelle.Clear;
-
 end;
 
 procedure TfrmSaisiDepense.FormShow(Sender: TObject);
 var
-  PsqlCaisse : string;
+  PsqlCaisse, PsqltDep : string;
   user : TUser;
+
+  Tdeps : TTypeDepenseArray;
+  I:integer;
 begin
+
+  PsqltDep := '' ;
+  tdeps:=DM.SelectTypeDep(PsqltDep);
+
+  for I := Low(tdeps) to High(tdeps) do
+    begin
+      cbTdepense.Items.Add(tdeps[i].Sdesigntdep);
+    end;
 
 //**********************Selection de la caisse de l'utilisateur*********
   DateDep.Date := Now;

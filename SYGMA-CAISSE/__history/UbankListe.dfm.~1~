@@ -1,0 +1,66 @@
+object frmListeBank: TfrmListeBank
+  Left = 0
+  Top = 0
+  Caption = 'Bank - Liste'
+  ClientHeight = 269
+  ClientWidth = 447
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 447
+    Height = 59
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 59
+    Width = 447
+    Height = 182
+    Align = alClient
+    ColCount = 4
+    DefaultRowHeight = 15
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect]
+    ParentColor = True
+    TabOrder = 1
+    StyleElements = [seBorder]
+    ExplicitTop = 53
+    ExplicitHeight = 148
+    ColWidths = (
+      76
+      158
+      101
+      104)
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 241
+    Width = 447
+    Height = 28
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitTop = 173
+    object Button1: TButton
+      Left = 370
+      Top = 2
+      Width = 75
+      Height = 25
+      Caption = 'Pr'#233'visualiser'
+      TabOrder = 0
+    end
+  end
+end

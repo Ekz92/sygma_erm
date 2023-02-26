@@ -2,6 +2,26 @@ unit records;
 
 interface
 type
+TPointVente = record
+  Nid_pv : integer;
+  Snom_pint,
+  Snom_zone,
+  Scode_clt,
+  Sadresse : string
+end;
+TPointVenteArray =Array of TPointVente;
+
+TUser =record
+  Nid_user : integer;
+  Snom_user,
+  Sprenom_user,
+  Susager,
+  Spwd,
+  Snum_caisse,
+  Sprofil : String;
+end;
+TUserArray = Array of TUser;
+
 
 TDateSys = record
   Nid_cd : integer;
@@ -46,7 +66,8 @@ TFacturation = record
   SNum_fact,
   SCode_mag,
   Scode_clt,
-  Snom_clt : string;
+  Snom_clt,
+  Spdv_cdp : string;
   NQte_total : integer;
   Rmnt_t,
   Rmnt_p,

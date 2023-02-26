@@ -1,0 +1,191 @@
+unit USaisiDepense;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmSaisiDepense = class(TForm)
+    Bevel1: TBevel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label4: TLabel;
+    DateDep: TDateTimePicker;
+    edPiece: TEdit;
+    cbCaisse: TComboBox;
+    edMontant: TEdit;
+    mLibelle: TMemo;
+    Button1: TButton;
+    Button2: TButton;
+    Label6: TLabel;
+    cbTdepense: TComboBox;
+    procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure edMontantKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmSaisiDepense: TfrmSaisiDepense;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM, UConnexion;
+
+procedure TfrmSaisiDepense.Button1Click(Sender: TObject);
+var
+  dep : TDepense;
+  caisses : TCaisseArray;
+  sqlCaisse,sqlUpd :string;
+  vSolde : real;
+  I,Maxope: Integer;
+  EtatJrn : TEtatJournal;
+
+  hisCaisse : THistoriqueCaisse;
+begin
+  sqlCaisse := ' where num_compte = '+QuotedStr(cbCaisse.Text);
+  caisses := dm.SelectCaisses(sqlCaisse);
+
+  for I := Low(caisses) to High(caisses) do
+    begin
+      vSolde := caisses[i].RSolde;
+    end;
+  {Noméro d'opération}
+
+  Maxope := DM.SelectMaxOpe.NMaxOpe;
+  Maxope := Maxope + 1;
+
+
+//      Etat journal
+
+    with EtatJrn do
+      begin
+        Sdate_ej:= DateToStr(DateDep.Date);
+        Snum_ope := 'ope'+IntToStr(Maxope);
+        Snum_piece := edPiece.Text;
+        Slibelle := mLibelle.Text;
+        Sdebit := edMontant.Text;
+        Scredit := '-';
+        Ssens := 'D';
+        Susager := vUsager;
+      end;
+
+  if (Trim(edPiece.Text)='') and (Trim(edMontant.Text)='') and(Trim(mLibelle.Text)='') then
+    begin
+      MessageDlg('Vous devez renseigner les champs',mtError,[mbOk],0);
+    end else
+    begin
+      with dep do
+        begin
+          Sope :=QuotedStr('ope'+IntToStr(Maxope));
+          SdateDep:=QuotedStr(FormatDateTime('yyyy-mm-dd',DateDep.Date));
+          SNumCaisse := QuotedStr(cbCaisse.Text);
+          STypDep := QuotedStr(cbTdepense.Text);
+          SPiece := QuotedStr(edPiece.Text);
+          SLibelle := QuotedStr(mLibelle.Text);
+          RMontant := StrToFloat(edMontant.Text);
+          SUsager := QuotedStr(vUsager);
+          Nstatut_canc:=0;
+        end;
+        if MessageDlg('Voulez-vous enregistré cette dépense ?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+          begin
+            dm.InsertDepense(dep);      {Insertion dans t_depense}
+            dm.InsertEtatJournal(EtatJrn); //Insertion dans etat journal
+
+            sqlUpd := 'Update tb_caisse ' {Requete Mise à jour du solde}
+                    +' set solde = '+FloatToStr(vSolde - StrToFloat(edMontant.Text))
+                    +' where num_compte = '+QuotedStr(cbCaisse.Text);
+
+            dm.UpdateTable(sqlUpd); {Mise à jour du solde}
+             { Insertion dasn la tale de l'historique de caisse}
+
+            with hisCaisse do
+              begin
+                Ddate_hisc:= DateToStr(DateDep.Date);
+                Snum_piece:=edPiece.Text;
+                Scode_cli := 'néant';
+                Snom_cli := mLibelle.Text;
+                SCaisse := cbCaisse.Text;
+                Sope := 'ope'+IntToStr(Maxope);
+                Ssens := 'D';
+                Rmontant := StrToFloat(edMontant.Text);
+                Susager:=vUsager;
+                Nstatut_canc:=0;
+              end;
+              DM.InsertHisCaisse(hisCaisse);
+
+            Button2.Click;
+          end;
+    end;
+end;
+
+procedure TfrmSaisiDepense.Button2Click(Sender: TObject);
+begin
+edPiece.Clear;
+edMontant.Clear;
+mLibelle.Clear;
+end;
+
+procedure TfrmSaisiDepense.edMontantKeyPress(Sender: TObject; var Key: Char);
+begin
+if key=#13 then Button1.Click;
+end;
+
+procedure TfrmSaisiDepense.FormActivate(Sender: TObject);
+var
+  PsqlCaisse : string;
+  user : TUser;
+begin
+
+//**********************Selection de la caisse de l'utilisateur*********
+
+  PsqlCaisse := ' where usager = '+QuotedStr(vUsager);
+  user := dm.selectUser(PsqlCaisse);
+  cbCaisse.Text := user.Snum_caisse;
+
+end;
+
+procedure TfrmSaisiDepense.FormCreate(Sender: TObject);
+begin
+  mLibelle.Clear;
+
+end;
+
+procedure TfrmSaisiDepense.FormShow(Sender: TObject);
+var
+  PsqlCaisse, PsqltDep : string;
+  user : TUser;
+
+  Tdeps : TTypeDepenseArray;
+  I:integer;
+begin
+
+  PsqltDep := '' ;
+  tdeps:=DM.SelectTypeDep(PsqltDep);
+
+  for I := Low(tdeps) to High(tdeps) do
+    begin
+      cbTdepense.Items.Add(tdeps[i].Sdesigntdep);
+    end;
+
+//**********************Selection de la caisse de l'utilisateur*********
+  DateDep.Date := Now;
+
+  PsqlCaisse := ' where usager = '+QuotedStr(vUsager);
+  user := dm.selectUser(PsqlCaisse);
+  cbCaisse.Text := user.Snum_caisse;
+end;
+
+end.

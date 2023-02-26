@@ -390,7 +390,18 @@ procedure TfrmListeFacture.Supprimer1Click(Sender: TObject);
 var
   PSql : string;
   Mnt_p : real;
+
+  Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
 begin
+//  PsqlUsr := '';
+//  Users := dm.SelectUsers(PsqlUsr);
+//
+//  for U := Low(Users) to High(Users) do
+//    begin
+//      uProfil := Users[U].Sprofil;
+//    end;
 
   Mnt_p := StrToFloat(St_listeFacture.Cells[4,St_listeFacture.Row]);
 

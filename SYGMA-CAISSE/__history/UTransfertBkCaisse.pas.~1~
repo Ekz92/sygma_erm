@@ -1,0 +1,24 @@
+unit UTransfertBkCaisse;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmTransfertBkCaisse = class(TForm)
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmTransfertBkCaisse: TfrmTransfertBkCaisse;
+
+implementation
+
+{$R *.dfm}
+
+end.

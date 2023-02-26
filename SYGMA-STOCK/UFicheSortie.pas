@@ -328,7 +328,26 @@ var
   StockCam : TStockCamion;
   vteChargd : TvteChargVehd;
 
+    Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
+
 begin
+
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
+
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
+
+  if (uProfil <>'Admin') and (uProfil <>'Gest. Stock') then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+//      exit
+    end else
+
   for I := 3 to st_ficheSortie.ColCount do
     for j := 1 to st_ficheSortie.RowCount-1 do
       if st_ficheSortie.Cells[i,j] = '' then

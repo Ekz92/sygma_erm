@@ -22,6 +22,7 @@ type
     function SelectMaxOpe():TMaxOpeCaisse;
     function SelectFactures(Psql:string):TFacturationArray;
     function SelectCaisses(Psql : string):TCaisseArray;
+    function SelectTypeDep(Psql : string):TTypeDepenseArray;
     function SelectCompteClient(Psql:string):TCompteClientArray;
     function SelectMaxIdAvance():TMaxIdAvance;
     function selectClients(Psql : string) : TClientArray;
@@ -36,6 +37,7 @@ type
     function SelectCaisse(Psql :string):TCaisse;
     function selectStock(Psql : String) :TStockArray;
     function selectCatalogueStock(Psql:string) : TCatalogueStock;
+    function SelectUsers(Psql : string):TUserArray;
 
 
     function InsertReleveClient(rc : TReleve_client):Boolean;
@@ -45,10 +47,16 @@ type
     function InsertCaisse(Caisse: TCaisse) : Boolean;
     function InsertPayementCanc(payement : TPayementCanc):Boolean;
     function InsertDepense(dep : TDepense):Boolean;
+    function InsertTypeDepense(typedep : TTypeDepense):Boolean;
     function InsertEncaissement(Enc : TEncaissement):Boolean;
     function InsertCatalogueCaisse(cat:TCatalogueCaisse ): Boolean;
     function InsertCatalogueStock(cstock : TCatalogueStock):boolean;
     function InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
+    function InsertBank(bk : TBank):Boolean;
+
+//    Caisse simplifiee
+
+    function selectArticles(Psql : string) : TarticleArray;
 
 
     procedure UpdateTable(var Psql :string);
@@ -69,6 +77,80 @@ uses UListeDepense;
 
 {$R *.dfm}
 
+function TDM.SelectUsers(Psql : string):TUserArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  user :TUser;
+  users :TUserArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_user '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(users,i+1);
+            with user do
+              begin
+                Nid_user:=FieldByName('id_user').AsInteger;
+                Snom_user:=FieldByName('nom_user').AsString;
+                Sprenom_user:=FieldByName('prenom_user').AsString;
+                Susager:=FieldByName('usager').AsString;
+                Spwd := FieldByName('password').AsString;
+                Snum_caisse := FieldByName('num_caisse').AsString;
+                Sprofil:=FieldByName('profil').AsString;
+              end;
+              users[i]:=user;
+              Inc(i);
+              query.Next;
+          end;
+          Result := users;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
+function TDM.InsertBank(bk : TBank):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:= dm.SQLConnection1;
+
+  with bk do
+    begin
+      sql := 'Insert into tb_bank values(null,'
+                +QuotedStr(Scode_bk)+','
+                +QuotedStr(SNom_bk)+','
+                +QuotedStr(SCompte_bk)+','
+                +FloatToStr(RSolde)
+                +')' ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
 
 function TDM.InsertEtatJournal(EtatJournal : TEtatJournal):boolean;
   var
@@ -346,6 +428,54 @@ begin
     end;
 end;
 
+function TDM.selectArticles(Psql : string) : TarticleArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  article : TArticle;
+  articles : TarticleArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_article '+Psql
+         +' order by id_art desc ';
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(articles,i+1);
+            with article do
+              begin
+                Nid_art := FieldByName('id_art').AsInteger;
+                Scode_art := FieldByName('code_art').AsString;
+                Sdesignation_art := FieldByName('designation_art').AsString;
+                Salias_art := FieldByName('alias_art').AsString;
+                Salias_ret := FieldByName('alias_ret').AsString;
+                Stype_art := FieldByName('type_art').AsString;
+                Rkilo := FieldByName('kilo').AsFloat;
+                Scode_mag := FieldByName('code_mag').AsString;
+              end;
+            articles[i]:=article;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := articles;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
 
 function TDM.selectDepense(Psql : string):TDepenseArray;
 var
@@ -376,6 +506,7 @@ begin
                 Sope:=FieldByName('ope').AsString;
                 SdateDep:=FieldByName('dateDep').AsString;
                 SNumCaisse:=FieldByName('num_caisse').AsString;
+                STypDep:=FieldByName('typedep').AsString;
                 SPiece:=FieldByName('num_piece').AsString;
                 SLibelle:=FieldByName('libelle_dep').AsString;
                 RMontant:=FieldByName('montant_dep').AsFloat;
@@ -393,6 +524,31 @@ begin
   end;
 end;
 
+function TDM.InsertTypeDepense(typedep : TTypeDepense):Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with typedep do
+    begin
+      sql := 'Insert into tb_type_depense values (null,'
+              +Scodetdep+','
+              +Sdesigntdep
+              +')';
+    end;
+
+    try
+      query.SQL.Add(sql);
+      query.ExecSQL();
+    finally
+      query.Free;
+    end;
+end;
+
+
 function TDM.InsertDepense(dep : TDepense):Boolean;
 var
   sql : string;
@@ -407,6 +563,7 @@ begin
               +Sope+','
               +SdateDep+','
               +SNumCaisse+','
+              +STypDep+','
               +SPiece+','
               +SLibelle+','
               +FloatToStr(RMontant)+','
@@ -545,6 +702,47 @@ begin
   end;
 end;
 
+function TDM.SelectTypeDep(Psql : string):TTypeDepenseArray;
+var
+  query : TSQLQuery;
+  sql:string;
+  TDep : TTypeDepense;
+  TDeps : TTypeDepenseArray;
+  i:integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_type_depense '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Clear;
+    query.SQL.Add(sql);
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(TDeps,i+1);
+            with TDep do
+              begin
+                Scodetdep:=FieldByName('code_tdep').AsString;
+                Sdesigntdep:=FieldByName('designation_tdep').AsString;
+              end;
+              TDeps[i]:=TDep;
+              Inc(i);
+              query.Next;
+          end;
+          Result := TDeps;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
 
 function TDM.SelectCaisses(Psql : string):TCaisseArray;
 var
@@ -1136,7 +1334,7 @@ begin
         Snom_user:=FieldByName('nom_user').AsString;
         Sprenom_user:=FieldByName('prenom_user').AsString;
         Susager:=FieldByName('usager').AsString;
-        Spassword:=FieldByName('password').AsString;
+        Spwd:=FieldByName('password').AsString;
         Sprofil:=FieldByName('profil').AsString;
         Snum_caisse:=FieldByName('num_caisse').AsString;
         NStatut:=FieldByName('statut').AsInteger;

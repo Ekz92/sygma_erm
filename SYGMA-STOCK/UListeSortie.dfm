@@ -45,32 +45,19 @@ object frmListeSortie: TfrmListeSortie
     Height = 47
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 624
     object Label1: TLabel
       Left = 8
-      Top = 4
+      Top = 5
       Width = 36
       Height = 13
       Caption = 'D'#233'but :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
     end
     object Label2: TLabel
-      Left = 23
-      Top = 26
+      Left = 8
+      Top = 27
       Width = 21
       Height = 13
       Caption = 'Fin :'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
     end
     object Button1: TButton
       Left = 457
@@ -87,9 +74,6 @@ object frmListeSortie: TfrmListeSortie
       ParentFont = False
       TabOrder = 0
       OnClick = Button1Click
-      ExplicitLeft = 344
-      ExplicitTop = 6
-      ExplicitHeight = 22
     end
     object d1: TDateTimePicker
       Left = 55
@@ -133,8 +117,6 @@ object frmListeSortie: TfrmListeSortie
     Height = 28
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 222
-    ExplicitWidth = 534
     object Button2: TButton
       Left = 457
       Top = 1
@@ -578,7 +560,6 @@ object frmListeSortie: TfrmListeSortie
     end
   end
   object QLSortie: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

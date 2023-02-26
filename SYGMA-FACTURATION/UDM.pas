@@ -39,6 +39,9 @@ type
     function SelectUnParamPrix(code_art,codetclt : string):Boolean;
     function selectCodeclt(var vNomClt : string) : TClient;
     function selectCumuleVente(Psql : string):TCumuleVenteBLArray;
+    function selectPoints(Psql : string) : TPointVenteArray;
+    function SelectUsers(Psql : string):TUserArray;
+
 
 
     function InsertFacturation(facture : TFacturation):boolean;
@@ -73,6 +76,50 @@ implementation
 uses USaisieFacture, UDiagramDayFacture;
 
 {$R *.dfm}
+
+function TDM.selectPoints(Psql : string) : TPointVenteArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  point : TPointVente;
+  points : TPointVenteArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_point_vente '+ Psql;
+  i:=0;
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\tt.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not eof do
+          begin
+          SetLength(points,i+1);
+            with point do
+              begin
+                Nid_pv := FieldByName('id_point').AsInteger;
+                Snom_pint := FieldByName('nom_point').AsString;
+                Snom_zone :=  FieldByName('zone').AsString;
+                Scode_clt := FieldByName('code_client').AsString;
+                Sadresse := FieldByName('adresse').AsString;
+              end;
+            points[i]:=point;
+            Inc(i);
+            query.Next;
+          end;
+      end;
+       Result := points;
+  finally
+    query.Free;
+  end;
+end;
+
 function TDM.selectCumuleVente(Psql : string):TCumuleVenteBLArray;
 var
   query : TSQLQuery;
@@ -1106,6 +1153,53 @@ begin
 
 end;
 
+function TDM.SelectUsers(Psql : string):TUserArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  user :TUser;
+  users :TUserArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_user '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(users,i+1);
+            with user do
+              begin
+                Nid_user:=FieldByName('id_user').AsInteger;
+                Snom_user:=FieldByName('nom_user').AsString;
+                Sprenom_user:=FieldByName('prenom_user').AsString;
+                Susager:=FieldByName('usager').AsString;
+                Spwd := FieldByName('password').AsString;
+                Snum_caisse := FieldByName('num_caisse').AsString;
+                Sprofil:=FieldByName('profil').AsString;
+              end;
+              users[i]:=user;
+              Inc(i);
+              query.Next;
+          end;
+          Result := users;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
 
 function TDM.InsertFacturation(facture : TFacturation):boolean;
 var
@@ -1123,6 +1217,7 @@ begin
             +QuotedStr(SCode_mag)+','
             +QuotedStr(Scode_clt)+','
             +QuotedStr(Snom_clt)+','
+            +QuotedStr(Spdv_cdp)+','
             +IntToStr(NQte_total)+','
             +FloatToStr(Rmnt_t)+','
             +FloatToStr(Rmnt_p)+','

@@ -15,6 +15,19 @@ TEtatJournal = record
 end;
 TEtatJournalArray = array of TEtatJournal;
 
+TArticle = record
+  Nid_art : integer;
+  Scode_art,
+  Sdesignation_art,
+  Salias_art,
+  Salias_ret,
+  Stype_art : String;
+  Rkilo : real;
+  Scode_mag : string;
+end;
+TarticleArray = array of TArticle;
+
+
 TDateSys = record
   Nid_cd : integer;
   Sdate_cd : string;
@@ -98,7 +111,7 @@ TUser = record
   Snom_user,
   Sprenom_user,
   Susager,
-  Spassword,
+  Spwd,
   Sprofil,
   Snum_caisse : string;
   NStatut : integer;
@@ -230,6 +243,7 @@ TDepense = record
   Sope,
   SdateDep,
   SNumCaisse,
+  STypDep,
   SPiece,
   SLibelle : string;
   RMontant : real;
@@ -237,6 +251,13 @@ TDepense = record
   Nstatut_canc :integer ;
 end;
 TDepenseArray = array of TDepense;
+
+TTypeDepense = record
+  Nid_td : integer;
+  Scodetdep,
+  Sdesigntdep : string;
+end;
+TTypeDepenseArray = array of TTypeDepense ;
 
 
 implementation

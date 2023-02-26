@@ -17,6 +17,7 @@ type
     { Déclarations publiques }
     function selectLivreur(Psql : string):TLivreurArray;
     function selectClients(Psql : string) : TClientArray;
+    function selectFournisseur(Psql : string) : TFournisseurArray;
     function selectTypeClients(Psql : string) : TTypeClientArray;
     function selectTarif(Psql:string) :TTarifArray ;
     function selectZones(Psql : string) : TZoneArray;
@@ -28,9 +29,12 @@ type
     function SelectCaisses(Psql : string):TCaisseArray;
     function selectStock(Psql : String) :TStockArray;
     function selectCatalogueStock(Psql:string) : TCatalogueStock;
+    function SelectUsers(Psql : string):TUserArray;
+
 
     function InsertLivreur(livreur : TLivreur) : Boolean;
     function InsertClient(clt : TClient ):Boolean;
+    function InsertFournisseur(Fourn : TFournisseur) : Boolean;
     function InsertTypeClient(tclt : TTypeClient ):Boolean;
     function InsertCompteClt(cmpt : TCompteClient ):Boolean;
     function InsertPointVente(var point : TPointVente): Boolean;
@@ -39,6 +43,7 @@ type
 
 
     procedure UpdateClient(client : TClient);
+    procedure UpdateFourn(Fourn : TFournisseur);
     procedure UpdateTable(var Psql :string);
 
     procedure Delete(Psql : String);
@@ -53,6 +58,54 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+function TDM.SelectUsers(Psql : string):TUserArray;
+var
+  query : TSQLQuery;
+  sql : string;
+  user :TUser;
+  users :TUserArray;
+  i : integer;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  sql := 'select * from tb_user '+Psql;
+
+  i:=0;
+
+  try
+    query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_facturation.txt');
+    query.Open;
+
+    with query do
+      begin
+        while not Eof do
+          begin
+            SetLength(users,i+1);
+            with user do
+              begin
+                Nid_user:=FieldByName('id_user').AsInteger;
+                Snom_user:=FieldByName('nom_user').AsString;
+                Sprenom_user:=FieldByName('prenom_user').AsString;
+                Susager:=FieldByName('usager').AsString;
+                Spwd := FieldByName('password').AsString;
+                Snum_caisse := FieldByName('num_caisse').AsString;
+                Sprofil:=FieldByName('profil').AsString;
+              end;
+              users[i]:=user;
+              Inc(i);
+              query.Next;
+          end;
+          Result := users;
+      end;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+
 function TDM.InsertCatalogueStock(cstock : TCatalogueStock):boolean;
   var
   sql : string;
@@ -506,6 +559,31 @@ begin
     end;
 end;
 
+
+procedure TDM.UpdateFourn(Fourn : TFournisseur);
+var
+  Query:TSQLQuery;
+  sql : String;
+begin
+    Query:=TSQLQuery.Create(self);
+    Query.SQLConnection:=SQLConnection1;
+
+    sql := 'Update tb_fournisseur set '
+                  +'nom_clt = '+Fourn.Snom_fourn  +','
+                  +'adresse_fourn = '+Fourn.Sadresse_froun+','
+                  +'tel_fourn = '+fourn.Stel_fourn+','
+                  +'email_clt = '+Fourn.Semail_fourn+','
+                  +' where code_fourn = '+fourn.Scode_fourn;
+    try
+      Query.SQL.Add(sql);
+//      Query.SQL.SaveToFile('g:\typeClt.txt');
+      Query.ExecSQL();
+    finally
+      Query.Free;
+    end;
+end;
+
+
 procedure TDM.UpdateClient(client : TClient);
 var
   Query:TSQLQuery;
@@ -585,6 +663,36 @@ begin
       SQLConnection1.Close;
     end;
 end;
+
+function TDM.InsertFournisseur(Fourn : TFournisseur) : Boolean;
+var
+  sql : string;
+  query : TSQLQuery;
+begin
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection := SQLConnection1;
+
+  with Fourn do
+    begin
+      sql := 'Insert into tb_fournisseur value(null,'
+              +Scode_fourn+','
+              +Snom_fourn+','
+              +Stel_fourn +','
+              +Semail_fourn+','
+              +Sadresse_froun
+              +');'       ;
+    end;
+
+    try
+      query.SQL.Add(sql);
+//      query.SQL.SaveToFile('g:\client.txt');
+      query.ExecSQL();
+    finally
+      query.Free;
+      SQLConnection1.Close;
+    end;
+end;
+
 
 function TDM.InsertClient(clt : TClient ):Boolean;
 var
@@ -696,6 +804,51 @@ begin
             end;
       end;
        Result := Tclients;
+  finally
+    query.Free;
+    SQLConnection1.Close;
+  end;
+end;
+
+function TDM.selectFournisseur(Psql : string) : TFournisseurArray;
+var
+  sql:string;
+  query : TSQLQuery;
+  fourn : TFournisseur;
+  fourns : TFournisseurArray;
+  i:integer;
+begin
+
+  query:=TSQLQuery.Create(self);
+  query.SQLConnection:=dm.SQLConnection1;
+
+  sql := 'select * from tb_fournisseur '+Psql;
+  i:=0;
+  try
+    query.SQL.Add(sql);
+ //   query.SQL.SaveToFile('g:\clt.txt');
+    query.Open;
+
+    with query do
+      begin
+          while not eof do
+            begin
+            SetLength(fourns,i+1);
+              with fourn do
+                begin
+                  Nid_fourn := FieldByName('id_fourn').AsInteger;
+                  Scode_fourn := FieldByName('code_fourn').AsString;
+                  Snom_fourn := FieldByName('nom_fourn').AsString;
+                  Stel_fourn := FieldByName('tel_fourn').AsString  ;
+                  Semail_fourn := FieldByName('email_fourn').AsString;
+                  Sadresse_froun :=FieldByName('adresse_froun').AsString;
+                end;
+              fourns[i]:=fourn;
+              Inc(i);
+              query.Next;
+            end;
+      end;
+       Result := fourns;
   finally
     query.Free;
     SQLConnection1.Close;

@@ -70,22 +70,41 @@ var
   CompteClient : TCompteClientArray;
   I: Integer;
 
+    Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
+
+
 begin
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
 
-  SqlCc := ' where code_clt = '+QuotedStr(St_journal.Cells[2,St_journal.Row]);
-  CompteClient := dm.SelectCompteClient(SqlCc);
-  for I := Low(CompteClient) to High(CompteClient) do vNum_cc := compteClient[i].SNum_cc;
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
 
-  with frmPayementCanc, St_journal do
-  begin
-    edpiece.Text:=Cells[1,Row];
-    edmontant.Text := Cells[8,Row];
-    edCodeClt.Text := Cells[2,Row];
-    edOpe.Text := Cells[6,Row];
-    edTypEncais.Text := Cells[4,Row];
-    edNumCompte.Text := vNum_cc;
-    ShowModal;
-  end;
+  if (uProfil <>'Admin') then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+//      exit
+    end else
+    begin
+      SqlCc := ' where code_clt = '+QuotedStr(St_journal.Cells[2,St_journal.Row]);
+      CompteClient := dm.SelectCompteClient(SqlCc);
+      for I := Low(CompteClient) to High(CompteClient) do vNum_cc := compteClient[i].SNum_cc;
+
+      with frmPayementCanc, St_journal do
+      begin
+        edpiece.Text:=Cells[1,Row];
+        edmontant.Text := Cells[8,Row];
+        edCodeClt.Text := Cells[2,Row];
+        edOpe.Text := Cells[6,Row];
+        edTypEncais.Text := Cells[4,Row];
+        edNumCompte.Text := vNum_cc;
+        ShowModal;
+      end;
+    end;
 end;
 
 procedure TfrmJournalCaisse.Button1Click(Sender: TObject);

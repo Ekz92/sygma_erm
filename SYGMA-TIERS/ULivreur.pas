@@ -115,6 +115,9 @@ begin
           Cells[3,i+1] := Lvs[i].Smail_liv;
         end;
     end;
+
+  if StringGrid1.RowCount > 1  then StringGrid1.FixedRows := 1;
+  
 end;
 
 procedure TfrmLivreur.StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;

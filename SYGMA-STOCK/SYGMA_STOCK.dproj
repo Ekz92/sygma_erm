@@ -254,6 +254,22 @@
             <Form>frmFiche_stock_gene</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="UValidBC.pas">
+            <Form>frmValideBc</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UBcCanc.pas">
+            <Form>frmBcCanc</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UChangePwd.pas">
+            <Form>frmChangePwd</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UChangeProfil.pas">
+            <Form>frmChangeProfiluser</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

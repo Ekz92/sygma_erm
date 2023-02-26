@@ -50,7 +50,29 @@ var
   sqlEntree,PsqlTransfert,
   PsqlUp,PsqlD : string;
 
+//  stockCam : TStockCamion;
+//  PStockCam,sqlUpdStockCam : string;
+
+    Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
+
+
 begin
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
+
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
+
+  if (uProfil <>'Admin') and (uProfil <>'Gest. Stock') then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+//      exit
+    end else
+
 if MessageDlg('Attention, cette action supprimera la facture. Voulez-vous Continuer ?',mtWarning,[mbyes,mbNo,mbCancel],0)=mrYes then
 begin
   code_art:=edArticle.Text;

@@ -142,9 +142,9 @@ begin
   //typeEntree := frmEntree_magasin.RgType.ItemIndex;
   if FrmSource_e_s = 'Entree' then
     begin
-       if (vTypeEntree = 0) then sql := ' select * from tb_article '
+       if (vTypeEntree = 0) then sql := ' select * from tb_article where code_mag = '+QuotedStr('PFGB')
         else if (vTypeEntree = 1) then sql:='Select * from tb_article where code_mag = '+QuotedStr('PFGB')
-        else if vTypeEntree = 2 then sql :='Select * from tb_article where code_mag = '+QuotedStr('PFBC');
+        else if vTypeEntree = 2 then sql :='Select * from tb_article where code_mag <> '+QuotedStr('PFGB') ;
     end else
   if FrmSource_e_s = 'Sortie' then
     begin

@@ -24,7 +24,6 @@ object frmLivreur: TfrmLivreur
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 369
     object Label1: TLabel
       Left = 13
       Top = 34
@@ -67,7 +66,7 @@ object frmLivreur: TfrmLivreur
       Height = 21
       CharCase = ecUpperCase
       ParentColor = True
-      TabOrder = 0
+      TabOrder = 1
     end
     object edTel: TEdit
       Left = 72
@@ -75,7 +74,7 @@ object frmLivreur: TfrmLivreur
       Width = 212
       Height = 21
       ParentColor = True
-      TabOrder = 1
+      TabOrder = 2
     end
     object edAdresse: TEdit
       Left = 72
@@ -83,7 +82,7 @@ object frmLivreur: TfrmLivreur
       Width = 212
       Height = 21
       ParentColor = True
-      TabOrder = 2
+      TabOrder = 3
     end
     object edMail: TEdit
       Left = 72
@@ -91,7 +90,7 @@ object frmLivreur: TfrmLivreur
       Width = 212
       Height = 21
       ParentColor = True
-      TabOrder = 3
+      TabOrder = 4
     end
     object Button1: TButton
       Left = 133
@@ -99,7 +98,7 @@ object frmLivreur: TfrmLivreur
       Width = 75
       Height = 25
       Caption = 'Ajouter'
-      TabOrder = 4
+      TabOrder = 5
       OnClick = Button1Click
     end
     object Button2: TButton
@@ -108,7 +107,7 @@ object frmLivreur: TfrmLivreur
       Width = 75
       Height = 25
       Caption = 'Annuler'
-      TabOrder = 5
+      TabOrder = 6
       OnClick = Button2Click
     end
     object edcode_liv: TEdit
@@ -119,7 +118,7 @@ object frmLivreur: TfrmLivreur
       CharCase = ecUpperCase
       MaxLength = 4
       ParentColor = True
-      TabOrder = 6
+      TabOrder = 0
     end
   end
   object StringGrid1: TStringGrid
@@ -138,8 +137,6 @@ object frmLivreur: TfrmLivreur
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 369
-    ExplicitHeight = 233
     ColWidths = (
       154
       119

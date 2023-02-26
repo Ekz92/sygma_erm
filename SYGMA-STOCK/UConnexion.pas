@@ -66,33 +66,56 @@ procedure Tfrmconnexion.SpeedButton1Click(Sender: TObject);
 var
   RUser : TSQLQuery;
   Conn : integer;
+
+  configFile : TextFile;
+  filePath ,dataLine : string;
 begin
-    RUser:=TSQLQuery.Create(self);
-    RUser.SQLConnection := dm.SQLConnection1;
+  filePath := 'c:\_config\validSoft.txt';
 
-    with RUser.SQL do
-      begin
-        Add('select * from tb_user where usager = ' + QuotedStr(edlogin.Text) +' and password = '+QuotedStr(edpwd.Text)+' and statut = 1');
-      end;
-
-      try
-        RUser.Open;
-        if not RUser.IsEmpty then
-          Conn := 1
-        else
-          conn := 0
-      finally
-        RUser.Free;
-        dm.SQLConnection1.Close;
-      end;
-
-  if Conn = 1 then
+  if not FileExists(filePath) then
     begin
-      vUsager := edlogin.Text;
-      edpwd.Clear;
-      frmIntegrateur.ShowModal;
+      ShowMessage('The setting file is corrupt');
+      exit
     end else
-      lberreur.Visible := true;
+    begin
+      AssignFile(configFile,filePath);
+      Reset(configFile);
+      Readln(configFile,dataLine);
+      CloseFile(configFile);
+
+      if FormatDateTime('yyyy-mm-dd',StrToDate(dataLine)) < FormatDateTime('yyyy-mm-dd', Now) then
+        begin
+          dm.SQLConnection1.Destroy
+        end else
+        begin
+          RUser:=TSQLQuery.Create(self);
+          RUser.SQLConnection := dm.SQLConnection1;
+
+          with RUser.SQL do
+            begin
+              Add('select * from tb_user where usager = ' + QuotedStr(edlogin.Text) +' and password = '+QuotedStr(edpwd.Text)+' and statut = 1');
+            end;
+
+            try
+              RUser.Open;
+              if not RUser.IsEmpty then
+                Conn := 1
+              else
+                conn := 0
+            finally
+              RUser.Free;
+              dm.SQLConnection1.Close;
+            end;
+
+          if Conn = 1 then
+            begin
+              vUsager := edlogin.Text;
+              edpwd.Clear;
+              frmIntegrateur.ShowModal;
+            end else
+              lberreur.Visible := true;
+        end;
+    end;
 
 end;
 

@@ -21,7 +21,14 @@ uses
   UClotureDay in 'UClotureDay.pas' {frmClotureDay},
   UEtatJournal in 'UEtatJournal.pas' {frmEtatJournal},
   UCreer_BL in 'UCreer_BL.pas' {frm_nouveau_BL},
-  UJournalCaisseH in 'UJournalCaisseH.pas' {frmJournalCaisseH};
+  UJournalCaisseH in 'UJournalCaisseH.pas' {frmJournalCaisseH},
+  UTypeDepense in 'UTypeDepense.pas' {frmTypeDepense},
+  UaddBank in 'UaddBank.pas' {frmAddBank},
+  UbankListe in 'UbankListe.pas' {frmListeBank},
+  UTransfertBkCaisse in 'UTransfertBkCaisse.pas' {frmTransfertBkCaisse},
+  UAllInOneCaisse in 'UAllInOneCaisse.pas' {frmAllInOneCaisse},
+  Ubkversement in 'Ubkversement.pas' {frmbkversement},
+  UCreanceClient in 'UCreanceClient.pas' {frmCreanceClient};
 
 {$R *.res}
 
@@ -47,5 +54,12 @@ begin
   Application.CreateForm(TfrmEtatJournal, frmEtatJournal);
   Application.CreateForm(Tfrm_nouveau_BL, frm_nouveau_BL);
   Application.CreateForm(TfrmJournalCaisseH, frmJournalCaisseH);
+  Application.CreateForm(TfrmTypeDepense, frmTypeDepense);
+  Application.CreateForm(TfrmAddBank, frmAddBank);
+  Application.CreateForm(TfrmListeBank, frmListeBank);
+  Application.CreateForm(TfrmTransfertBkCaisse, frmTransfertBkCaisse);
+  Application.CreateForm(TfrmAllInOneCaisse, frmAllInOneCaisse);
+  Application.CreateForm(Tfrmbkversement, frmbkversement);
+  Application.CreateForm(TfrmCreanceClient, frmCreanceClient);
   Application.Run;
 end.

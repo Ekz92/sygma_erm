@@ -112,6 +112,10 @@ type
     LivrsNonlivrs1: TMenuItem;
     Diagramme1: TMenuItem;
     Etatdustockgnral1: TMenuItem;
+    Parametre1: TMenuItem;
+    Utilisateur1: TMenuItem;
+    Changmotdepasse1: TMenuItem;
+    ChangProfil1: TMenuItem;
     procedure ypedebouteil1Click(Sender: TObject);
     procedure Magasin1Click(Sender: TObject);
     procedure Entreeenmagasin1Click(Sender: TObject);
@@ -143,6 +147,8 @@ type
     procedure RappeldeBL1Click(Sender: TObject);
     procedure Diagramme1Click(Sender: TObject);
     procedure Etatdustockgnral1Click(Sender: TObject);
+    procedure Changmotdepasse1Click(Sender: TObject);
+    procedure ChangProfil1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -164,7 +170,38 @@ uses UNouvel_article, UMagasin, UEntree_en_magasin, UTransfertInterMagasin,
   UDM, UClotureDay, UFicheEntree, UFicheSortie, UFicheRecap_es,
   UListeFcheEntree, UListeFcheSortie, URapprochementFicheEs, UCreer_BL,
   UL_BL_par_date, UBon_Commande, UListeBonCommande, URappelBl, UFicheRecapi,
-  UFicheRecapo, USortieVrac, UDiagrammeBC, UFiche_stock_gene;
+  UFicheRecapo, USortieVrac, UDiagrammeBC, UFiche_stock_gene, UChangePwd,
+  UChangeProfil, UConnexion;
+
+procedure TfrmIntegrateur.Changmotdepasse1Click(Sender: TObject);
+begin
+frmChangePwd.ShowModal;
+end;
+
+procedure TfrmIntegrateur.ChangProfil1Click(Sender: TObject);
+VAR
+  Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
+begin
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
+
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
+
+//    ShowMessage(uProfil);
+
+  if uProfil <> 'Admin' then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+//      exit
+    end      else
+
+  frmChangeProfiluser.ShowModal;
+end;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin

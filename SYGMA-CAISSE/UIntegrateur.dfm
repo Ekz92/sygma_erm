@@ -10241,10 +10241,11 @@ object frmIntegrateur: TfrmIntegrateur
       ExplicitHeight = 163
     end
     object Label1: TLabel
-      Left = 3
-      Top = 6
+      Left = 1
+      Top = 1
       Width = 207
-      Height = 60
+      Height = 79
+      Align = alLeft
       Caption = 'SYGMA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clMaroon
@@ -10252,6 +10253,7 @@ object frmIntegrateur: TfrmIntegrateur
       Font.Name = 'Broadway'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitHeight = 60
     end
     object Label3: TLabel
       Left = 5
@@ -10291,6 +10293,23 @@ object frmIntegrateur: TfrmIntegrateur
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 920
+      Top = 1
+      Width = 111
+      Height = 79
+      Align = alRight
+      Caption = 'Caisse Simplifi'#233'e'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      OnClick = SpeedButton1Click
     end
   end
   object Panel2: TPanel
@@ -30814,12 +30833,9 @@ object frmIntegrateur: TfrmIntegrateur
       Caption = 'Outils'
       object Opration1: TMenuItem
         Caption = 'Op'#233'ration'
-        object Dchargementdevhicule1: TMenuItem
-          Caption = 'D'#233'chargement de v'#233'hicule'
-        end
-        object Cltureouverture1: TMenuItem
-          Caption = 'Cl'#244'ture / ouverture'
-          OnClick = Cltureouverture1Click
+        object ransfertdefondsbanketcaisse1: TMenuItem
+          Caption = 'Transfert de fonds bank et caisse'
+          OnClick = ransfertdefondsbanketcaisse1Click
         end
       end
       object Contrle1: TMenuItem
@@ -30846,40 +30862,6 @@ object frmIntegrateur: TfrmIntegrateur
         Caption = 'Historique de caisse'
         OnClick = Historiquedecaisse1Click
       end
-      object Avancefacture1: TMenuItem
-        Caption = 'Avance'
-        object S1: TMenuItem
-          Caption = 'Saisir une avance'
-          OnClick = S1Click
-        end
-        object Listedesavancesreus1: TMenuItem
-          Caption = 'Liste des avances re'#231'us'
-          OnClick = Listedesavancesreus1Click
-        end
-      end
-      object Dcaissement1: TMenuItem
-        Caption = 'D'#233'caissement'
-        RadioItem = True
-        object Saisidedpense1: TMenuItem
-          Caption = 'Saisi de d'#233'pense'
-          OnClick = Saisidedpense1Click
-        end
-        object Listededpense1: TMenuItem
-          Caption = 'Liste de d'#233'pense'
-          OnClick = Listededpense1Click
-        end
-      end
-      object Encaissement1: TMenuItem
-        Caption = 'Encaissement'
-        object Saisie3: TMenuItem
-          Caption = 'Saisie d'#39'encaissement'
-          OnClick = Saisie3Click
-        end
-        object Liste3: TMenuItem
-          Caption = 'Liste'
-          OnClick = Liste3Click
-        end
-      end
       object Solde1: TMenuItem
         Caption = 'Solde de la caisse'
       end
@@ -30894,14 +30876,103 @@ object frmIntegrateur: TfrmIntegrateur
           OnClick = Horizontal1Click
         end
       end
+      object Saisie1: TMenuItem
+        Caption = 'Saisie'
+        object Avancefacture1: TMenuItem
+          Caption = 'Avance'
+          object S1: TMenuItem
+            Caption = 'Saisir une avance'
+            OnClick = S1Click
+          end
+          object Listedesavancesreus1: TMenuItem
+            Caption = 'Liste des avances re'#231'us'
+            OnClick = Listedesavancesreus1Click
+          end
+        end
+        object Encaissement1: TMenuItem
+          Caption = 'Encaissement'
+          object Saisie3: TMenuItem
+            Caption = 'Saisie d'#39'encaissement'
+            OnClick = Saisie3Click
+          end
+          object Liste3: TMenuItem
+            Caption = 'Liste'
+            OnClick = Liste3Click
+          end
+        end
+        object Dcaissement1: TMenuItem
+          Caption = 'D'#233'caissement'
+          RadioItem = True
+          object ypedpense1: TMenuItem
+            Caption = 'Type d'#233'pense'
+            OnClick = ypedpense1Click
+          end
+          object Saisidedpense1: TMenuItem
+            Caption = 'Saisi de d'#233'pense'
+            OnClick = Saisidedpense1Click
+          end
+          object Listededpense1: TMenuItem
+            Caption = 'Liste de d'#233'pense'
+            OnClick = Listededpense1Click
+          end
+        end
+        object Crance1: TMenuItem
+          Caption = 'Cr'#233'ance'
+          object Saisirunecrance1: TMenuItem
+            Caption = 'Saisir une cr'#233'ance'
+            OnClick = Saisirunecrance1Click
+          end
+          object Listedecrances1: TMenuItem
+            Caption = 'Liste de cr'#233'ances'
+          end
+        end
+        object Dette1: TMenuItem
+          Caption = 'Dette fournisseur'
+          object Saisirunedette1: TMenuItem
+            Caption = 'Saisir une dette'
+          end
+          object ListedeDettes1: TMenuItem
+            Caption = 'Liste de Dettes'
+          end
+        end
+      end
     end
     object Banque1: TMenuItem
       Caption = 'Bank'
       object Nouveau2: TMenuItem
-        Caption = 'Nouveau'
+        Caption = 'Cr'#233'er une bank'
+        OnClick = Nouveau2Click
       end
       object Liste2: TMenuItem
         Caption = 'Liste'
+        OnClick = Liste2Click
+      end
+      object Bkopration1: TMenuItem
+        Caption = 'Bk op'#233'ration'
+        object Versement1: TMenuItem
+          Caption = 'Versement'
+        end
+        object irerunchque1: TMenuItem
+          Caption = 'Tirer un ch'#232'que'
+        end
+        object Emettreunvirement1: TMenuItem
+          Caption = 'Emettre un virement'
+        end
+      end
+      object Etat1: TMenuItem
+        Caption = 'Etat'
+        object Chquetirs1: TMenuItem
+          Caption = 'Ch'#232'que tir'#233's'
+        end
+        object Virementsmis1: TMenuItem
+          Caption = 'Virements '#233'mis'
+        end
+        object Versementffectus1: TMenuItem
+          Caption = 'Versement '#233'ffectu'#233's'
+        end
+        object Relevdecompte1: TMenuItem
+          Caption = 'Relev'#233' de compte'
+        end
       end
     end
     object Admin1: TMenuItem

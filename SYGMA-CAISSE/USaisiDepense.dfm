@@ -2,7 +2,7 @@ object frmSaisiDepense: TfrmSaisiDepense
   Left = 0
   Top = 0
   Caption = 'Saisi de d'#233'pense'
-  ClientHeight = 205
+  ClientHeight = 220
   ClientWidth = 414
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,6 +13,7 @@ object frmSaisiDepense: TfrmSaisiDepense
   OldCreateOrder = False
   Position = poDesktopCenter
   OnActivate = FormActivate
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -21,7 +22,7 @@ object frmSaisiDepense: TfrmSaisiDepense
     Left = 8
     Top = 8
     Width = 401
-    Height = 169
+    Height = 185
     Shape = bsFrame
   end
   object Label1: TLabel
@@ -33,21 +34,21 @@ object frmSaisiDepense: TfrmSaisiDepense
   end
   object Label2: TLabel
     Left = 13
-    Top = 63
+    Top = 84
     Width = 32
     Height = 13
     Caption = 'Pi'#232'ce :'
   end
   object Label3: TLabel
     Left = 13
-    Top = 81
+    Top = 102
     Width = 36
     Height = 13
     Caption = 'Libell'#233' :'
   end
   object Label5: TLabel
     Left = 12
-    Top = 147
+    Top = 168
     Width = 47
     Height = 13
     Caption = 'Montant :'
@@ -58,6 +59,13 @@ object frmSaisiDepense: TfrmSaisiDepense
     Width = 38
     Height = 13
     Caption = 'Caisse :'
+  end
+  object Label6: TLabel
+    Left = 13
+    Top = 62
+    Width = 53
+    Height = 13
+    Caption = 'Type Dep :'
   end
   object DateDep: TDateTimePicker
     Left = 78
@@ -72,8 +80,8 @@ object frmSaisiDepense: TfrmSaisiDepense
   end
   object edPiece: TEdit
     Left = 78
-    Top = 60
-    Width = 145
+    Top = 81
+    Width = 200
     Height = 21
     CharCase = ecUpperCase
     ParentColor = True
@@ -82,15 +90,15 @@ object frmSaisiDepense: TfrmSaisiDepense
   object cbCaisse: TComboBox
     Left = 78
     Top = 37
-    Width = 145
+    Width = 200
     Height = 21
     ParentColor = True
     TabOrder = 1
   end
   object edMontant: TEdit
     Left = 78
-    Top = 144
-    Width = 145
+    Top = 165
+    Width = 200
     Height = 21
     Alignment = taRightJustify
     ParentColor = True
@@ -99,7 +107,7 @@ object frmSaisiDepense: TfrmSaisiDepense
   end
   object mLibelle: TMemo
     Left = 78
-    Top = 83
+    Top = 104
     Width = 321
     Height = 59
     Lines.Strings = (
@@ -109,7 +117,7 @@ object frmSaisiDepense: TfrmSaisiDepense
   end
   object Button1: TButton
     Left = 259
-    Top = 177
+    Top = 194
     Width = 75
     Height = 25
     Caption = 'Valider'
@@ -118,11 +126,20 @@ object frmSaisiDepense: TfrmSaisiDepense
   end
   object Button2: TButton
     Left = 334
-    Top = 177
+    Top = 194
     Width = 75
     Height = 25
     Caption = 'Annuler'
     TabOrder = 6
     OnClick = Button2Click
+  end
+  object cbTdepense: TComboBox
+    Left = 78
+    Top = 59
+    Width = 200
+    Height = 21
+    Style = csDropDownList
+    ParentColor = True
+    TabOrder = 7
   end
 end

@@ -378,9 +378,25 @@ end;
 procedure TfrmAdd_client.Supprimer1Click(Sender: TObject);
 var
   Psql_cl,
-  Psql_cc : string;
+  Psql_cc,PsqlUsr : string;
+
+  Users : TUserArray;
+  uProfil :string;
+  U: Integer;
 begin
-  if vUsager='1001' then
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
+
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
+
+  if uProfil <>'Admin' then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+      exit
+    end else
     begin
       with StringGrid1 do
         begin
@@ -395,8 +411,8 @@ begin
           dm.Delete(Psql_cc);
           FormShow(sender);
         end;
-    end else
-    MessageDlg('Vous n''avez pas d''autorisation pour cette action',mtError,[mbOK],0);
+    end;
 end;
+
 
 end.

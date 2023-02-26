@@ -11,8 +11,6 @@ type
   TfrmListeSortie = class(TForm)
     StringGrid1: TStringGrid;
     Panel1: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
     Button1: TButton;
     d1: TDateTimePicker;
     d2: TDateTimePicker;
@@ -36,6 +34,8 @@ type
     QLSortiecode_mag_2: TStringField;
     QLSortiedesignation_mag: TStringField;
     frxDBLSortie: TfrxDBDataset;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);

@@ -96,10 +96,10 @@ begin
     begin
       if MessageDlg('Voulez-vous clôturer cette commande ?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
-          if Length(Factures) > 0 then // sil exite une facture non cloturé sur la commande
-            begin
-              MessageDlg('Impossible de clôturer cette commande. Vous devez payer toutes les factures sur cette commande avant de la clôturer',mtError,[mbOK],0);
-            end else
+//          if Length(Factures) > 0 then // sil exite une facture non cloturé sur la commande
+//            begin
+//              MessageDlg('Impossible de clôturer cette commande. Vous devez payer toutes les factures sur cette commande avant de la clôturer',mtError,[mbOK],0);
+//            end else
             begin
               dm.UpdateTable(sql); // cloture de la commande
             end;

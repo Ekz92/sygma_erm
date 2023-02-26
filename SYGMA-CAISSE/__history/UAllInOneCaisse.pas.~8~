@@ -1,0 +1,55 @@
+unit UAllInOneCaisse;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Grids;
+
+type
+  TfrmAllInOneCaisse = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edCode: TEdit;
+    edNom: TEdit;
+    Label2: TLabel;
+    st_CsArtListe: TStringGrid;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Déclarations privées }
+  public
+    { Déclarations publiques }
+  end;
+
+var
+  frmAllInOneCaisse: TfrmAllInOneCaisse;
+
+implementation
+
+{$R *.dfm}
+
+uses records, UDM;
+
+procedure TfrmAllInOneCaisse.FormCreate(Sender: TObject);
+begin
+with st_CsArtListe do
+  begin
+    Cells[0,0]:='Code';
+    Cells[1,0]:='Nom';
+  end;
+end;
+
+procedure TfrmAllInOneCaisse.FormShow(Sender: TObject);
+var
+  Articles : TarticleArray;
+  Psql : string;
+begin
+  Psql := '';
+//  Articles := dm.sel
+
+end;
+
+end.

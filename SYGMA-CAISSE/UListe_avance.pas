@@ -87,7 +87,7 @@ if MessageDlg('Voulez-vous annuler cet avance ?',mtWarning,[mbYes,mbNo],0)=mryes
 
 //        Mise à jour du solde compte client
 
-      sql_UpCc := 'UPdate tb_compte_client set solde = '+FloatToStr(solde_cc - mnt_av)
+      sql_UpCc := 'Update tb_compte_client set solde = '+FloatToStr(solde_cc - mnt_av)
                   +' where num_cc = '+QuotedStr(StringGrid1.Cells[2,StringGrid1.Row]);
 
 //      suppression dans les relevés dopération du client

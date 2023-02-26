@@ -19,11 +19,6 @@ type
     lbdate: TLabel;
     Panel2: TPanel;
     Panel3: TPanel;
-    SpeedButton6: TSpeedButton;
-    SpeedButton7: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    SpeedButton10: TSpeedButton;
     MainMenu1: TMainMenu;
     Fichier1: TMenuItem;
     Nouveau1: TMenuItem;

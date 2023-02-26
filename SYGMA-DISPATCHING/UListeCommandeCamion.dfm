@@ -24,7 +24,6 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 707
     object Label1: TLabel
       Left = 198
       Top = 9
@@ -124,8 +123,6 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
     TabOrder = 1
     StyleElements = [seBorder]
     OnDrawCell = StringGrid1DrawCell
-    ExplicitWidth = 707
-    ExplicitHeight = 260
     ColWidths = (
       70
       50
@@ -144,8 +141,6 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 314
-    ExplicitWidth = 707
     object Button1: TButton
       Left = 518
       Top = 0
@@ -154,7 +149,6 @@ object frmListeCommandeCamion: TfrmListeCommandeCamion
       Align = alRight
       Caption = 'Imprimer'
       TabOrder = 0
-      ExplicitLeft = 632
     end
   end
   object PopupMenu1: TPopupMenu

@@ -44,7 +44,11 @@ uses
   USortieVrac in 'USortieVrac.pas' {frmSortieVrac},
   UDefPrixArticle in 'UDefPrixArticle.pas' {frmDefPrixArticle},
   UDiagrammeBC in 'UDiagrammeBC.pas' {frmDiagrammeBC},
-  UFiche_stock_gene in 'UFiche_stock_gene.pas' {frmFiche_stock_gene};
+  UFiche_stock_gene in 'UFiche_stock_gene.pas' {frmFiche_stock_gene},
+  UValidBC in 'UValidBC.pas' {frmValideBc},
+  UBcCanc in 'UBcCanc.pas' {frmBcCanc},
+  UChangePwd in 'UChangePwd.pas' {frmChangePwd},
+  UChangeProfil in 'UChangeProfil.pas' {frmChangeProfiluser};
 
 {$R *.res}
 
@@ -94,5 +98,9 @@ begin
   Application.CreateForm(TfrmDefPrixArticle, frmDefPrixArticle);
   Application.CreateForm(TfrmDiagrammeBC, frmDiagrammeBC);
   Application.CreateForm(TfrmFiche_stock_gene, frmFiche_stock_gene);
+  Application.CreateForm(TfrmValideBc, frmValideBc);
+  Application.CreateForm(TfrmBcCanc, frmBcCanc);
+  Application.CreateForm(TfrmChangePwd, frmChangePwd);
+  Application.CreateForm(TfrmChangeProfiluser, frmChangeProfiluser);
   Application.Run;
 end.

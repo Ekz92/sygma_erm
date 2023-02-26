@@ -1590,7 +1590,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Left = 67.015748030000000000
           Width = 152.692942680000000000
           Height = 18.897650000000000000
-          DataField = 'nom_clt'
+          DataField = 'marque_veh'
           DataSet = frxDBRecap
           DataSetName = 'frxDBRecap'
           Font.Charset = DEFAULT_CHARSET
@@ -1601,7 +1601,7 @@ object frmFicheRecapi: TfrmFicheRecapi
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Frame.Width = 0.100000000000000000
           Memo.UTF8W = (
-            '[frxDBRecap."nom_clt"]')
+            '[frxDBRecap."marque_veh"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -5386,7 +5386,6 @@ object frmFicheRecapi: TfrmFicheRecapi
     Top = 88
   end
   object QRecap: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -5396,7 +5395,6 @@ object frmFicheRecapi: TfrmFicheRecapi
     Top = 120
   end
   object QSUM: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

@@ -58,7 +58,24 @@ var
   Paymt : TPayement_caisse;
   vSolde,mnt_p : real;
 
+  Users : TUserArray;
+  uProfil,PsqlUsr :string;
+  U: Integer;
 begin
+  PsqlUsr := ' where usager = '+QuotedStr(vUsager);
+  Users := dm.SelectUsers(PsqlUsr);
+
+  for U := Low(Users) to High(Users) do
+    begin
+      uProfil := Users[U].Sprofil;
+    end;
+
+  if uProfil <>'Admin' then
+    begin
+      MessageDlg('Vous n''avez pas cette habilitation merci de vous referer à votre administrateur',mtError,[mbOK],0);
+      exit
+    end;
+
 if MessageDlg('Attention, cette action supprimera la facture. Voulez-vous Continuer ?',mtWarning,[mbyes,mbNo,mbCancel],0)=mrYes then
 begin
   PSql := ' update tb_facturation set statut_canc = 1 '
@@ -105,17 +122,17 @@ begin
             code_art := facturesd[i].Scode_art;
             Stock := dm.selectStockByArticle(code_art);
 
-            if Stock.Scode_mag = 'PFBC' then
-            SqlUpdate:='update tb_stock set '
-            //          +' qte_vide = '+IntToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
-                      +' qte_mag = '+IntToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
-                      +' qte_totale ='+IntToStr(Stock.Nqte_total + facturesd[i].Nqte_art)
-                      +' Where code_art = '+QuotedStr(facturesd[i].Scode_art)
-            else
+            if Stock.Scode_mag = 'PFGB' then
             SqlUpdate:='update tb_stock set '
                       +' qte_vide = '+IntToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
                       +' qte_mag = '+IntToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
                       +' qte_totale ='+IntToStr(Stock.Nqte_total {+ facturesd[i].Nqte_art})
+                      +' Where code_art = '+QuotedStr(facturesd[i].Scode_art)
+            else
+            SqlUpdate:='update tb_stock set '
+            //          +' qte_vide = '+IntToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
+                      +' qte_mag = '+IntToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
+                      +' qte_totale ='+IntToStr(Stock.Nqte_total + facturesd[i].Nqte_art)
                       +' Where code_art = '+QuotedStr(facturesd[i].Scode_art);
 
             dm.UpdateTable(SqlUpdate);
