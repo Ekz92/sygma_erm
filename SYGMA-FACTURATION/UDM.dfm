@@ -42,10 +42,10 @@ object DM: TDM
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=192.168.1.1'
-      'Database=sygma_peter'
-      'User_Name=kernel'
-      'Password=kernel'
+      'HostName=127.0.0.1'
+      'Database=sygma_pdt'
+      'User_Name=root'
+      'Password='
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'
@@ -53,6 +53,7 @@ object DM: TDM
       'BlobSize=-1'
       'ErrorResourceFile='
       '=')
+    Connected = True
     Left = 64
     Top = 32
   end

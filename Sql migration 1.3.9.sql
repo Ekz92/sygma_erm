@@ -762,5 +762,19 @@ create table type_dette(
 alter table tb_facturation
 	add column pdv_cdp varchar(50) after nom_clt;
 
+//***************22 04 2023 ************************/
+
+alter table tb_stock 
+	change qte_vide qte_vide real,
+	change qte_mag qte_mag real,
+	change qte_totale qte_totale real;
+
+alter table tb_facturation_detail change qte_art qte_art real;
+
+alter table tb_sortie change qte_sortie  qte_sortie real;
+alter table tb_entree change qte_entree  qte_entree real;
+alter table tb_mouvement_stock change qte_sortie  qte_sortie real,
+	change qte_entree  qte_entree real;
+
 
 								   

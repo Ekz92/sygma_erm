@@ -796,8 +796,8 @@ begin
  //         +'id_mouv = '+IntToStr(mouv.NidMouvStock)+','
           +'code_art = '+QuotedStr(mouv.Scode_art)+','
           +'code_mag = '+QuotedStr(mouv.Scode_mag)+','
-          +'qte_entree = '+IntToStr (mouv.Nqte_entree)+','
-          +'qte_sortie = '+IntToStr(mouv.Nqte_sortie)
+          +'qte_entree = '+FloatToStr (mouv.Nqte_entree)+','
+          +'qte_sortie = '+FloatToStr(mouv.Nqte_sortie)
           +' where code_art = '+QuotedStr(mouv.Scode_art)
           +' and code_mag = '+QuotedStr(mouv.Scode_mag)
           +' and date_mouv = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDate(mouv.Ddate_mouv)));
@@ -825,8 +825,8 @@ begin
                 +QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDateTime(Ddate_mouv)))+','
                 +QuotedStr(SCode_art)+','
                 +QuotedStr(Scode_mag)+','
-                +QuotedStr(IntToStr(Nqte_entree))+','
-                +QuotedStr(IntToStr(Nqte_sortie))
+                +QuotedStr(FloatToStr(Nqte_entree))+','
+                +QuotedStr(FloatToStr(Nqte_sortie))
           +')' ;
     end;
 
@@ -856,6 +856,7 @@ begin
   i:=0;
   try
     query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\mvm.txt');
     query.Open;
       with mouv , query do
         begin
@@ -889,7 +890,7 @@ begin
                 +QuotedStr(Scode_art_src)+','
                 +QuotedStr(SCode_art)+','
                 +QuotedStr(Scode_mag)+','
-                +IntToStr(NQte_sortie)+','
+                +FloatToStr(NQte_sortie)+','
                 +IntToStr(NType_Sortie)+','
                 +QuotedStr(SUsager)+','
                 +QuotedStr(FormatDateTime('yyyy-mm-dd hh:mm:ss',StrToDateTime(Ddate_sortie)))+','
@@ -922,9 +923,9 @@ begin
           +' vehicule = '+QuotedStr(stockCam.Svehicule)+','
           +' code_art = '+QuotedStr(stockCam.Scode_art)+','
           +' designation_art = '+QuotedStr(stockCam.SDesignation_art)+','
-          +' qte_vide = '+IntToStr(stockCam.NQte_vide)+','
-          +' qte_mag = '+IntToStr(stockCam.NQte_mag) +','
-          +' qte_total = '+IntToStr(stockCam.Nqte_total)
+          +' qte_vide = '+FloatToStr(stockCam.NQte_vide)+','
+          +' qte_mag = '+FloatToStr(stockCam.NQte_mag) +','
+          +' qte_total = '+FloatToStr(stockCam.Nqte_total)
           +' where code_art = '+QuotedStr(stockCam.Scode_art)
           +' and vehicule ='+QuotedStr(stockCam.Svehicule);
     try
@@ -949,9 +950,9 @@ begin
     sql:='Update tb_stock set '
           +' code_art = '+QuotedStr(stock.Scode_art)+','
           +' code_mag = '+QuotedStr(stock.Scode_mag)+','
-          +' qte_vide = '+IntToStr(stock.NQte_vide)+','
-          +' qte_mag = '+IntToStr(stock.NQte_mag) +','
-          +' qte_totale = '+IntToStr(stock.Nqte_total)
+          +' qte_vide = '+FloatToStr(stock.NQte_vide)+','
+          +' qte_mag = '+FloatToStr(stock.NQte_mag) +','
+          +' qte_totale = '+FloatToStr(stock.Nqte_total)
           +' where code_art = '+QuotedStr(stock.Scode_art)
           +' and code_mag ='+QuotedStr(stock.Scode_mag);
     try
@@ -1038,7 +1039,7 @@ begin
               +Snum_fact+','
               +Scode_art+','
               +Sdesignation_art+','
-              +IntToStr(Nqte)+','
+              +FloatToStr(Nqte)+','
               +FloatToStr(Rpu)+','
               +FloatToStr(Rcout)+','
               +FloatToStr(Rmarge)+','
@@ -1076,7 +1077,7 @@ begin
               +QuotedStr(Snom_clt)+','
               +QuotedStr(Scode_art)+','
               +QuotedStr(Sdesignation_art)+','
-              +IntToStr(Nqte_art)+','
+              +FloatToStr(Nqte_art)+','
               +FloatToStr(RPrixU)+','
               +FloatToStr(RPrixT)+');'
     end;
@@ -1218,7 +1219,7 @@ begin
             +QuotedStr(Scode_clt)+','
             +QuotedStr(Snom_clt)+','
             +QuotedStr(Spdv_cdp)+','
-            +IntToStr(NQte_total)+','
+            +FloatToStr(NQte_total)+','
             +FloatToStr(Rmnt_t)+','
             +FloatToStr(Rmnt_p)+','
             +FloatToStr(Rmnt_r)+','
@@ -1324,6 +1325,7 @@ begin
   i:= 0;
   try
     query.SQL.Add(sql);
+//    query.SQL.SaveToFile('g:\tb_tarif_DefPrix.txt');
 
     query.Open;
 

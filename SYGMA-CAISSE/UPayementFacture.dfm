@@ -502,7 +502,7 @@ object frmPayementFacture: TfrmPayementFacture
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 120.944960000000000000
+        Height = 128.504020000000000000
         Top = 18.897650000000000000
         Width = 778.583180000000000000
         object Memo20: TfrxMemoView
@@ -589,7 +589,7 @@ object frmPayementFacture: TfrmPayementFacture
         object Memo33: TfrxMemoView
           AllowVectorExport = True
           Left = 23.779527560000000000
-          Top = 70.133890000000000000
+          Top = 91.133890000000000000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           AutoWidth = True
@@ -606,7 +606,7 @@ object frmPayementFacture: TfrmPayementFacture
         object Memo34: TfrxMemoView
           AllowVectorExport = True
           Left = 22.677180000000000000
-          Top = 87.708720000000000000
+          Top = 108.708720000000000000
           Width = 37.795300000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -623,7 +623,7 @@ object frmPayementFacture: TfrmPayementFacture
           IndexTag = 1
           AllowVectorExport = True
           Left = 64.252010000000000000
-          Top = 88.708720000000000000
+          Top = 109.708720000000000000
           Width = 268.346630000000000000
           Height = 18.897650000000000000
           DataField = 'tel_clt'
@@ -669,12 +669,43 @@ object frmPayementFacture: TfrmPayementFacture
             '[frxDBParam."description"]')
           ParentFont = False
         end
+        object frxDBFacturepdv_cdp: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 75.590600000000000000
+          Top = 71.811070000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          DataField = 'pdv_cdp'
+          DataSet = frxDBRecuCaisse
+          DataSetName = 'frxDBFacture'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBFacture."pdv_cdp"]')
+        end
+        object Memo25: TfrxMemoView
+          AllowVectorExport = True
+          Left = 22.677180000000000000
+          Top = 71.811070000000000000
+          Width = 49.133890000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'PdV/CDP')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 162.519790000000000000
+        Top = 170.078850000000000000
         Width = 778.583180000000000000
         object Memo4: TfrxMemoView
           AllowVectorExport = True
@@ -771,7 +802,7 @@ object frmPayementFacture: TfrmPayementFacture
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 245.669450000000000000
+        Top = 253.228510000000000000
         Width = 778.583180000000000000
         DataSet = frxDBRecuCaisse
         DataSetName = 'frxDBFacture'
@@ -873,7 +904,7 @@ object frmPayementFacture: TfrmPayementFacture
         FillType = ftBrush
         Frame.Typ = []
         Height = 23.677180000000000000
-        Top = 442.205010000000000000
+        Top = 449.764070000000000000
         Width = 778.583180000000000000
         object Memo17: TfrxMemoView
           Align = baWidth
@@ -908,7 +939,7 @@ object frmPayementFacture: TfrmPayementFacture
         FillType = ftBrush
         Frame.Typ = []
         Height = 90.708720000000000000
-        Top = 291.023810000000000000
+        Top = 298.582870000000000000
         Width = 778.583180000000000000
         object Memo22: TfrxMemoView
           Align = baCenter

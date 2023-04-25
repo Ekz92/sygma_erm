@@ -27,12 +27,13 @@ type
 
 var
   frmFacturationRech_mag: TfrmFacturationRech_mag;
+  gFormSrc_mag : string;
 
 implementation
 
 {$R *.dfm}
 
-uses records, UDM, USaisieFacture;
+uses records, UDM, USaisieFacture, UParametreNumFacture;
 
 procedure TfrmFacturationRech_mag.edrech_magChange(Sender: TObject);
 var
@@ -95,11 +96,23 @@ end;
 
 procedure TfrmFacturationRech_mag.St_rech_magDblClick(Sender: TObject);
 begin
-with frmSaisieFacture ,St_rech_mag do
+if gFormSrc_mag = 'frmSaisieFacture' then
   begin
-    edcodeMag.Text:= Cells[0,Row];
-    eddesignation_mag.Text:= Cells[1,Row];
+    with frmSaisieFacture ,St_rech_mag do
+      begin
+        edcodeMag.Text:= Cells[0,Row];
+        eddesignation_mag.Text:= Cells[1,Row];
+      end;
+  end else
+if gFormSrc_mag = 'frmParamNumFact' then
+  begin
+    with frmParamNumFact ,St_rech_mag do
+      begin
+        edcodeMag.Text:= Cells[0,Row];
+        edDesignationMag.Text:= Cells[1,Row];
+      end;
   end;
+
   close;
 end;
 

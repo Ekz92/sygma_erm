@@ -45,7 +45,9 @@ var
   TypeFact,
   NumFact,
   Vehicule ,
-  SqlStockCam: string;
+  Date_fact,
+  SqlStockCam,
+  SqlMvmStk: string;
 
   I: Integer;
   Stock : TStock;
@@ -61,6 +63,7 @@ var
   Users : TUserArray;
   uProfil,PsqlUsr :string;
   U: Integer;
+  Mvmt_stk : TMouvStock;
 begin
   PsqlUsr := ' where usager = '+QuotedStr(vUsager);
   Users := dm.SelectUsers(PsqlUsr);
@@ -113,6 +116,7 @@ begin
         NumFact := facture[i].SNum_fact;
         Vehicule := facture[i].Svehicule;
         TypeFact := facture[i].Stype_fact;
+        Date_fact := facture[i].Sdate_fact;
       end;
 
     if TypeFact = 'Comptoir' then //
@@ -124,18 +128,26 @@ begin
 
             if Stock.Scode_mag = 'PFGB' then
             SqlUpdate:='update tb_stock set '
-                      +' qte_vide = '+IntToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
-                      +' qte_mag = '+IntToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
-                      +' qte_totale ='+IntToStr(Stock.Nqte_total {+ facturesd[i].Nqte_art})
+                      +' qte_vide = '+FloatToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
+                      +' qte_mag = '+FloatToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
+                      +' qte_totale ='+FloatToStr(Stock.Nqte_total {+ facturesd[i].Nqte_art})
                       +' Where code_art = '+QuotedStr(facturesd[i].Scode_art)
             else
             SqlUpdate:='update tb_stock set '
             //          +' qte_vide = '+IntToStr(Stock.NQte_vide - facturesd[i].Nqte_art)+','
-                      +' qte_mag = '+IntToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
-                      +' qte_totale ='+IntToStr(Stock.Nqte_total + facturesd[i].Nqte_art)
+                      +' qte_mag = '+FloatToStr(Stock.NQte_mag + facturesd[i].Nqte_art)+','
+                      +' qte_totale ='+FloatToStr(Stock.Nqte_total + facturesd[i].Nqte_art)
                       +' Where code_art = '+QuotedStr(facturesd[i].Scode_art);
 
             dm.UpdateTable(SqlUpdate);
+            //    selection de larticle de le mouvement des articles
+            Mvmt_stk :=  dm.selectMouvStock(code_art,Date_fact,Stock.Scode_mag);
+            SqlMvmStk := 'update tb_mouvement_stock set '
+                        +' qte_sortie = '+FloatToStr(Mvmt_stk.Nqte_sortie - facturesd[i].Nqte_art)
+                        +' where code_art = '+QuotedStr(code_art)
+                        +' and date_mouv = '+QuotedStr(FormatDateTime('yyyy-mm-dd',StrToDateTime(Date_fact)));
+
+            dm.UpdateTable(SqlMvmStk);
           end;
       end else
     if TypeFact = 'Camion' then //
@@ -152,15 +164,15 @@ begin
             if Stock.Scode_mag = 'PFBC' then
             SqlUpdate:='update tb_stock_camion set '
 //                      +' qte_vide = '+IntToStr(Stock_cam.NQte_vide - facturesd[i].Nqte_art)+','
-                      +' qte_mag = '+IntToStr(Stock_cam.NQte_mag + facturesd[i].Nqte_art)+','
-                      +' qte_total ='+IntToStr(Stock_cam.Nqte_total + facturesd[i].Nqte_art)
+                      +' qte_mag = '+FloatToStr(Stock_cam.NQte_mag + facturesd[i].Nqte_art)+','
+                      +' qte_total ='+FloatToStr(Stock_cam.Nqte_total + facturesd[i].Nqte_art)
                       +' Where code_art = '+QuotedStr(facturesd[i].Scode_art)
                       +' and vehicule = '+QuotedStr(Vehicule)
             else
             SqlUpdate:='update tb_stock_camion set '
-                      +' qte_vide = '+IntToStr(Stock_cam.NQte_vide - facturesd[i].Nqte_art)+','
-                      +' qte_mag = '+IntToStr(Stock_cam.NQte_mag + facturesd[i].Nqte_art)+','
-                      +' qte_total ='+IntToStr(Stock_cam.Nqte_total {+ facturesd[i].Nqte_art})
+                      +' qte_vide = '+FloatToStr(Stock_cam.NQte_vide - facturesd[i].Nqte_art)+','
+                      +' qte_mag = '+FloatToStr(Stock_cam.NQte_mag + facturesd[i].Nqte_art)+','
+                      +' qte_total ='+FloatToStr(Stock_cam.Nqte_total {+ facturesd[i].Nqte_art})
                       +' Where code_art = '+QuotedStr(facturesd[i].Scode_art)
                       +' and vehicule = '+QuotedStr(Vehicule) ;
 

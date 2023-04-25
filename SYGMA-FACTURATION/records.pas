@@ -68,7 +68,7 @@ TFacturation = record
   Scode_clt,
   Snom_clt,
   Spdv_cdp : string;
-  NQte_total : integer;
+  NQte_total : real;
   Rmnt_t,
   Rmnt_p,
   Rmnt_r : real;
@@ -93,7 +93,7 @@ TFacturation_detail =record
   Snom_clt,
   Scode_art,
   Sdesignation_art: string;
-  Nqte_art : integer;
+  Nqte_art : real;
   RPrixU,
   RPrixT :real;
 end;
@@ -124,7 +124,7 @@ TStock = record
   Scode_mag : String ;
   NQte_vide,
   NQte_mag ,
-  Nqte_total : Integer;
+  Nqte_total : real;
   Rcoutachat : real;
 end;
 TStockArray = Array of TStock;
@@ -177,7 +177,7 @@ TBeneFact = record
   Snum_fact,
   Scode_art,
   Sdesignation_art : string;
-  Nqte : integer;
+  Nqte : real;
   Rpu,
   Rcout:Real;
   Rmarge : Real;
@@ -190,7 +190,7 @@ TSortie = record
   Scode_art_src,
   SCode_art,
   Scode_mag :String    ;
-  NQte_sortie,
+  NQte_sortie: real;
   NType_Sortie : integer;
   SUsager,
   Ddate_sortie : String;
@@ -206,7 +206,7 @@ TMouvStock = record
   Scode_art,
   Scode_mag :string;
   Nqte_entree,
-  Nqte_sortie : integer;
+  Nqte_sortie : real;
 end;
 TMouvStockArray = Array of TMouvStock;
 
@@ -297,7 +297,7 @@ TStockCamion = record
   SDesignation_art : String ;
   NQte_vide,
   NQte_mag ,
-  Nqte_total : Integer;
+  Nqte_total : real;
 end;
 TStockCamionArray = Array of TStockCamion;
 

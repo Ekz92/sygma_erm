@@ -91,6 +91,7 @@ object frmParamNumFact: TfrmParamNumFact
       Height = 21
       ParentColor = True
       TabOrder = 0
+      OnDblClick = edCodeMagDblClick
     end
     object edDesignationMag: TEdit
       Left = 76
@@ -125,6 +126,7 @@ object frmParamNumFact: TfrmParamNumFact
     Height = 25
     Caption = 'Refresh'
     TabOrder = 4
+    OnClick = Button2Click
   end
   object PopupMenu1: TPopupMenu
     Left = 152

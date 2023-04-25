@@ -94,4 +94,20 @@ object frmCreanceClient: TfrmCreanceClient
     ParentColor = True
     TabOrder = 4
   end
+  object Button1: TButton
+    Left = 16
+    Top = 136
+    Width = 75
+    Height = 25
+    Caption = 'Valider'
+    TabOrder = 5
+  end
+  object Button2: TButton
+    Left = 97
+    Top = 136
+    Width = 75
+    Height = 25
+    Caption = 'Annuler'
+    TabOrder = 6
+  end
 end

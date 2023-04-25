@@ -70,11 +70,11 @@ begin
     end else
     begin
         sql := ' select * from tb_mouvement_stock mv'
-              +' inner join tb_article ta on ta.code_art = mb.code_art '
-              +' where code_art = '+QuotedStr(edcode_art.Text)
+              +' inner join tb_article ta on ta.code_art = mv.code_art '
+              +' where ta.code_art = '+QuotedStr(edcode_art.Text)
               +' and date_mouv between '+QuotedStr(FormatDateTime('yyyy-mm-dd',d1.Date))
               +                        ' and '+ QuotedStr(FormatDateTime('yyyy-mm-dd',d2.Date))
-              +                        ' and code_mag = '+ QuotedStr(edcode_mag.Text)
+              +                        ' and ta.code_mag = '+ QuotedStr(edcode_mag.Text)
               +                        ' order by date_mouv desc';
 
         sql2 := ' select * from tb_article A, tb_stock S where A.code_art = S.code_art'
@@ -101,11 +101,13 @@ Component := frxMouv_stockArticle.FindObject('md2');
     SQLQuery1.SQl.Clear;
     QHeader.SQL.Clear;
     SQLQuery1.SQL.Add(sql);
+//    SQLQuery1.SQL.SaveToFile('g:\fifi.txt');
     QHeader.SQL.Add(sql2);
 
     SQLQuery1.Open;
     if ckTout.Checked = False then
       QHeader.Open;
+
     frxMouv_stockArticle.ShowReport();
   finally
     SQLQuery1.Close;
@@ -122,6 +124,7 @@ begin
   nom_art := cbarticle.Text;
   article:=dm.selectArticleByNom(nom_art);
   edcode_art.Text := article.Scode_art;
+  edcode_mag.Text := article.Scode_mag;
 end;
 
 procedure TfrmMouvStockByArticle.ckToutClick(Sender: TObject);

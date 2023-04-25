@@ -302,7 +302,11 @@ var
 
   RC : TReleve_client;
 
-  k,j,l,Qte_Stock,Qte_mag,Qte_vide,Qte_total:integer;
+  k,j,l : integer;
+  Qte_Stock,
+  Qte_mag,
+  Qte_vide,
+  Qte_total:real;
   Old_BL,
   code_mag,
   code_art,
@@ -382,11 +386,10 @@ begin
 //******** detail*********************
     for I := 1 to st_saisie.RowCount-1 do
       begin
+        code_art := st_saisie.Cells[0,i];
+        designation_art :=  st_saisie.Cells[1,i];
 
-            code_art := st_saisie.Cells[0,i];
-            designation_art :=  st_saisie.Cells[1,i];
-
-            stock := dm.selectStockByArticle(code_art);
+        stock := dm.selectStockByArticle(code_art);
 
         with facture_detail do
           begin
@@ -617,7 +620,8 @@ end;
 
 procedure TfrmSaisieFacture.edCodeMagDblClick(Sender: TObject);
 begin
-  frmFacturationRech_mag.ShowModal;
+gFormSrc_mag:='frmSaisieFacture';
+frmFacturationRech_mag.ShowModal;
 end;
 
 procedure TfrmSaisieFacture.edCommandeDblClick(Sender: TObject);

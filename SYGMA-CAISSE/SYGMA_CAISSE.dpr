@@ -28,7 +28,8 @@ uses
   UTransfertBkCaisse in 'UTransfertBkCaisse.pas' {frmTransfertBkCaisse},
   UAllInOneCaisse in 'UAllInOneCaisse.pas' {frmAllInOneCaisse},
   Ubkversement in 'Ubkversement.pas' {frmbkversement},
-  UCreanceClient in 'UCreanceClient.pas' {frmCreanceClient};
+  UCreanceClient in 'UCreanceClient.pas' {frmCreanceClient},
+  UDette_fourn in 'UDette_fourn.pas' {Form1};
 
 {$R *.res}
 
@@ -61,5 +62,6 @@ begin
   Application.CreateForm(TfrmAllInOneCaisse, frmAllInOneCaisse);
   Application.CreateForm(Tfrmbkversement, frmbkversement);
   Application.CreateForm(TfrmCreanceClient, frmCreanceClient);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

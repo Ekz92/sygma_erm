@@ -31,7 +31,8 @@ uses
   URechCommandeFacture in 'URechCommandeFacture.pas' {frmRechCommandeFacture},
   UDiagramDayFacture in 'UDiagramDayFacture.pas' {frmDiagramDayFact},
   UCumulVenteCmd in 'UCumulVenteCmd.pas' {frmCumulVenteCmd},
-  UCumuleFacture in 'UCumuleFacture.pas' {frmCumuleFacture};
+  UCumuleFacture in 'UCumuleFacture.pas' {frmCumuleFacture},
+  USaisieFactureVrac in 'USaisieFactureVrac.pas' {frmSaisieFactureVrac};
 
 {$R *.res}
 
@@ -67,5 +68,6 @@ begin
   Application.CreateForm(TfrmDiagramDayFact, frmDiagramDayFact);
   Application.CreateForm(TfrmCumulVenteCmd, frmCumulVenteCmd);
   Application.CreateForm(TfrmCumuleFacture, frmCumuleFacture);
+  Application.CreateForm(TfrmSaisieFactureVrac, frmSaisieFactureVrac);
   Application.Run;
 end.

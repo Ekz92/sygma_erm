@@ -18,6 +18,8 @@ type
     cTypCrea: TComboBox;
     edLibelleCrea: TEdit;
     edmontant: TEdit;
+    Button1: TButton;
+    Button2: TButton;
   private
     { Déclarations privées }
   public

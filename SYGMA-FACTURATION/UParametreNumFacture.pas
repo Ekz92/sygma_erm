@@ -29,6 +29,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure StringGrid1DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure edCodeMagDblClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -42,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses records, UDM;
+uses records, UDM, UFacturation_rech_magasin, USaisieFactureVrac;
 
 procedure TfrmParamNumFact.Button1Click(Sender: TObject);
 var
@@ -76,6 +78,20 @@ begin
 
 //************
   FormShow(sender);
+  Button2.Click;
+end;
+
+procedure TfrmParamNumFact.Button2Click(Sender: TObject);
+begin
+edCodeMag.Clear;
+edDesignationMag.Clear;
+edPrefixe.Clear;
+end;
+
+procedure TfrmParamNumFact.edCodeMagDblClick(Sender: TObject);
+begin
+gFormSrc_mag:='frmParamNumFact';
+frmFacturationRech_mag.ShowModal;
 end;
 
 procedure TfrmParamNumFact.FormCreate(Sender: TObject);

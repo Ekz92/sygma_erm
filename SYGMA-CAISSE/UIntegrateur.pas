@@ -166,7 +166,7 @@ implementation
 uses UPayementFacture, UAddCaisse, UJournal_caisse, UAvance, UListe_avance,
   USaisiDepense, UListeDepense, UEncaissement, UListeEncaissement, records, UDM,
   UClotureDay, UEtatJournal, UCreer_BL, UJournalCaisseH, UTypeDepense, UaddBank,
-  UbankListe, UTransfertBkCaisse, UAllInOneCaisse;
+  UbankListe, UTransfertBkCaisse, UAllInOneCaisse, UCreanceClient;
 
 procedure TfrmIntegrateur.Cltureouverture1Click(Sender: TObject);
 begin

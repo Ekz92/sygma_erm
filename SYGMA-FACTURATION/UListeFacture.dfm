@@ -987,6 +987,7 @@ object frmListeFacture: TfrmListeFacture
     Top = 176
   end
   object QConsultation: TSQLQuery
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -995,10 +996,165 @@ object frmListeFacture: TfrmListeFacture
     SQLConnection = DM.SQLConnection1
     Left = 40
     Top = 184
+    object QConsultationid_fact: TIntegerField
+      FieldName = 'id_fact'
+      Required = True
+    end
+    object QConsultationdate_fact: TSQLTimeStampField
+      FieldName = 'date_fact'
+    end
+    object QConsultationnum_fact: TStringField
+      FieldName = 'num_fact'
+      Size = 30
+    end
+    object QConsultationcode_mag: TStringField
+      FieldName = 'code_mag'
+      Size = 10
+    end
+    object QConsultationcode_clt: TStringField
+      FieldName = 'code_clt'
+      Required = True
+      Size = 10
+    end
+    object QConsultationnom_clt: TStringField
+      FieldName = 'nom_clt'
+      Required = True
+      Size = 100
+    end
+    object QConsultationpdv_cdp: TStringField
+      FieldName = 'pdv_cdp'
+      Size = 50
+    end
+    object QConsultationqte_total: TIntegerField
+      FieldName = 'qte_total'
+    end
+    object QConsultationmnt_t: TFloatField
+      FieldName = 'mnt_t'
+    end
+    object QConsultationmnt_p: TFloatField
+      FieldName = 'mnt_p'
+      Required = True
+    end
+    object QConsultationmnt_r: TIntegerField
+      FieldName = 'mnt_r'
+      Required = True
+    end
+    object QConsultationstatut: TStringField
+      FieldName = 'statut'
+      Required = True
+    end
+    object QConsultationtype_fact: TStringField
+      FieldName = 'type_fact'
+      Required = True
+      Size = 30
+    end
+    object QConsultationnum_comc: TStringField
+      FieldName = 'num_comc'
+      Size = 12
+    end
+    object QConsultationvehicule: TStringField
+      FieldName = 'vehicule'
+      Required = True
+      Size = 10
+    end
+    object QConsultationstatut_canc: TIntegerField
+      FieldName = 'statut_canc'
+      Required = True
+    end
+    object QConsultationusager: TStringField
+      FieldName = 'usager'
+      Size = 4
+    end
+    object QConsultationid_fact_1: TIntegerField
+      FieldName = 'id_fact_1'
+      Required = True
+    end
+    object QConsultationdate_fact_1: TSQLTimeStampField
+      FieldName = 'date_fact_1'
+    end
+    object QConsultationnum_fact_1: TStringField
+      FieldName = 'num_fact_1'
+      Size = 30
+    end
+    object QConsultationcode_mag_1: TStringField
+      FieldName = 'code_mag_1'
+      Size = 10
+    end
+    object QConsultationdesignation_mag: TStringField
+      FieldName = 'designation_mag'
+      Size = 100
+    end
+    object QConsultationcode_tclt: TStringField
+      FieldName = 'code_tclt'
+      Size = 10
+    end
+    object QConsultationdesignation_tclt: TStringField
+      FieldName = 'designation_tclt'
+      Size = 100
+    end
+    object QConsultationcode_clt_1: TStringField
+      FieldName = 'code_clt_1'
+      Size = 10
+    end
+    object QConsultationnom_clt_1: TStringField
+      FieldName = 'nom_clt_1'
+      Size = 100
+    end
+    object QConsultationcode_art: TStringField
+      FieldName = 'code_art'
+      Size = 10
+    end
+    object QConsultationdesignation_art: TStringField
+      FieldName = 'designation_art'
+      Size = 100
+    end
+    object QConsultationqte_art: TFloatField
+      FieldName = 'qte_art'
+    end
+    object QConsultationPrixU: TFloatField
+      FieldName = 'PrixU'
+      Required = True
+    end
+    object QConsultationPrixT: TFloatField
+      FieldName = 'PrixT'
+      Required = True
+    end
   end
   object frxDBConsultation: TfrxDBDataset
     UserName = 'frxDBConsultation'
     CloseDataSource = False
+    FieldAliases.Strings = (
+      'id_fact=id_fact'
+      'date_fact=date_fact'
+      'num_fact=num_fact'
+      'code_mag=code_mag'
+      'code_clt=code_clt'
+      'nom_clt=nom_clt'
+      'pdv_cdp=pdv_cdp'
+      'qte_total=qte_total'
+      'mnt_t=mnt_t'
+      'mnt_p=mnt_p'
+      'mnt_r=mnt_r'
+      'statut=statut'
+      'type_fact=type_fact'
+      'num_comc=num_comc'
+      'vehicule=vehicule'
+      'statut_canc=statut_canc'
+      'usager=usager'
+      'id_fact_1=id_fact_1'
+      'date_fact_1=date_fact_1'
+      'num_fact_1=num_fact_1'
+      'code_mag_1=code_mag_1'
+      'designation_mag=designation_mag'
+      'code_tclt=code_tclt'
+      'designation_tclt=designation_tclt'
+      'code_clt_1=code_clt_1'
+      'nom_clt_1=nom_clt_1'
+      'code_art=code_art'
+      'designation_art=designation_art'
+      'qte_art=qte_art'
+      'PrixU=PrixU'
+      'PrixT=PrixT')
     DataSet = QConsultation
     BCDToCurrency = False
     Left = 48
@@ -1206,7 +1362,7 @@ object frmListeFacture: TfrmListeFacture
           IndexTag = 1
           AllowVectorExport = True
           Left = 56.692950000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 56.692950000000000000
           Height = 18.897650000000000000
           DataField = 'statut'
@@ -1249,7 +1405,7 @@ object frmListeFacture: TfrmListeFacture
         object Memo12: TfrxMemoView
           AllowVectorExport = True
           Left = 122.622140000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 49.133890000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -1266,7 +1422,7 @@ object frmListeFacture: TfrmListeFacture
           IndexTag = 1
           AllowVectorExport = True
           Left = 174.779547090000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 70.299205280000000000
           Height = 18.897650000000000000
           DataField = 'code_clt'
@@ -1280,7 +1436,7 @@ object frmListeFacture: TfrmListeFacture
           IndexTag = 1
           AllowVectorExport = True
           Left = 246.346630000000000000
-          Top = 41.952755905511810000
+          Top = 41.952755905511800000
           Width = 192.000000000000000000
           Height = 18.897650000000000000
           DataField = 'nom_clt'
@@ -1554,9 +1710,10 @@ object frmListeFacture: TfrmListeFacture
           Top = 1.133858270000000000
           Width = 59.716535430000000000
           Height = 18.897650000000000000
-          DataField = 'qte_art'
           DataSet = frxDBConsultation
           DataSetName = 'frxDBConsultation'
+          DisplayFormat.FormatStr = '%g'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -1764,7 +1921,7 @@ object frmListeFacture: TfrmListeFacture
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
-        Height = 91.779569060000000000
+        Height = 103.118159060000000000
         Top = 18.897650000000000000
         Width = 778.583180000000000000
         object Memo11: TfrxMemoView
@@ -1855,7 +2012,7 @@ object frmListeFacture: TfrmListeFacture
           Left = 25.779527560000000000
           Top = 48.913420000000000000
           Width = 56.692950000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -1871,7 +2028,7 @@ object frmListeFacture: TfrmListeFacture
           Left = 84.574830000000000000
           Top = 48.992125980000000000
           Width = 64.252010000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -1887,7 +2044,7 @@ object frmListeFacture: TfrmListeFacture
           Left = 151.929190000000000000
           Top = 48.992125980000000000
           Width = 139.842610000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -1917,7 +2074,7 @@ object frmListeFacture: TfrmListeFacture
         object Memo36: TfrxMemoView
           AllowVectorExport = True
           Left = 26.456710000000000000
-          Top = 66.811070000000000000
+          Top = 80.811070000000000000
           Width = 34.015770000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -1933,7 +2090,7 @@ object frmListeFacture: TfrmListeFacture
         object Memo37: TfrxMemoView
           AllowVectorExport = True
           Left = 61.063080000000000000
-          Top = 66.811070000000000000
+          Top = 80.811070000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           AutoWidth = True
@@ -1984,12 +2141,48 @@ object frmListeFacture: TfrmListeFacture
             '[frxDBParam."description"]')
           ParentFont = False
         end
+        object Memo38: TfrxMemoView
+          AllowVectorExport = True
+          Left = 26.456710000000000000
+          Top = 64.472480000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'PdV/CDP :')
+          ParentFont = False
+        end
+        object frxQFacturepdv_cdp: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 93.756030000000000000
+          Top = 61.811070000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          DataField = 'pdv_cdp'
+          DataSet = frxQFacture
+          DataSetName = 'frxQFacture'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxQFacture."pdv_cdp"]')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 132.283550000000000000
+        Top = 143.622140000000000000
         Width = 778.583180000000000000
         object Memo8: TfrxMemoView
           AllowVectorExport = True
@@ -2103,7 +2296,7 @@ object frmListeFacture: TfrmListeFacture
         FillType = ftBrush
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 215.433210000000000000
+        Top = 226.771800000000000000
         Width = 778.583180000000000000
         DataSet = frxQFacture
         DataSetName = 'frxQFacture'
@@ -2243,7 +2436,7 @@ object frmListeFacture: TfrmListeFacture
         FillType = ftBrush
         Frame.Typ = []
         Height = 87.370130000000000000
-        Top = 260.787570000000000000
+        Top = 272.126160000000000000
         Width = 778.583180000000000000
         object Memo26: TfrxMemoView
           AllowVectorExport = True

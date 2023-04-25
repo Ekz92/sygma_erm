@@ -140,6 +140,10 @@ object frmBeneficeVente: TfrmBeneficeVente
     Top = 72
     Datasets = <
       item
+        DataSet = DM.frxDBParam
+        DataSetName = 'frxDBParam'
+      end
+      item
         DataSet = frxQbene
         DataSetName = 'frxQbene'
       end>
@@ -362,10 +366,11 @@ object frmBeneficeVente: TfrmBeneficeVente
         end
         object Memo31: TfrxMemoView
           AllowVectorExport = True
-          Left = 468.661720000000000000
+          Left = 464.882190000000000000
           Top = 3.779530000000000000
           Width = 241.889775980000000000
           Height = 18.897650000000000000
+          AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -374,25 +379,26 @@ object frmBeneficeVente: TfrmBeneficeVente
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'ETS BARRY GAZ & FRERES')
+            '[frxDBParam."nom"]'
+            'ETS. MEL'#39'SIFA')
           ParentFont = False
         end
         object Memo32: TfrxMemoView
           AllowVectorExport = True
-          Left = 510.787496770000000000
-          Top = 19.677180000000000000
+          Left = 505.007966770000000000
+          Top = 23.677180000000000000
           Width = 173.858235980000000000
           Height = 15.118120000000000000
           AutoWidth = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
           HAlign = haCenter
           Memo.UTF8W = (
-            'COMMERCE GENERAL')
+            '[frxDBParam."description"]')
           ParentFont = False
         end
       end

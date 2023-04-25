@@ -401,6 +401,10 @@ object frmIntegrateur: TfrmIntegrateur
           Caption = 'Service'
           OnClick = Service1Click
         end
+        object Vrac1: TMenuItem
+          Caption = 'Vrac'
+          OnClick = Vrac1Click
+        end
       end
       object Listedeparamprixlient1: TMenuItem
         Caption = 'Liste de tarifs'

@@ -110,7 +110,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Caption = 'Magasin'
       ParentBiDiMode = False
       TabOrder = 2
-      ExplicitTop = 250
       object Label2: TLabel
         Left = 10
         Top = 15
@@ -161,7 +160,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alTop
       Caption = 'Client'
       TabOrder = 1
-      ExplicitTop = 139
       object Label7: TLabel
         Left = 10
         Top = 18
@@ -237,7 +235,6 @@ object frmSaisieFacture: TfrmSaisieFacture
       Align = alTop
       Caption = 'Article'
       TabOrder = 3
-      ExplicitTop = 314
       object Label4: TLabel
         Left = 10
         Top = 14

@@ -745,7 +745,6 @@ object frmMouvStockByArticle: TfrmMouvStockByArticle
     end
   end
   object SQLQuery1: TSQLQuery
-    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (

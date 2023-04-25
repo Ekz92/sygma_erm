@@ -15,6 +15,19 @@ TEtatJournal = record
 end;
 TEtatJournalArray = array of TEtatJournal;
 
+TDette_fourn = record
+	Nid_detf : integer;
+	Sdate_detf ,
+	Scode_fourn ,
+	Stype_detf ,
+	Slibelle_detf ,
+	Rmontant  ,
+	Sstatut ,
+	Suser_val : string;
+	Ncanc : integer;
+end;
+TDette_fournArray = array of TDette_fournArray;
+
 TArticle = record
   Nid_art : integer;
   Scode_art,

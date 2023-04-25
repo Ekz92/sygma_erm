@@ -2485,6 +2485,7 @@ begin
       begin
         Nid_art := FieldByName('id_art').AsInteger;
         Scode_art := FieldByName('code_art').AsString;
+        Scode_mag:=FieldByName('code_mag').AsString;
         Sdesignation_art := FieldByName('designation_art').AsString;
         Stype_art := FieldByName('type_art').AsString;
         Rkilo := FieldByName('kilo').AsFloat;

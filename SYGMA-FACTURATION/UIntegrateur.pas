@@ -64,6 +64,7 @@ type
     Diagrammedefacture1: TMenuItem;
     Cumuldeventeparcmd1: TMenuItem;
     Cumuledeventeparclient1: TMenuItem;
+    Vrac1: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure Produit1Click(Sender: TObject);
     procedure Service1Click(Sender: TObject);
@@ -81,6 +82,7 @@ type
     procedure Diagrammedefacture1Click(Sender: TObject);
     procedure Cumuldeventeparcmd1Click(Sender: TObject);
     procedure Cumuledeventeparclient1Click(Sender: TObject);
+    procedure Vrac1Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -98,7 +100,7 @@ uses UDM, records, USaisieFacture, USaisieFactureService, UListeParamPrix,
   UListeFacture, UListeFactureAnnulee, UListeFactureCommande,
   UParametreNumFacture, UParametrage_prix_clt, Uadd_type_client, UTypeService,
   URapportParClient, UCumuleVenteBl, UBeneficeVente, UDiagramDayFacture,
-  UCumulVenteCmd, UCumuleFacture;
+  UCumulVenteCmd, UCumuleFacture, USaisieFactureVrac;
 
 procedure TfrmIntegrateur.Bnficesurvente1Click(Sender: TObject);
 begin
@@ -203,6 +205,11 @@ end;
 procedure TfrmIntegrateur.Service1Click(Sender: TObject);
 begin
 frmSaisieFactureService.ShowModal;
+end;
+
+procedure TfrmIntegrateur.Vrac1Click(Sender: TObject);
+begin
+frmSaisieFactureVrac.ShowModal;
 end;
 
 procedure TfrmIntegrateur.ypeClient1Click(Sender: TObject);

@@ -14,6 +14,8 @@ object frmIntegrateur: TfrmIntegrateur
   Menu = MainMenu1
   OldCreateOrder = False
   OnShow = FormShow
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -10162,7 +10164,7 @@ object frmIntegrateur: TfrmIntegrateur
       Left = 1031
       Top = 1
       Width = 277
-      Height = 79
+      Height = 163
       Align = alRight
       AutoSize = True
       Picture.Data = {
@@ -10238,13 +10240,12 @@ object frmIntegrateur: TfrmIntegrateur
       ExplicitLeft = 736
       ExplicitTop = -73
       ExplicitWidth = 737
-      ExplicitHeight = 163
     end
     object Label1: TLabel
       Left = 1
       Top = 1
       Width = 207
-      Height = 79
+      Height = 60
       Align = alLeft
       Caption = 'SYGMA'
       Font.Charset = ANSI_CHARSET
@@ -10253,7 +10254,6 @@ object frmIntegrateur: TfrmIntegrateur
       Font.Name = 'Broadway'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitHeight = 60
     end
     object Label3: TLabel
       Left = 5
@@ -11483,7 +11483,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label5: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 42
         Height = 13
         Hint = 'Cr'#233'ation et gestion d'#39'articles '
         Align = alBottom
@@ -11497,7 +11497,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 42
       end
     end
     object PnMagasin: TPanel
@@ -11511,7 +11510,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label6: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 36
         Height = 13
         Hint = 'Cr'#233'ation de magasins'
         Align = alBottom
@@ -11525,7 +11524,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 36
       end
       object Image2: TImage
         Left = 0
@@ -12952,7 +12950,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label7: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 37
         Height = 13
         Hint = 'Entr'#233'e en stock'
         Align = alBottom
@@ -12966,7 +12964,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 37
       end
       object Image3: TImage
         Left = 0
@@ -17301,7 +17298,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label8: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 34
         Height = 13
         Hint = 'Transfert intermagasin'
         Align = alBottom
@@ -17315,7 +17312,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 34
       end
       object Image4: TImage
         Left = 0
@@ -19606,7 +19602,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label9: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 29
         Height = 13
         Hint = 'Liste d'#39'articles, magasins, entr'#233'es...'
         Align = alBottom
@@ -19620,7 +19616,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 29
       end
       object Image7: TImage
         Left = 0
@@ -25019,7 +25014,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label10: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 42
         Height = 13
         Hint = 'Entr'#233'e en stock'
         Align = alBottom
@@ -25033,7 +25028,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 42
       end
       object ImgEntree: TImage
         Left = 0
@@ -30405,7 +30399,7 @@ object frmIntegrateur: TfrmIntegrateur
       object Label11: TLabel
         Left = 0
         Top = 53
-        Width = 55
+        Width = 54
         Height = 13
         Hint = 'Cr'#233'ation et gestion d'#39'articles '
         Align = alBottom
@@ -30419,7 +30413,6 @@ object frmIntegrateur: TfrmIntegrateur
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 54
       end
     end
   end
